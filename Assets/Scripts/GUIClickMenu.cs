@@ -9,6 +9,7 @@ public class GUIClickMenu : MonoBehaviour {
 	public GameObject goUnit;
 	public GameObject goSpawner;
 
+	//Default choice for the enumerator. 
 	public SOLDIER_TYPE troopChoice = SOLDIER_TYPE.GUNNER;
 
 	public bool bMenuOn = false;
@@ -34,15 +35,18 @@ public class GUIClickMenu : MonoBehaviour {
 			Debug.Log("GUNNER");
 			GameObject lastSpawned = (GameObject)Instantiate(goUnit, goSpawner.transform.position + new Vector3(0.0f, 0.15f, 0.0f), Quaternion.identity);
 			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+
 		}
+
 		if (sol == SOLDIER_TYPE.HEAVY) {
-			Debug.Log("HEV");
+			Debug.Log("HEAVY");
+
 		}
 		if (sol == SOLDIER_TYPE.MEDIC) {
-			Debug.Log("POOP");
+			Debug.Log("MEDIC");
 		}
 		if (sol == SOLDIER_TYPE.MECHANIC) {
-			Debug.Log("POOP");
+			Debug.Log("MECHANIC");
 		}
 	}
 }

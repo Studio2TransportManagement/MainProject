@@ -1,0 +1,5 @@
+﻿public enum RESOURCE_TYPE{
+
+	MONEY,
+	RECRUITS
+}
