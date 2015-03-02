@@ -35,7 +35,6 @@ public class GUIClickMenu : MonoBehaviour {
 			Debug.Log("GUNNER");
 			GameObject lastSpawned = (GameObject)Instantiate(goUnit, goSpawner.transform.position + new Vector3(0.0f, 0.15f, 0.0f), Quaternion.identity);
 			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
-
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {

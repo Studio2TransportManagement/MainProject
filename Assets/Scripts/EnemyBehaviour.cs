@@ -16,8 +16,8 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		foreach(GameObject enemy in l_goEnemysList){
-		
-		}
+		//foreach(GameObject enemy in l_goEnemysList){
+			//
+		//}
 	}
 }
