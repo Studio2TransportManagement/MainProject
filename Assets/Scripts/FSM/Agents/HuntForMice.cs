@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static sealed class HuntForMice : FSM_State<Cat> {
+public sealed class HuntForMice : FSM_State<Cat> {
 	
 	public override void Begin(Cat c) {
 		if (c.Location != CatLocations.home) {

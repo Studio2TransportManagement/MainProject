@@ -23,7 +23,8 @@ public class SelectionManager : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
 			rRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(rRay, out hit, Mathf.Infinity)) {
-				if (hit.transform.gameObject.GetComponent<Selectable>() != null) {
+				//if (hit.transform.gameObject.GetComponent("ISelectable") as ISelectable != null) {
+				if (hit.transform.gameObject.GetComponent<GameUnit>() != null) {
 					Debug.Log("<color=green>Hit selectable!</color>");
 					//Don't select the same object twice
 					if (hit.transform.gameObject != goCurrentSelection) {
@@ -86,10 +87,11 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	//Only "Selectable" objects can be selected
-	public bool SetSelection(GameObject go) {
-		if (go.GetComponent<Selectable>()) {
-			if (go.GetComponent<Selectable>().bUnselectable == false) {
-				goCurrentSelection = go;
+	public bool SetSelection(GameUnit go) {
+		//if (go.GetComponent("ISelectable") as GameUnit != null) {
+		if (go.GetComponent<GameUnit>() != null) {
+			if (go.bUnselectable == false) {
+				goCurrentSelection = go.gameObject;
 
 				return true;
 			}

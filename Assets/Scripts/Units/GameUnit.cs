@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Selectable : MonoBehaviour {
+public class GameUnit : MonoBehaviour, ISelectable {
 
-	public bool bUnselectable;
-	private SelectionManager selectionManager;
+	public bool bUnselectable {
+		get;
+		set;
+	}
+
+	public SelectionManager selectionManager {
+		get;
+		set;
+	}
 
 	// Use this for initialization
 	void Start () {
+		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 	}
 
@@ -17,14 +25,11 @@ public class Selectable : MonoBehaviour {
 			return true;
 		}
 
-		Debug.Log("<color=purple>" + this.gameObject.name + " :: this</color>");
-		Debug.Log("<color=purple>" + selectionManager.GetSelection().name + " :: selman selected</color>");
-
 		return false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//
+	
 	}
 }
