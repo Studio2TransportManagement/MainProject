@@ -17,7 +17,9 @@ public class FSM_Core<T> {
 
 	public void Config(T owner, FSM_State<T> start_state) {
 		fsmOwner = owner;
+		Debug.Log("Owner is " + fsmOwner.ToString());
 		ChangeState(start_state);
+		Debug.Log("Current state is " + stateCurrent.ToString());
 	}
 
 	public void Update() {
@@ -39,6 +41,12 @@ public class FSM_Core<T> {
 			if (stateCurrent != null) {
 				stateCurrent.Begin(fsmOwner);
 			}
+			else {
+				Debug.Log("FSM_CORE: stateCurrent was null!");
+			}
+		}
+		else {
+			Debug.Log("<color=red>Attempted to pass a null state</color>");
 		}
 	}
 
