@@ -38,6 +38,7 @@ public class gunnerButton : MonoBehaviour, IDropHandler {
 				unitsTraining-= 1;
 				Debug.Log("New Gunner");
 				//spawn new unit
+				//add name to newly spawned units script
 			}
 
 		}
