@@ -58,6 +58,7 @@ public class gunnerButton : MonoBehaviour, IDropHandler {
 	{
 		if (Camera.main.GetComponent<stats>().cash >= price && Camera.main.GetComponent<stats>().recruits >= 1)
 		{
+			//save name before reset of avatar and name.
 			RecruitButton.GetComponent<characterRandomiser> ().RandomiseAvatar ();
 			if (unitsTraining == 0)
 			{
