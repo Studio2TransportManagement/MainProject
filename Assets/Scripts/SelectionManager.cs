@@ -11,6 +11,8 @@ public class SelectionManager : MonoBehaviour {
 
 	private RaycastHit hit;
 	private Ray rRay;
+
+	public DisplayTextList displayNames;
 	
 	//Init
 	void Start() {
@@ -27,17 +29,18 @@ public class SelectionManager : MonoBehaviour {
 			if (Physics.Raycast(rRay, out hit, Mathf.Infinity)) {
 				//if (hit.transform.gameObject.GetComponent("ISelectable") as ISelectable != null) {
 				if (hit.transform.gameObject.GetComponent<GameUnit>() != null) {
-					Debug.Log("<color=green>Hit selectable!</color>");
+					//Debug.Log("<color=green>Hit selectable!</color>");
 					//Don't select the same object twice
 					if (!l_goCurrentSelection.Contains(hit.transform.gameObject)) {
 						l_goCurrentSelection.Add(hit.transform.gameObject);
 
 						if (l_goCurrentSelection[l_goCurrentSelection.Count - 1].tag == "building") {
-							Debug.Log("Hit building");
+							Debug.Log("Clicked on the <color=green>" + l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName + "</color>!");
 						}
 
 						if (l_goCurrentSelection[l_goCurrentSelection.Count - 1].tag == "player-unit") {
-							Debug.Log("Hit player unit");
+							displayNames.AddText(l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName);
+							Debug.Log("Clicked on <color=blue>" + l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName + "</color>!");
 						}
 
 						//If the object had a GUI menu, activate it now
@@ -47,6 +50,7 @@ public class SelectionManager : MonoBehaviour {
 					}
 					else {
 						//Unselect if clicked again
+						displayNames.RemoveText(hit.transform.gameObject.GetComponent<GameUnit>().sUnitName);
 						l_goCurrentSelection.Remove(hit.transform.gameObject);
 					}
 				}
@@ -60,8 +64,7 @@ public class SelectionManager : MonoBehaviour {
 						}
 					}
 					//Debug.Log(hit.transform.gameObject.name);
-					Debug.Log("<color=red>Lost selection!</color>");
-					l_goCurrentSelection.Clear();
+					ClearSelection();
 				}
 			}
 		}
@@ -115,7 +118,9 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	public void ClearSelection() {
+		Debug.Log("<color=magenta>Lost selection!</color>");
 		l_goCurrentSelection.Clear();
+		displayNames.ClearText();
 	}
 
 }

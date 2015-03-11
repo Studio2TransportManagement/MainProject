@@ -25,10 +25,10 @@ public class SpawnSoldier : MonoBehaviour {
 
     public void SpawnUnit(SOLDIER_TYPE sol, Vector3 spawnpoint, string name) {
 		if (sol == SOLDIER_TYPE.GUNNER) {
-			Debug.Log("GUNNER");
 			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
-			//lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+			//Fluff
+			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {

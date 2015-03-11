@@ -40,6 +40,6 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//
 	}
 }
