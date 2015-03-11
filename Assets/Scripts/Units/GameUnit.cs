@@ -13,6 +13,15 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		set;
 	}
 
+	public string sUnitName;
+
+	public float fHealthMax;
+	public float fHealthCurrent;
+	public float fRange;
+	public float fFireRate;
+	
+	public int iAmmo;
+
 	// Use this for initialization
 	void Start () {
 		bUnselectable = false;

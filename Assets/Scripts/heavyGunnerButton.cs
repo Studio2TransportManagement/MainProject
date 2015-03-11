@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class heavyGunnerButton : MonoBehaviour, IDropHandler {
 	
-	public GameObject RecruitButton;
+	public GameObject RecruitSystem;
 	public GameObject HeavyGunnerButtonPressed;
 	public GameObject currentlyTraining;
+	public List<string> currentUnitsName = new List<string> ();
 	public GameObject Cost;
 	public Color32 transparent;
 	public int unitsTraining = 0;
@@ -35,8 +36,10 @@ public class heavyGunnerButton : MonoBehaviour, IDropHandler {
 			if (HeavyGunnerButtonPressed.GetComponent<Image> ().fillAmount == 0)
 			{
 				unitsTraining-= 1;
-				Debug.Log("New Heavy Gunner");
+				Debug.Log("Trained Heavy Gunner " + currentUnitsName[0] +"");
 				//spawn new unit
+				//add name to newly spawned units script
+				currentUnitsName.RemoveAt (0);
 			}
 			
 		}
@@ -57,7 +60,8 @@ public class heavyGunnerButton : MonoBehaviour, IDropHandler {
 	{
 		if (Camera.main.GetComponent<stats>().cash >= price && Camera.main.GetComponent<stats>().recruits >= 1)
 		{
-			RecruitButton.GetComponent<characterRandomiser> ().RandomiseAvatar ();
+			currentUnitsName.Add ("" + RecruitSystem.GetComponent<characterRandomiser> ().characterName.GetComponent<Text>().text + "");
+			RecruitSystem.GetComponent<characterRandomiser> ().RandomiseAvatar ();
 			if (unitsTraining == 0)
 			{
 				HeavyGunnerButtonPressed.GetComponent<Image> ().fillAmount = 1;
