@@ -6,9 +6,6 @@ public class stats : MonoBehaviour {
 
 	public int recruits = 0;
 	public int cash = 1000;
-
-	//public GameObject recruitmentPanel;
-	//public bool isRecruitmentPanelOpen = false;
 	public float timer = 0.25f;
 	public GameObject RecruitAmount;
 	public GameObject Currency;
@@ -35,20 +32,5 @@ public class stats : MonoBehaviour {
 		{
 			Cursor.SetCursor (cursorTexture, hotSpot, cursorMode);
 		}
-
-//		if (Input.GetKeyDown (KeyCode.R)) 
-//		{
-//			if(!isRecruitmentPanelOpen)
-//			{
-//				LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, 520f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//				isRecruitmentPanelOpen = true;
-//			}
-//			else
-//			{
-//				LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, -520f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//				isRecruitmentPanelOpen = false;
-//			}
-//		}
-
 	}
 }

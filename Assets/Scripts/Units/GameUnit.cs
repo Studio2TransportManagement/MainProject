@@ -36,9 +36,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		return false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+		//
 	}
 }
