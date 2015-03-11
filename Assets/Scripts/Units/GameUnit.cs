@@ -29,11 +29,12 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 
 	public bool IsSelected() {
-		if (selectionManager.GetSelection() == this) {
-			Debug.Log("<color=purple>" + this.gameObject.name + " is selected</color>");
+		if (selectionManager.IsAlreadySelected(this.gameObject)) {
+			//Debug.Log("<color=purple>" + this.gameObject.name + " is selected</color>");
 			return true;
 		}
 
+		//Debug.Log("<color=purple>" + this.gameObject.name + " is NOT selected</color>");
 		return false;
 	}
 

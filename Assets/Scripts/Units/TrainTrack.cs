@@ -4,24 +4,31 @@ using System.Collections.Generic;
 
 public class TrainTrack : MonoBehaviour {
 
-	public List<TrainStation> l_tsNodes;
-	public Train guTrain;
+	private List<TrainStation> l_tsNodes;
+	private Train guTrain;
+	public GameUnit guProtoTrain;
 
 	// Use this for initialization
 	void Start() {
+		l_tsNodes = new List<TrainStation>();
 		TrainStation[] nodes = this.GetComponentsInChildren<TrainStation>();
 		l_tsNodes.AddRange(nodes);
-		guTrain = this.GetComponentInChildren<Train>();
+
+		guTrain = (Train)Instantiate(guProtoTrain, l_tsNodes[0].transform.position, this.transform.rotation);
 	}
 	
 	// Update is called once per frame
 	void Update() {
 		guTrain.GetComponent<SlideToLocation>().vTarget = l_tsNodes[0].transform.position;
 
-
-		//Temp
-		if (Input.GetKeyUp(KeyCode.T)) {
-			l_tsNodes.Reverse();
+		if (Input.GetMouseButtonUp(1)) {
+			if (guTrain.IsSelected()) {
+				FlipDestination();
+			}
 		}
+	}
+
+	void FlipDestination() {
+		l_tsNodes.Reverse();
 	}
 }

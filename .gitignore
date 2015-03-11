@@ -46,3 +46,7 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity4.dll
+Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity4.dll
+Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity4.dll
+Assets/ProCore/Shared/Code/ProCore.dll
