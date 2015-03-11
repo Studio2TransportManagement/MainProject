@@ -8,16 +8,18 @@ public class Enemy_Spawner : MonoBehaviour {
 	public GameObject[] goSpawnPoints;
 
 	public int iEnemyWaveSize;
-
-	public int i;
+	public int CurrentWaveMax;
+	public int spawnIndex;
 	
 	public float fSpawnRate;
+	public float fWaveWait;
 
 	Bounds[] bSpawnBounds;
 
 
-	void Start () {
-
+	void Start () 
+	{
+		
 		//By extracting the bounds from each SpawnPoint object, we don't need to have gameobject.collider.bounds.FUNCTION later when spawning, also allows to easily change from coolider to other.boundsp
 		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
 		foreach(Bounds element in bSpawnBounds)
@@ -37,18 +39,20 @@ public class Enemy_Spawner : MonoBehaviour {
 
 	IEnumerator SpawnEnemies()
 	{
-		int CurrentWaveMax = iEnemyWaveSize;
+
 		//replace true with GameOver=False or something later
 		while(true)
 		{
-			if(CurrentWaveMax >=0)
+			CurrentWaveMax = iEnemyWaveSize;
+			for(int i = CurrentWaveMax; i > 0; i--)
 			{
-				Vector3 spawnPos = new Vector3 (Random.Range(bSpawnBounds[i].max.x,bSpawnBounds[i].min.x),1,(Random.Range(bSpawnBounds[i].max.z,bSpawnBounds[i].min.z)));
+				Vector3 spawnPos = new Vector3 (Random.Range(bSpawnBounds[spawnIndex].max.x,bSpawnBounds[spawnIndex].min.x),1,(Random.Range(bSpawnBounds[spawnIndex].max.z,bSpawnBounds[spawnIndex].min.z)));
 				Instantiate(goEnemies[Random.Range(0,goEnemies.Length)],spawnPos,Quaternion.identity);
 				CurrentWaveMax--;
 				yield return new WaitForSeconds (fSpawnRate);
 			}
 
+			yield return new WaitForSeconds (fWaveWait);
 		}
 	}
 

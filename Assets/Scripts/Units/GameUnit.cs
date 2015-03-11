@@ -37,7 +37,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		//Debug.Log("<color=purple>" + this.gameObject.name + " is NOT selected</color>");
 		return false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		//
