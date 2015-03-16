@@ -8,11 +8,10 @@ public class Enemy_Spawner : MonoBehaviour {
 	public GameObject[] goSpawnPoints;
 
 	public int iEnemyWaveSize;
-	public int CurrentWaveMax;
-	public int spawnIndex;
+	public int CurrentWaveCount;
 	
 	public float fSpawnRate;
-	public float fWaveWait;
+	public float fWaveRate;
 
 	Bounds[] bSpawnBounds;
 
@@ -22,11 +21,7 @@ public class Enemy_Spawner : MonoBehaviour {
 		
 		//By extracting the bounds from each SpawnPoint object, we don't need to have gameobject.collider.bounds.FUNCTION later when spawning, also allows to easily change from coolider to other.boundsp
 		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
-		foreach(Bounds element in bSpawnBounds)
-		{
-			Debug.Log(element.ToString());
-		}
-		GenerateRatioArray();
+
 		StartCoroutine (SpawnEnemies());
 	}
 	
@@ -43,16 +38,30 @@ public class Enemy_Spawner : MonoBehaviour {
 		//replace true with GameOver=False or something later
 		while(true)
 		{
-			CurrentWaveMax = iEnemyWaveSize;
-			for(int i = CurrentWaveMax; i > 0; i--)
+			CurrentWaveCount = iEnemyWaveSize;
+			float[] WaveSizes = CalculateWaveSizes(GenerateRatioArray());
+
+
+			while(CurrentWaveCount > 0)
 			{
-				Vector3 spawnPos = new Vector3 (Random.Range(bSpawnBounds[spawnIndex].max.x,bSpawnBounds[spawnIndex].min.x),1,(Random.Range(bSpawnBounds[spawnIndex].max.z,bSpawnBounds[spawnIndex].min.z)));
-				Instantiate(goEnemies[Random.Range(0,goEnemies.Length)],spawnPos,Quaternion.identity);
-				CurrentWaveMax--;
+				for(int i = 0; i < WaveSizes.Length; i++)
+				{
+					for(int a = (int)WaveSizes[i]; a > 0 ; a--)
+					{
+						Vector3 spawnPos = new Vector3 (
+							Random.Range(bSpawnBounds[i].max.x,bSpawnBounds[i].min.x),
+							1,
+							Random.Range(bSpawnBounds[i].max.z,bSpawnBounds[i].min.z));
+
+						Instantiate(goEnemies[Random.Range(0,goEnemies.Length)],spawnPos,Quaternion.identity);
+						CurrentWaveCount--;
+					}
+				}
+								
 				yield return new WaitForSeconds (fSpawnRate);
 			}
 
-			yield return new WaitForSeconds (fWaveWait);
+			yield return new WaitForSeconds (fWaveRate);
 		}
 	}
 
@@ -71,23 +80,25 @@ public class Enemy_Spawner : MonoBehaviour {
 	}
 
 	//divide the total size of the wave into the generated ratio and store each 
-	int[] CalculateWaveSizes(int[] RatioArray)
+	float[] CalculateWaveSizes(int[] RatioArray)
 	{
-		int[] iDividedWaves = new int[RatioArray.Length];
-		int iPartValue = 0;
-		int iRatioTotal = 0;
+		float[] iDividedWaves = new float[RatioArray.Length];
+		float iPartValue = 0;
+		float iRatioTotal = 0;
 
 		foreach(int value in RatioArray)
 		{
-			iRatioTotal += value;
+			iRatioTotal += (float)value;
 		}
 
 		iPartValue = iEnemyWaveSize/iRatioTotal;
 
 		for(int i = 0; i<iDividedWaves.Length; i++)
 		{
-			iDividedWaves[i] = RatioArray[i]*iPartValue;
+			iDividedWaves[i] = Mathf.Round((float)RatioArray[i]*iPartValue);
 		}
+		
+//		Debug.Log (string.Format("Wave Sizes {0}:{1}:{2}", iDividedWaves[0],iDividedWaves[1],iDividedWaves[2]));
 
 		return iDividedWaves;
 	}
@@ -111,7 +122,7 @@ public class Enemy_Spawner : MonoBehaviour {
 			RatioArray[i] /= iGCD;
 		}
 
-		Debug.Log (string.Format("{0}:{1}:{2}", RatioArray[0],RatioArray[1],RatioArray[2]));
+//		Debug.Log (string.Format("Ratio {0}:{1}:{2}", RatioArray[0],RatioArray[1],RatioArray[2]));
 
 
 		return RatioArray;
