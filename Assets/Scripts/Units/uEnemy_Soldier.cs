@@ -13,7 +13,7 @@ public class uEnemy_Soldier : GameUnit {
 		agent = GetComponent<NavMeshAgent>();
 		agent.SetDestination(new Vector3(0,2,0));
 
-//		Debug.Log(StructureManager.bases[1].transform.position.ToString());
+		Debug.Log(StructureManager.bases[1].transform.position.ToString());
 	}
 
 	// Update is called once per frame
@@ -26,11 +26,11 @@ public class uEnemy_Soldier : GameUnit {
 		Vector3 returnVector = new Vector3(0,0,0);
 
 
-//
-//		for(int i = 0; i < ; i++)
-//		{
-//			Debug.Log();
-////		}
+
+		for(int i = 0; i < StructureManager.bases.Length; i++)
+		{
+//			StructureManager.bases;
+		}
 
 		return returnVector;
 	}

@@ -1,0 +1,45 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 755M (ID=0xfea)
+    Vendor:   NVIDIA
+    VRAM:     971 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProBuilderCore-Unity4.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProBuilderCore-Unity4.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProBuilderMeshOps-Unity4.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProBuilderMeshOps-Unity4.dll into Unity Child Domain
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProCore.dll (this message is harmless)
+Loading C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\ProCore.dll into Unity Child Domain
+- Completed reload, in  0.102 seconds
+desktop: 2560x1440 59Hz; virtual: 2560x1440 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\System.Core.dll (this message is harmless)
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+Platform assembly: C:\Users\lbrown53\Documents\MainProject\testbuild_Data\Managed\System.dll (this message is harmless)
+Center: (105.0, 2.0, 60.0), Extents: (8.4, 0.5, 12.1)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Center: (-104.0, 2.0, 60.0), Extents: (8.4, 0.5, 12.1)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Center: (0.0, 2.0, -130.0), Extents: (15.0, 0.5, 2.5)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+5:2:7
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
