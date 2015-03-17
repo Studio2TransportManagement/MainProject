@@ -5,33 +5,50 @@ public class uEnemy_Soldier : GameUnit {
 
 	NavMeshAgent agent;
 
+	GameObject goTargetBase;
+
 	StructureManager structureManager;
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		agent = GetComponent<NavMeshAgent>();
-		agent.SetDestination(new Vector3(0,2,0));
 
-		Debug.Log(StructureManager.bases[1].transform.position.ToString());
+		agent.SetDestination(new Vector3(0,0,0));
+
+		//goTargetBase = GetClosestBase();
+
+		//agent.SetDestination(goTargetBase.transform.position);
+
+		//Debug.Log(StructureManager.bases[1].transform.position.ToString());
 	}
 
 	// Update is called once per frame
-	void Update () {
-
+	void Update () 
+	{
+//		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
+//		{
+//			agent.SetDestination(this.transform.position);
+//		}
 	}
 
-	Vector3 GetClosestBase()
+	GameObject GetClosestBase()
 	{
-		Vector3 returnVector = new Vector3(0,0,0);
-
-
+		GameObject returnObject = StructureManager.bases[0];
+				
+		float tempdistance = (float)10000.0;
 
 		for(int i = 0; i < StructureManager.bases.Length; i++)
 		{
-//			StructureManager.bases;
+			if( Vector3.Distance(this.transform.position, StructureManager.bases[i].transform.position) < tempdistance)
+			{
+				tempdistance = Vector3.Distance(this.transform.position, StructureManager.bases[i].transform.position);
+				returnObject = StructureManager.bases[i];
+			}
+
 		}
 
-		return returnVector;
+		return returnObject;
 	}
 }
