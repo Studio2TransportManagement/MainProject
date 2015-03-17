@@ -13,6 +13,10 @@ public class SelectionManager : MonoBehaviour {
 	private Ray rRay;
 
 	public DisplayTextList displayNames;
+
+	private GameObject goCurrentObject;
+	private GameUnit guCurrentUnit;
+	private GUI_Base guiCurrentGUIBase;
 	
 	//Init
 	void Start() {
@@ -27,31 +31,43 @@ public class SelectionManager : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
 			rRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(rRay, out hit, Mathf.Infinity)) {
-				//if (hit.transform.gameObject.GetComponent("ISelectable") as ISelectable != null) {
-				if (hit.transform.gameObject.GetComponent<GameUnit>() != null) {
-					//Debug.Log("<color=green>Hit selectable!</color>");
-					//Don't select the same object twice
-					if (!l_goCurrentSelection.Contains(hit.transform.gameObject)) {
-						l_goCurrentSelection.Add(hit.transform.gameObject);
+				goCurrentObject = null;
+				guCurrentUnit = null;
+				guiCurrentGUIBase = null;
 
-						if (l_goCurrentSelection[l_goCurrentSelection.Count - 1].tag == "building") {
-							Debug.Log("Clicked on the <color=green>" + l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName + "</color>!");
+				goCurrentObject = hit.transform.gameObject;
+				if (hit.transform.gameObject.GetComponent<GameUnit>() != null) {
+					guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
+					//Don't select the same object twice
+					if (!l_goCurrentSelection.Contains(goCurrentObject)) {
+						l_goCurrentSelection.Add(goCurrentObject);
+
+						if (goCurrentObject.tag == "building") {
+							Debug.Log("Clicked on the <color=green>" + guCurrentUnit.sUnitName + "</color>!");
 						}
 
-						if (l_goCurrentSelection[l_goCurrentSelection.Count - 1].tag == "player-unit") {
-							displayNames.AddText(l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName);
-							Debug.Log("Clicked on <color=blue>" + l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GameUnit>().sUnitName + "</color>!");
+						if (goCurrentObject.tag == "player-unit") {
+							displayNames.AddText(guCurrentUnit.sUnitName);
+							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
+						}
+
+						if (goCurrentObject.tag == "train") {
+							displayNames.AddText(guCurrentUnit.sUnitName);
+							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>, choo choo!");
 						}
 
 						//If the object had a GUI menu, activate it now
-						if (l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GUI_Base>()) {
-							l_goCurrentSelection[l_goCurrentSelection.Count - 1].GetComponent<GUI_Base>().OnSelected();
+						if (goCurrentObject.GetComponent<GUI_Base>()) {
+							guiCurrentGUIBase = goCurrentObject.GetComponent<GUI_Base>();
+							guiCurrentGUIBase.OnSelected();
 						}
 					}
 					else {
 						//Unselect if clicked again
-						displayNames.RemoveText(hit.transform.gameObject.GetComponent<GameUnit>().sUnitName);
-						l_goCurrentSelection.Remove(hit.transform.gameObject);
+						if (guCurrentUnit != null) {
+							displayNames.RemoveText(guCurrentUnit.sUnitName);
+						}
+						l_goCurrentSelection.Remove(goCurrentObject);
 					}
 				}
 				else {
@@ -76,7 +92,13 @@ public class SelectionManager : MonoBehaviour {
 				foreach (GameObject gobj in l_goCurrentSelection) {
 					//If it was a unit, tell it to move
 					if (gobj.tag == "player-unit") {
-						gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+						if (hit.transform.gameObject.tag == "train") {
+							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<GameUnit>());
+						}
+						else {
+							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+						}
 					}
 				}
 			}
