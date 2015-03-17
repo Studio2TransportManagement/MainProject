@@ -13,11 +13,11 @@ public class ChildMenuController : GUI_Base {
 	}
 
 	public void OpenMenu() {
-		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, Screen.height, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	public void CloseMenu() {
-		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, -Screen.height, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	//Update 

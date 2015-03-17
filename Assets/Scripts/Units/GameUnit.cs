@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameUnit : MonoBehaviour, ISelectable {
@@ -19,6 +20,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
+
+	public GameObject goHealthBar;
+	public GameObject goHealthInstance;
 	
 	public int iAmmo;
 
@@ -26,6 +30,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void Start () {
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
+		goHealthInstance = Instantiate (goHealthBar) as GameObject;
+		goHealthInstance.transform.SetParent (GameObject.Find ("Canvas").transform, false);
+		//goHealthInstance.SetActive (false);
 	}
 
 	public bool IsSelected() {
@@ -40,6 +47,11 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	// Update is called once per frame
 	void Update () {
-		//
+
+		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 0.25f, 0f));
+		
+		goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
+		goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
+
 	}
 }
