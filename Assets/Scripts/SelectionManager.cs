@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour {
 
-	private List<GameObject> l_goCurrentSelection;
+	public List<GameObject> l_goCurrentSelection;
 	private bool bGotSelection = false;
 
 	private RaycastHit hit;
@@ -48,6 +48,7 @@ public class SelectionManager : MonoBehaviour {
 
 						if (goCurrentObject.tag == "player-unit") {
 							displayNames.AddText(guCurrentUnit.sUnitName);
+							guCurrentUnit.goHealthInstance.SetActive (true);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
 						}
 
@@ -141,6 +142,7 @@ public class SelectionManager : MonoBehaviour {
 
 	public void ClearSelection() {
 		Debug.Log("<color=magenta>Lost selection!</color>");
+		//grab all the selected units and setactive false their goHealthInstans.
 		l_goCurrentSelection.Clear();
 		displayNames.ClearText();
 	}

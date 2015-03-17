@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ChildMenuController : GUI_Base {
 	
-	public GameObject recruitmentPanel;
+	public GameObject goRecruitmentPanel;
+	public bool bIsPanelOpen = false;
+	public float fTimer = 0f;
 
 	//Init
 	void Start() {
@@ -13,24 +15,40 @@ public class ChildMenuController : GUI_Base {
 	}
 
 	public void OpenMenu() {
-		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		if(!bIsPanelOpen)
+		{
+			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsPanelOpen = true;
+		}
 	}
 
 	public void CloseMenu() {
-		LeanTween.move (recruitmentPanel, recruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		if(bIsPanelOpen)
+		{
+			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsPanelOpen = false;
+		}
 	}
 
 	//Update 
 	void Update() {
-		//
+		fTimer -= Time.deltaTime;
 	}
 
 	//Inherited
 	public override void OnSelected() {
-		OpenMenu();
+		if(fTimer <= 0)
+		{
+			OpenMenu();
+			fTimer = 0.30f;
+		}
 	}
 
 	public override void OnDeselected() {
-		CloseMenu();
+		if(fTimer <= 0)
+		{
+			CloseMenu();
+			fTimer = 0.30f;
+		}
 	}
 }

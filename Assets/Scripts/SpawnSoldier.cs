@@ -32,14 +32,23 @@ public class SpawnSoldier : MonoBehaviour {
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {
-			Debug.Log("HEAVY");
+			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
+			//Fluff
+			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
 
 		}
 		if (sol == SOLDIER_TYPE.MEDIC) {
-			Debug.Log("MEDIC");
+			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
+			//Fluff
+			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
 		}
 		if (sol == SOLDIER_TYPE.MECHANIC) {
-			Debug.Log("MECHANIC");
+			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
+			//Fluff
+			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
 		}
 	}
 }

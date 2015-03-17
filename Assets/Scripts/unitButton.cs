@@ -46,9 +46,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			{
 				iUnitsTraining -= 1;
 				Debug.Log("Trained " + l_sCurrentUnitsName[0] +"");
-				//spawn new unit
-				//add name to newly spawned units script
-				unitSpawner.SpawnUnit(troopChoice, Vector3.zero, l_sCurrentUnitsName[0]);
+				unitSpawner.SpawnUnit(troopChoice, new Vector3(0f, 1.9f, 0f), l_sCurrentUnitsName[0]);
 				l_sCurrentUnitsName.RemoveAt(0);
 			}
 			
