@@ -28,12 +28,16 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	// Use this for initialization
 	void Start () {
+		fHealthCurrent = fHealthMax;
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
-		goHealthInstance = Instantiate (goHealthBar) as GameObject;
-		goHealthInstance.transform.SetParent (GameObject.Find ("Canvas").transform, false);
-		goHealthInstance.transform.SetAsFirstSibling ();
-		goHealthInstance.SetActive (false);
+		if(goHealthBar != null)
+		{
+			goHealthInstance = Instantiate (goHealthBar) as GameObject;
+			goHealthInstance.transform.SetParent (GameObject.Find ("Canvas").transform, false);
+			goHealthInstance.transform.SetAsFirstSibling ();
+			goHealthInstance.SetActive (false);
+		}
 	}
 
 	public bool IsSelected() {
@@ -48,13 +52,25 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	// Update is called once per frame
 	void Update () {
-
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
 
-		if(goHealthInstance.activeInHierarchy)
+		if(goHealthInstance != null)
 		{
-			goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
-			goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
+			if(IsSelected())
+			{
+				goHealthInstance.SetActive (true);
+			}
+			else
+			{
+				goHealthInstance.SetActive (false);
+			}
+
+			if(goHealthInstance.activeInHierarchy)
+			{
+				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / 100;
+				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
+				goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
+			}
 		}
 	}
 }

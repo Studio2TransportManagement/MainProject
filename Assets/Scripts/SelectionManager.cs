@@ -48,7 +48,6 @@ public class SelectionManager : MonoBehaviour {
 
 						if (goCurrentObject.tag == "player-unit") {
 							displayNames.AddText(guCurrentUnit.sUnitName);
-							guCurrentUnit.goHealthInstance.SetActive (true);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
 						}
 
