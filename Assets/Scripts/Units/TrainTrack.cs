@@ -23,7 +23,7 @@ public class TrainTrack : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp(1)) {
 			if (guTrain.IsSelected()) {
-				//FlipDestination();
+				FlipDestination();
 			}
 		}
 	}
