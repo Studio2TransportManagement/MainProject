@@ -9,6 +9,10 @@ public class stats : MonoBehaviour {
 	public float timer = 0.25f;
 	public GameObject RecruitAmount;
 	public GameObject Currency;
+	public GameObject Currency2;
+	public Text BaseName;
+	public Image BaseHealth;
+	public Text BaseHealthValue;
 	public Texture2D cursorTexture;
 	public Texture2D cursorTexture2;
 	public CursorMode cursorMode = CursorMode.Auto;
@@ -23,6 +27,7 @@ public class stats : MonoBehaviour {
 	{
 		RecruitAmount.GetComponent<Text> ().text = "Recruits: " + recruits + "";
 		Currency.GetComponent<Text> ().text = "$ " + cash + "";
+		Currency2.GetComponent<Text> ().text = "$ " + cash + "";
 
 		if (Input.GetMouseButtonDown (0))
 		{

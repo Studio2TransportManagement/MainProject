@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
 public class GameUnit : MonoBehaviour, ISelectable {
 
 	public bool bUnselectable {
@@ -16,7 +17,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	public string sUnitName;
 
-	public float fHealthMax;
+    public float fHealthMax;
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
@@ -52,9 +53,18 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	// Update is called once per frame
 	void Update () {
-		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
+		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 
-		if(goHealthInstance != null)
+		if(goHealthInstance == null)
+		{
+			if(IsSelected())
+			{
+				Camera.main.GetComponent<stats>().BaseName.text = "" + sUnitName + " Upgrades";
+				Camera.main.GetComponent<stats>().BaseHealth.fillAmount = fHealthCurrent / 100;
+				Camera.main.GetComponent<stats>().BaseHealthValue.text = "" + fHealthCurrent + "/" + fHealthMax + "";
+			}
+		}
+		else
 		{
 			if(IsSelected())
 			{
@@ -67,6 +77,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 			if(goHealthInstance.activeInHierarchy)
 			{
+				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
+
 				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / 100;
 				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;

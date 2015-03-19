@@ -4,9 +4,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class ChildMenuController : GUI_Base {
-	
+
+	public GameUnit guRecruitmentBuilding;
 	public GameObject goRecruitmentPanel;
-	public bool bIsPanelOpen = false;
+	public GameUnit guBase1Building;
+	public GameUnit guBase2Building;
+	public GameUnit guBase3Building;
+	public GameObject goUpgradePanel;
+	static bool bIsRecruitmentPanelOpen = false;
+	static bool bIsUpgradePanelOpen = false;
 	public float fTimer = 0f;
 
 	//Init
@@ -15,18 +21,32 @@ public class ChildMenuController : GUI_Base {
 	}
 
 	public void OpenMenu() {
-		if(!bIsPanelOpen)
+		if(guRecruitmentBuilding.IsSelected() && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen)
 		{
 			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsPanelOpen = true;
+			bIsRecruitmentPanelOpen = true;
+		}
+
+		if((guBase1Building.IsSelected() || 
+		    guBase2Building.IsSelected() ||
+		    guBase3Building.IsSelected() ) && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen)
+		{
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsUpgradePanelOpen = true;
 		}
 	}
 
 	public void CloseMenu() {
-		if(bIsPanelOpen)
+		if(bIsRecruitmentPanelOpen)
 		{
 			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsPanelOpen = false;
+			bIsRecruitmentPanelOpen = false;
+		}
+
+		if(bIsUpgradePanelOpen)
+		{
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (-1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsUpgradePanelOpen = false;
 		}
 	}
 
