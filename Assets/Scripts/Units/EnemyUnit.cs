@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class uEnemy_Soldier : GameUnit {
+public class EnemyUnit : GameUnit {
 
 	NavMeshAgent agent;
 
