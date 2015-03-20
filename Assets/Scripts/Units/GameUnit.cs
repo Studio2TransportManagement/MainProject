@@ -21,7 +21,16 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
+	public int iIntegrityLevel = 1;
+	public int iIntegrityUpgradeCost = 50;
+	public int iWindowLevel = 1;
+	public int iWindows = 4;
+	public int iWindowUpgradeCost = 50;
+	public int iCapacityLevel = 1;
+	public int iCapacity = 3;
+	public int iCapacityUpgradeCost = 50;
 
+	public GameObject SelectionManager;
 	public GameObject goHealthBar;
 	public GameObject goHealthInstance;
 	
@@ -55,16 +64,22 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void Update () {
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 
-		if(goHealthInstance == null)
+		if(goHealthInstance == null && SelectionManager != null && SelectionManager.GetComponent<SelectionManager>().goCurrentObject != null && SelectionManager.GetComponent<SelectionManager>().goCurrentObject.name == sUnitName)
 		{
-			if(IsSelected())
-			{
-				Camera.main.GetComponent<stats>().BaseName.text = "" + sUnitName + " Upgrades";
-				Camera.main.GetComponent<stats>().BaseHealth.fillAmount = fHealthCurrent / 100;
-				Camera.main.GetComponent<stats>().BaseHealthValue.text = "" + fHealthCurrent + "/" + fHealthMax + "";
-			}
+			int iHealthCurrent = (int) fHealthCurrent;
+			
+			Camera.main.GetComponent<stats>().tBaseName.text = "" + sUnitName + " Upgrades";
+			Camera.main.GetComponent<stats>().tBaseHealth.fillAmount = fHealthCurrent / fHealthMax;
+			Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + iHealthCurrent + "/" + fHealthMax + "";
+			Camera.main.GetComponent<stats>().tIntegrityLevel.text = "Level: " + iIntegrityLevel + "";
+			Camera.main.GetComponent<stats>().tIntegrityUpgradeCost.text = "Cost for next level = $" + iIntegrityUpgradeCost + "";
+			Camera.main.GetComponent<stats>().tWindowLevel.text = "Level: " + iWindowLevel + "";
+			Camera.main.GetComponent<stats>().tWindowUpgradeCost.text = "Cost for next level = $" + iWindowUpgradeCost + "";
+			Camera.main.GetComponent<stats>().tCapacityLevel.text = "Level: " + iCapacityLevel + "";
+			Camera.main.GetComponent<stats>().tCapacityUpgradeCost.text = "Cost for next level = $" + iCapacityUpgradeCost + "";
 		}
-		else
+
+		if(goHealthInstance != null)
 		{
 			if(IsSelected())
 			{
@@ -79,7 +94,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			{
 				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
 
-				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / 100;
+				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / fHealthMax;
 				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
 			}

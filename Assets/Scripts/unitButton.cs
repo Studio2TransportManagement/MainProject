@@ -66,7 +66,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	
 	public void OnDrop (PointerEventData eventData)
 	{
-		if (Camera.main.GetComponent<stats>().cash >= iPrice && Camera.main.GetComponent<stats>().recruits >= 1)
+		if (Camera.main.GetComponent<stats>().iCash >= iPrice && Camera.main.GetComponent<stats>().iRecruits >= 1)
 		{
 			l_sCurrentUnitsName.Add("" + goRecruitSystem.GetComponent<characterRandomiser>().characterName.GetComponent<Text>().text + "");
 			goRecruitSystem.GetComponent<characterRandomiser>().RandomiseAvatar();
@@ -74,14 +74,14 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			{
 				goButtonPressed.GetComponent<Image>().fillAmount = 1;
 				iUnitsTraining += 1;
-				Camera.main.GetComponent<stats>().cash -= iPrice;
-				Camera.main.GetComponent<stats>().recruits -= 1;
+				Camera.main.GetComponent<stats>().iCash -= iPrice;
+				Camera.main.GetComponent<stats>().iRecruits -= 1;
 			}
 			else if (iUnitsTraining >= 1)
 			{
 				iUnitsTraining += 1;
-				Camera.main.GetComponent<stats>().cash -= iPrice;
-				Camera.main.GetComponent<stats>().recruits -= 1;
+				Camera.main.GetComponent<stats>().iCash -= iPrice;
+				Camera.main.GetComponent<stats>().iRecruits -= 1;
 			}
 		}
 	}

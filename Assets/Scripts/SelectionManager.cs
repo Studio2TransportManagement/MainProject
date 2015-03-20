@@ -14,7 +14,7 @@ public class SelectionManager : MonoBehaviour {
 
 	public DisplayTextList displayNames;
 
-	private GameObject goCurrentObject;
+	public GameObject goCurrentObject;
 	private GameUnit guCurrentUnit;
 	private GUI_Base guiCurrentGUIBase;
 	

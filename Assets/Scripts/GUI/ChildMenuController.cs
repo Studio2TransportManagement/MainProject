@@ -34,6 +34,26 @@ public class ChildMenuController : GUI_Base {
 			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = true;
 		}
+
+		//My shitty attempt at trying to make transitions from upgrade panel straight to recruitment panel and vice versa
+//		if(guRecruitmentBuilding.IsSelected() && bIsUpgradePanelOpen)
+//		{
+//			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (-1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+//			bIsUpgradePanelOpen = false;
+//			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+//			bIsRecruitmentPanelOpen = true;
+//		}
+
+//		if(guBase1Building.IsSelected() || 
+//		   guBase2Building.IsSelected() ||
+//		   guBase3Building.IsSelected() && bIsRecruitmentPanelOpen)
+//		{
+//			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+//			bIsRecruitmentPanelOpen = false;
+//			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+//			bIsUpgradePanelOpen = true;
+//		}
+
 	}
 
 	public void CloseMenu() {
