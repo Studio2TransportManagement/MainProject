@@ -7,7 +7,8 @@ public class Tower : MonoBehaviour {
 	public GameObject goStationedUnit;
 	public Camera cTowerCamera;
 	public Camera cMainCamera;
-	
+
+
 	//
 	void Start(){
 		cMainCamera.enabled = true;
