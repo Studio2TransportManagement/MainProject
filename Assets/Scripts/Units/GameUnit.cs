@@ -21,14 +21,6 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
-	public int iIntegrityLevel = 1;
-	public int iIntegrityUpgradeCost = 50;
-	public int iWindowLevel = 1;
-	public int iWindows = 4;
-	public int iWindowUpgradeCost = 50;
-	public int iCapacityLevel = 1;
-	public int iCapacity = 3;
-	public int iCapacityUpgradeCost = 50;
 
 	public SelectionManager SelectionManager;
 	public GameObject goHealthBar;
@@ -64,20 +56,6 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void Update () {
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 
-		if(goHealthInstance == null && SelectionManager != null && SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.name == sUnitName)
-		{
-			int iHealthCurrent = (int) fHealthCurrent;
-			
-			Camera.main.GetComponent<stats>().tBaseName.text = "" + sUnitName + " Upgrades";
-			Camera.main.GetComponent<stats>().tBaseHealth.fillAmount = fHealthCurrent / fHealthMax;
-			Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + iHealthCurrent + "/" + fHealthMax + "";
-			Camera.main.GetComponent<stats>().tIntegrityLevel.text = "Level: " + iIntegrityLevel + "";
-			Camera.main.GetComponent<stats>().tIntegrityUpgradeCost.text = "Cost for next level = $" + iIntegrityUpgradeCost + "";
-			Camera.main.GetComponent<stats>().tWindowLevel.text = "Level: " + iWindowLevel + "";
-			Camera.main.GetComponent<stats>().tWindowUpgradeCost.text = "Cost for next level = $" + iWindowUpgradeCost + "";
-			Camera.main.GetComponent<stats>().tCapacityLevel.text = "Level: " + iCapacityLevel + "";
-			Camera.main.GetComponent<stats>().tCapacityUpgradeCost.text = "Cost for next level = $" + iCapacityUpgradeCost + "";
-		}
 
 		if(goHealthInstance != null)
 		{

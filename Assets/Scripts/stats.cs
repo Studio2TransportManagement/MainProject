@@ -38,7 +38,7 @@ public class stats : MonoBehaviour {
 		goCurrency2.GetComponent<Text> ().text = "$ " + iCash + "";
 
 		//Handles the window upgrades to the bases
-		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindows == 5)
+		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows == 5)
 		{
 			//Disable mesh for the 4 window base for alpha
 			//Enable mesh for the 5 window base for alpha
@@ -62,12 +62,12 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost)
 			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().fHealthMax += 100f;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
 			}
 		}
 	}
@@ -78,12 +78,12 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost)
 			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindows += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost += 50;
 			}
 		}
 	}
@@ -94,12 +94,12 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost)
 			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacity += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
 			}
 		}
 	}
