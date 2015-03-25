@@ -30,7 +30,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public int iCapacity = 3;
 	public int iCapacityUpgradeCost = 50;
 
-	public GameObject SelectionManager;
+	public SelectionManager SelectionManager;
 	public GameObject goHealthBar;
 	public GameObject goHealthInstance;
 	
@@ -64,7 +64,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void Update () {
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 
-		if(goHealthInstance == null && SelectionManager != null && SelectionManager.GetComponent<SelectionManager>().goCurrentObject != null && SelectionManager.GetComponent<SelectionManager>().goCurrentObject.name == sUnitName)
+		if(goHealthInstance == null && SelectionManager != null && SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.name == sUnitName)
 		{
 			int iHealthCurrent = (int) fHealthCurrent;
 			

@@ -10,9 +10,7 @@ public class stats : MonoBehaviour {
 	public GameObject goRecruitAmount;
 	public GameObject goCurrency;
 	public GameObject goCurrency2;
-	public GameUnit guBaseAlpha;
-	public GameUnit guBaseBravo;
-	public GameUnit guBaseCharlie;
+	public SelectionManager SelectionManager;
 	public Text tBaseName;
 	public Image tBaseHealth;
 	public Text tBaseHealthValue;
@@ -40,22 +38,10 @@ public class stats : MonoBehaviour {
 		goCurrency2.GetComponent<Text> ().text = "$ " + iCash + "";
 
 		//Handles the window upgrades to the bases
-		if(guBaseAlpha.iWindows == 5)
+		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindows == 5)
 		{
 			//Disable mesh for the 4 window base for alpha
 			//Enable mesh for the 5 window base for alpha
-			//Reaarange gunner positions for windows accordingly
-		}
-		if(guBaseBravo.iWindows == 5)
-		{
-			//Disable mesh for the 4 window base for bravo
-			//Enable mesh for the 5 window base for bravo
-			//Reaarange gunner positions for windows accordingly
-		}
-		if(guBaseCharlie.iWindows == 5)
-		{
-			//Disable mesh for the 4 window base for charlie
-			//Enable mesh for the 5 window base for charlie
 			//Reaarange gunner positions for windows accordingly
 		}
 
@@ -72,108 +58,48 @@ public class stats : MonoBehaviour {
 
 	public void IntegrityUpgrade ()
 	{
-		if(guBaseAlpha.IsSelected())
+		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= guBaseAlpha.iIntegrityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost)
 			{
-				iCash -= guBaseAlpha.iIntegrityUpgradeCost;
-				guBaseAlpha.fHealthMax += 100f;
-				guBaseAlpha.iIntegrityLevel += 1;
-				guBaseAlpha.iIntegrityUpgradeCost += 50;
-			}
-		}
-
-		if(guBaseBravo.IsSelected())
-		{
-			if(iCash >= guBaseBravo.iIntegrityUpgradeCost)
-			{
-				iCash -= guBaseBravo.iIntegrityUpgradeCost;
-				guBaseBravo.fHealthMax += 100f;
-				guBaseBravo.iIntegrityLevel += 1;
-				guBaseBravo.iIntegrityUpgradeCost += 50;
-			}
-		}
-
-		if(guBaseCharlie.IsSelected())
-		{
-			if(iCash >= guBaseCharlie.iIntegrityUpgradeCost)
-			{
-				iCash -= guBaseCharlie.iIntegrityUpgradeCost;
-				guBaseCharlie.fHealthMax += 100f;
-				guBaseCharlie.iIntegrityLevel += 1;
-				guBaseCharlie.iIntegrityUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().fHealthMax += 100f;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iIntegrityUpgradeCost += 50;
 			}
 		}
 	}
 
 	public void WindowUpgrade ()
 	{
-		if(guBaseAlpha.IsSelected())
+		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= guBaseAlpha.iWindowUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost)
 			{
-				iCash -= guBaseAlpha.iWindowUpgradeCost;
-				guBaseAlpha.iWindows += 1;
-				guBaseAlpha.iWindowLevel += 1;
-				guBaseAlpha.iWindowUpgradeCost += 50;
-			}
-		}
-		
-		if(guBaseBravo.IsSelected())
-		{
-			if(iCash >= guBaseBravo.iWindowUpgradeCost)
-			{
-				iCash -= guBaseBravo.iWindowUpgradeCost;
-				guBaseBravo.iWindows += 1;
-				guBaseBravo.iWindowLevel += 1;
-				guBaseBravo.iWindowUpgradeCost += 50;
-			}
-		}
-		
-		if(guBaseCharlie.IsSelected())
-		{
-			if(iCash >= guBaseCharlie.iWindowUpgradeCost)
-			{
-				iCash -= guBaseCharlie.iWindowUpgradeCost;
-				guBaseCharlie.iWindows += 1;
-				guBaseCharlie.iWindowLevel += 1;
-				guBaseCharlie.iWindowUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindows += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iWindowUpgradeCost += 50;
 			}
 		}
 	}
 
 	public void CapacityUpgrade ()
 	{
-		if(guBaseAlpha.IsSelected())
+		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= guBaseAlpha.iCapacityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost)
 			{
-				iCash -= guBaseAlpha.iCapacityUpgradeCost;
-				guBaseAlpha.iCapacity += 1;
-				guBaseAlpha.iCapacityLevel += 1;
-				guBaseAlpha.iCapacityUpgradeCost += 50;
-			}
-		}
-		
-		if(guBaseBravo.IsSelected())
-		{
-			if(iCash >= guBaseBravo.iCapacityUpgradeCost)
-			{
-				iCash -= guBaseBravo.iCapacityUpgradeCost;
-				guBaseBravo.iCapacity += 1;
-				guBaseBravo.iCapacityLevel += 1;
-				guBaseBravo.iCapacityUpgradeCost += 50;
-			}
-		}
-		
-		if(guBaseCharlie.IsSelected())
-		{
-			if(iCash >= guBaseCharlie.iCapacityUpgradeCost)
-			{
-				iCash -= guBaseCharlie.iCapacityUpgradeCost;
-				guBaseCharlie.iCapacity += 1;
-				guBaseCharlie.iCapacityLevel += 1;
-				guBaseCharlie.iCapacityUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacity += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<GameUnit>().iCapacityUpgradeCost += 50;
 			}
 		}
 	}
