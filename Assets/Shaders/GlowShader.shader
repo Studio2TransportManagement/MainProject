@@ -39,5 +39,5 @@
 		}
 		ENDCG
 	} 
-	FallBack "Self-Illumin/Diffuse"
+	FallBack "Self-Illumin/VertexLit"
 }
