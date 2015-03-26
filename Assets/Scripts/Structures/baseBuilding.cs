@@ -3,21 +3,6 @@ using System.Collections;
 
 public class baseBuilding : MonoBehaviour {
 
-	private float health;
-
-	public float Health 
-	{
-		get
-		{
-			return health;
-		}
-
-		set
-		{
-			health = value;
-		}
-	}
-
 	void Awake () {
 
 	}
