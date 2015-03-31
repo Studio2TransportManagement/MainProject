@@ -8,7 +8,7 @@ namespace BehaviorDesigner.Runtime
     {
         public string Value { get { return mValue; } set { mValue = value; } }
         [SerializeField]
-        private string mValue;
+        private string mValue = "";
 
         public override object GetValue() { return mValue; }
         public override void SetValue(object value) { mValue = (string)value; }

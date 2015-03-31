@@ -36,15 +36,11 @@ public class SelectionManager : MonoBehaviour {
 				guiCurrentGUIBase = null;
 
 				goCurrentObject = hit.transform.gameObject;
-				if (hit.transform.gameObject.GetComponent<GameUnit>() != null) {
+				if (goCurrentObject.GetComponent<GameUnit>()) {
 					guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
 					//Don't select the same object twice
 					if (!l_goCurrentSelection.Contains(goCurrentObject)) {
 						l_goCurrentSelection.Add(goCurrentObject);
-
-						if (goCurrentObject.tag == "building") {
-							Debug.Log("Clicked on the <color=green>" + guCurrentUnit.sUnitName + "</color>!");
-						}
 
 						if (goCurrentObject.tag == "player-unit") {
 							displayNames.AddText(guCurrentUnit.sUnitName);
@@ -55,12 +51,6 @@ public class SelectionManager : MonoBehaviour {
 							displayNames.AddText(guCurrentUnit.sUnitName);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>, choo choo!");
 						}
-
-						//If the object had a GUI menu, activate it now
-						if (goCurrentObject.GetComponent<GUI_Base>()) {
-							guiCurrentGUIBase = goCurrentObject.GetComponent<GUI_Base>();
-							guiCurrentGUIBase.OnSelected();
-						}
 					}
 					else {
 						//Unselect if clicked again
@@ -69,6 +59,10 @@ public class SelectionManager : MonoBehaviour {
 						}
 						l_goCurrentSelection.Remove(goCurrentObject);
 					}
+				}
+				else if (goCurrentObject.GetComponent<GameStructure>()) {
+					     guiCurrentGUIBase = goCurrentObject.GetComponent<GUI_Base>();
+					     guiCurrentGUIBase.OnSelected();
 				}
 				else {
 					//If selection had a GUI component, run deselected function

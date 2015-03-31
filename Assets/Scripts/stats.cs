@@ -38,12 +38,12 @@ public class stats : MonoBehaviour {
 		goCurrency2.GetComponent<Text> ().text = "$ " + iCash + "";
 
 		//Handles the window upgrades to the bases
-		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows == 5)
-		{
-			//Disable mesh for the 4 window base for alpha
-			//Enable mesh for the 5 window base for alpha
-			//Reaarange gunner positions for windows accordingly
-		}
+//		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows == 5)
+//		{
+//			//Disable mesh for the 4 window base for alpha
+//			//Enable mesh for the 5 window base for alpha
+//			//Reaarange gunner positions for windows accordingly
+//		}
 
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))

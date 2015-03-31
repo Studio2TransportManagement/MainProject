@@ -47,8 +47,9 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override void OnChildExecuted(int childIndex, TaskStatus childStatus)
         {
-            // The child status will be inactive immediately following an abort from OnReevaluationEnded. Ignore that status. 
-            if (childStatus != TaskStatus.Inactive) {
+            // The child status will be inactive immediately following an abort from OnReevaluationEnded. The status will be running if the 
+            // child task is interrupted. Ignore the status for both of these. 
+            if (childStatus != TaskStatus.Inactive && childStatus != TaskStatus.Running) {
                 executionStatus = childStatus;
             }
         }
