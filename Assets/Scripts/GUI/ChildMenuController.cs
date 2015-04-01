@@ -5,11 +5,7 @@ using UnityEngine.UI;
 
 public class ChildMenuController : GUI_Base {
 
-	public GameUnit guRecruitmentBuilding;
 	public GameObject goRecruitmentPanel;
-	public GameUnit guBase1Building;
-	public GameUnit guBase2Building;
-	public GameUnit guBase3Building;
 	public GameObject goUpgradePanel;
 	static bool bIsRecruitmentPanelOpen = false;
 	static bool bIsUpgradePanelOpen = false;
@@ -21,18 +17,13 @@ public class ChildMenuController : GUI_Base {
 	}
 
 	public void OpenMenu() {
-		if(guRecruitmentBuilding.IsSelected() && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen)
-		{
-			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsRecruitmentPanelOpen = true;
-		}
-
-		if((guBase1Building.IsSelected() || 
-		    guBase2Building.IsSelected() ||
-		    guBase3Building.IsSelected() ) && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen)
-		{
+		if (this.gameObject.name.StartsWith("Base ") && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
 			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = true;
+		}
+		else if (this.gameObject.name == "Recruitment Building" && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
+			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsRecruitmentPanelOpen = true;
 		}
 
 		//My shitty attempt at trying to make transitions from upgrade panel straight to recruitment panel and vice versa
