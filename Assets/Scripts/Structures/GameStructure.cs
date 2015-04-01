@@ -48,7 +48,7 @@ public class GameStructure : MonoBehaviour, ISelectable {
 			GameStructure currentBase = SelectionManager.l_goCurrentSelection[0].GetComponent<GameStructure>();
 			Camera.main.GetComponent<stats>().tBaseName.text = "" + currentBase.sBaseName + " Upgrades";
 			Camera.main.GetComponent<stats>().tBaseHealth.fillAmount = currentBase.fHealthCurrent / currentBase.fHealthMax;
-			Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + currentBase.iHealthCurrent + "/" + fHealthMax + "";
+//			Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + currentBase.iHealthCurrent + "/" + fHealthMax + "";
 			Camera.main.GetComponent<stats>().tIntegrityLevel.text = "Level: " + iIntegrityLevel + "";
 			Camera.main.GetComponent<stats>().tIntegrityUpgradeCost.text = "Cost for next level = $" + iIntegrityUpgradeCost + "";
 			Camera.main.GetComponent<stats>().tWindowLevel.text = "Level: " + iWindowLevel + "";

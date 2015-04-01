@@ -18,8 +18,8 @@ public class FSM_Core<T> {
 	public void Config(T owner, FSM_State<T> start_state) {
 		fsmOwner = owner;
 		Debug.Log("Owner is " + fsmOwner.ToString());
-		ChangeState(start_state);
-		Debug.Log("Current state is " + stateCurrent.ToString());
+		stateCurrent = start_state;
+		//Debug.Log("Current state is " + stateCurrent.ToString());
 	}
 
 	public void Update() {

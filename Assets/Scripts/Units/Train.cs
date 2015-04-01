@@ -17,15 +17,9 @@ public class Train : GameUnit {
 	}
 
 	// Update is called once per frame
-	void Update () {
-
-		//commented this out becuase the trains are a series of blocks with individual renderers, rather than the whole thing sharing one
-//		if (this.IsSelected()) {
-//			this.renderer.material.color = Color.red;
-//		}
-//		else {
-//			this.renderer.material.color = Color.white;
-//		}
+	void Update () 
+	{
+		
 	}
 
 	public void SetExpected(List<GameUnit> lexp) {

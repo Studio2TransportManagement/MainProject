@@ -8,6 +8,7 @@ public class Cat : MonoBehaviour {
 	public int iThirst = 0;
 	public int iHunger = 0;
 	public int iMice = 0;
+	public int iMiceMax = 5;
 	
 	public void Start() {
 		Debug.Log("Cat!");
@@ -20,7 +21,9 @@ public class Cat : MonoBehaviour {
 	}
 	
 	public void Update() {
-		iThirst++;
+		if (Time.frameCount % 100 == 0) {
+			iThirst++;
+		}
 		FSM.Update();
 	}
 	
@@ -37,11 +40,11 @@ public class Cat : MonoBehaviour {
 	}
 
 	public bool IsHungry() {
-		if (iHunger > 10) {
-			return true;
+		if (iHunger > 6) {
+			return false;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public void IncreaseHunger() {
@@ -54,5 +57,9 @@ public class Cat : MonoBehaviour {
 
 	public void AddMice(int amount) {
 		iMice += amount;
+	}
+	
+	public void EatMouse() {
+		iMice--;
 	}
 }

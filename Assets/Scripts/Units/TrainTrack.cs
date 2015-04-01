@@ -15,6 +15,7 @@ public class TrainTrack : MonoBehaviour {
 		l_tsNodes.AddRange(nodes);
 
 		guTrain = (Train)Instantiate(guProtoTrain, l_tsNodes[0].transform.position, this.transform.rotation);
+
 	}
 	
 	// Update is called once per frame
