@@ -15,9 +15,9 @@ public class SelectionManager : MonoBehaviour {
 	public DisplayTextList displayNames;
 
 	public GameObject goCurrentObject;
-	private GameUnit guCurrentUnit;
-	private GameStructure gsCurrentBuilding;
-	private GUI_Base guiCurrentGUIBase;
+	public GameUnit guCurrentUnit;
+	public GameStructure gsCurrentBuilding;
+	public GUI_Base guiCurrentGUIBase;
 	
 	//Init
 	void Start() {
@@ -32,10 +32,6 @@ public class SelectionManager : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
 			rRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(rRay, out hit, Mathf.Infinity)) {
-				goCurrentObject = null;
-				guCurrentUnit = null;
-				guiCurrentGUIBase = null;
-				gsCurrentBuilding = null;
 
 				if (IsObjectSelectable(hit.transform.gameObject)) {
 					goCurrentObject = hit.transform.gameObject;
@@ -43,14 +39,18 @@ public class SelectionManager : MonoBehaviour {
 					if (!l_goCurrentSelection.Contains(goCurrentObject)) {
 						
 						if (hit.transform.gameObject.GetComponent<GameUnit>()) {
-							guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
 							l_goCurrentSelection.Add(goCurrentObject);
+							if(!l_goCurrentSelection[0].GetComponent<GameUnit>())
+							{
+								ClearSelection();
+							}
+							guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
 						}
 						if (goCurrentObject.GetComponent<GameStructure>()) {
 							ClearSelection();
-							gsCurrentBuilding = goCurrentObject.GetComponent<GameStructure>();
-							guiCurrentGUIBase = goCurrentObject.GetComponent<GUI_Base>();
 							l_goCurrentSelection.Add(goCurrentObject);
+							gsCurrentBuilding = hit.transform.gameObject.GetComponent<GameStructure>();
+							guiCurrentGUIBase = hit.transform.gameObject.GetComponent<GUI_Base>();
 							guiCurrentGUIBase.OnSelected();
 						}
 
@@ -75,12 +75,8 @@ public class SelectionManager : MonoBehaviour {
 							displayNames.RemoveText(guCurrentUnit.sUnitName);
 						}
 						//If selection had a GUI component, run deselected function
-						if (l_goCurrentSelection.Count > 0) {
-							foreach (GameObject gobj in l_goCurrentSelection) {
-								if (gobj.GetComponent<GUI_Base>()) {
-									gobj.GetComponent<GUI_Base>().OnDeselected();
-								}
-							}
+						if (gsCurrentBuilding != null) {
+							displayNames.RemoveText (gsCurrentBuilding.sBaseName);
 						}
 						l_goCurrentSelection.Remove(goCurrentObject);
 			         }
@@ -88,6 +84,9 @@ public class SelectionManager : MonoBehaviour {
 				else {
 					//Debug.Log(hit.transform.gameObject.name);
 					Debug.Log("Nothing interesting here..");
+					if (gsCurrentBuilding != null) {
+						guiCurrentGUIBase.OnDeselected();
+					}
 					ClearSelection();
 				}
 			}
@@ -101,11 +100,11 @@ public class SelectionManager : MonoBehaviour {
 					//If it was a unit, tell it to move
 					if (gobj.tag == "player-unit") {
 						if (hit.transform.gameObject.tag == "train") {
-//							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
-//							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<GameUnit>());
+							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<GameUnit>());
 						}
 						else {
-							gobj.GetComponent<NavMeshAgent>().SetDestination( hit.point );
+							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
 						}
 					}
 				}
@@ -152,6 +151,10 @@ public class SelectionManager : MonoBehaviour {
 		//grab all the selected units and setactive false their goHealthInstans.
 		l_goCurrentSelection.Clear();
 		displayNames.ClearText();
+//		goCurrentObject = null;
+		guCurrentUnit = null;
+		guiCurrentGUIBase = null;
+		gsCurrentBuilding = null;
 	}
 
 	private bool IsObjectSelectable(GameObject go) {

@@ -18,32 +18,29 @@ public class ChildMenuController : GUI_Base {
 
 	public void OpenMenu() {
 		if (this.gameObject.name.StartsWith("Base ") && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = true;
 		}
 		else if (this.gameObject.name == "Recruitment Building" && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
 			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsRecruitmentPanelOpen = true;
 		}
+		
+		if(this.gameObject.name == "Recruitment Building" && bIsUpgradePanelOpen)
+		{
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsUpgradePanelOpen = false;
+			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsRecruitmentPanelOpen = true;
+		}
 
-		//My shitty attempt at trying to make transitions from upgrade panel straight to recruitment panel and vice versa
-//		if(guRecruitmentBuilding.IsSelected() && bIsUpgradePanelOpen)
-//		{
-//			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (-1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//			bIsUpgradePanelOpen = false;
-//			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//			bIsRecruitmentPanelOpen = true;
-//		}
-
-//		if(guBase1Building.IsSelected() || 
-//		   guBase2Building.IsSelected() ||
-//		   guBase3Building.IsSelected() && bIsRecruitmentPanelOpen)
-//		{
-//			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//			bIsRecruitmentPanelOpen = false;
-//			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-//			bIsUpgradePanelOpen = true;
-//		}
+		if(this.gameObject.name.StartsWith("Base ") && bIsRecruitmentPanelOpen)
+		{
+			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsRecruitmentPanelOpen = false;
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			bIsUpgradePanelOpen = true;
+		}
 
 	}
 
@@ -56,7 +53,7 @@ public class ChildMenuController : GUI_Base {
 
 		if(bIsUpgradePanelOpen)
 		{
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (-1300f, 0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = false;
 		}
 	}
@@ -71,7 +68,7 @@ public class ChildMenuController : GUI_Base {
 		if(fTimer <= 0)
 		{
 			OpenMenu();
-			fTimer = 0.30f;
+			fTimer = 0.25f;
 		}
 	}
 
@@ -79,7 +76,7 @@ public class ChildMenuController : GUI_Base {
 		if(fTimer <= 0)
 		{
 			CloseMenu();
-			fTimer = 0.30f;
+			fTimer = 0.25f;
 		}
 	}
 }

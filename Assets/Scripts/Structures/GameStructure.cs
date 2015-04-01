@@ -28,6 +28,7 @@ public class GameStructure : MonoBehaviour, ISelectable {
 	public int iCapacityLevel = 1;
 	public int iCapacity = 3;
 	public int iCapacityUpgradeCost = 50;
+	public int iHealthCurrent;
 
 	// Use this for initialization
 	void Start () 
@@ -35,26 +36,28 @@ public class GameStructure : MonoBehaviour, ISelectable {
 		fHealthCurrent = fHealthMax;
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
-		int iHealthCurrent = (int) fHealthCurrent;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{	
-		if(SelectionManager.l_goCurrentSelection[0].gameObject.name.StartsWith("Base "))
+		if(SelectionManager.l_goCurrentSelection.Count != 0)
 		{
-			int iHealthCurrent = (int) fHealthCurrent;
-
-			GameStructure currentBase = SelectionManager.l_goCurrentSelection[0].GetComponent<GameStructure>();
-			Camera.main.GetComponent<stats>().tBaseName.text = "" + currentBase.sBaseName + " Upgrades";
-			Camera.main.GetComponent<stats>().tBaseHealth.fillAmount = currentBase.fHealthCurrent / currentBase.fHealthMax;
-//			Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + currentBase.iHealthCurrent + "/" + fHealthMax + "";
-			Camera.main.GetComponent<stats>().tIntegrityLevel.text = "Level: " + iIntegrityLevel + "";
-			Camera.main.GetComponent<stats>().tIntegrityUpgradeCost.text = "Cost for next level = $" + iIntegrityUpgradeCost + "";
-			Camera.main.GetComponent<stats>().tWindowLevel.text = "Level: " + iWindowLevel + "";
-			Camera.main.GetComponent<stats>().tWindowUpgradeCost.text = "Cost for next level = $" + iWindowUpgradeCost + "";
-			Camera.main.GetComponent<stats>().tCapacityLevel.text = "Level: " + iCapacityLevel + "";
-			Camera.main.GetComponent<stats>().tCapacityUpgradeCost.text = "Cost for next level = $" + iCapacityUpgradeCost + "";
+			if(SelectionManager.l_goCurrentSelection[0].gameObject.name.StartsWith("Base "))
+			{
+				iHealthCurrent = (int) fHealthCurrent;
+				
+				GameStructure currentBase = SelectionManager.l_goCurrentSelection[0].GetComponent<GameStructure>();
+				Camera.main.GetComponent<stats>().tBaseName.text = "" + currentBase.sBaseName + " Upgrades";
+				Camera.main.GetComponent<stats>().tBaseHealth.fillAmount = currentBase.fHealthCurrent / currentBase.fHealthMax;
+				Camera.main.GetComponent<stats>().tBaseHealthValue.text = "" + currentBase.iHealthCurrent + "/" + currentBase.fHealthMax + "";
+				Camera.main.GetComponent<stats>().tIntegrityLevel.text = "Level: " + currentBase.iIntegrityLevel + "";
+				Camera.main.GetComponent<stats>().tIntegrityUpgradeCost.text = "Cost for next level = $" + currentBase.iIntegrityUpgradeCost + "";
+				Camera.main.GetComponent<stats>().tWindowLevel.text = "Level: " + currentBase.iWindowLevel + "";
+				Camera.main.GetComponent<stats>().tWindowUpgradeCost.text = "Cost for next level = $" + currentBase.iWindowUpgradeCost + "";
+				Camera.main.GetComponent<stats>().tCapacityLevel.text = "Level: " + currentBase.iCapacityLevel + "";
+				Camera.main.GetComponent<stats>().tCapacityUpgradeCost.text = "Cost for next level = $" + currentBase.iCapacityUpgradeCost + "";
+			}
 		}
 
 	}
