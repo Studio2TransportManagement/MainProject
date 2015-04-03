@@ -8,6 +8,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	public GameObject goRecruitSystem;
 	public GameObject goButtonPressed;
 	public GameObject goCurrentlyTraining;
+	public Transform tSpawnPoint;
 	public List<string> l_sCurrentUnitsName = new List<string>();
 	public Text textCost;
 	public Color32 colTransparent;
@@ -46,7 +47,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			{
 				iUnitsTraining -= 1;
 				Debug.Log("Trained " + l_sCurrentUnitsName[0] +"");
-				unitSpawner.SpawnUnit(troopChoice, new Vector3(0f, 1.9f, 0f), l_sCurrentUnitsName[0]);
+				unitSpawner.SpawnUnit(troopChoice, tSpawnPoint.position, l_sCurrentUnitsName[0]);
 				l_sCurrentUnitsName.RemoveAt(0);
 			}
 			
