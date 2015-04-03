@@ -28,27 +28,27 @@ public class SpawnSoldier : MonoBehaviour {
 			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
 			//Fluff
-			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+			lastSpawned.GetComponent<NavMeshAgent>().SetDestination(spawnpoint + new Vector3(0,0,-5)); 
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {
 			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
 			//Fluff
-			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+			lastSpawned.GetComponent<NavMeshAgent>().SetDestination(spawnpoint + new Vector3(0,0,-5));
 
 		}
 		if (sol == SOLDIER_TYPE.MEDIC) {
 			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
 			//Fluff
-			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+			lastSpawned.GetComponent<NavMeshAgent>().SetDestination(spawnpoint + new Vector3(0,0,-5));
 		}
 		if (sol == SOLDIER_TYPE.MECHANIC) {
 			GameObject lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 			lastSpawned.GetComponent<GameUnit>().sUnitName = name;
 			//Fluff
-			lastSpawned.GetComponent<SlideToLocation>().vTarget.x += Random.Range(-0.5f, 0.5f);
+			lastSpawned.GetComponent<NavMeshAgent>().SetDestination(spawnpoint + new Vector3(0,0,-5));
 		}
 	}
 }

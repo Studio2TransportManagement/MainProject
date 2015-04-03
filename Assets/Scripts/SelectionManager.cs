@@ -100,11 +100,11 @@ public class SelectionManager : MonoBehaviour {
 					//If it was a unit, tell it to move
 					if (gobj.tag == "player-unit") {
 						if (hit.transform.gameObject.tag == "train") {
-							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
 							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<GameUnit>());
 						}
 						else {
-							gobj.GetComponent<SlideToLocation>().vTarget = hit.point;
+							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
 						}
 					}
 				}
