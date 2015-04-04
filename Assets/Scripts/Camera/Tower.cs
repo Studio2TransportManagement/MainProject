@@ -3,42 +3,31 @@ using System.Collections;
 
 public class Tower : MonoBehaviour {
 
-	private bool bIsEmpty;
-	public GameObject goStationedUnit;
 	public Camera cTowerCamera;
 	public Camera cMainCamera;
 
 
 	//
 	void Start(){
-		cMainCamera.enabled = true;
-		cTowerCamera.enabled = false;
-		//bIsEmpty = true;
+		cTowerCamera.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
 	void Update () {
-
-		if(bIsEmpty == false && Input.GetKeyDown(KeyCode.C))
+		if(Input.GetMouseButton(1) && cTowerCamera.gameObject.activeInHierarchy == true)
 		{
-			SwitchCamera();
+			SwapCamera();
 		}
-
-	
 	}
 
-	public void SwitchCamera(){
-		cTowerCamera.enabled = !cTowerCamera.enabled;
-		cMainCamera.enabled = !cTowerCamera.enabled;
-		Screen.showCursor = !Screen.showCursor;
+	void OnMouseDown(){
+		Debug.Log("Clicked");
+		SwapCamera();
 	}
 
-	public void FillTower(){
-		bIsEmpty = false;
-	}
-
-	public void EmptyTower(){
-		bIsEmpty = true;
-		//cTowerCamera.camera.enabled = false;
+	void SwapCamera(){
+		Debug.Log("Swapping");
+		cTowerCamera.gameObject.SetActive(!cTowerCamera.gameObject.activeInHierarchy);
+		Screen.lockCursor = !Screen.lockCursor;
 	}
 }

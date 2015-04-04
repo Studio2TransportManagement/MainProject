@@ -31,7 +31,7 @@ public class GameStructure : MonoBehaviour, ISelectable {
 	public int iHealthCurrent;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		fHealthCurrent = fHealthMax;
 		bUnselectable = false;

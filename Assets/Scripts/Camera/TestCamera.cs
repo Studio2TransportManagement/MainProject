@@ -11,9 +11,6 @@ public class TestCamera : MonoBehaviour {
 	public float fCamZoomInLimit;
 	public float fCamZoomOutLimit;
 
-	public GameObject goTargetObj;
-
-	public bool target;
 
 	// Use this for initialization
 	void Start () {
@@ -22,13 +19,6 @@ public class TestCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-//		if(!target)
-//		{
-//			this.transform.LookAt(goTargetObj.transform);
-//		}
-
-
 
 		if(Input.GetKey(KeyCode.A))
 		{
@@ -42,12 +32,12 @@ public class TestCamera : MonoBehaviour {
 
 //		if (Input.GetAxis("Mouse ScrollWheel") < 0 ) 
 //		{
-//			this.transform.RotateAround(this.transform.position + (this.transform.forward * 10), Vector3.right, -fCamZoomSpeed * Time.deltaTime);
+//			transform.Translate(-transform.forward);
 //		}
 //		
 //		if (Input.GetAxis("Mouse ScrollWheel") > 0) 
 //		{
-//			this.transform.RotateAround(this.transform.position + (this.transform.forward * 10), Vector3.right, fCamZoomSpeed * Time.deltaTime);
+//			transform.Translate(transform.forward);
 //		}
 
 	}

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class SelectionManager : MonoBehaviour {
 
 	public List<GameObject> l_goCurrentSelection;
+	public Camera cMainCamera;
 	private bool bGotSelection = false;
 
 	private RaycastHit hit;
