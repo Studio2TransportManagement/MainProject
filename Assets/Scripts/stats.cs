@@ -78,12 +78,13 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost)
 			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowUpgradeCost += 50;
+				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
+
+				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
+				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
+				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
 			}
 		}
 	}
