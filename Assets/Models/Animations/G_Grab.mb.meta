@@ -1,0 +1,590 @@
+fileFormatVersion: 2
+guid: 40bb236404542e748a626e0e9db3d1de
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: back
+    100002: bottom
+    100004: curve1
+    100006: curve2
+    100008: //RootNode
+    100010: group
+    100012: group1
+    100014: head
+    100016: Head_IK
+    100018: joint10
+    100020: joint2
+    100022: joint3
+    100024: joint4
+    100026: joint5
+    100028: joint7
+    100030: joint8
+    100032: joint9
+    100034: L_Arm
+    100036: L_Arm_IK
+    100038: L_ClavIK
+    100040: L_Foot
+    100042: L_Knee
+    100044: L_Leg
+    100046: L_LegIK
+    100048: L_Toe
+    100050: L_ToeIK
+    100052: left
+    100054: neck
+    100056: pasted__pCube2
+    100058: pasted__pCube3
+    100060: pasted__pCylinder1
+    100062: pasted__pCylinder3
+    100064: pasted__pPipe1
+    100066: pCube1
+    100068: pCylinder1
+    100070: pCylinder10
+    100072: pCylinder2
+    100074: pCylinder3
+    100076: pCylinder4
+    100078: pCylinder5
+    100080: pCylinder6
+    100082: pCylinder7
+    100084: pCylinder8
+    100086: pCylinder9
+    100088: polySurface1
+    100090: polySurface10
+    100092: polySurface11
+    100094: polySurface12
+    100096: polySurface13
+    100098: polySurface14
+    100100: polySurface15
+    100102: polySurface16
+    100104: polySurface17
+    100106: polySurface18
+    100108: polySurface19
+    100110: polySurface2
+    100112: polySurface2 1
+    100114: polySurface20
+    100116: polySurface21
+    100118: polySurface3
+    100120: polySurface4
+    100122: polySurface5
+    100124: polySurface6
+    100126: polySurface6 1
+    100128: polySurface7
+    100130: polySurface8
+    100132: polySurface9
+    100134: pPipe1
+    100136: pPipe2
+    100138: pPipe4
+    100140: pSphere1
+    100142: pSphere2
+    100144: R_Arm
+    100146: R_ArmIK
+    100148: R_ClavIK
+    100150: R_Foot
+    100152: R_Knee
+    100154: R_Leg
+    100156: R_LegIK
+    100158: R_Toe
+    100160: R_ToeIK
+    100162: Root_Node
+    100164: Skull
+    100166: spine1
+    100168: spine2
+    100170: spine3
+    100172: SpineIK
+    100174: transform1
+    100176: transform10
+    100178: transform11
+    100180: transform12
+    100182: transform13
+    100184: transform14
+    100186: transform15
+    100188: transform16
+    100190: transform17
+    100192: transform18
+    100194: transform19
+    100196: transform2
+    100198: transform20
+    100200: transform21
+    100202: transform22
+    100204: transform23
+    100206: transform24
+    100208: transform3
+    100210: transform4
+    100212: transform5
+    100214: transform6
+    100216: transform7
+    100218: transform8
+    100220: transform9
+    400000: back
+    400002: bottom
+    400004: curve1
+    400006: curve2
+    400008: //RootNode
+    400010: group
+    400012: group1
+    400014: head
+    400016: Head_IK
+    400018: joint10
+    400020: joint2
+    400022: joint3
+    400024: joint4
+    400026: joint5
+    400028: joint7
+    400030: joint8
+    400032: joint9
+    400034: L_Arm
+    400036: L_Arm_IK
+    400038: L_ClavIK
+    400040: L_Foot
+    400042: L_Knee
+    400044: L_Leg
+    400046: L_LegIK
+    400048: L_Toe
+    400050: L_ToeIK
+    400052: left
+    400054: neck
+    400056: pasted__pCube2
+    400058: pasted__pCube3
+    400060: pasted__pCylinder1
+    400062: pasted__pCylinder3
+    400064: pasted__pPipe1
+    400066: pCube1
+    400068: pCylinder1
+    400070: pCylinder10
+    400072: pCylinder2
+    400074: pCylinder3
+    400076: pCylinder4
+    400078: pCylinder5
+    400080: pCylinder6
+    400082: pCylinder7
+    400084: pCylinder8
+    400086: pCylinder9
+    400088: polySurface1
+    400090: polySurface10
+    400092: polySurface11
+    400094: polySurface12
+    400096: polySurface13
+    400098: polySurface14
+    400100: polySurface15
+    400102: polySurface16
+    400104: polySurface17
+    400106: polySurface18
+    400108: polySurface19
+    400110: polySurface2
+    400112: polySurface2 1
+    400114: polySurface20
+    400116: polySurface21
+    400118: polySurface3
+    400120: polySurface4
+    400122: polySurface5
+    400124: polySurface6
+    400126: polySurface6 1
+    400128: polySurface7
+    400130: polySurface8
+    400132: polySurface9
+    400134: pPipe1
+    400136: pPipe2
+    400138: pPipe4
+    400140: pSphere1
+    400142: pSphere2
+    400144: R_Arm
+    400146: R_ArmIK
+    400148: R_ClavIK
+    400150: R_Foot
+    400152: R_Knee
+    400154: R_Leg
+    400156: R_LegIK
+    400158: R_Toe
+    400160: R_ToeIK
+    400162: Root_Node
+    400164: Skull
+    400166: spine1
+    400168: spine2
+    400170: spine3
+    400172: SpineIK
+    400174: transform1
+    400176: transform10
+    400178: transform11
+    400180: transform12
+    400182: transform13
+    400184: transform14
+    400186: transform15
+    400188: transform16
+    400190: transform17
+    400192: transform18
+    400194: transform19
+    400196: transform2
+    400198: transform20
+    400200: transform21
+    400202: transform22
+    400204: transform23
+    400206: transform24
+    400208: transform3
+    400210: transform4
+    400212: transform5
+    400214: transform6
+    400216: transform7
+    400218: transform8
+    400220: transform9
+    2300000: pasted__pCube2
+    2300002: pasted__pCube3
+    2300004: pasted__pCylinder3
+    2300006: pasted__pPipe1
+    2300008: polySurface10
+    2300010: polySurface11
+    2300012: polySurface12
+    2300014: polySurface13
+    2300016: polySurface14
+    2300018: polySurface15
+    2300020: polySurface16
+    2300022: polySurface17
+    2300024: polySurface18
+    2300026: polySurface19
+    2300028: polySurface20
+    2300030: polySurface3
+    2300032: polySurface4
+    2300034: polySurface8
+    2300036: polySurface9
+    3300000: pasted__pCube2
+    3300002: pasted__pCube3
+    3300004: pasted__pCylinder3
+    3300006: pasted__pPipe1
+    3300008: polySurface10
+    3300010: polySurface11
+    3300012: polySurface12
+    3300014: polySurface13
+    3300016: polySurface14
+    3300018: polySurface15
+    3300020: polySurface16
+    3300022: polySurface17
+    3300024: polySurface18
+    3300026: polySurface19
+    3300028: polySurface20
+    3300030: polySurface3
+    3300032: polySurface4
+    3300034: polySurface8
+    3300036: polySurface9
+    4300000: pasted__pCylinder3
+    4300002: pasted__pCube2
+    4300004: pasted__pCube3
+    4300006: pasted__pPipe1
+    4300008: polySurface3
+    4300010: polySurface4
+    4300012: polySurface8
+    4300014: polySurface9
+    4300016: polySurface10
+    4300018: polySurface11
+    4300020: polySurface12
+    4300022: polySurface13
+    4300024: polySurface14
+    4300026: polySurface15
+    4300028: polySurface16
+    4300030: polySurface17
+    4300032: polySurface18
+    4300034: polySurface19
+    4300036: polySurface20
+    4300038: polySurface21
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: polySurface21
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: back
+        weight: 1
+      - path: bottom
+        weight: 1
+      - path: group
+        weight: 1
+      - path: group/pasted__pCylinder1
+        weight: 1
+      - path: group/pasted__pCylinder1/transform15
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group1/pasted__pCube2
+        weight: 1
+      - path: group1/pasted__pCube3
+        weight: 1
+      - path: group1/pasted__pCylinder3
+        weight: 1
+      - path: group1/pasted__pPipe1
+        weight: 1
+      - path: Head_IK
+        weight: 1
+      - path: L_Arm_IK
+        weight: 1
+      - path: L_ClavIK
+        weight: 1
+      - path: L_LegIK
+        weight: 1
+      - path: L_ToeIK
+        weight: 1
+      - path: left
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform16
+        weight: 1
+      - path: pCylinder1
+        weight: 1
+      - path: pCylinder1/transform22
+        weight: 1
+      - path: pCylinder2
+        weight: 1
+      - path: pCylinder2/transform21
+        weight: 1
+      - path: pCylinder3
+        weight: 1
+      - path: pCylinder3/transform20
+        weight: 1
+      - path: pCylinder4
+        weight: 1
+      - path: pCylinder4/transform19
+        weight: 1
+      - path: pCylinder5
+        weight: 1
+      - path: pCylinder5/transform18
+        weight: 1
+      - path: pCylinder6
+        weight: 1
+      - path: pCylinder6/transform17
+        weight: 1
+      - path: pCylinder7
+        weight: 1
+      - path: pCylinder7/polySurface5
+        weight: 1
+      - path: pCylinder7/polySurface5/transform4
+        weight: 1
+      - path: pCylinder7/polySurface6 1
+        weight: 1
+      - path: pCylinder7/polySurface6 1/transform5
+        weight: 1
+      - path: pCylinder7/transform3
+        weight: 1
+      - path: pCylinder8
+        weight: 1
+      - path: pCylinder8/polySurface1
+        weight: 1
+      - path: pCylinder8/polySurface1/transform6
+        weight: 1
+      - path: pCylinder8/polySurface2 1
+        weight: 1
+      - path: pCylinder8/polySurface2 1/transform9
+        weight: 1
+      - path: pCylinder8/transform1
+        weight: 1
+      - path: pCylinder9
+        weight: 1
+      - path: pCylinder9/transform14
+        weight: 1
+      - path: pCylinder10
+        weight: 1
+      - path: pCylinder10/transform13
+        weight: 1
+      - path: polySurface2
+        weight: 1
+      - path: polySurface2/transform10
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/transform7
+        weight: 1
+      - path: polySurface7
+        weight: 1
+      - path: polySurface7/transform8
+        weight: 1
+      - path: pPipe1
+        weight: 1
+      - path: pPipe1/transform12
+        weight: 1
+      - path: pPipe2
+        weight: 1
+      - path: pPipe2/transform11
+        weight: 1
+      - path: pPipe4
+        weight: 1
+      - path: pPipe4/polySurface3
+        weight: 1
+      - path: pPipe4/polySurface4
+        weight: 1
+      - path: pPipe4/transform2
+        weight: 1
+      - path: pSphere1
+        weight: 1
+      - path: pSphere1/transform23
+        weight: 1
+      - path: pSphere2
+        weight: 1
+      - path: pSphere2/polySurface8
+        weight: 1
+      - path: pSphere2/polySurface9
+        weight: 1
+      - path: pSphere2/polySurface10
+        weight: 1
+      - path: pSphere2/polySurface11
+        weight: 1
+      - path: pSphere2/polySurface12
+        weight: 1
+      - path: pSphere2/polySurface13
+        weight: 1
+      - path: pSphere2/polySurface14
+        weight: 1
+      - path: pSphere2/polySurface15
+        weight: 1
+      - path: pSphere2/polySurface16
+        weight: 1
+      - path: pSphere2/polySurface17
+        weight: 1
+      - path: pSphere2/polySurface18
+        weight: 1
+      - path: pSphere2/polySurface19
+        weight: 1
+      - path: pSphere2/polySurface20
+        weight: 1
+      - path: pSphere2/polySurface21
+        weight: 1
+      - path: pSphere2/transform24
+        weight: 1
+      - path: R_ArmIK
+        weight: 1
+      - path: R_ClavIK
+        weight: 1
+      - path: R_LegIK
+        weight: 1
+      - path: R_ToeIK
+        weight: 1
+      - path: Root_Node
+        weight: 1
+      - path: Root_Node/curve1
+        weight: 1
+      - path: Root_Node/spine1
+        weight: 1
+      - path: Root_Node/spine1/L_Leg
+        weight: 1
+      - path: Root_Node/spine1/L_Leg/L_Knee
+        weight: 1
+      - path: Root_Node/spine1/L_Leg/L_Knee/L_Foot
+        weight: 1
+      - path: Root_Node/spine1/L_Leg/L_Knee/L_Foot/L_Toe
+        weight: 1
+      - path: Root_Node/spine1/R_Leg
+        weight: 1
+      - path: Root_Node/spine1/R_Leg/R_Knee
+        weight: 1
+      - path: Root_Node/spine1/R_Leg/R_Knee/R_Foot
+        weight: 1
+      - path: Root_Node/spine1/R_Leg/R_Knee/R_Foot/R_Toe
+        weight: 1
+      - path: Root_Node/spine1/spine2
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/curve2
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/L_Arm
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/L_Arm/joint2
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/L_Arm/joint2/joint3
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/L_Arm/joint2/joint3/joint4
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/L_Arm/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/neck
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/neck/head
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/neck/head/Skull
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/R_Arm
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/R_Arm/joint7
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/R_Arm/joint7/joint8
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/R_Arm/joint7/joint8/joint9
+        weight: 1
+      - path: Root_Node/spine1/spine2/spine3/R_Arm/joint7/joint8/joint9/joint10
+        weight: 1
+      - path: SpineIK
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
