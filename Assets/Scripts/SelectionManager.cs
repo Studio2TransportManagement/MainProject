@@ -158,6 +158,13 @@ public class SelectionManager : MonoBehaviour {
 		gsCurrentBuilding = null;
 	}
 
+	public void RemoveDeadUnitIfSelected(GameObject deadUnit) {
+		if (l_goCurrentSelection.Contains (deadUnit)) {
+			l_goCurrentSelection.Remove (deadUnit);
+			displayNames.RemoveText(deadUnit.GetComponent<GameUnit>().sUnitName);
+		}
+	}
+
 	private bool IsObjectSelectable(GameObject go) {
 		if (go.GetComponent<GameUnit>() != null) {
 			return true;

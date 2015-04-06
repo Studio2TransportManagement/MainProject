@@ -20,10 +20,13 @@ public class stats : MonoBehaviour {
 	public Text tWindowUpgradeCost;
 	public Text tCapacityLevel;
 	public Text tCapacityUpgradeCost;
+	public Text SlainMessage;
 	public Texture2D texCursorTexture;
 	public Texture2D texCursorTexture2;
 	public CursorMode cursorMode = CursorMode.Auto;
 	public Vector2 hotSpot = Vector2.zero;
+	public Color32 colTransparent;
+	public Color32 colBloodRed;
 
 	void Start ()
 	{
@@ -103,6 +106,12 @@ public class stats : MonoBehaviour {
 				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
 			}
 		}
+	}
+
+	public void SlainMessagePrintToUI (string name)
+	{
+		SlainMessage.text = "" + name + " has been slain!";
+		SlainMessage.color = colBloodRed;
 	}
 
 }

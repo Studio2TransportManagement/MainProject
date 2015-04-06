@@ -23,6 +23,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fFireRate;
 
 	public SelectionManager SelectionManager;
+	public NameSaver NameSaver;
 	public GameObject goHealthBar;
 	public GameObject goHealthInstance;
 	
@@ -33,10 +34,11 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		fHealthCurrent = fHealthMax;
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
+		NameSaver = GameObject.FindGameObjectWithTag ("NameSaver").GetComponent<NameSaver>();
 		if(goHealthBar != null)
 		{
 			goHealthInstance = Instantiate (goHealthBar) as GameObject;
-			goHealthInstance.transform.SetParent (GameObject.Find ("Canvas").transform, false);
+			goHealthInstance.transform.SetParent (GameObject.Find ("Main Canvas").transform, false);
 			goHealthInstance.transform.SetAsFirstSibling ();
 			goHealthInstance.SetActive (false);
 		}
@@ -73,9 +75,19 @@ public class GameUnit : MonoBehaviour, ISelectable {
 				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
 
 				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / fHealthMax;
-				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
+				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
 			}
 		}
+
+		if(fHealthCurrent <= 0)
+		{
+			Camera.main.GetComponent<stats>().SlainMessagePrintToUI(sUnitName);
+			selectionManager.RemoveDeadUnitIfSelected(gameObject);
+			NameSaver.l_guDeadUnitNames.Add (sUnitName);
+			Destroy(goHealthInstance);
+			Destroy(gameObject);
+		}
+
 	}
 }
