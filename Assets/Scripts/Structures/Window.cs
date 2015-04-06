@@ -22,6 +22,14 @@ public class Window : MonoBehaviour {
 		}
 	}
 
+	public bool BIsManned
+	{
+		get
+		{
+			return bIsManned;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 
@@ -36,10 +44,7 @@ public class Window : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKeyDown(KeyCode.C))
-		{
-			debugSwitchWindowState();
-		}
+
 	}
 
 	void debugSwitchWindowState()
