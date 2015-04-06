@@ -3,50 +3,59 @@ using System.Collections;
 
 public class PlayerResources : MonoBehaviour {
 
-	private float fMoney = 500f;
-	private float fRecruits = 10f;
+	public float fStartingCash;
+	public float fStartingRecruits;
 
+	private float fCurrentMoney = 500f;
+	private float fCurrentRecruits = 10f;
+
+
+	void start()
+	{
+		fCurrentMoney = fStartingCash;
+		fCurrentRecruits = fStartingRecruits;
+	}
 
 	//Setters
 	public void ChangeMoney(float amount) {
 		if (amount > 0) {
 			//add extra fluff here
-			fMoney += amount;
+			fCurrentMoney += amount;
 		}
 		if (amount < 0) {
 			//fluff
-			fMoney += amount;
+			fCurrentMoney += amount;
 		}
 	}
 
 	public void SetMoney(float amount) {
-		fMoney = amount;
+		fCurrentMoney = amount;
 	}
 
 
 	public void ChangeRecruits(float amount) {
 		if (amount > 0) {
 			//add extra fluff here
-			fRecruits += amount;
+			fCurrentRecruits += amount;
 		}
 		if (amount < 0) {
 			//fluff
-			fRecruits += amount;
+			fCurrentRecruits += amount;
 		}
 	}
 
 	public void SetRecruits(float amount) {
-		fRecruits = amount;
+		fCurrentRecruits = amount;
 	}
 
 
 
 	//Getters
 	public float GetMoney() {
-		return fMoney;
+		return fCurrentMoney;
 	}
 
 	public float GetRecruits(){
-		return fRecruits;
+		return fCurrentRecruits;
 	}
 }

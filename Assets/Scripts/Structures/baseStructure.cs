@@ -25,6 +25,19 @@ public class baseStructure : GameStructure {
 		ActivateWindowsByLevel();
 	}
 
+	public Window GetAvailableOpenWindow()
+	{
+		foreach(Window window in windows)
+		{
+			if(window.BIsActive && !window.BIsManned)
+			{
+				return window;
+			}
+		}
+		Debug.Log ("Get Window Failed, check if window is availbale before getting");
+		return null;
+	}
+
 	public void ActivateWindowsByLevel()
 	{
 		switch(iWindowLevel)
