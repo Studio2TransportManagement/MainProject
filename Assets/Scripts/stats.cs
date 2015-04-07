@@ -7,6 +7,7 @@ public class stats : MonoBehaviour {
 	public int iRecruits = 0;
 	public int iCash = 1000;
 	public float fTimer = 0.25f;
+	public float fConstant = 255f;
 	public GameObject goRecruitAmount;
 	public GameObject goCurrency;
 	public GameObject goCurrency2;
@@ -39,14 +40,6 @@ public class stats : MonoBehaviour {
 		goRecruitAmount.GetComponent<Text> ().text = "Recruits: " + iRecruits + "";
 		goCurrency.GetComponent<Text> ().text = "$ " + iCash + "";
 		goCurrency2.GetComponent<Text> ().text = "$ " + iCash + "";
-
-		//Handles the window upgrades to the bases
-//		if(SelectionManager.goCurrentObject != null && SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindows == 5)
-//		{
-//			//Disable mesh for the 4 window base for alpha
-//			//Enable mesh for the 5 window base for alpha
-//			//Reaarange gunner positions for windows accordingly
-//		}
 
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))
@@ -112,6 +105,8 @@ public class stats : MonoBehaviour {
 	{
 		SlainMessage.text = "" + name + " has been slain!";
 		SlainMessage.color = colBloodRed;
+		//SlainMessage.text
+		//SlainMessage.color
 	}
 
 }

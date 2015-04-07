@@ -22,10 +22,16 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fRange;
 	public float fFireRate;
 
+	public bool isHovering = false;
+
 	public SelectionManager SelectionManager;
 	public NameSaver NameSaver;
 	public GameObject goHealthBar;
 	public GameObject goHealthInstance;
+
+	public Color32 colHover;
+	public Color32 colSelected;
+	public Color32 colDeselected;
 	
 	public int iAmmo;
 
@@ -64,10 +70,19 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			if(IsSelected())
 			{
 				goHealthInstance.SetActive (true);
+				gameObject.GetComponentInChildren<SpriteRenderer>().color = colSelected;
 			}
 			else
 			{
 				goHealthInstance.SetActive (false);
+				if(!isHovering)
+				{
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
+				}
+				else
+				{
+					gameObject.GetComponentInChildren<SpriteRenderer>().color = colHover;
+				}
 			}
 
 			if(goHealthInstance.activeInHierarchy)
@@ -90,4 +105,25 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		}
 
 	}
+
+	void OnMouseEnter ()
+	{
+		isHovering = true;
+		if(!goHealthInstance.activeInHierarchy)
+		{
+			Debug.Log("Hovering");
+			gameObject.GetComponentInChildren<SpriteRenderer>().color = colHover;
+		}
+	}
+
+	void OnMouseExit ()
+	{
+		isHovering = false;
+		if(!goHealthInstance.activeInHierarchy)
+		{
+			Debug.Log("Stopped Hovering");
+			gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
+		}
+	}
+
 }
