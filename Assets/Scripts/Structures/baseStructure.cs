@@ -4,6 +4,7 @@ using System.Collections;
 public class baseStructure : GameStructure {
 
 	Window[] windows;
+	public UpgradeGUI UpgradeUI;
 
 	public Window[] Windows
 	{
@@ -22,7 +23,7 @@ public class baseStructure : GameStructure {
 
 	void Start () 
 	{
-		ActivateWindowsByLevel();
+		UpgradeWindows();
 	}
 
 	public Window GetAvailableOpenWindow()
@@ -34,11 +35,22 @@ public class baseStructure : GameStructure {
 				return window;
 			}
 		}
-		Debug.Log ("Get Window Failed, check if window is availbale before getting");
+		Debug.Log ("Get Window Failed, check if window is available before getting");
 		return null;
 	}
 
-	public void ActivateWindowsByLevel()
+	public void UpgradeIntegrity()
+	{
+		
+	}
+	
+	public void getThisBase()
+	{
+		UpgradeUI.bPanelActive = !UpgradeUI.bPanelActive;
+		UpgradeUI.upgradingBase = this;
+	}
+	
+	public void UpgradeWindows()
 	{
 		switch(iWindowLevel)
 		{

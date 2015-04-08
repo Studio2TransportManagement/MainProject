@@ -8,6 +8,7 @@ public class stats : MonoBehaviour {
 	public int iCash = 1000;
 	public float fTimer = 0.25f;
 	public float fConstant = 255f;
+	public bool bIsMessageFading = false;
 	public GameObject goRecruitAmount;
 	public GameObject goCurrency;
 	public GameObject goCurrency2;
@@ -21,13 +22,14 @@ public class stats : MonoBehaviour {
 	public Text tWindowUpgradeCost;
 	public Text tCapacityLevel;
 	public Text tCapacityUpgradeCost;
-	public Text SlainMessage;
+	public Text tSlainMessage;
 	public Texture2D texCursorTexture;
 	public Texture2D texCursorTexture2;
 	public CursorMode cursorMode = CursorMode.Auto;
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
+
 
 	void Start ()
 	{
@@ -50,63 +52,76 @@ public class stats : MonoBehaviour {
 		{
 			Cursor.SetCursor (texCursorTexture, hotSpot, cursorMode);
 		}
-	}
 
-	public void IntegrityUpgrade ()
-	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
+		if(bIsMessageFading)
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost)
+			Color32 fadeColor = tSlainMessage.color;
+			fadeColor.a -= 1;
+			tSlainMessage.color = fadeColor;
+
+			if(tSlainMessage.color.a <= 0)
 			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
+				bIsMessageFading = false;
 			}
 		}
 	}
 
-	public void WindowUpgrade ()
+//	public void IntegrityUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
+//			}
+//		}
+//	}
+//
+//	public void WindowUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
+//
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
+//			}
+//		}
+//	}
+//
+//	public void CapacityUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
+//			}
+//		}
+//	}
+
+	public void tSlainMessagePrintToUI (string name)
 	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
-		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost)
-			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
-
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
-			}
-		}
+		tSlainMessage.text = "" + name + " has been slain!";
+		tSlainMessage.color = colBloodRed;
+		bIsMessageFading = true;
 	}
-
-	public void CapacityUpgrade ()
-	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
-		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost)
-			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
-			}
-		}
-	}
-
-	public void SlainMessagePrintToUI (string name)
-	{
-		SlainMessage.text = "" + name + " has been slain!";
-		SlainMessage.color = colBloodRed;
-		//SlainMessage.text
-		//SlainMessage.color
-	}
-
 }

@@ -21,6 +21,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
+	public SOLDIER_TYPE SollyType = SOLDIER_TYPE.NONE;
 
 	public bool isHovering = false;
 
@@ -32,6 +33,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public Color32 colHover;
 	public Color32 colSelected;
 	public Color32 colDeselected;
+
+	public NavMeshAgent navAgent;
 	
 	public int iAmmo;
 
@@ -48,6 +51,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			goHealthInstance.transform.SetAsFirstSibling ();
 			goHealthInstance.SetActive (false);
 		}
+		navAgent = this.gameObject.GetComponent<NavMeshAgent>();
+		Debug.Log ("Unit Initiated");
 	}
 
 	public bool IsSelected() {
@@ -74,9 +79,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			}
 			else
 			{
-				goHealthInstance.SetActive (false);
 				if(!isHovering)
 				{
+					goHealthInstance.SetActive (false);
 					gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
 				}
 				else
@@ -97,9 +102,12 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		if(fHealthCurrent <= 0)
 		{
-			Camera.main.GetComponent<stats>().SlainMessagePrintToUI(sUnitName);
 			selectionManager.RemoveDeadUnitIfSelected(gameObject);
 			NameSaver.l_guDeadUnitNames.Add (sUnitName);
+			//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
+			//if(deathAnimationHasFinished)
+			//Do following functions.
+			Camera.main.GetComponent<stats>().tSlainMessagePrintToUI(sUnitName);
 			Destroy(goHealthInstance);
 			Destroy(gameObject);
 		}
@@ -109,9 +117,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void OnMouseEnter ()
 	{
 		isHovering = true;
-		if(!goHealthInstance.activeInHierarchy)
+		goHealthInstance.SetActive (true);
+		if(!IsSelected())
 		{
-			Debug.Log("Hovering");
 			gameObject.GetComponentInChildren<SpriteRenderer>().color = colHover;
 		}
 	}
@@ -119,11 +127,10 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	void OnMouseExit ()
 	{
 		isHovering = false;
-		if(!goHealthInstance.activeInHierarchy)
+		goHealthInstance.SetActive (false);
+		if(!IsSelected())
 		{
-			Debug.Log("Stopped Hovering");
 			gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
 		}
 	}
-
 }
