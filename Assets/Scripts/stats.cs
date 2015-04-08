@@ -66,57 +66,57 @@ public class stats : MonoBehaviour {
 		}
 	}
 
-	public void IntegrityUpgrade ()
-	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
-		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost &&
-			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel != 3)
-			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
-			}
-		}
-	}
-
-	public void WindowUpgrade ()
-	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
-		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost &&
-			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel != 3)
-			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
-
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
-				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
-			}
-		}
-	}
-
-	public void CapacityUpgrade ()
-	{
-		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-		   SelectionManager.goCurrentObject.name == "Base Charlie")
-		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost &&
-			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel != 3)
-			{
-				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
-				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
-			}
-		}
-	}
+//	public void IntegrityUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
+//			}
+//		}
+//	}
+//
+//	public void WindowUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
+//
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
+//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
+//			}
+//		}
+//	}
+//
+//	public void CapacityUpgrade ()
+//	{
+//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
+//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
+//		   SelectionManager.goCurrentObject.name == "Base Charlie")
+//		{
+//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost &&
+//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel != 3)
+//			{
+//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
+//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
+//			}
+//		}
+//	}
 
 	public void tSlainMessagePrintToUI (string name)
 	{
