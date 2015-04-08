@@ -21,6 +21,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
+	public SOLDIER_TYPE SollyType = SOLDIER_TYPE.NONE;
 
 	public bool isHovering = false;
 
@@ -32,6 +33,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public Color32 colHover;
 	public Color32 colSelected;
 	public Color32 colDeselected;
+
+	public NavMeshAgent navAgent;
 	
 	public int iAmmo;
 
@@ -48,6 +51,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			goHealthInstance.transform.SetAsFirstSibling ();
 			goHealthInstance.SetActive (false);
 		}
+		navAgent = this.gameObject.GetComponent<NavMeshAgent>();
+		Debug.Log ("Unit Initiated");
 	}
 
 	public bool IsSelected() {
@@ -125,5 +130,4 @@ public class GameUnit : MonoBehaviour, ISelectable {
 			gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
 		}
 	}
-
 }

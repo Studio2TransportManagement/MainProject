@@ -1,6 +1,8 @@
 ﻿public enum SOLDIER_TYPE {
+	NONE,
 	GUNNER,
 	HEAVY,
 	MEDIC,
-	MECHANIC
+	MECHANIC,
+	CIVILIAN
 }
