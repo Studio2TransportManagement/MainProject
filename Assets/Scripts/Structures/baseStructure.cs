@@ -6,6 +6,8 @@ public class baseStructure : GameStructure {
 	Window[] windows;
 	public UpgradeGUI UpgradeUI;
 
+	public bool bAlert;
+
 	public Window[] Windows
 	{
 		get

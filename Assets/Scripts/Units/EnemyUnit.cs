@@ -6,8 +6,6 @@ public class EnemyUnit : GameUnit {
 
 	NavMeshAgent agent;
 
-	GameObject goTargetBase;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -15,7 +13,7 @@ public class EnemyUnit : GameUnit {
 
 //		agent.SetDestination(new Vector3(0,0,0));
 
-		goTargetBase = GetClosestBase();
+		this.goTargetBase = GetClosestBase();
 
 		agent.SetDestination(goTargetBase.transform.position);
 	}
@@ -29,22 +27,22 @@ public class EnemyUnit : GameUnit {
 		}
 	}
 
-	GameObject GetClosestBase()
+	baseStructure GetClosestBase()
 	{
-		GameObject returnObject = staticStructures.bases[0].gameObject;
+		baseStructure returnStructure = staticStructures.bases[0];
 				
-		float tempdistance = Vector3.Distance(this.transform.position, staticStructures.bases[0].gameObject.transform.position);
+		float tempdistance = Vector3.Distance(this.transform.position, staticStructures.bases[0].transform.position);
 
 		for(int i = 0; i < staticStructures.bases.Count; i++)
 		{
-			if( Vector3.Distance(this.transform.position, staticStructures.bases[i].gameObject.transform.position) < tempdistance)
+			if( Vector3.Distance(this.transform.position, staticStructures.bases[i].transform.position) < tempdistance)
 			{
-				tempdistance = Vector3.Distance(this.transform.position, staticStructures.bases[i].gameObject.transform.position);
-				returnObject = staticStructures.bases[i].gameObject;
+				tempdistance = Vector3.Distance(this.transform.position, staticStructures.bases[i].transform.position);
+				returnStructure = staticStructures.bases[i];
 			}
 
 		}
 
-		return returnObject;
+		return returnStructure;
 	}
 }
