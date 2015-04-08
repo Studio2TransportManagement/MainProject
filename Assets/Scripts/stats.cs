@@ -8,6 +8,7 @@ public class stats : MonoBehaviour {
 	public int iCash = 1000;
 	public float fTimer = 0.25f;
 	public float fConstant = 255f;
+	public bool bIsMessageFading = false;
 	public GameObject goRecruitAmount;
 	public GameObject goCurrency;
 	public GameObject goCurrency2;
@@ -21,13 +22,14 @@ public class stats : MonoBehaviour {
 	public Text tWindowUpgradeCost;
 	public Text tCapacityLevel;
 	public Text tCapacityUpgradeCost;
-	public Text SlainMessage;
+	public Text tSlainMessage;
 	public Texture2D texCursorTexture;
 	public Texture2D texCursorTexture2;
 	public CursorMode cursorMode = CursorMode.Auto;
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
+
 
 	void Start ()
 	{
@@ -50,6 +52,18 @@ public class stats : MonoBehaviour {
 		{
 			Cursor.SetCursor (texCursorTexture, hotSpot, cursorMode);
 		}
+
+		if(bIsMessageFading)
+		{
+			Color32 fadeColor = tSlainMessage.color;
+			fadeColor.a -= 1;
+			tSlainMessage.color = fadeColor;
+
+			if(tSlainMessage.color.a <= 0)
+			{
+				bIsMessageFading = false;
+			}
+		}
 	}
 
 	public void IntegrityUpgrade ()
@@ -58,7 +72,8 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost &&
+			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel != 3)
 			{
 				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
 				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
@@ -74,7 +89,8 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost &&
+			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel != 3)
 			{
 				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
 
@@ -91,7 +107,8 @@ public class stats : MonoBehaviour {
 		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
 		   SelectionManager.goCurrentObject.name == "Base Charlie")
 		{
-			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost)
+			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost &&
+			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel != 3)
 			{
 				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
 				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
@@ -101,12 +118,10 @@ public class stats : MonoBehaviour {
 		}
 	}
 
-	public void SlainMessagePrintToUI (string name)
+	public void tSlainMessagePrintToUI (string name)
 	{
-		SlainMessage.text = "" + name + " has been slain!";
-		SlainMessage.color = colBloodRed;
-		//SlainMessage.text
-		//SlainMessage.color
+		tSlainMessage.text = "" + name + " has been slain!";
+		tSlainMessage.color = colBloodRed;
+		bIsMessageFading = true;
 	}
-
 }

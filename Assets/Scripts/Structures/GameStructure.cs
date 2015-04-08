@@ -42,7 +42,12 @@ public class GameStructure : MonoBehaviour, ISelectable {
 	
 	// Update is called once per frame
 	void Update () 
-	{	
+	{
+		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
+		iIntegrityLevel = Mathf.Clamp(iIntegrityLevel, 1, 3);
+		iWindowLevel = Mathf.Clamp(iWindowLevel, 1, 3);
+		iCapacityLevel = Mathf.Clamp(iCapacityLevel, 1, 3);
+
 		if(SelectionManager.l_goCurrentSelection.Count != 0)
 		{
 			if(SelectionManager.l_goCurrentSelection[0].gameObject.name.StartsWith("Base "))
