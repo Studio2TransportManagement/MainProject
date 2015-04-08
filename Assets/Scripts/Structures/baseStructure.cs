@@ -6,7 +6,6 @@ public class baseStructure : GameStructure {
 	Window[] windows;
 	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
-	public ChildMenuController CMC;
 
 	public bool bAlert;
 
@@ -52,17 +51,7 @@ public class baseStructure : GameStructure {
 	public void getThisBase()
 	{
 		UpgradeUI.upgradingBase = this;
-		if (!PanelOpen) 
-		{
-			CMC.OpenMenu();
-			PanelOpen = true;
-		}
-		if (PanelOpen) 
-		{
-			CMC.CloseMenu();
-			PanelOpen = false;
-		}
-
+		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
 	}
 	
 	public void UpgradeWindows()

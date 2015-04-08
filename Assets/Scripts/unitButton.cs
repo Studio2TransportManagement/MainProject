@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class unitButton : MonoBehaviour, IDropHandler {
-	
+
+	private PlayerResources pPlayerResources;
 	public GameObject goRecruitSystem;
 	public GameObject goButtonPressed;
 	public GameObject goCurrentlyTraining;
@@ -19,6 +20,11 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	private SpawnSoldier unitSpawner;
 	//public GameObject goProtoUnit;
 	public SOLDIER_TYPE troopChoice = SOLDIER_TYPE.GUNNER;
+
+	void Awake ()
+	{
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	void Start() {
 		unitSpawner = this.GetComponentInParent<SpawnSoldier> ();
@@ -67,7 +73,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	
 	public void OnDrop (PointerEventData eventData)
 	{
-		if (Camera.main.GetComponent<stats>().iCash >= iPrice && Camera.main.GetComponent<stats>().iRecruits >= 1)
+		if (pPlayerResources.GetMoney() >= iPrice && pPlayerResources.GetRecruits() >= 1)
 		{
 			l_sCurrentUnitsName.Add("" + goRecruitSystem.GetComponent<characterRandomiser>().characterName.GetComponent<Text>().text + "");
 			goRecruitSystem.GetComponent<characterRandomiser>().RandomiseAvatar();
@@ -75,14 +81,14 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			{
 				goButtonPressed.GetComponent<Image>().fillAmount = 1;
 				iUnitsTraining += 1;
-				Camera.main.GetComponent<stats>().iCash -= iPrice;
-				Camera.main.GetComponent<stats>().iRecruits -= 1;
+				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
+				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
 			}
 			else if (iUnitsTraining >= 1)
 			{
 				iUnitsTraining += 1;
-				Camera.main.GetComponent<stats>().iCash -= iPrice;
-				Camera.main.GetComponent<stats>().iRecruits -= 1;
+				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
+				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
 			}
 		}
 	}

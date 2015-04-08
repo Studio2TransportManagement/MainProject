@@ -10,6 +10,7 @@ public class TestCamera : MonoBehaviour {
 
 	public float fCamZoomInLimit;
 	public float fCamZoomOutLimit;
+	public bool bCanMoveCamera = true;
 
 
 	// Use this for initialization
@@ -20,14 +21,17 @@ public class TestCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetKey(KeyCode.A))
+		if(bCanMoveCamera)
 		{
-			this.transform.RotateAround(vRot, Vector3.up, -fCamPanSpeed*Time.deltaTime);
-		}
-
-		if(Input.GetKey(KeyCode.D))
-		{
-			this.transform.RotateAround(vRot, Vector3.up, fCamPanSpeed*Time.deltaTime);
+			if(Input.GetKey(KeyCode.A))
+			{
+				this.transform.RotateAround(vRot, Vector3.up, -fCamPanSpeed*Time.deltaTime);
+			}
+			
+			if(Input.GetKey(KeyCode.D))
+			{
+				this.transform.RotateAround(vRot, Vector3.up, fCamPanSpeed*Time.deltaTime);
+			}
 		}
 
 //		if (Input.GetAxis("Mouse ScrollWheel") < 0 ) 

@@ -15,10 +15,8 @@ public class SelectionManager : MonoBehaviour {
 
 	public DisplayTextList displayNames;
 
-	public GameObject goCurrentObject;
-	public GameUnit guCurrentUnit;
-	public GameStructure gsCurrentBuilding;
-	public GUI_Base guiCurrentGUIBase;
+	private GameObject goCurrentObject;
+	private GameUnit guCurrentUnit;
 	
 	//Init
 	void Start() {
@@ -47,22 +45,10 @@ public class SelectionManager : MonoBehaviour {
 							}
 							guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
 						}
-//						if (goCurrentObject.GetComponent<GameStructure>()) {
-//							ClearSelection();
-//							l_goCurrentSelection.Add(goCurrentObject);
-//							gsCurrentBuilding = hit.transform.gameObject.GetComponent<GameStructure>();
-//							guiCurrentGUIBase = hit.transform.gameObject.GetComponent<GUI_Base>();
-//							guiCurrentGUIBase.OnSelected();
-//						}
 
 						if (goCurrentObject.tag == "player-unit") {
 							displayNames.AddText(guCurrentUnit.sUnitName);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
-						}
-
-						if (goCurrentObject.tag == "building") {
-							displayNames.AddText(gsCurrentBuilding.sBaseName);
-							Debug.Log("Clicked on <color=blue>" + gsCurrentBuilding.sBaseName + "</color>!");
 						}
 						
 	//					if (goCurrentObject.tag == "train") {
@@ -75,19 +61,11 @@ public class SelectionManager : MonoBehaviour {
 						if (guCurrentUnit != null) {
 							displayNames.RemoveText(guCurrentUnit.sUnitName);
 						}
-						//If selection had a GUI component, run deselected function
-						if (gsCurrentBuilding != null) {
-							displayNames.RemoveText (gsCurrentBuilding.sBaseName);
-						}
-						l_goCurrentSelection.Remove(goCurrentObject);
 			         }
 				}
 				else {
 					//Debug.Log(hit.transform.gameObject.name);
 					Debug.Log("Nothing interesting here..");
-					if (gsCurrentBuilding != null) {
-						guiCurrentGUIBase.OnDeselected();
-					}
 					ClearSelection();
 				}
 			}
@@ -154,8 +132,6 @@ public class SelectionManager : MonoBehaviour {
 		displayNames.ClearText();
 //		goCurrentObject = null;
 		guCurrentUnit = null;
-		guiCurrentGUIBase = null;
-		gsCurrentBuilding = null;
 	}
 
 	public void RemoveDeadUnitIfSelected(GameObject deadUnit) {

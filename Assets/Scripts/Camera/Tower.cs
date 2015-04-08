@@ -5,6 +5,7 @@ public class Tower : MonoBehaviour {
 
 	public Camera cTowerCamera;
 	public Camera cMainCamera;
+	public Canvas canMainCanvas;
 
 
 	//
@@ -27,7 +28,9 @@ public class Tower : MonoBehaviour {
 
 	void SwapCamera(){
 		Debug.Log("Swapping");
+		cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = !cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera;
 		cTowerCamera.gameObject.SetActive(!cTowerCamera.gameObject.activeInHierarchy);
+		canMainCanvas.gameObject.SetActive (!canMainCanvas.gameObject.activeInHierarchy);
 		Screen.lockCursor = !Screen.lockCursor;
 	}
 }

@@ -18,6 +18,8 @@ public class GameStructure : MonoBehaviour {
 	public int iCapacityUpgradeCost = 50;
 	public int iHealthCurrent;
 
+	public ChildMenuController CMC;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -37,6 +39,14 @@ public class GameStructure : MonoBehaviour {
 			Application.LoadLevel(2);
 		}
 
+	}
+
+	void OnMouseDown()
+	{
+		if(sBaseName == "Recruitment Building")
+		{
+			CMC.OpenCloseRecruitmentMenu();
+		}
 	}
 
 }

@@ -9,92 +9,97 @@ public class ChildMenuController : GUI_Base {
 	public GameObject goUpgradePanel;
 	static bool bIsRecruitmentPanelOpen = false;
 	static bool bIsUpgradePanelOpen = false;
-	bool PanelOpened;
+	static bool PanelMoving;
+	static baseStructure currentOpenBase;
+	public float fTimer = 0.50f;
 
 	//Init
 	void Start() {
-		//
+		LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.01f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.01f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	void Update() 
 	{
-
-	}
-
-	public void OpenMenu() {
-		if (this.gameObject.name.StartsWith("Base ") && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
-			LeanTween.move (goUpgradePanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsUpgradePanelOpen = true;
-		}
-		else if (this.gameObject.name == "Recruitment Building" && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
-			LeanTween.move (goRecruitmentPanel, new Vector2(0f,0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsRecruitmentPanelOpen = true;
-		}
-		
-		if(this.gameObject.name == "Recruitment Building" && bIsUpgradePanelOpen)
+		if(PanelMoving)
 		{
-			LeanTween.move (goUpgradePanel, new Vector2 (0f, 1040f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsUpgradePanelOpen = false;
-			LeanTween.move (goRecruitmentPanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsRecruitmentPanelOpen = true;
-		}
-
-		if(this.gameObject.name.StartsWith("Base ") && bIsRecruitmentPanelOpen)
-		{
-			LeanTween.move (goRecruitmentPanel, new Vector2 (0f, -1040f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsRecruitmentPanelOpen = false;
-			LeanTween.move (goUpgradePanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsUpgradePanelOpen = true;
-		}
-
-	}
-
-	public void CloseMenu() {
-		if(bIsRecruitmentPanelOpen)
-		{
-			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsRecruitmentPanelOpen = false;
-		}
-
-		if(bIsUpgradePanelOpen)
-		{
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
-			bIsUpgradePanelOpen = false;
-		}
-	}
-
-	public void SwitchUpgradeMenu() {
-		if(bIsUpgradePanelOpen)
-		{
-			CloseMenu();
+			fTimer -= Time.deltaTime;
+			if(fTimer <= 0f)
+			{
+				PanelMoving = false;
+			}
 		}
 		else
 		{
-			OpenMenu();
+			fTimer = 0.50f;
 		}
 	}
 
-//
-//
-//	//Inherited
-//	public override void OnSelected() {
-//		OpenMenu();
-//	}
-//
-//	public override void OnDeselected() {
-//		CloseMenu();
-//	}
-
-	public bool BIsUpgradePanelOpen
+	public void OpenCloseUpgradeMenu(baseStructure currentBase)
 	{
-		get
+		if(!PanelMoving)
 		{
-			return bIsUpgradePanelOpen;
+			if(!bIsUpgradePanelOpen)
+			{
+				currentOpenBase = currentBase;
+				if(!bIsRecruitmentPanelOpen)
+				{
+					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsUpgradePanelOpen = true;
+					PanelMoving = true;
+				}
+				else
+				{
+					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsRecruitmentPanelOpen = false;
+					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsUpgradePanelOpen = true;
+					PanelMoving = true;
+				}
+			}
+			else
+			{
+				if(currentOpenBase == currentBase)
+				{
+				    LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsUpgradePanelOpen = false;
+					PanelMoving = true;
+				}
+				else
+				{
+					currentOpenBase = currentBase;
+				}
+			}
 		}
+	}
 
-		set
+	public void OpenCloseRecruitmentMenu()
+	{
+		if(!PanelMoving)
 		{
-			bIsUpgradePanelOpen = value;
+			if(!bIsRecruitmentPanelOpen)
+			{
+				if(!bIsUpgradePanelOpen)
+				{
+					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsRecruitmentPanelOpen = true;
+					PanelMoving = true;
+				}
+				else
+				{
+					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsUpgradePanelOpen = false;
+					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					bIsRecruitmentPanelOpen = true;
+					PanelMoving = true;
+				}
+			}
+			else
+			{
+				LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.25f).setEase (LeanTweenType.easeInQuad);
+				bIsRecruitmentPanelOpen = false;
+				PanelMoving = true;
+			}
 		}
 	}
 }

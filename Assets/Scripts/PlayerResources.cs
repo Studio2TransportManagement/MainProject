@@ -6,7 +6,7 @@ public class PlayerResources : MonoBehaviour {
 	public float fStartingCash;
 	public float fStartingRecruits;
 
-	private float fCurrentMoney = 500f;
+	private float fCurrentMoney = 5000f;
 	private float fCurrentRecruits = 10f;
 
 

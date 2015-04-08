@@ -4,10 +4,7 @@ using UnityEngine.UI;
 
 public class stats : MonoBehaviour {
 
-	public int iRecruits = 0;
-	public int iCash = 1000;
-	public float fTimer = 0.25f;
-	public float fConstant = 255f;
+	private PlayerResources pPlayerResources;
 	public bool bIsMessageFading = false;
 	public GameObject goRecruitAmount;
 	public GameObject goCurrency;
@@ -30,6 +27,10 @@ public class stats : MonoBehaviour {
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
 
+	void Awake ()
+	{
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	void Start ()
 	{
@@ -39,9 +40,9 @@ public class stats : MonoBehaviour {
 	void Update () 
 	{
 		//Sets labels to their corresponding variables
-		goRecruitAmount.GetComponent<Text> ().text = "Recruits: " + iRecruits + "";
-		goCurrency.GetComponent<Text> ().text = "$ " + iCash + "";
-		goCurrency2.GetComponent<Text> ().text = "$ " + iCash + "";
+		goRecruitAmount.GetComponent<Text> ().text = "Recruits: " + pPlayerResources.GetRecruits()+ "";
+		goCurrency.GetComponent<Text> ().text = "$ " + pPlayerResources.GetMoney() + "";
+		goCurrency2.GetComponent<Text> ().text = "$ " + pPlayerResources.GetMoney() + "";
 
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))
@@ -65,58 +66,6 @@ public class stats : MonoBehaviour {
 			}
 		}
 	}
-
-//	public void IntegrityUpgrade ()
-//	{
-//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-//		   SelectionManager.goCurrentObject.name == "Base Charlie")
-//		{
-//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost &&
-//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel != 3)
-//			{
-//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().fHealthMax += 100f;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityLevel += 1;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iIntegrityUpgradeCost += 50;
-//			}
-//		}
-//	}
-//
-//	public void WindowUpgrade ()
-//	{
-//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-//		   SelectionManager.goCurrentObject.name == "Base Charlie")
-//		{
-//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost &&
-//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iWindowLevel != 3)
-//			{
-//				iCash -= SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost;
-//
-//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowLevel += 1;
-//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().ActivateWindowsByLevel();
-//				SelectionManager.goCurrentObject.GetComponent<baseStructure>().iWindowUpgradeCost += 50;
-//			}
-//		}
-//	}
-//
-//	public void CapacityUpgrade ()
-//	{
-//		if(SelectionManager.goCurrentObject.name == "Base Alpha" ||
-//		   SelectionManager.goCurrentObject.name == "Base Bravo" ||
-//		   SelectionManager.goCurrentObject.name == "Base Charlie")
-//		{
-//			if(iCash >= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost &&
-//			   SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel != 3)
-//			{
-//				iCash -= SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacity += 1;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityLevel += 1;
-//				SelectionManager.goCurrentObject.GetComponent<GameStructure>().iCapacityUpgradeCost += 50;
-//			}
-//		}
-//	}
 
 	public void tSlainMessagePrintToUI (string name)
 	{
