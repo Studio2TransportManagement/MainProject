@@ -8,6 +8,8 @@ public class baseStructure : GameStructure {
 	public UpgradeGUI UpgradeUI;
 	public ChildMenuController CMC;
 
+	public bool bAlert;
+
 	public Window[] Windows
 	{
 		get

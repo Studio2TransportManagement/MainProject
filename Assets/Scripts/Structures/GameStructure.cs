@@ -1,20 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameStructure : MonoBehaviour, ISelectable {
-
-	public bool bUnselectable {
-		get;
-		set;
-	}
-	
-	public SelectionManager selectionManager {
-		get;
-		set;
-	}
-
-	public SelectionManager SelectionManager;
-	public stats stMainCamera;
+public class GameStructure : MonoBehaviour {
 
 	public string sBaseName;
 
@@ -35,9 +22,6 @@ public class GameStructure : MonoBehaviour, ISelectable {
 	void Awake () 
 	{
 		fHealthCurrent = fHealthMax;
-		bUnselectable = false;
-		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
-		stMainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<stats>();
 	}
 	
 	// Update is called once per frame
@@ -55,13 +39,4 @@ public class GameStructure : MonoBehaviour, ISelectable {
 
 	}
 
-	public bool IsSelected() {
-		if (selectionManager.IsAlreadySelected(this.gameObject)) {
-			//Debug.Log("<color=purple>" + this.gameObject.name + " is selected</color>");
-			return true;
-		}
-		
-		//Debug.Log("<color=purple>" + this.gameObject.name + " is NOT selected</color>");
-		return false;
-	}
 }

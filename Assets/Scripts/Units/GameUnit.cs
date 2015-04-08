@@ -37,6 +37,11 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public NavMeshAgent navAgent;
 	
 	public int iAmmo;
+	
+	public baseStructure goTargetBase {
+		get;
+		set;
+	}
 
 	// Use this for initialization
 	void Start () {
