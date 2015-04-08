@@ -44,13 +44,10 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 		NameSaver = GameObject.FindGameObjectWithTag ("NameSaver").GetComponent<NameSaver>();
-		if(goHealthBar != null)
-		{
-			goHealthInstance = Instantiate (goHealthBar) as GameObject;
-			goHealthInstance.transform.SetParent (GameObject.Find ("Main Canvas").transform, false);
-			goHealthInstance.transform.SetAsFirstSibling ();
-			goHealthInstance.SetActive (false);
-		}
+		goHealthInstance = Instantiate (goHealthBar) as GameObject;
+		goHealthInstance.transform.SetParent (GameObject.Find ("Main Canvas").transform, false);
+		goHealthInstance.transform.SetAsFirstSibling ();
+		goHealthInstance.SetActive (false);
 		navAgent = this.gameObject.GetComponent<NavMeshAgent>();
 		Debug.Log ("Unit Initiated");
 	}

@@ -4,7 +4,9 @@ using System.Collections;
 public class baseStructure : GameStructure {
 
 	Window[] windows;
+	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
+	public ChildMenuController CMC;
 
 	public Window[] Windows
 	{
@@ -23,6 +25,7 @@ public class baseStructure : GameStructure {
 
 	void Start () 
 	{
+		PanelOpen = false;
 		UpgradeWindows();
 	}
 
@@ -46,8 +49,18 @@ public class baseStructure : GameStructure {
 	
 	public void getThisBase()
 	{
-		UpgradeUI.bPanelActive = !UpgradeUI.bPanelActive;
 		UpgradeUI.upgradingBase = this;
+		if (!PanelOpen) 
+		{
+			CMC.OpenMenu();
+			PanelOpen = true;
+		}
+		if (PanelOpen) 
+		{
+			CMC.CloseMenu();
+			PanelOpen = false;
+		}
+
 	}
 	
 	public void UpgradeWindows()

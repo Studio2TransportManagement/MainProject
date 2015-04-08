@@ -47,13 +47,13 @@ public class SelectionManager : MonoBehaviour {
 							}
 							guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
 						}
-						if (goCurrentObject.GetComponent<GameStructure>()) {
-							ClearSelection();
-							l_goCurrentSelection.Add(goCurrentObject);
-							gsCurrentBuilding = hit.transform.gameObject.GetComponent<GameStructure>();
-							guiCurrentGUIBase = hit.transform.gameObject.GetComponent<GUI_Base>();
-							guiCurrentGUIBase.OnSelected();
-						}
+//						if (goCurrentObject.GetComponent<GameStructure>()) {
+//							ClearSelection();
+//							l_goCurrentSelection.Add(goCurrentObject);
+//							gsCurrentBuilding = hit.transform.gameObject.GetComponent<GameStructure>();
+//							guiCurrentGUIBase = hit.transform.gameObject.GetComponent<GUI_Base>();
+//							guiCurrentGUIBase.OnSelected();
+//						}
 
 						if (goCurrentObject.tag == "player-unit") {
 							displayNames.AddText(guCurrentUnit.sUnitName);

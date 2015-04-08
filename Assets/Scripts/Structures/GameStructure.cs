@@ -48,8 +48,6 @@ public class GameStructure : MonoBehaviour, ISelectable {
 		iWindowLevel = Mathf.Clamp(iWindowLevel, 1, 3);
 		iCapacityLevel = Mathf.Clamp(iCapacityLevel, 1, 3);
 
-		
-
 		if(fHealthCurrent <= 0)
 		{
 			Application.LoadLevel(2);

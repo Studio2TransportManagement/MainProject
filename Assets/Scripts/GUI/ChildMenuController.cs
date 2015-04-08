@@ -9,36 +9,41 @@ public class ChildMenuController : GUI_Base {
 	public GameObject goUpgradePanel;
 	static bool bIsRecruitmentPanelOpen = false;
 	static bool bIsUpgradePanelOpen = false;
-	public float fTimer = 0f;
+	bool PanelOpened;
 
 	//Init
 	void Start() {
 		//
 	}
 
+	void Update() 
+	{
+
+	}
+
 	public void OpenMenu() {
 		if (this.gameObject.name.StartsWith("Base ") && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goUpgradePanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = true;
 		}
 		else if (this.gameObject.name == "Recruitment Building" && !bIsRecruitmentPanelOpen && !bIsUpgradePanelOpen) {
-			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goRecruitmentPanel, new Vector2(0f,0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsRecruitmentPanelOpen = true;
 		}
 		
 		if(this.gameObject.name == "Recruitment Building" && bIsUpgradePanelOpen)
 		{
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goUpgradePanel, new Vector2 (0f, 1040f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = false;
-			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, 1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goRecruitmentPanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsRecruitmentPanelOpen = true;
 		}
 
 		if(this.gameObject.name.StartsWith("Base ") && bIsRecruitmentPanelOpen)
 		{
-			LeanTween.move (goRecruitmentPanel, goRecruitmentPanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goRecruitmentPanel, new Vector2 (0f, -1040f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsRecruitmentPanelOpen = false;
-			LeanTween.move (goUpgradePanel, goUpgradePanel.transform.position + new Vector3 (0f, -1040f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
+			LeanTween.move (goUpgradePanel, new Vector2(0f, 0f), 0.25f).setEase (LeanTweenType.easeInQuad);
 			bIsUpgradePanelOpen = true;
 		}
 
@@ -58,25 +63,38 @@ public class ChildMenuController : GUI_Base {
 		}
 	}
 
-	//Update 
-	void Update() {
-		fTimer -= Time.deltaTime;
-	}
-
-	//Inherited
-	public override void OnSelected() {
-		if(fTimer <= 0)
+	public void SwitchUpgradeMenu() {
+		if(bIsUpgradePanelOpen)
+		{
+			CloseMenu();
+		}
+		else
 		{
 			OpenMenu();
-			fTimer = 0.25f;
 		}
 	}
 
-	public override void OnDeselected() {
-		if(fTimer <= 0)
+//
+//
+//	//Inherited
+//	public override void OnSelected() {
+//		OpenMenu();
+//	}
+//
+//	public override void OnDeselected() {
+//		CloseMenu();
+//	}
+
+	public bool BIsUpgradePanelOpen
+	{
+		get
 		{
-			CloseMenu();
-			fTimer = 0.25f;
+			return bIsUpgradePanelOpen;
+		}
+
+		set
+		{
+			bIsUpgradePanelOpen = value;
 		}
 	}
 }
