@@ -7,8 +7,8 @@ public class unitButton : MonoBehaviour, IDropHandler {
 
 	private PlayerResources pPlayerResources;
 	public GameObject goRecruitSystem;
-	public GameObject goButtonPressed;
-	public GameObject goCurrentlyTraining;
+	public Image IButtonPressed;
+	public Text tCurrentlyTraining;
 	public Transform tSpawnPoint;
 	public List<string> l_sCurrentUnitsName = new List<string>();
 	public Text textCost;
@@ -37,19 +37,19 @@ public class unitButton : MonoBehaviour, IDropHandler {
 		
 		if (iUnitsTraining == 0)
 		{
-			goCurrentlyTraining.GetComponent<Text>().color = colTransparent;
+			tCurrentlyTraining.color = colTransparent;
 		}
 		else
 		{
-			goCurrentlyTraining.GetComponent<Text>().color = Color.white;
-			goCurrentlyTraining.GetComponent<Text>().text = "" + iUnitsTraining + "";
+			tCurrentlyTraining.color = Color.white;
+			tCurrentlyTraining.text = "" + iUnitsTraining + "";
 		}
 		
 		if (iUnitsTraining >= 1)
 		{
-			goButtonPressed.GetComponent<Image> ().fillAmount -= Time.deltaTime / fTrainingTimer;
+			IButtonPressed.fillAmount -= Time.deltaTime / fTrainingTimer;
 			
-			if (goButtonPressed.GetComponent<Image> ().fillAmount == 0)
+			if (IButtonPressed.fillAmount == 0)
 			{
 				iUnitsTraining -= 1;
 				Debug.Log("Trained " + l_sCurrentUnitsName[0] +"");
@@ -61,9 +61,9 @@ public class unitButton : MonoBehaviour, IDropHandler {
 		
 		if (iUnitsTraining >= 1)
 		{
-			if (goButtonPressed.GetComponent<Image>().fillAmount == 0)
+			if (IButtonPressed.fillAmount == 0)
 			{
-				goButtonPressed.GetComponent<Image>().fillAmount = 1;
+				IButtonPressed.fillAmount = 1;
 			}	
 		}
 		
@@ -79,7 +79,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			goRecruitSystem.GetComponent<characterRandomiser>().RandomiseAvatar();
 			if (iUnitsTraining == 0)
 			{
-				goButtonPressed.GetComponent<Image>().fillAmount = 1;
+				IButtonPressed.fillAmount = 1;
 				iUnitsTraining += 1;
 				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
 				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
