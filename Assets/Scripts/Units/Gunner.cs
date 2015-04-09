@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gunner : GameUnit {
+public class Gunner : PlayerUnit {
 
 	private FSM_Core<Gunner> FSM;
 
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start();
+
+		InstantiateHealthBar();
+
 		SollyType = SOLDIER_TYPE.GUNNER;
 
 		//Init AI
@@ -16,15 +20,18 @@ public class Gunner : GameUnit {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
+		base.Update();
+			
 		FSM.Update();
+		base.SelectionCircle();
 	}
 	
 	public void ChangeState(FSM_State<Gunner> gu) {
 		FSM.ChangeState(gu);
 	}
 	
-	baseStructure GetCurrentBase()
+	BaseStructure GetCurrentBase()
 	{
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);
@@ -32,7 +39,7 @@ public class Gunner : GameUnit {
 		{
 			if(hit.transform.gameObject.tag == "building")
 			{
-				return this.goTargetBase = hit.transform.gameObject.GetComponent<baseStructure>();
+				return this.goTargetBase = hit.transform.gameObject.GetComponent<BaseStructure>();
 			}
 		}
 		Debug.Log ("Unit not detecting base");

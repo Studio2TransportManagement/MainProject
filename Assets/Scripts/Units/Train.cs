@@ -8,7 +8,7 @@ public class Train : GameUnit {
 	private List<GameUnit> l_guPassengers;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
 		bUnselectable = false;
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 
@@ -17,7 +17,7 @@ public class Train : GameUnit {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	protected override void Update () 
 	{
 		
 	}

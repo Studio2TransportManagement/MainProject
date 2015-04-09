@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class baseStructure : GameStructure {
+public class BaseStructure : GameStructure {
 
 	Window[] windows;
 	public bool PanelOpen;

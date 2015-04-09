@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public static class staticStructures {
 
-	public static List<baseStructure> bases = new List<baseStructure>();
+	public static List<BaseStructure> bases = new List<BaseStructure>();
 }

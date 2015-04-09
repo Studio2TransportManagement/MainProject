@@ -16,7 +16,7 @@ public class SelectionManager : MonoBehaviour {
 	public DisplayTextList displayNames;
 
 	private GameObject goCurrentObject;
-	private GameUnit guCurrentUnit;
+	private PlayerUnit guCurrentUnit;
 	
 	//Init
 	void Start() {
@@ -37,13 +37,13 @@ public class SelectionManager : MonoBehaviour {
 					//Don't select the same object twice
 					if (!l_goCurrentSelection.Contains(goCurrentObject)) {
 						
-						if (hit.transform.gameObject.GetComponent<GameUnit>()) {
+						if (hit.transform.gameObject.GetComponent<PlayerUnit>()) {
 							l_goCurrentSelection.Add(goCurrentObject);
-							if(!l_goCurrentSelection[0].GetComponent<GameUnit>())
+							if(!l_goCurrentSelection[0].GetComponent<PlayerUnit>())
 							{
 								ClearSelection();
 							}
-							guCurrentUnit = hit.transform.gameObject.GetComponent<GameUnit>();
+							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
 						}
 
 						if (goCurrentObject.tag == "player-unit") {
@@ -80,7 +80,7 @@ public class SelectionManager : MonoBehaviour {
 					if (gobj.tag == "player-unit") {
 						if (hit.transform.gameObject.tag == "train") {
 							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
-							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<GameUnit>());
+							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<PlayerUnit>());
 						}
 						else {
 							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
@@ -112,9 +112,9 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	//Only "Selectable" objects can be selected
-	public bool SetSelection(GameUnit go) {
-		//if (go.GetComponent("ISelectable") as GameUnit != null) {
-		if (go.GetComponent<GameUnit>() != null) {
+	public bool SetSelection(PlayerUnit go) {
+		//if (go.GetComponent("ISelectable") as PlayerUnit != null) {
+		if (go.GetComponent<PlayerUnit>() != null) {
 			if (go.bUnselectable == false) {
 				l_goCurrentSelection.Add(go.gameObject);
 
@@ -137,12 +137,12 @@ public class SelectionManager : MonoBehaviour {
 	public void RemoveDeadUnitIfSelected(GameObject deadUnit) {
 		if (l_goCurrentSelection.Contains (deadUnit)) {
 			l_goCurrentSelection.Remove (deadUnit);
-			displayNames.RemoveText(deadUnit.GetComponent<GameUnit>().sUnitName);
+			displayNames.RemoveText(deadUnit.GetComponent<PlayerUnit>().sUnitName);
 		}
 	}
 
 	private bool IsObjectSelectable(GameObject go) {
-		if (go.GetComponent<GameUnit>() != null) {
+		if (go.GetComponent<PlayerUnit>() != null) {
 			return true;
 		}
 		else if (go.GetComponent<GameStructure>() != null) {

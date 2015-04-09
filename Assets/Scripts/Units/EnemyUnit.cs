@@ -4,32 +4,32 @@ using System.Collections;
 
 public class EnemyUnit : GameUnit {
 
-	NavMeshAgent agent;
 
 	// Use this for initialization
-	void Start () 
+	protected override void Start () 
 	{
-		agent = GetComponent<NavMeshAgent>();
-
-//		agent.SetDestination(new Vector3(0,0,0));
+		base.Start();
 
 		this.goTargetBase = GetClosestBase();
 
-		agent.SetDestination(goTargetBase.transform.position);
+		navAgent.SetDestination(goTargetBase.transform.position);
 	}
 
 	// Update is called once per frame
-	void Update () 
+	protected override void Update () 
 	{
+		base.Update();
+
 		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
 		{
-			agent.SetDestination(this.transform.position);
+			navAgent.SetDestination(this.transform.position);
 		}
+
 	}
 
-	baseStructure GetClosestBase()
+	BaseStructure GetClosestBase()
 	{
-		baseStructure returnStructure = staticStructures.bases[0];
+		BaseStructure returnStructure = staticStructures.bases[0];
 				
 		float tempdistance = Vector3.Distance(this.transform.position, staticStructures.bases[0].transform.position);
 
