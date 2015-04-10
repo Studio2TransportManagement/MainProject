@@ -22,12 +22,12 @@ public class Tower : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		Debug.Log("Clicked");
+//		Debug.Log("Clicked");
 		SwapCamera();
 	}
 
 	void SwapCamera(){
-		Debug.Log("Swapping");
+//		Debug.Log("Swapping");
 		cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = !cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera;
 		cTowerCamera.gameObject.SetActive(!cTowerCamera.gameObject.activeInHierarchy);
 		canMainCanvas.gameObject.SetActive (!canMainCanvas.gameObject.activeInHierarchy);

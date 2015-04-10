@@ -7,7 +7,8 @@ public class EnemyUnit : GameUnit {
 	private FSM_Core<EnemyUnit> FSM;
 
 	private PlayerResources playerResources;
-
+	[Tooltip("For testing purposes, kills the selected unit")]
+	public bool kill;
 	public float fWorth;
 
 	// Use this for initialization
@@ -22,8 +23,6 @@ public class EnemyUnit : GameUnit {
 		FSM = new FSM_Core<EnemyUnit>();
 		FSM.Config(this, new StateEnemyMoveToBase());
 
-
-
 	}
 
 	// Update is called once per frame
@@ -32,6 +31,11 @@ public class EnemyUnit : GameUnit {
 		base.Update();
 		if (FSM != null) {
 			FSM.Update();
+		}
+
+		if(kill)
+		{
+			fHealthCurrent = 0f;
 		}
 
 //		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
@@ -44,11 +48,20 @@ public class EnemyUnit : GameUnit {
 	protected override void KillUnit()
 	{
 		playerResources.ChangeMoney(fWorth);
+		if(wMannedWindow != null){
+			wMannedWindow.RemoveTarget();
+		}
+		Destroy(this.gameObject);
 	}
 
 	
 	public void ChangeState(FSM_State<EnemyUnit> gu) {
 		FSM.ChangeState(gu);
+	}
+
+	public void ReturnToLastState()
+	{
+		FSM.ReturnToLastState();
 	}
 
 	BaseStructure GetClosestBase()

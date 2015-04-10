@@ -8,29 +8,23 @@ public class Window : MonoBehaviour {
 
 	public Transform tStandingPosition;
 
-	public bool bIsActive {
-		get;
-		set;
-	}
+	public bool bIsActive = false;
+//		get;
+//		set;
+//	}
 
-	public bool bIsManned {
-		get;
-		set;
-	}
+	public bool bIsManned = false;
+//		get;
+//		set;
+//	}
 
-	public bool bIsTargeted {
-		get;
-		set;
-	}
+	public bool bIsTargeted = false;
 		
-	GameObject goStationedSoldier;
+	public PlayerUnit goStationedSoldier;
+	public EnemyUnit euTargetingEnemy;
 
 	// Use this for initialization
 	void Start () {
-		bIsActive = false;
-		bIsManned = false;
-		bIsTargeted = false;
-
 		goOpenModel.SetActive(false);
 		goClosedModel.SetActive(true);
 	}
@@ -52,11 +46,11 @@ public class Window : MonoBehaviour {
 		goClosedModel.SetActive(false);
 	}
 
-	public Transform ManWindow(GameObject soldier) {
+	public void ManWindow(PlayerUnit soldier) {
 		goStationedSoldier = soldier;
 		bIsManned = true;
 
-		return tStandingPosition;
+//		return tStandingPosition;
 	}
 
 	public void LeaveWindow() {
@@ -73,13 +67,14 @@ public class Window : MonoBehaviour {
 		}
 	}
 
-	public GameObject TargetWindow() {
+	public PlayerUnit TargetWindow(EnemyUnit eu) {
 		bIsTargeted = true;
-
+		euTargetingEnemy = eu;
 		return goStationedSoldier;
 	}
 
 	public void RemoveTarget() {
 		bIsTargeted = false;
+		euTargetingEnemy = null;
 	}
 }

@@ -14,6 +14,7 @@ public class Gunner : PlayerUnit {
 		//Init AI
 		FSM = new FSM_Core<PlayerUnit>();
 		FSM.Config(this, new StateSoldierIdle(Random.Range(0.25f, 1.0f), Random.Range(20.0f, 50.0f)));
+		
 	}
 	
 	// Update is called once per frame

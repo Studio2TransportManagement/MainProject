@@ -19,14 +19,22 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	protected float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
+	public float fDamage;
 
 
 	public NavMeshAgent navAgent;
-	
-	public int iAmmo;
-	
-	public BaseStructure goTargetBase;
 
+	[Tooltip("How many shots a unit can fire before it needs to reload")]
+	public int iMaxAmmo;
+	public int iCurrentAmmo{ get; set; } 
+	[Tooltip("The time in seconds it takes for a unit to reload (in future; a clip)")]
+	public int fReloadSpeed;
+	
+	public BaseStructure goTargetBase { get; set; }
+
+	public Window wMannedWindow { get; set; }
+
+	public GameUnit guTargetUnit { get; set; }
 
 	// Use this for initialization
 	protected virtual void Start() {
@@ -34,7 +42,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 
-		Debug.Log("Unit Initiated");
+//		Debug.Log("Unit Initiated");
 	}
 
 	public bool IsSelected() {
