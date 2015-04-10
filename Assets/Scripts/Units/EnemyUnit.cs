@@ -17,10 +17,12 @@ public class EnemyUnit : GameUnit {
 
 		playerResources = FindObjectOfType<PlayerResources>();
 
+		this.goTargetBase = GetClosestBase();
+
 		FSM = new FSM_Core<EnemyUnit>();
 		FSM.Config(this, new StateEnemyMoveToBase());
 
-		this.goTargetBase = GetClosestBase();
+
 
 	}
 
@@ -28,7 +30,9 @@ public class EnemyUnit : GameUnit {
 	protected override void Update () 
 	{
 		base.Update();
-		FSM.Update();
+		if (FSM != null) {
+			FSM.Update();
+		}
 
 //		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
 //		{

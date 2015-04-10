@@ -80,7 +80,7 @@ public class PlayerUnit : GameUnit {
 
 	protected override void KillUnit() {
 		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
-		nameSaver.l_guDeadUnitNames.Add(sUnitName);
+		nameSaver.l_sDeadUnitNames.Add(sUnitName);
 		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
 		//if(deathAnimationHasFinished)
 		//Do following functions.

@@ -16,7 +16,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 
     public float fHealthMax;
-	public float fHealthCurrent;
+	protected float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
 
