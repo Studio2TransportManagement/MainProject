@@ -58,4 +58,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	protected virtual void KillUnit() {
 		//SOON
 	}
+
+	public void DamageUnit(float dmg)
+	{
+		fHealthCurrent -=dmg;
+	}
 }

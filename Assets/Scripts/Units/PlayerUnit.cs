@@ -20,7 +20,9 @@ public class PlayerUnit : GameUnit {
 	public Color32 colHover;
 	public Color32 colSelected;
 	public Color32 colDeselected;
+
 	
+	private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	protected override void Start() {
@@ -32,6 +34,7 @@ public class PlayerUnit : GameUnit {
 		goHealthInstance.transform.SetParent(GameObject.Find("Main Canvas").transform, false);
 		goHealthInstance.transform.SetAsFirstSibling();
 		goHealthInstance.SetActive(false);
+		spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 		Debug.Log("PlayerUnit Initialised");
 
 	}
@@ -51,17 +54,17 @@ public class PlayerUnit : GameUnit {
 		if (goHealthInstance != null) {
 			if (IsSelected()) {
 				goHealthInstance.SetActive (true);
-				gameObject.GetComponentInChildren<SpriteRenderer>().color = colSelected;
+				spriteRenderer.color = colSelected;
 			}
 			else
 			{
 				if (!isHovering) {
 					goHealthInstance.SetActive (false);
-					gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
+					spriteRenderer.color = colDeselected;
 				}
 				else
 				{
-					gameObject.GetComponentInChildren<SpriteRenderer>().color = colHover;
+					spriteRenderer.color = colHover;
 				}
 			}
 			
