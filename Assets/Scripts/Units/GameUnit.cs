@@ -32,7 +32,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 
 	// Use this for initialization
-	protected virtual void Start () {
+	protected virtual void Start() {
 		fHealthCurrent = fHealthMax;
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
@@ -42,26 +42,20 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	public bool IsSelected() {
 		if (selectionManager.IsAlreadySelected(this.gameObject)) {
-			//Debug.Log("<color=purple>" + this.gameObject.name + " is selected</color>");
 			return true;
 		}
 
-		//Debug.Log("<color=purple>" + this.gameObject.name + " is NOT selected</color>");
 		return false;
 	}
+	
+	protected virtual void Update() {
 
-	// Update is called once per frame
-	protected virtual void Update () {
-
-		if(fHealthCurrent <= 0)
-		{
+		if(fHealthCurrent <= 0) {
 			KillUnit();
-
 		}
 
 	}
-	protected virtual void KillUnit()
-	{
-
+	protected virtual void KillUnit() {
+		//SOON
 	}
 }

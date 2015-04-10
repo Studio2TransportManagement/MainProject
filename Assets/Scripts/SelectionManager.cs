@@ -39,8 +39,7 @@ public class SelectionManager : MonoBehaviour {
 						
 						if (hit.transform.gameObject.GetComponent<PlayerUnit>()) {
 							l_goCurrentSelection.Add(goCurrentObject);
-							if(!l_goCurrentSelection[0].GetComponent<PlayerUnit>())
-							{
+							if (!l_goCurrentSelection[0].GetComponent<PlayerUnit>()) {
 								ClearSelection();
 							}
 							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
@@ -78,6 +77,7 @@ public class SelectionManager : MonoBehaviour {
 				foreach (GameObject gobj in l_goCurrentSelection) {
 					//If it was a unit, tell it to move
 					if (gobj.tag == "player-unit") {
+						//This needs to be where we get added to the train station
 						if (hit.transform.gameObject.tag == "train") {
 							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
 							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<PlayerUnit>());
@@ -135,17 +135,14 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	public void RemoveDeadUnitIfSelected(GameObject deadUnit) {
-		if (l_goCurrentSelection.Contains (deadUnit)) {
-			l_goCurrentSelection.Remove (deadUnit);
+		if (l_goCurrentSelection.Contains(deadUnit)) {
+			l_goCurrentSelection.Remove(deadUnit);
 			displayNames.RemoveText(deadUnit.GetComponent<PlayerUnit>().sUnitName);
 		}
 	}
 
 	private bool IsObjectSelectable(GameObject go) {
 		if (go.GetComponent<PlayerUnit>() != null) {
-			return true;
-		}
-		else if (go.GetComponent<GameStructure>() != null) {
 			return true;
 		}
 
