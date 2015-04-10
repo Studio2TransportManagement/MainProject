@@ -50,3 +50,13 @@ Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity4.dll
 Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity4.dll
 Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity4.dll
 Assets/ProCore/Shared/Code/ProCore.dll
+Assets/ProCore.meta
+Assets/ProCore/Prototype.meta
+Assets/ProCore/Prototype/Classes.meta
+Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity4.dll.meta
+Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity4.dll.meta
+Assets/ProCore/Prototype/Editor.meta
+Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity4.dll.meta
+Assets/ProCore/Shared.meta
+Assets/ProCore/Shared/Code.meta
+Assets/ProCore/Shared/Code/ProCore.dll.meta

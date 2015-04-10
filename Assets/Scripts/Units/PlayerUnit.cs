@@ -6,6 +6,8 @@ public class PlayerUnit : GameUnit {
 
 	public string sUnitName;
 
+	protected FSM_Core<PlayerUnit> FSM;
+
 	public SOLDIER_TYPE SollyType = SOLDIER_TYPE.NONE;
 	
 	public bool isHovering = false;
@@ -21,32 +23,33 @@ public class PlayerUnit : GameUnit {
 	
 
 	// Use this for initialization
-	protected override void Start () {
+	protected override void Start() {
 		base.Start();
 
 		bUnselectable = false;
-		nameSaver = GameObject.FindGameObjectWithTag ("NameSaver").GetComponent<NameSaver>();
-		goHealthInstance = Instantiate (goHealthBar) as GameObject;
-		goHealthInstance.transform.SetParent (GameObject.Find ("Main Canvas").transform, false);
-		goHealthInstance.transform.SetAsFirstSibling ();
-		goHealthInstance.SetActive (false);
+		nameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
+		goHealthInstance = Instantiate(goHealthBar) as GameObject;
+		goHealthInstance.transform.SetParent(GameObject.Find("Main Canvas").transform, false);
+		goHealthInstance.transform.SetAsFirstSibling();
+		goHealthInstance.SetActive(false);
 		Debug.Log("PlayerUnit Initialised");
 
 	}
 
-	protected void InstantiateHealthBar()
-	{
+	protected void InstantiateHealthBar() {
 
 	}
 
 	// Update is called once per frame
-	protected override void Update () {
+	protected override void Update() {
 		base.Update();
+		if (FSM != null) {
+			FSM.Update();
+		}
 		SelectionCircle();
 	}
 
-	protected void SelectionCircle()
-	{
+	protected void SelectionCircle() {
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 		
 		if(goHealthInstance != null)
@@ -80,10 +83,9 @@ public class PlayerUnit : GameUnit {
 		}
 	}
 
-	protected override void KillUnit()
-	{
+	protected override void KillUnit() {
 		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
-		nameSaver.l_guDeadUnitNames.Add (sUnitName);
+		nameSaver.l_guDeadUnitNames.Add(sUnitName);
 		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
 		//if(deathAnimationHasFinished)
 		//Do following functions.
@@ -92,23 +94,23 @@ public class PlayerUnit : GameUnit {
 		Destroy(gameObject);
 	}
 
-	void OnMouseEnter ()
-	{
+	void OnMouseEnter() {
 		isHovering = true;
-		goHealthInstance.SetActive (true);
-		if(!IsSelected())
-		{
+		goHealthInstance.SetActive(true);
+		if(!IsSelected()) {
 			gameObject.GetComponentInChildren<SpriteRenderer>().color = colHover;
 		}
 	}
 	
-	void OnMouseExit ()
-	{
+	void OnMouseExit() {
 		isHovering = false;
-		goHealthInstance.SetActive (false);
-		if(!IsSelected())
-		{
+		goHealthInstance.SetActive(false);
+		if(!IsSelected()) {
 			gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
 		}
+	}
+
+	public void ChangeState(FSM_State<PlayerUnit> gu) {
+		FSM.ChangeState(gu);
 	}
 }

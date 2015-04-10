@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class StateSoldierIdle : FSM_State<Gunner> {
+public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 
 	private Vector3 vTarget;
 	private Vector3 vDir;
@@ -11,28 +11,33 @@ public sealed class StateSoldierIdle : FSM_State<Gunner> {
 		Debug.Log("StateSoldierIdle begin");
 	}
 
-	public StateSoldierIdle(float wanderRate) {
+	public StateSoldierIdle(float wanderRate, float wanderDistance) {
 		fWanderRate = wanderRate;
+		fWanderDistance = wanderDistance;
 	}
 	
-	public override void Begin(Gunner gu) {
+	public override void Begin(PlayerUnit gu) {
 		gu.navAgent.speed = 1.0f;
 		gu.navAgent.angularSpeed = 5.0f;
 	}
 	
-	public override void Run(Gunner gu) {
+	public override void Run(PlayerUnit gu) {
 		vDir = gu.transform.forward + Random.insideUnitSphere * fWanderRate;
 		vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
 		gu.navAgent.destination = vTarget;
-		
-		if(gu.goTargetBase.bAlert)
-		{
-			gu.ChangeState(new StateSoldierAlert());
+
+		if (gu.goTargetBase != null) {
+			if(gu.goTargetBase.bAlert) {
+				gu.ChangeState(new StateSoldierAlert());
+			}
+		}
+		else {
+			Debug.Log("StateSoldierIdle: goTargetBase was null!");
 		}
 		
 	}
 	
-	public override void End(Gunner gu) {
+	public override void End(PlayerUnit gu) {
 		Debug.Log("StateSoldierIdle end");
 	}
 }
