@@ -4,27 +4,47 @@ using System.Collections;
 
 public class EnemyUnit : GameUnit {
 
+	private FSM_Core<EnemyUnit> FSM;
+
+	private PlayerResources playerResources;
+
+	public float fWorth;
 
 	// Use this for initialization
 	protected override void Start () 
 	{
 		base.Start();
 
+		playerResources = FindObjectOfType<PlayerResources>();
+
+		FSM = new FSM_Core<EnemyUnit>();
+		FSM.Config(this, new StateEnemyMoveToBase());
+
 		this.goTargetBase = GetClosestBase();
 
-		navAgent.SetDestination(goTargetBase.transform.position);
 	}
 
 	// Update is called once per frame
 	protected override void Update () 
 	{
 		base.Update();
+		FSM.Update();
 
-		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
-		{
-			navAgent.SetDestination(this.transform.position);
-		}
+//		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
+//		{
+//			navAgent.SetDestination(this.transform.position);
+//		}
 
+	}
+
+	protected override void KillUnit()
+	{
+		playerResources.ChangeMoney(fWorth);
+	}
+
+	
+	public void ChangeState(FSM_State<EnemyUnit> gu) {
+		FSM.ChangeState(gu);
 	}
 
 	BaseStructure GetClosestBase()

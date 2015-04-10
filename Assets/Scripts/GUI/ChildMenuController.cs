@@ -11,7 +11,7 @@ public class ChildMenuController : GUI_Base {
 	static bool bIsUpgradePanelOpen = false;
 	static bool PanelMoving;
 	static BaseStructure currentOpenBase;
-	public float fTimer = 0.50f;
+	public float fTimer = 0.35f;
 
 	//Init
 	void Start() {
@@ -31,7 +31,7 @@ public class ChildMenuController : GUI_Base {
 		}
 		else
 		{
-			fTimer = 0.50f;
+			fTimer = 0.35f;
 		}
 	}
 
