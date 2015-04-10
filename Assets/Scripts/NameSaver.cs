@@ -5,26 +5,21 @@ public class NameSaver : MonoBehaviour {
 	
 	public static NameSaver Instance;
 	
-	public List<string> l_guDeadUnitNames;
+	public List<string> l_sDeadUnitNames;
 
-	void Start() 
-	{
-		l_guDeadUnitNames = new List<string> ();
+	void Start() {
+		l_sDeadUnitNames = new List<string>();
 	}
 
-	void Update ()
-	{
+	void Update() {
 
 	}
 	
-	void Awake ()
-	{
-		if(Instance)
-		{
+	void Awake() {
+		if (Instance) {
 			DestroyImmediate(gameObject);
 		}
-		else
-		{
+		else {
 			DontDestroyOnLoad(gameObject);
 			Instance = this;
 		}

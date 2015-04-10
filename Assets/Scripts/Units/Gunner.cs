@@ -4,10 +4,12 @@ using System.Collections;
 public class Gunner : PlayerUnit {
 	
 	// Use this for initialization
-	protected override void Start () {
+	protected override void Start() {
 		base.Start();
 
 		SollyType = SOLDIER_TYPE.GUNNER;
+
+		this.goTargetBase = GetCurrentBase();
 
 		//Init AI
 		FSM = new FSM_Core<PlayerUnit>();

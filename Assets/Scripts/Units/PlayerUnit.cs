@@ -20,7 +20,6 @@ public class PlayerUnit : GameUnit {
 	public Color32 colHover;
 	public Color32 colSelected;
 	public Color32 colDeselected;
-	
 
 	// Use this for initialization
 	protected override void Start() {
@@ -33,7 +32,6 @@ public class PlayerUnit : GameUnit {
 		goHealthInstance.transform.SetAsFirstSibling();
 		goHealthInstance.SetActive(false);
 		Debug.Log("PlayerUnit Initialised");
-
 	}
 
 	// Update is called once per frame
@@ -77,7 +75,7 @@ public class PlayerUnit : GameUnit {
 
 	protected override void KillUnit() {
 		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
-		nameSaver.l_guDeadUnitNames.Add(sUnitName);
+		nameSaver.l_sDeadUnitNames.Add(sUnitName);
 		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
 		//if(deathAnimationHasFinished)
 		//Do following functions.
@@ -109,12 +107,10 @@ public class PlayerUnit : GameUnit {
 	protected BaseStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);
-		if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("building"))) {
-			if (hit.transform.gameObject.tag == "building") {
-				return this.goTargetBase = hit.transform.gameObject.GetComponent<BaseStructure>();
-			}
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("building"))) {
+			return this.goTargetBase = hit.transform.gameObject.GetComponent<BaseStructure>();
 		}
-		Debug.Log ("Unit not detecting base");
+		Debug.Log("<color=red>Unit not detecting base</color>");
 		return null;
 	}
 }

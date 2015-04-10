@@ -25,10 +25,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	
 	public int iAmmo;
 	
-	public BaseStructure goTargetBase {
-		get;
-		set;
-	}
+	public BaseStructure goTargetBase;
 
 
 	// Use this for initialization
@@ -49,11 +46,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 	
 	protected virtual void Update() {
-
-		if(fHealthCurrent <= 0) {
+		if (fHealthCurrent <= 0) {
 			KillUnit();
 		}
-
 	}
 	protected virtual void KillUnit() {
 		//SOON
