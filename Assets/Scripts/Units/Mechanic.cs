@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gunner : PlayerUnit {
+public class Mechanic : PlayerUnit {
 	
 	// Use this for initialization
 	protected override void Start () {
 		base.Start();
-
-		SollyType = SOLDIER_TYPE.GUNNER;
-
+		
+		SollyType = SOLDIER_TYPE.MECHANIC;
+		
 		//Init AI
 		FSM = new FSM_Core<PlayerUnit>();
 		FSM.Config(this, new StateSoldierIdle(Random.Range(0.25f, 1.0f), Random.Range(20.0f, 50.0f)));

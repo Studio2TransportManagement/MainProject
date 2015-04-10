@@ -36,10 +36,6 @@ public class PlayerUnit : GameUnit {
 
 	}
 
-	protected void InstantiateHealthBar() {
-
-	}
-
 	// Update is called once per frame
 	protected override void Update() {
 		base.Update();
@@ -52,17 +48,14 @@ public class PlayerUnit : GameUnit {
 	protected void SelectionCircle() {
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 		
-		if(goHealthInstance != null)
-		{
-			if(IsSelected())
-			{
+		if (goHealthInstance != null) {
+			if (IsSelected()) {
 				goHealthInstance.SetActive (true);
 				gameObject.GetComponentInChildren<SpriteRenderer>().color = colSelected;
 			}
 			else
 			{
-				if(!isHovering)
-				{
+				if (!isHovering) {
 					goHealthInstance.SetActive (false);
 					gameObject.GetComponentInChildren<SpriteRenderer>().color = colDeselected;
 				}
@@ -72,13 +65,12 @@ public class PlayerUnit : GameUnit {
 				}
 			}
 			
-			if(goHealthInstance.activeInHierarchy)
-			{
+			if (goHealthInstance.activeInHierarchy) {
 				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
 				
 				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / fHealthMax;
 				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
-				goHealthInstance.GetComponentInChildren<Text> ().text = sUnitName;
+				goHealthInstance.GetComponentInChildren<Text>().text = sUnitName;
 			}
 		}
 	}

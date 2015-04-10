@@ -13,7 +13,12 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Run(PlayerUnit gu) {
-				
+		if (gu.goTargetBase != null) {
+			//
+		}
+		else {
+			Debug.Log("StateSoldierAlert: gu.goTargetBase is null!");
+		}
 	}
 	
 	public override void End(PlayerUnit gu) {

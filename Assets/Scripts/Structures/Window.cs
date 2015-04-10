@@ -8,31 +8,25 @@ public class Window : MonoBehaviour {
 
 	public Transform tStandingPosition;
 
-	bool bIsActive;
-	bool bIsManned;
-	bool bIsTargeted;
+	public bool bIsActive {
+		get;
+		set;
+	}
+
+	public bool bIsManned {
+		get;
+		set;
+	}
+
+	public bool bIsTargeted {
+		get;
+		set;
+	}
 		
 	GameObject goStationedSoldier;
 
-	public bool BIsActive
-	{
-		get
-		{
-			return bIsActive;
-		}
-	}
-
-	public bool BIsManned
-	{
-		get
-		{
-			return bIsManned;
-		}
-	}
-
 	// Use this for initialization
 	void Start () {
-
 		bIsActive = false;
 		bIsManned = false;
 		bIsTargeted = false;
@@ -42,60 +36,50 @@ public class Window : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
+	void Update() {
 
 	}
 
-	void debugSwitchWindowState()
-	{
+	void debugSwitchWindowState() {
 		bIsActive = !bIsActive;
 		goOpenModel.SetActive(!goOpenModel.activeInHierarchy);
 		goClosedModel.SetActive(!goOpenModel.activeInHierarchy);
 	}
 
-	public void ActivateWindow(){
-
+	public void ActivateWindow() {
 		bIsActive = true;
 		goOpenModel.SetActive(true);
 		goClosedModel.SetActive(false);
 	}
 
-	public Transform ManWindow(GameObject soldier)
-	{
+	public Transform ManWindow(GameObject soldier) {
 		goStationedSoldier = soldier;
 		bIsManned = true;
 
 		return tStandingPosition;
 	}
 
-	public void LeaveWindow()
-	{
+	public void LeaveWindow() {
 		goStationedSoldier = null;
 		bIsManned = false;
 	}
 
-	public bool CheckIfTargetable()
-	{
-		if(bIsActive && bIsManned && !bIsTargeted)
-		{
+	public bool CheckIfTargetable() {
+		if (bIsActive && bIsManned && !bIsTargeted) {
 			return true;
 		}
-		else
-		{
+		else {
 			return false;
 		}
 	}
 
-	public GameObject TargetWindow()
-	{
+	public GameObject TargetWindow() {
 		bIsTargeted = true;
 
 		return goStationedSoldier;
 	}
 
-	public void RemoveTarget()
-	{
+	public void RemoveTarget() {
 		bIsTargeted = false;
 	}
 }

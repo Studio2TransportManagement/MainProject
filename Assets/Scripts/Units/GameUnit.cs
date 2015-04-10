@@ -37,7 +37,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 
-		Debug.Log ("Unit Initiated");
+		Debug.Log("Unit Initiated");
 	}
 
 	public bool IsSelected() {

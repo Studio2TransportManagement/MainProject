@@ -9,82 +9,45 @@ public class BaseStructure : GameStructure {
 
 	public bool bAlert;
 
-	public Window[] Windows
-	{
-		get
-		{
-			return windows;
-		}
+	public Window[] Windows {
+		get;
+		set;
 	}
 
-	void Awake()
-	{
+	void Awake() {
 		windows = GetComponentsInChildren<Window>();
 		staticStructures.bases.Add(this);
-
 	}
 
-	void Start () 
-	{
+	void Start () {
 		PanelOpen = false;
 		UpgradeWindows();
 	}
 
-	public Window GetAvailableOpenWindow()
-	{
-		foreach(Window window in windows)
-		{
-			if(window.BIsActive && !window.BIsManned)
-			{
+	public Window GetAvailableOpenWindow() {
+		foreach (Window window in windows) {
+			if (window.bIsActive && !window.bIsManned) {
 				return window;
 			}
 		}
-		Debug.Log ("Get Window Failed, check if window is available before getting");
+		Debug.Log("Get Window Failed, check if window is available before getting");
 		return null;
 	}
 
-	public void UpgradeIntegrity()
-	{
+	public void UpgradeIntegrity() {
 		
 	}
 	
-	public void getThisBase()
-	{
+	public void getThisBase() {
 		UpgradeUI.upgradingBase = this;
 		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
 	}
 	
-	public void UpgradeWindows()
-	{
-		switch(iWindowLevel)
-		{
-		case 1:
-			for(int i = 0; i < 3; i++)
-			{
-				windows[i].ActivateWindow();
-			}
-			break;
-		case 2:
-			for(int i = 0; i < 4; i++)
-			{
-				if(!windows[i].BIsActive)
-				{
-					windows[i].ActivateWindow();
-				}
-			}
-			break;
-		case 3:
-			for(int i = 0; i < 5; i++)
-			{
-				if(!windows[i].BIsActive)
-				{
-					windows[i].ActivateWindow();
-				}
-			}
-			break;
-		default:
-			Debug.Log ("Max Windows!");
-			break;
+	public void UpgradeWindows() {
+		//Base windows plus upgrade level
+		int j = iWindowLevel + 2;
+		for (int i = 0; i < j; i++) {
+			windows[i].ActivateWindow();
 		}
 	}
 
