@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour {
 
+	public UIAudioManager audioManager;
 	public List<GameObject> l_goCurrentSelection;
 	public Camera cMainCamera;
 	private bool bGotSelection = false;
@@ -21,7 +22,7 @@ public class SelectionManager : MonoBehaviour {
 	//Init
 	void Start() {
 		l_goCurrentSelection = new List<GameObject>();
-
+		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
 		hit = new RaycastHit();
 	}
 	
@@ -39,10 +40,8 @@ public class SelectionManager : MonoBehaviour {
 						
 						if (hit.transform.gameObject.GetComponent<PlayerUnit>()) {
 							l_goCurrentSelection.Add(goCurrentObject);
-							if (!l_goCurrentSelection[0].GetComponent<PlayerUnit>()) {
-								ClearSelection();
-							}
 							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
+							AudioSource.PlayClipAtPoint (audioManager.ACSelectUnit, Camera.main.transform.position);
 						}
 
 						if (goCurrentObject.tag == "player-unit") {
@@ -59,6 +58,7 @@ public class SelectionManager : MonoBehaviour {
 						//Unselect if clicked again
 						if (guCurrentUnit != null) {
 							displayNames.RemoveText(guCurrentUnit.sUnitName);
+							AudioSource.PlayClipAtPoint (audioManager.ACDeselectUnit, Camera.main.transform.position);
 						}
 			         }
 				}

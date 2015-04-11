@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class unitButton : MonoBehaviour, IDropHandler {
 
+	public UIAudioManager audioManager;
 	private PlayerResources pPlayerResources;
 	public GameObject goRecruitSystem;
 	public Image IButtonPressed;
@@ -27,6 +28,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	}
 
 	void Start() {
+		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
 		unitSpawner = this.GetComponentInParent<SpawnSoldier> ();
 	}
 	
@@ -54,6 +56,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 				iUnitsTraining -= 1;
 				Debug.Log("Trained " + l_sCurrentUnitsName[0] +"");
 				unitSpawner.SpawnUnit(troopChoice, tSpawnPoint.position, l_sCurrentUnitsName[0]);
+				AudioSource.PlayClipAtPoint (audioManager.ACEndTraining, Camera.main.transform.position);
 				l_sCurrentUnitsName.RemoveAt(0);
 			}
 			
@@ -83,12 +86,14 @@ public class unitButton : MonoBehaviour, IDropHandler {
 				iUnitsTraining += 1;
 				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
 				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
+				AudioSource.PlayClipAtPoint (audioManager.ACStartTraining, Camera.main.transform.position);
 			}
 			else if (iUnitsTraining >= 1)
 			{
 				iUnitsTraining += 1;
 				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
 				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
+				AudioSource.PlayClipAtPoint (audioManager.ACStartTraining, Camera.main.transform.position);
 			}
 		}
 	}

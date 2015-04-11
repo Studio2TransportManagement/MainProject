@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ChildMenuController : GUI_Base {
 
+	public UIAudioManager audioManager;
 	public GameObject goRecruitmentPanel;
 	public GameObject goUpgradePanel;
 	static bool bIsRecruitmentPanelOpen = false;
@@ -15,6 +16,7 @@ public class ChildMenuController : GUI_Base {
 
 	//Init
 	void Start() {
+		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
 		LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.01f).setEase (LeanTweenType.easeInQuad);
 		LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.01f).setEase (LeanTweenType.easeInQuad);
 	}
@@ -45,12 +47,14 @@ public class ChildMenuController : GUI_Base {
 				if(!bIsRecruitmentPanelOpen)
 				{
 					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					AudioSource.PlayClipAtPoint( audioManager.ACOpenUpgrade, Camera.main.transform.position);
 					bIsUpgradePanelOpen = true;
 					PanelMoving = true;
 				}
 				else
 				{
 					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.25f).setEase (LeanTweenType.easeInQuad);
+					AudioSource.PlayClipAtPoint( audioManager.ACSwitchingMenus, Camera.main.transform.position);
 					bIsRecruitmentPanelOpen = false;
 					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
 					bIsUpgradePanelOpen = true;
@@ -62,12 +66,14 @@ public class ChildMenuController : GUI_Base {
 				if(currentOpenBase == currentBase)
 				{
 				    LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.25f).setEase (LeanTweenType.easeInQuad);
+					AudioSource.PlayClipAtPoint( audioManager.ACCloseUpgrade, Camera.main.transform.position);
 					bIsUpgradePanelOpen = false;
 					PanelMoving = true;
 				}
 				else
 				{
 					currentOpenBase = currentBase;
+					AudioSource.PlayClipAtPoint( audioManager.ACChangingBase, Camera.main.transform.position);
 				}
 			}
 		}
@@ -82,12 +88,14 @@ public class ChildMenuController : GUI_Base {
 				if(!bIsUpgradePanelOpen)
 				{
 					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+					AudioSource.PlayClipAtPoint( audioManager.ACOpenRecruitment, Camera.main.transform.position);
 					bIsRecruitmentPanelOpen = true;
 					PanelMoving = true;
 				}
 				else
 				{
 					LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.25f).setEase (LeanTweenType.easeInQuad);
+					AudioSource.PlayClipAtPoint( audioManager.ACSwitchingMenus, Camera.main.transform.position);
 					bIsUpgradePanelOpen = false;
 					LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, Screen.height/2f), 0.25f).setEase (LeanTweenType.easeInQuad);
 					bIsRecruitmentPanelOpen = true;
@@ -97,6 +105,7 @@ public class ChildMenuController : GUI_Base {
 			else
 			{
 				LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.25f).setEase (LeanTweenType.easeInQuad);
+				AudioSource.PlayClipAtPoint( audioManager.ACCloseRecruitment, Camera.main.transform.position);
 				bIsRecruitmentPanelOpen = false;
 				PanelMoving = true;
 			}

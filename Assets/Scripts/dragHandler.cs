@@ -4,10 +4,16 @@ using UnityEngine.EventSystems;
 
 public class dragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
+	public UIAudioManager audioManager;
 	public static GameObject itemBeingDragged;
 	Vector3 startPosition;
 	Vector3 startSize;
 	Vector3 dragSize;
+
+	void Start ()
+	{
+		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
+	}
 
 	#region IBeginDragHandler implementation
 	public void OnBeginDrag (PointerEventData eventData)
@@ -21,6 +27,7 @@ public class dragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		itemBeingDragged = gameObject;
 		startPosition = transform.position;
 		itemBeingDragged.transform.localScale = dragSize;
+		AudioSource.PlayClipAtPoint (audioManager.ACGrabRecruit, Camera.main.transform.position);
 	}
 	#endregion
 
