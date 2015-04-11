@@ -32,6 +32,8 @@ public class GameStructure : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () 
 	{
+		iHealthCurrent = (int) fHealthCurrent;
+
 		fHealthCurrent = Mathf.Clamp(fHealthCurrent, 0f, fHealthMax);
 		iIntegrityLevel = Mathf.Clamp(iIntegrityLevel, 1, 3);
 		iWindowLevel = Mathf.Clamp(iWindowLevel, 1, 3);
