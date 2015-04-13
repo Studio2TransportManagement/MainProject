@@ -43,29 +43,30 @@ public class SelectionManager : MonoBehaviour {
 							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
 							displayNames.AddText(guCurrentUnit.sUnitName);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
-							AudioSource.PlayClipAtPoint (audioManager.ACSelectUnit, Camera.main.transform.position);
+							AudioSource.PlayClipAtPoint(audioManager.ACSelectUnit, Camera.main.transform.position);
 						}
-						
-	//					if (goCurrentObject.tag == "train") {
-	//						displayNames.AddText(guCurrentUnit.sUnitName);
-	//						Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>, choo choo!");
-	//					}
 					}
 					else {
 						//Unselect if clicked again
 						if (guCurrentUnit != null) {
 							l_goCurrentSelection.Remove(goCurrentObject);
 							displayNames.RemoveText(guCurrentUnit.sUnitName);
-							AudioSource.PlayClipAtPoint (audioManager.ACDeselectUnit, Camera.main.transform.position);
+							AudioSource.PlayClipAtPoint(audioManager.ACDeselectUnit, Camera.main.transform.position);
 						}
 			         }
 				}
 				else {
-					//Debug.Log(hit.transform.gameObject.name);
-					Debug.Log("Nothing interesting here..");
-					if(l_goCurrentSelection[0])
-					{
-						AudioSource.PlayClipAtPoint (audioManager.ACDeselectUnit, Camera.main.transform.position);
+					if (hit.transform.gameObject.tag == "building" && l_goCurrentSelection.Count > 0) {
+						foreach (GameObject go in l_goCurrentSelection) {
+							BaseStructure bs = hit.transform.gameObject.GetComponent<BaseStructure>();
+							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
+						}
+					}
+					else {
+						Debug.Log("Nothing interesting here..");
+						if(l_goCurrentSelection[0]) {
+							AudioSource.PlayClipAtPoint(audioManager.ACDeselectUnit, Camera.main.transform.position);
+						}
 					}
 					ClearSelection();
 				}

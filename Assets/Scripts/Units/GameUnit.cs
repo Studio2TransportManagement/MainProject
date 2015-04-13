@@ -26,10 +26,13 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	[Tooltip("How many shots a unit can fire before it needs to reload")]
 	public int iMaxAmmo;
-	public int iCurrentAmmo{ get; set; } 
+
+	public int iCurrentAmmo{ get; set; }
+
 	[Tooltip("The time in seconds it takes for a unit to reload (in future; a clip)")]
 	public int fReloadSpeed;
-	
+
+	[Tooltip("The base we are in, if any, or the base we are trying to reach")]
 	public BaseStructure goTargetBase { get; set; }
 
 	public Window wMannedWindow { get; set; }
@@ -62,8 +65,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		//SOON
 	}
 
-	public void DamageUnit(float dmg)
-	{
+	public void DamageUnit(float dmg) {
 		fHealthCurrent -=dmg;
 	}
 }
