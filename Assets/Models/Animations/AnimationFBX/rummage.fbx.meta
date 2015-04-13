@@ -1,0 +1,581 @@
+fileFormatVersion: 2
+guid: ecc0a5cd96a18d0419820b41f6519a45
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bag1
+    100002: Bag2
+    100004: Bag3
+    100006: Bag4
+    100008: Bag5
+    100010: group
+    100012: group1
+    100014: HeadBone
+    100016: HipBone
+    100018: L_ArmBone
+    100020: L_ElbowBone
+    100022: L_FootBone
+    100024: L_HandBone
+    100026: L_KneeBone
+    100028: L_LegBone
+    100030: L_ShoulderBone
+    100032: L_ToeBone
+    100034: L_WristBone
+    100036: NeckBone
+    100038: pasted__pCube2
+    100040: pasted__pCube3
+    100042: pasted__pCylinder1
+    100044: pasted__pCylinder3
+    100046: pasted__pCylinder3 1
+    100048: pasted__pPipe1
+    100050: pCube1
+    100052: pCylinder1
+    100054: pCylinder10
+    100056: pCylinder2
+    100058: pCylinder3
+    100060: pCylinder4
+    100062: pCylinder5
+    100064: pCylinder6
+    100066: pCylinder7
+    100068: pCylinder8
+    100070: pCylinder9
+    100072: polySurface1
+    100074: polySurface10
+    100076: polySurface11
+    100078: polySurface12
+    100080: polySurface13
+    100082: polySurface14
+    100084: polySurface15
+    100086: polySurface16
+    100088: polySurface17
+    100090: polySurface18
+    100092: polySurface19
+    100094: polySurface2
+    100096: polySurface2 1
+    100098: polySurface20
+    100100: polySurface21
+    100102: polySurface3
+    100104: polySurface4
+    100106: polySurface5
+    100108: polySurface6
+    100110: polySurface6 1
+    100112: polySurface7
+    100114: polySurface8
+    100116: polySurface9
+    100118: pPipe1
+    100120: pPipe2
+    100122: pPipe4
+    100124: pSphere1
+    100126: pSphere2
+    100128: R_ArmBone
+    100130: R_ElbowBone
+    100132: R_FootBone
+    100134: R_HandBone
+    100136: R_KneeBone
+    100138: R_LegBone
+    100140: R_ShoulderBone
+    100142: R_ToeBone
+    100144: R_WristBone
+    100146: RootBone
+    100148: //RootNode
+    100150: SkullBone
+    100152: Spine1Bone
+    100154: Spine2Bone
+    100156: Spine3Bone
+    100158: transform1
+    100160: transform10
+    100162: transform11
+    100164: transform12
+    100166: transform13
+    100168: transform14
+    100170: transform15
+    100172: transform16
+    100174: transform17
+    100176: transform18
+    100178: transform19
+    100180: transform2
+    100182: transform20
+    100184: transform21
+    100186: transform22
+    100188: transform23
+    100190: transform24
+    100192: transform25
+    100194: transform26
+    100196: transform27
+    100198: transform28
+    100200: transform29
+    100202: transform3
+    100204: transform30
+    100206: transform31
+    100208: transform32
+    100210: transform33
+    100212: transform34
+    100214: transform35
+    100216: transform36
+    100218: transform37
+    100220: transform38
+    100222: transform39
+    100224: transform4
+    100226: transform40
+    100228: transform41
+    100230: transform42
+    100232: transform43
+    100234: transform44
+    100236: transform5
+    100238: transform6
+    100240: transform7
+    100242: transform8
+    100244: transform9
+    400000: Bag1
+    400002: Bag2
+    400004: Bag3
+    400006: Bag4
+    400008: Bag5
+    400010: group
+    400012: group1
+    400014: HeadBone
+    400016: HipBone
+    400018: L_ArmBone
+    400020: L_ElbowBone
+    400022: L_FootBone
+    400024: L_HandBone
+    400026: L_KneeBone
+    400028: L_LegBone
+    400030: L_ShoulderBone
+    400032: L_ToeBone
+    400034: L_WristBone
+    400036: NeckBone
+    400038: pasted__pCube2
+    400040: pasted__pCube3
+    400042: pasted__pCylinder1
+    400044: pasted__pCylinder3
+    400046: pasted__pCylinder3 1
+    400048: pasted__pPipe1
+    400050: pCube1
+    400052: pCylinder1
+    400054: pCylinder10
+    400056: pCylinder2
+    400058: pCylinder3
+    400060: pCylinder4
+    400062: pCylinder5
+    400064: pCylinder6
+    400066: pCylinder7
+    400068: pCylinder8
+    400070: pCylinder9
+    400072: polySurface1
+    400074: polySurface10
+    400076: polySurface11
+    400078: polySurface12
+    400080: polySurface13
+    400082: polySurface14
+    400084: polySurface15
+    400086: polySurface16
+    400088: polySurface17
+    400090: polySurface18
+    400092: polySurface19
+    400094: polySurface2
+    400096: polySurface2 1
+    400098: polySurface20
+    400100: polySurface21
+    400102: polySurface3
+    400104: polySurface4
+    400106: polySurface5
+    400108: polySurface6
+    400110: polySurface6 1
+    400112: polySurface7
+    400114: polySurface8
+    400116: polySurface9
+    400118: pPipe1
+    400120: pPipe2
+    400122: pPipe4
+    400124: pSphere1
+    400126: pSphere2
+    400128: R_ArmBone
+    400130: R_ElbowBone
+    400132: R_FootBone
+    400134: R_HandBone
+    400136: R_KneeBone
+    400138: R_LegBone
+    400140: R_ShoulderBone
+    400142: R_ToeBone
+    400144: R_WristBone
+    400146: RootBone
+    400148: //RootNode
+    400150: SkullBone
+    400152: Spine1Bone
+    400154: Spine2Bone
+    400156: Spine3Bone
+    400158: transform1
+    400160: transform10
+    400162: transform11
+    400164: transform12
+    400166: transform13
+    400168: transform14
+    400170: transform15
+    400172: transform16
+    400174: transform17
+    400176: transform18
+    400178: transform19
+    400180: transform2
+    400182: transform20
+    400184: transform21
+    400186: transform22
+    400188: transform23
+    400190: transform24
+    400192: transform25
+    400194: transform26
+    400196: transform27
+    400198: transform28
+    400200: transform29
+    400202: transform3
+    400204: transform30
+    400206: transform31
+    400208: transform32
+    400210: transform33
+    400212: transform34
+    400214: transform35
+    400216: transform36
+    400218: transform37
+    400220: transform38
+    400222: transform39
+    400224: transform4
+    400226: transform40
+    400228: transform41
+    400230: transform42
+    400232: transform43
+    400234: transform44
+    400236: transform5
+    400238: transform6
+    400240: transform7
+    400242: transform8
+    400244: transform9
+    4300000: pasted__pCylinder3
+    7400000: RummageAnim
+    9500000: //RootNode
+    13700000: pasted__pCylinder3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: RummageAnim
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group
+        weight: 1
+      - path: group/pasted__pCylinder1
+        weight: 1
+      - path: group/pasted__pCylinder1/transform15
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group1/pasted__pCube2
+        weight: 1
+      - path: group1/pasted__pCube2/transform43
+        weight: 1
+      - path: group1/pasted__pCube3
+        weight: 1
+      - path: group1/pasted__pCube3/transform42
+        weight: 1
+      - path: group1/pasted__pCylinder3 1
+        weight: 1
+      - path: group1/pasted__pCylinder3 1/transform44
+        weight: 1
+      - path: group1/pasted__pPipe1
+        weight: 1
+      - path: group1/pasted__pPipe1/transform41
+        weight: 1
+      - path: pasted__pCylinder3
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform16
+        weight: 1
+      - path: pCylinder1
+        weight: 1
+      - path: pCylinder1/transform22
+        weight: 1
+      - path: pCylinder2
+        weight: 1
+      - path: pCylinder2/transform21
+        weight: 1
+      - path: pCylinder3
+        weight: 1
+      - path: pCylinder3/transform20
+        weight: 1
+      - path: pCylinder4
+        weight: 1
+      - path: pCylinder4/transform19
+        weight: 1
+      - path: pCylinder5
+        weight: 1
+      - path: pCylinder5/transform18
+        weight: 1
+      - path: pCylinder6
+        weight: 1
+      - path: pCylinder6/transform17
+        weight: 1
+      - path: pCylinder7
+        weight: 1
+      - path: pCylinder7/polySurface5
+        weight: 1
+      - path: pCylinder7/polySurface5/transform4
+        weight: 1
+      - path: pCylinder7/polySurface6 1
+        weight: 1
+      - path: pCylinder7/polySurface6 1/transform5
+        weight: 1
+      - path: pCylinder7/transform3
+        weight: 1
+      - path: pCylinder8
+        weight: 1
+      - path: pCylinder8/polySurface1
+        weight: 1
+      - path: pCylinder8/polySurface1/transform6
+        weight: 1
+      - path: pCylinder8/polySurface2 1
+        weight: 1
+      - path: pCylinder8/polySurface2 1/transform9
+        weight: 1
+      - path: pCylinder8/transform1
+        weight: 1
+      - path: pCylinder9
+        weight: 1
+      - path: pCylinder9/transform14
+        weight: 1
+      - path: pCylinder10
+        weight: 1
+      - path: pCylinder10/transform13
+        weight: 1
+      - path: polySurface2
+        weight: 1
+      - path: polySurface2/transform10
+        weight: 1
+      - path: polySurface6
+        weight: 1
+      - path: polySurface6/transform7
+        weight: 1
+      - path: polySurface7
+        weight: 1
+      - path: polySurface7/transform8
+        weight: 1
+      - path: pPipe1
+        weight: 1
+      - path: pPipe1/transform12
+        weight: 1
+      - path: pPipe2
+        weight: 1
+      - path: pPipe2/transform11
+        weight: 1
+      - path: pPipe4
+        weight: 1
+      - path: pPipe4/polySurface3
+        weight: 1
+      - path: pPipe4/polySurface3/transform40
+        weight: 1
+      - path: pPipe4/polySurface4
+        weight: 1
+      - path: pPipe4/polySurface4/transform39
+        weight: 1
+      - path: pPipe4/transform2
+        weight: 1
+      - path: pSphere1
+        weight: 1
+      - path: pSphere1/transform23
+        weight: 1
+      - path: pSphere2
+        weight: 1
+      - path: pSphere2/polySurface8
+        weight: 1
+      - path: pSphere2/polySurface8/transform38
+        weight: 1
+      - path: pSphere2/polySurface9
+        weight: 1
+      - path: pSphere2/polySurface9/transform37
+        weight: 1
+      - path: pSphere2/polySurface10
+        weight: 1
+      - path: pSphere2/polySurface10/transform36
+        weight: 1
+      - path: pSphere2/polySurface11
+        weight: 1
+      - path: pSphere2/polySurface11/transform35
+        weight: 1
+      - path: pSphere2/polySurface12
+        weight: 1
+      - path: pSphere2/polySurface12/transform34
+        weight: 1
+      - path: pSphere2/polySurface13
+        weight: 1
+      - path: pSphere2/polySurface13/transform33
+        weight: 1
+      - path: pSphere2/polySurface14
+        weight: 1
+      - path: pSphere2/polySurface14/transform32
+        weight: 1
+      - path: pSphere2/polySurface15
+        weight: 1
+      - path: pSphere2/polySurface15/transform31
+        weight: 1
+      - path: pSphere2/polySurface16
+        weight: 1
+      - path: pSphere2/polySurface16/transform30
+        weight: 1
+      - path: pSphere2/polySurface17
+        weight: 1
+      - path: pSphere2/polySurface17/transform29
+        weight: 1
+      - path: pSphere2/polySurface18
+        weight: 1
+      - path: pSphere2/polySurface18/transform28
+        weight: 1
+      - path: pSphere2/polySurface19
+        weight: 1
+      - path: pSphere2/polySurface19/transform27
+        weight: 1
+      - path: pSphere2/polySurface20
+        weight: 1
+      - path: pSphere2/polySurface20/transform26
+        weight: 1
+      - path: pSphere2/polySurface21
+        weight: 1
+      - path: pSphere2/polySurface21/transform25
+        weight: 1
+      - path: pSphere2/transform24
+        weight: 1
+      - path: RootBone
+        weight: 1
+      - path: RootBone/HipBone
+        weight: 1
+      - path: RootBone/HipBone/L_LegBone
+        weight: 1
+      - path: RootBone/HipBone/L_LegBone/L_KneeBone
+        weight: 1
+      - path: RootBone/HipBone/L_LegBone/L_KneeBone/L_FootBone
+        weight: 1
+      - path: RootBone/HipBone/L_LegBone/L_KneeBone/L_FootBone/L_ToeBone
+        weight: 1
+      - path: RootBone/HipBone/R_LegBone
+        weight: 1
+      - path: RootBone/HipBone/R_LegBone/R_KneeBone
+        weight: 1
+      - path: RootBone/HipBone/R_LegBone/R_KneeBone/R_FootBone
+        weight: 1
+      - path: RootBone/HipBone/R_LegBone/R_KneeBone/R_FootBone/R_ToeBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Bag1
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Bag1/Bag2
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Bag1/Bag2/Bag3
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Bag1/Bag2/Bag3/Bag4
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Bag1/Bag2/Bag3/Bag5
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/L_ArmBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/L_ArmBone/L_ShoulderBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/L_ArmBone/L_ShoulderBone/L_ElbowBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/L_ArmBone/L_ShoulderBone/L_ElbowBone/L_WristBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/L_ArmBone/L_ShoulderBone/L_ElbowBone/L_WristBone/L_HandBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/NeckBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/NeckBone/HeadBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/NeckBone/HeadBone/SkullBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/R_ArmBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/R_ArmBone/R_ShoulderBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/R_ArmBone/R_ShoulderBone/R_ElbowBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/R_ArmBone/R_ShoulderBone/R_ElbowBone/R_WristBone
+        weight: 1
+      - path: RootBone/HipBone/Spine3Bone/Spine2Bone/Spine1Bone/R_ArmBone/R_ShoulderBone/R_ElbowBone/R_WristBone/R_HandBone
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
