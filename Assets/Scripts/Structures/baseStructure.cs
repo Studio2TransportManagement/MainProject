@@ -8,9 +8,6 @@ public class BaseStructure : GameStructure {
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
 
-	public TrainStation tsLeftStation;
-	public TrainStation tsRightStation;
-
 	public bool bAlert;
 
 	public Window[] Windows {
@@ -20,12 +17,11 @@ public class BaseStructure : GameStructure {
 
 	void Awake() {
 		windows = GetComponentsInChildren<Window>();
-		StaticStructures.bases.Add(this);
+		staticStructures.bases.Add(this);
 
 	}
 
 	void Start () {
-		sBaseName = this.gameObject.name;
 		PanelOpen = false;
 		UpgradeWindows();
 	}
