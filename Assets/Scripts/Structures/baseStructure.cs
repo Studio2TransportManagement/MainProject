@@ -8,6 +8,9 @@ public class BaseStructure : GameStructure {
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
 
+	public GameObject goLeftStation;
+	public GameObject goRightStation;
+
 	public bool bAlert;
 
 	public Window[] Windows {
@@ -17,7 +20,7 @@ public class BaseStructure : GameStructure {
 
 	void Awake() {
 		windows = GetComponentsInChildren<Window>();
-		staticStructures.bases.Add(this);
+		StaticStructures.bases.Add(this);
 
 	}
 

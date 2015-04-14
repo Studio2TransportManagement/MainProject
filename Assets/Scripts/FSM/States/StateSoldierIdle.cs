@@ -18,8 +18,8 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-//		gu.navAgent.speed = 1.0f;
-//		gu.navAgent.angularSpeed = 170.0f;
+		gu.navAgent.speed = 1.0f;
+		gu.navAgent.angularSpeed = 170.0f;
 	}
 	
 	public override void Run(PlayerUnit gu) {

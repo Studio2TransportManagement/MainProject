@@ -22,13 +22,17 @@ public class PlayerUnit : GameUnit {
 	public Color32 colDeselected;
 
 	public bool bManningWindow;
-		
+	public bool bInTransit;
+
 	private SpriteRenderer spriteRenderer;
+
+
 
 	// Use this for initialization
 	protected override void Start() {
 		base.Start();
 
+		bInTransit = false;
 		bUnselectable = false;
 		nameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
 		goHealthInstance = Instantiate(goHealthBar) as GameObject;

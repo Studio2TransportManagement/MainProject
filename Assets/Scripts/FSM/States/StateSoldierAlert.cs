@@ -17,14 +17,14 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 					gu.wMannedWindow.ManWindow(gu);
 					gu.bManningWindow = true;
 					gu.navAgent.destination = gu.wMannedWindow.tStandingPosition.position;
-					Debug.Log ("Manning Window");
+//					Debug.Log ("Manning Window");
 				}
 				else {
 					Debug.Log("No AvailableWindows");
 				}
 			}
 			else{
-				Debug.Log("<color = red>NULL</color>");
+				Debug.Log("<color = red>Base is NULL</color>");
 			}
 		}
 	}
