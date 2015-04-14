@@ -32,7 +32,6 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	[Tooltip("The time in seconds it takes for a unit to reload (in future; a clip)")]
 	public int fReloadSpeed;
 
-	[Tooltip("The base we are in, if any, or the base we are trying to reach")]
 	public BaseStructure goTargetBase { get; set; }
 
 	public Window wMannedWindow { get; set; }
