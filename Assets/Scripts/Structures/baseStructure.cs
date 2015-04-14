@@ -20,7 +20,7 @@ public class BaseStructure : GameStructure {
 
 	void Awake() {
 		windows = GetComponentsInChildren<Window>();
-		staticStructures.bases.Add(this);
+		StaticStructures.bases.Add(this);
 
 	}
 

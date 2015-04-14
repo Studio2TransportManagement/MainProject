@@ -21,6 +21,7 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 	
 	public override void Begin(PlayerUnit gu) {
 		Debug.Log("StateSoldierMoveToBase begin");
+		gu.bInTransit = true;
 	}
 	
 	public override void Run(PlayerUnit gu) {
@@ -40,6 +41,7 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		Debug.Log("StateSoldierMoveToBase end");
+		gu.bInTransit = false;
 	}
 
 	public void FindClosestTrainStation(PlayerUnit gu) {

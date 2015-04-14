@@ -2,22 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Train : GameUnit {
+public class Train : MonoBehaviour {
 
 	private List<GameUnit> l_guExpected;
 	private List<GameUnit> l_guPassengers;
 
 	// Use this for initialization
-	protected override void Start () {
-		bUnselectable = false;
-		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
-
+	void Start () {
 		l_guExpected = new List<GameUnit>();
 		l_guPassengers = new List<GameUnit>();
 	}
 
 	// Update is called once per frame
-	protected override void Update () 
+	void Update () 
 	{
 		
 	}
