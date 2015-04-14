@@ -18,16 +18,16 @@ public class dragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	#region IBeginDragHandler implementation
 	public void OnBeginDrag (PointerEventData eventData)
 	{
-		startSize.x = 0.8109928f;
-		startSize.y = 0.7791893f;
-		startSize.z = 0.9934663f;
+		startSize.x = 0.6618425f;
+		startSize.y = 0.6358879f;
+		startSize.z = 0.8107571f;
 		dragSize.x = 0.2585708f;
 		dragSize.y = 0.2484309f;
 		dragSize.z = 0.3167494f;
 		itemBeingDragged = gameObject;
 		startPosition = transform.position;
 		itemBeingDragged.transform.localScale = dragSize;
-		AudioSource.PlayClipAtPoint (audioManager.ACGrabRecruit, Camera.main.transform.position);
+		AudioSource.PlayClipAtPoint (audioManager.acGrabRecruit, Camera.main.transform.position);
 	}
 	#endregion
 

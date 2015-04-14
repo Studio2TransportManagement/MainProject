@@ -16,6 +16,7 @@ public class stats : MonoBehaviour {
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
+	public GameObject goInstructionsPanel;
 
 	void Awake ()
 	{
@@ -62,4 +63,10 @@ public class stats : MonoBehaviour {
 		tSlainMessage.color = colBloodRed;
 		bIsMessageFading = true;
 	}
+
+	public void ContinueButton ()
+	{
+		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+	}
+
 }

@@ -7,6 +7,8 @@ public class BaseStructure : GameStructure {
 	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
+	public TrainStation tsLeftStation;
+	public TrainStation tsRightStation;
 
 	public bool bAlert;
 
@@ -17,7 +19,7 @@ public class BaseStructure : GameStructure {
 
 	void Awake() {
 		windows = GetComponentsInChildren<Window>();
-		staticStructures.bases.Add(this);
+		StaticStructures.bases.Add(this);
 
 	}
 

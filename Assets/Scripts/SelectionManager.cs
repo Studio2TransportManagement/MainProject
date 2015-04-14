@@ -43,7 +43,7 @@ public class SelectionManager : MonoBehaviour {
 							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
 							displayNames.AddText(guCurrentUnit.sUnitName);
 							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
-							AudioSource.PlayClipAtPoint(audioManager.ACSelectUnit, Camera.main.transform.position);
+							AudioSource.PlayClipAtPoint(audioManager.acSelectUnit, Camera.main.transform.position);
 						}
 					}
 					else {
@@ -51,7 +51,7 @@ public class SelectionManager : MonoBehaviour {
 						if (guCurrentUnit != null) {
 							l_goCurrentSelection.Remove(goCurrentObject);
 							displayNames.RemoveText(guCurrentUnit.sUnitName);
-							AudioSource.PlayClipAtPoint(audioManager.ACDeselectUnit, Camera.main.transform.position);
+							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
 						}
 			         }
 				}
@@ -65,7 +65,7 @@ public class SelectionManager : MonoBehaviour {
 					else {
 						Debug.Log("Nothing interesting here..");
 						if(l_goCurrentSelection.Count > 0) {
-							AudioSource.PlayClipAtPoint(audioManager.ACDeselectUnit, Camera.main.transform.position);
+							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
 						}
 					}
 					ClearSelection();

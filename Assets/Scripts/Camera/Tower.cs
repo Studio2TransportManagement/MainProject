@@ -35,11 +35,11 @@ public class Tower : MonoBehaviour {
 		canMainCanvas.GetComponent<Canvas>().enabled = !canMainCanvas.GetComponent<Canvas>().enabled;
 		if(cTowerCamera.gameObject.activeInHierarchy)
 		{
-			AudioSource.PlayClipAtPoint (audioManager.ACEnterTower, Camera.main.transform.position);
+			AudioSource.PlayClipAtPoint (audioManager.acEnterTower, Camera.main.transform.position);
 		}
 		else
 		{
-			AudioSource.PlayClipAtPoint (audioManager.ACLeaveTower, Camera.main.transform.position);
+			AudioSource.PlayClipAtPoint (audioManager.acLeaveTower, Camera.main.transform.position);
 		}
 		Screen.lockCursor = !Screen.lockCursor;
 	}
