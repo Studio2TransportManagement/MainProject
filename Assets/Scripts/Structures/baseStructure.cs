@@ -8,8 +8,8 @@ public class BaseStructure : GameStructure {
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
 
-	public GameObject goLeftStation;
-	public GameObject goRightStation;
+	public TrainStation tsLeftStation;
+	public TrainStation tsRightStation;
 
 	public bool bAlert;
 
@@ -25,6 +25,7 @@ public class BaseStructure : GameStructure {
 	}
 
 	void Start () {
+		sBaseName = this.gameObject.name;
 		PanelOpen = false;
 		UpgradeWindows();
 	}

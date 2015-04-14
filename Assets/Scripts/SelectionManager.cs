@@ -64,7 +64,7 @@ public class SelectionManager : MonoBehaviour {
 					}
 					else {
 						Debug.Log("Nothing interesting here..");
-						if(l_goCurrentSelection[0]) {
+						if(l_goCurrentSelection.Count > 0) {
 							AudioSource.PlayClipAtPoint(audioManager.ACDeselectUnit, Camera.main.transform.position);
 						}
 					}
@@ -83,7 +83,7 @@ public class SelectionManager : MonoBehaviour {
 						//This needs to be where we get added to the train station
 						if (hit.transform.gameObject.tag == "train") {
 							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
-							hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<PlayerUnit>());
+							//hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<PlayerUnit>());
 						}
 						else {
 							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);

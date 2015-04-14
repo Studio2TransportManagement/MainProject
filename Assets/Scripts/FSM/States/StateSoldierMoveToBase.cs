@@ -7,7 +7,7 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 		set;
 	}
 
-	public GameObject goTargetStation;
+	public TrainStation goTargetStation;
 	
 	
 	public StateSoldierMoveToBase() {
@@ -27,7 +27,8 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 	public override void Run(PlayerUnit gu) {
 		if (bsBaseToReach != null) {
 			if (gu.goTargetBase != bsBaseToReach) {
-				FindClosestTrainStation(gu);
+				if(FindClosestTrainStation(gu)!= null)
+				gu.navAgent.SetDestination(FindClosestTrainStation(gu).gameObject.transform.position);
 			}
 			else {
 				//Success! We got there!
@@ -44,35 +45,37 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 		gu.bInTransit = false;
 	}
 
-	public void FindClosestTrainStation(PlayerUnit gu) {
+	public TrainStation FindClosestTrainStation(PlayerUnit gu) {
 		//Alpha to others
 		if (gu.goTargetBase.sBaseName == "Base Alpha") {
 			if (bsBaseToReach.sBaseName == "Base Bravo") {
-				goTargetStation = gu.goTargetBase.goRightStation;
+				return gu.goTargetBase.tsRightStation;
 			}
 			if (bsBaseToReach.sBaseName == "Base Charlie") {
-				goTargetStation = gu.goTargetBase.goLeftStation;
+				return gu.goTargetBase.tsLeftStation;
 			}
 		}
 
 		//Bravo to others
 		if (gu.goTargetBase.sBaseName == "Base Bravo") {
 			if (bsBaseToReach.sBaseName == "Base Alpha") {
-				goTargetStation = gu.goTargetBase.goRightStation;
+				return gu.goTargetBase.tsRightStation;
 			}
 			if (bsBaseToReach.sBaseName == "Base Charlie") {
-				goTargetStation = gu.goTargetBase.goLeftStation;
+				return gu.goTargetBase.tsLeftStation;
 			}
 		}
 
 		//Charlie to others
 		if (gu.goTargetBase.sBaseName == "Base Charlie") {
 			if (bsBaseToReach.sBaseName == "Base Alpha") {
-				goTargetStation = gu.goTargetBase.goLeftStation;
+				return gu.goTargetBase.tsLeftStation;
 			}
 			if (bsBaseToReach.sBaseName == "Base Bravo") {
-				goTargetStation = gu.goTargetBase.goRightStation;
+				return gu.goTargetBase.tsRightStation;
 			}
 		}
+Debug.Log ("ERROR: Not Valid Station");
+		return null;
 	}
 }
