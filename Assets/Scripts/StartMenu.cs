@@ -3,14 +3,19 @@ using System.Collections;
 
 public class StartMenu : MonoBehaviour {
 
+	public GameObject goMainPanel;
+	public GameObject goInstructionsPanel;
+
 	public void Play ()
 	{
+//		goInstructionsPanel.SetActive (true);
+//		goMainPanel.SetActive (false);
 		Application.LoadLevel (1);
 	}
 
-	public void Instructions ()
+	public void StartGame ()
 	{
-
+		Application.LoadLevel (1);
 	}
 
 	public void Exit ()

@@ -3,23 +3,23 @@ using System.Collections;
 
 public class UIAudioManager : MonoBehaviour {
 
-	public AudioClip ACOpenUpgrade;
-	public AudioClip ACCloseUpgrade;
-	public AudioClip ACChangingBase;
-	public AudioClip ACSwitchingMenus;
-	public AudioClip ACOpenRecruitment;
-	public AudioClip ACCloseRecruitment;
-	public AudioClip ACUpgradeButton;
-	public AudioClip ACGrabRecruit;
-	public AudioClip ACStartTraining;
-	public AudioClip ACEndTraining;
-	public AudioClip ACEnterTower;
-	public AudioClip ACLeaveTower;
-	public AudioClip ACSelectUnit;
-	public AudioClip ACDeselectUnit;
+	public AudioClip acOpenUpgrade;
+	public AudioClip acCloseUpgrade;
+	public AudioClip acChangingBase;
+	public AudioClip acSwitchingMenus;
+	public AudioClip acOpenRecruitment;
+	public AudioClip acCloseRecruitment;
+	public AudioClip acUpgradeButton;
+	public AudioClip acGrabRecruit;
+	public AudioClip acStartTraining;
+	public AudioClip acEndTraining;
+	public AudioClip acEnterTower;
+	public AudioClip acLeaveTower;
+	public AudioClip acSelectUnit;
+	public AudioClip acDeselectUnit;
 
 	public void UpgradeButton ()
 	{
-		AudioSource.PlayClipAtPoint( ACUpgradeButton, Camera.main.transform.position);
+		AudioSource.PlayClipAtPoint(acUpgradeButton, Camera.main.transform.position);
 	}
 }

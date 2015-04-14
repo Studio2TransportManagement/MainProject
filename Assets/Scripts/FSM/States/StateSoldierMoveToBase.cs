@@ -39,9 +39,9 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 		//
 	}
 
-	public GameObject FindClosestTrainStation(PlayerUnit gu) {
-		if (gu.goTargetBase.sBaseName == "Base Alpha") {
-			//
-		}
-	}
+//	public GameObject FindClosestTrainStation(PlayerUnit gu) {
+//		if (gu.goTargetBase.sBaseName == "Base Alpha") {
+//			//
+//		}
+//	}
 }
