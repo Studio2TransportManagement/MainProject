@@ -27,6 +27,10 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 					else {
 						Debug.Log("<color=red>No AvailableWindows</color>");
 					}
+
+					if (!gu.goTargetBase.bAlert) {
+						gu.ChangeState(new StateSoldierIdle());
+					}
 				}
 				else{
 					Debug.Log("<color = red>Base is NULL</color>");

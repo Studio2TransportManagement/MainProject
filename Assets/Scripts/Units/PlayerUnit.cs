@@ -123,6 +123,10 @@ public class PlayerUnit : GameUnit {
 		FSM.ReturnToLastState ();
 	}
 
+	public string GetStateName() {
+		return this.FSM.GetStateName();
+	}
+
 	protected BaseGameStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);
@@ -133,5 +137,13 @@ public class PlayerUnit : GameUnit {
 		}
 		Debug.Log ("Unit not detecting base");
 		return null;
+	}
+
+	public bool IsFSMInitialised() {
+		if (this.FSM != null) {
+			return true;
+		}
+
+		return false;
 	}
 }

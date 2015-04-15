@@ -55,4 +55,8 @@ public class FSM_Core<T> {
 			ChangeState(statePrevious);
 		}
 	}
+
+	public string GetStateName() {
+		return this.stateCurrent.GetType().ToString();
+	}
 }

@@ -1,15 +1,27 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class ShowSoldierState : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Vector3 vOffset;
+	public string sStateIcon = "GizmoIcon_StateSoldierIdle.png";
+	public PlayerUnit puUnit;
+
+	void OnDrawGizmos() {
+		if (puUnit == null) {
+			puUnit = this.GetComponent<PlayerUnit>();
+		}
+		else {
+			Gizmos.DrawIcon(transform.position + vOffset, sStateIcon, false);
+
+			Handles.Label(transform.position, puUnit.fHealthCurrent.ToString());
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update() {
+		if (puUnit != null && puUnit.IsFSMInitialised()) {
+			sStateIcon = "GizmoIcon_" + puUnit.GetStateName() + ".png";
+		}
 	}
 }
