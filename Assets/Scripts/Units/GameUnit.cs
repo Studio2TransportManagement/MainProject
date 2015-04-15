@@ -20,7 +20,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fRange;
 	public float fFireRate;
 	public float fDamage;
-
+	
+	public Animator aAnimator;
 
 	public NavMeshAgent navAgent;
 
