@@ -10,7 +10,7 @@ public class PlayerResources : MonoBehaviour {
 	private float fCurrentRecruits = 10f;
 
 
-	void start()
+	void Start()
 	{
 		fCurrentMoney = fStartingCash;
 		fCurrentRecruits = fStartingRecruits;

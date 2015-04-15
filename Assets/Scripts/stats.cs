@@ -6,6 +6,7 @@ public class stats : MonoBehaviour {
 
 	private PlayerResources pPlayerResources;
 	public bool bIsMessageFading = false;
+	public bool bPaused = false;
 	public Text tRecruitAmount;
 	public Text tCurrency;
 	public SelectionManager SelectionManager;
@@ -17,6 +18,7 @@ public class stats : MonoBehaviour {
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
 	public GameObject goInstructionsPanel;
+	public GameObject goPausePanel;
 
 	void Awake ()
 	{
@@ -42,6 +44,22 @@ public class stats : MonoBehaviour {
 		else if (Input.GetMouseButtonUp (0))
 		{
 			Cursor.SetCursor (texCursorTexture, hotSpot, cursorMode);
+		}
+
+		if (Input.GetKeyDown (KeyCode.P))
+		{
+			if(bPaused)
+			{
+				Time.timeScale = 1;
+				goPausePanel.SetActive (false);
+				bPaused = false;
+			}
+			else
+			{
+				Time.timeScale = 0;
+				goPausePanel.SetActive (true);
+				bPaused = true;
+			}
 		}
 
 		if(bIsMessageFading)

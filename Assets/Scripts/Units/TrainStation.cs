@@ -61,7 +61,7 @@ public class TrainStation : MonoBehaviour {
 							
 					}
 					l_goWaiting.Clear();
-				trTrain.transform.position = tStartPoint.position;
+
 				}
 		}
 		else if (fLerpTimer == 5.0f)
