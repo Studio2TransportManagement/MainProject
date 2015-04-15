@@ -119,6 +119,10 @@ public class PlayerUnit : GameUnit {
 		FSM.ChangeState(gu);
 	}
 
+	public void ReturnToLastState(){
+		FSM.ReturnToLastState ();
+	}
+
 	protected BaseStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);

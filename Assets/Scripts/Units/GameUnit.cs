@@ -16,7 +16,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 
     public float fHealthMax;
-	protected float fHealthCurrent;
+	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
 	public float fDamage;
@@ -36,7 +36,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	public Window wMannedWindow { get; set; }
 
-	public GameUnit guTargetUnit { get; set; }
+	public GameUnit guTargetUnit;
 
 	// Use this for initialization
 	protected virtual void Start() {

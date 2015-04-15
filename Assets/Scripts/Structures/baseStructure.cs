@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BaseStructure : GameStructure {
 
-	Window[] windows;
+	private Window[] windows;
 	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
 	public TrainStation tsLeftStation;
 	public TrainStation tsRightStation;
+	public List<EnemyUnit> l_euAttackers;
 
 	public bool bAlert;
 
@@ -24,6 +26,7 @@ public class BaseStructure : GameStructure {
 	}
 
 	void Start () {
+		l_euAttackers = new List<EnemyUnit> ();
 		PanelOpen = false;
 		UpgradeWindows();
 	}
@@ -33,6 +36,9 @@ public class BaseStructure : GameStructure {
 		base.Update();
 		if(bAlert)
 		{
+			if(l_euAttackers.Count <= 0){
+				bAlert =false;
+			}
 			goAlertImage.gameObject.SetActive(true);
 		}
 
@@ -115,6 +121,14 @@ public class BaseStructure : GameStructure {
 		int j = iWindowLevel + 2;
 		for (int i = 0; i < j; i++) {
 			windows[i].ActivateWindow();
+		}
+	}
+
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.tag == "enemy-unit") {
+			if (!l_euAttackers.Contains (other.GetComponent<EnemyUnit>())) {
+				l_euAttackers.Add (other.GetComponent<EnemyUnit> ());	
+			}
 		}
 	}
 

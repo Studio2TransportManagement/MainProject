@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 3cab040c5fe6aef459c00f19d0d8b8cc
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Recruit: {instanceID: 0}
+  - DraggableRecruit: {instanceID: 0}
+  - characterName: {instanceID: 0}
+  - firstNames: {fileID: 4900000, guid: d3bc681cd1afc634d8bfa11539699597, type: 3}
+  - lastNames: {fileID: 4900000, guid: c43674724931352448fbf4898adaf548, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -12,13 +12,15 @@ public class characterRandomiser : MonoBehaviour {
 	public GameObject Recruit;
 	public GameObject DraggableRecruit;
 	public GameObject characterName;
+	public TextAsset firstNames;
+	public TextAsset lastNames;
 
 	public void Start ()
 	{
 		try 
 		{
-			characterFirstNames = File.ReadAllLines("Assets/Scripts/SoldierFirstNames.txt");
-			characterLastNames = File.ReadAllLines("Assets/Scripts/SoldierLastNames.txt");
+			characterFirstNames = firstNames.text.Split('\n');
+			characterLastNames = lastNames.text.Split('\n');
 		}
 		catch(IOException e)
 		{

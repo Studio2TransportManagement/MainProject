@@ -51,6 +51,7 @@ public class EnemyUnit : GameUnit {
 		if(wMannedWindow != null){
 			wMannedWindow.RemoveTarget();
 		}
+		this.goTargetBase.l_euAttackers.Remove (this);
 		Destroy(this.gameObject);
 	}
 

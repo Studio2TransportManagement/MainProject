@@ -1,35 +1,45 @@
-﻿//using UnityEngine;
-//using System.Collections;
-//
-//public class StateSoldierFiring : FSM_State{
-//
-//	public StateSoldierIdle(float wanderRate, float wanderDistance) {
-//		fWanderRate = wanderRate;
-//		fWanderDistance = wanderDistance;
-//	}
-//	
-//	public override void Begin(PlayerUnit gu) {
-//		gu.navAgent.speed = 1.0f;
-//		gu.navAgent.angularSpeed = 170.0f;
-//	}
-//	
-//	public override void Run(PlayerUnit gu) {
-//		vDir = gu.transform.forward + Random.insideUnitSphere * fWanderRate;
-//		vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
-//		gu.navAgent.destination = vTarget;
-//		
-//		if (gu.goTargetBase != null) {
-//			if(gu.goTargetBase.bAlert) {
-//				gu.ChangeState(new StateSoldierAlert());
-//			}
-//		}
-//		else {
-//			Debug.Log("StateSoldierIdle: goTargetBase was null!");
-//		}
-//		
-//	}
-//	
-//	public override void End(PlayerUnit gu) {
-//		Debug.Log("StateSoldierIdle end");
-//	}
-//}
+﻿using UnityEngine;
+using System.Collections;
+
+public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
+
+	private float fShootTimer;
+
+	public StateSoldierFiring() {
+	}
+	
+	public override void Begin(PlayerUnit gu) {
+		Debug.Log("StateSoldierFiring begin");
+
+	}
+	
+	public override void Run(PlayerUnit gu) {
+		if (gu.goTargetBase.l_euAttackers.Count > 0) {
+				gu.guTargetUnit = gu.goTargetBase.l_euAttackers [0];
+		} else {
+			Debug.Log("BALLS");
+		}
+
+		if(gu.iCurrentAmmo > 0){
+			if(fShootTimer != 0f) {
+				fShootTimer -= Time.fixedDeltaTime;
+			}
+			
+			if(fShootTimer <= 0f) {
+				gu.guTargetUnit.DamageUnit(gu.fDamage);
+				gu.iCurrentAmmo--;
+				fShootTimer = gu.fFireRate;
+			}
+		}
+
+		if(gu.iCurrentAmmo <= 0)
+		{
+			gu.ChangeState(new StateSoldierReload());
+		}
+		
+	}
+	
+	public override void End(PlayerUnit gu) {
+		Debug.Log("StateSoldierFiring end");
+	}
+}
