@@ -6,7 +6,7 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	private Vector3 vDir;
 	private float fWanderRate = 0.5f;
 	private float fWanderDistance = 20.0f;
-	private NavMeshHit irrelevant;
+	private NavMeshHit navhitIrrelevant;
 
 
 	public StateSoldierIdle() {
@@ -21,15 +21,17 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	public override void Begin(PlayerUnit gu) {
 		gu.navAgent.speed = 1.0f;
 		gu.navAgent.angularSpeed = 170.0f;
-		irrelevant = new NavMeshHit();
+		navhitIrrelevant = new NavMeshHit();
 	}
 	
 	public override void Run(PlayerUnit gu) {
 	
-	do {
-		vDir = gu.transform.forward + new Vector3(Random.insideUnitCircle.x, gu.transform.position.y, Random.insideUnitCircle.y) * fWanderRate;
-		vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
-		}while(NavMesh.SamplePosition(vTarget, out irrelevant, Mathf.Infinity, NavMesh.GetNavMeshLayerFromName("Floorges")));
+		do {
+			vDir = gu.transform.forward + new Vector3(Random.insideUnitCircle.x, gu.transform.position.y, Random.insideUnitCircle.y) * fWanderRate;
+			vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
+		}
+		while(NavMesh.SamplePosition(vTarget, out navhitIrrelevant, Mathf.Infinity, NavMesh.GetNavMeshLayerFromName("Floorges")));
+
 		gu.navAgent.SetDestination(vTarget);
 
 		if (gu.goTargetBase != null) {

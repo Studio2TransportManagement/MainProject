@@ -2,7 +2,7 @@
 
 public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 	
-	public BaseStructure bsBaseToReach {
+	public BaseGameStructure bsBaseToReach {
 		get;
 		set;
 	}
@@ -15,7 +15,7 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 		goTargetStation = null;
 	}
 	
-	public StateSoldierMoveToBase(BaseStructure goalbase) {
+	public StateSoldierMoveToBase(BaseGameStructure goalbase) {
 		bsBaseToReach = goalbase;
 	}
 	

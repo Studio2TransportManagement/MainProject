@@ -11,7 +11,7 @@ public class ChildMenuController : GUI_Base {
 	static bool bIsRecruitmentPanelOpen = false;
 	static bool bIsUpgradePanelOpen = false;
 	static bool PanelMoving;
-	static BaseStructure currentOpenBase;
+	static BaseGameStructure currentOpenBase;
 	public float fTimer = 0.35f;
 
 	//Init
@@ -37,7 +37,7 @@ public class ChildMenuController : GUI_Base {
 		}
 	}
 
-	public void OpenCloseUpgradeMenu(BaseStructure currentBase)
+	public void OpenCloseUpgradeMenu(BaseGameStructure currentBase)
 	{
 		if(!PanelMoving)
 		{

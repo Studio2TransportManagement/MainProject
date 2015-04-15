@@ -123,12 +123,12 @@ public class PlayerUnit : GameUnit {
 		FSM.ReturnToLastState ();
 	}
 
-	protected BaseStructure GetCurrentBase() {
+	protected BaseGameStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);
 		if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("building"))) {
 			if (hit.transform.gameObject.tag == "building") {
-				return this.goTargetBase = hit.transform.gameObject.GetComponent<BaseStructure>();
+				return this.goTargetBase = hit.transform.gameObject.GetComponent<BaseGameStructure>();
 			}
 		}
 		Debug.Log ("Unit not detecting base");

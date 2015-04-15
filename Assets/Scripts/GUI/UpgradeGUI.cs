@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpgradeGUI : MonoBehaviour {
 
-	public BaseStructure upgradingBase;
+	public BaseGameStructure upgradingBase;
 
 	private PlayerResources pPlayerResources;
 

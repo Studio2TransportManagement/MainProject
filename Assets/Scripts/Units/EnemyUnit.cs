@@ -65,18 +65,18 @@ public class EnemyUnit : GameUnit {
 		FSM.ReturnToLastState();
 	}
 
-	BaseStructure GetClosestBase()
+	BaseGameStructure GetClosestBase()
 	{
-		BaseStructure returnStructure = StaticStructures.bases[0];
+		BaseGameStructure returnStructure = StaticGameStructures.bases[0];
 				
-		float tempdistance = Vector3.Distance(this.transform.position, StaticStructures.bases[0].transform.position);
+		float tempdistance = Vector3.Distance(this.transform.position, StaticGameStructures.bases[0].transform.position);
 
-		for(int i = 0; i < StaticStructures.bases.Count; i++)
+		for(int i = 0; i < StaticGameStructures.bases.Count; i++)
 		{
-			if( Vector3.Distance(this.transform.position, StaticStructures.bases[i].transform.position) < tempdistance)
+			if( Vector3.Distance(this.transform.position, StaticGameStructures.bases[i].transform.position) < tempdistance)
 			{
-				tempdistance = Vector3.Distance(this.transform.position, StaticStructures.bases[i].transform.position);
-				returnStructure = StaticStructures.bases[i];
+				tempdistance = Vector3.Distance(this.transform.position, StaticGameStructures.bases[i].transform.position);
+				returnStructure = StaticGameStructures.bases[i];
 			}
 
 		}

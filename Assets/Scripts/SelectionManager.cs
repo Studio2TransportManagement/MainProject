@@ -58,7 +58,7 @@ public class SelectionManager : MonoBehaviour {
 				else {
 					if (hit.transform.gameObject.tag == "building" && l_goCurrentSelection.Count > 0) {
 						foreach (GameObject go in l_goCurrentSelection) {
-							BaseStructure bs = hit.transform.gameObject.GetComponent<BaseStructure>();
+							BaseGameStructure bs = hit.transform.gameObject.GetComponent<BaseGameStructure>();
 							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
 						}
 					}
