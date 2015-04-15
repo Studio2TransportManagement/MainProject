@@ -22,7 +22,7 @@ public sealed class StateEnemyMoveToBase : FSM_State<EnemyUnit>{
 	}
 	
 	public override void End(EnemyUnit eu) {
-		eu.navAgent.SetDestination(eu.transform.position);
+		eu.navAgent.Stop();
 //		Debug.Log("StateSoldierIdle end");
 	}
 }
