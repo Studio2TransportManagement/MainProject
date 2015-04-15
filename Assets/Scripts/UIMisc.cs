@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class stats : MonoBehaviour {
+public class UIMisc : MonoBehaviour {
 
 	private PlayerResources pPlayerResources;
 	public bool bIsMessageFading = false;
@@ -11,8 +11,8 @@ public class stats : MonoBehaviour {
 	public Text tCurrency;
 	public SelectionManager SelectionManager;
 	public Text tSlainMessage;
-	public Texture2D texCursorTexture;
-	public Texture2D texCursorTexture2;
+	public Texture2D texCursorDefault;
+	public Texture2D texCursorOnClick;
 	public CursorMode cursorMode = CursorMode.Auto;
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
@@ -27,7 +27,7 @@ public class stats : MonoBehaviour {
 
 	void Start ()
 	{
-		Cursor.SetCursor (texCursorTexture, hotSpot, cursorMode);
+		Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
 	}
 
 	void Update () 
@@ -39,11 +39,11 @@ public class stats : MonoBehaviour {
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))
 		{
-			Cursor.SetCursor (texCursorTexture2, hotSpot, cursorMode);
+			Cursor.SetCursor (texCursorOnClick, hotSpot, cursorMode);
 		} 
 		else if (Input.GetMouseButtonUp (0))
 		{
-			Cursor.SetCursor (texCursorTexture, hotSpot, cursorMode);
+			Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
 		}
 
 		if (Input.GetKeyDown (KeyCode.P))

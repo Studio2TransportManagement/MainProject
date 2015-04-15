@@ -94,7 +94,7 @@ public class PlayerUnit : GameUnit {
 		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
 		//if(deathAnimationHasFinished)
 		//Do following functions.
-		Camera.main.GetComponent<stats>().tSlainMessagePrintToUI(sUnitName);
+		Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
 		Destroy(goHealthInstance);
 		Destroy(gameObject);
 	}
