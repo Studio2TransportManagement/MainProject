@@ -48,11 +48,11 @@ public class SelectionManager : MonoBehaviour {
 					}
 					else {
 						//Unselect if clicked again
-						if (guCurrentUnit != null) {
-							l_goCurrentSelection.Remove(goCurrentObject);
-							displayNames.RemoveText(guCurrentUnit.sUnitName);
-							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
-						}
+//						if (guCurrentUnit != null) {
+//							l_goCurrentSelection.Remove(goCurrentObject);
+//							displayNames.RemoveText(guCurrentUnit.sUnitName);
+//							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
+//						}
 			         }
 				}
 				else {
@@ -68,9 +68,14 @@ public class SelectionManager : MonoBehaviour {
 							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
 						}
 					}
-					ClearSelection();
+//					ClearSelection();
 				}
 			}
+		}
+		
+		if(Input.GetMouseButtonDown(1)&& l_goCurrentSelection.Count > 0){
+			AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
+			ClearSelection();		
 		}
 
 		//If we right click, issue an order

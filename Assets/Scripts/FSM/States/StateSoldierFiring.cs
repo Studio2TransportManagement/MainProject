@@ -6,21 +6,23 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	private float fShootTimer;
 
 	public StateSoldierFiring() {
+		//
 	}
 	
 	public override void Begin(PlayerUnit gu) {
 		Debug.Log("StateSoldierFiring begin");
-
 	}
 	
 	public override void Run(PlayerUnit gu) {
 		if (gu.goTargetBase.l_euAttackers.Count > 0) {
 				gu.guTargetUnit = gu.goTargetBase.l_euAttackers [0];
-		} else {
-			Debug.Log("BALLS");
+		} 
+		else {
+			//No attackers
+			gu.ChangeState(new StateSoldierIdle());
 		}
 
-		if(gu.iCurrentAmmo > 0){
+		if(gu.iCurrentAmmo > 0) {
 			if(fShootTimer != 0f) {
 				fShootTimer -= Time.fixedDeltaTime;
 			}
@@ -32,8 +34,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 			}
 		}
 
-		if(gu.iCurrentAmmo <= 0)
-		{
+		if(gu.iCurrentAmmo <= 0) {
 			gu.ChangeState(new StateSoldierReload());
 		}
 		
