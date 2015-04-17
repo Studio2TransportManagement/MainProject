@@ -19,6 +19,8 @@ public class TrainStation : MonoBehaviour {
 	public float fCountdown = 5.0f;
 	public int sCapacity = 4;
 	public bool bTravelling = false;
+
+	public BaseGameStructure bsDestinationBase;
 	
 	// Use this for initialization
 	void Start() {
@@ -64,21 +66,27 @@ public class TrainStation : MonoBehaviour {
 
 				}
 		}
-		else if (fLerpTimer == 5.0f)
-		{
-		fLerpTimer = 0.0f;
+		else if (fLerpTimer == 5.0f) {
+			fLerpTimer = 0.0f;
 		}
 	}
 
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "player-unit" && other.gameObject.GetComponent<PlayerUnit>().bInTransit == true) {
-			Debug.Log ("Did collide");
+			//Debug.Log ("Did collide");
 			l_goWaiting.Add(other.gameObject);
 			other.gameObject.SetActive (false);
 		}
-		else{
-			Debug.Log ("Didn't Collide");
+		else {
+			//Debug.Log ("Didn't Collide");
 		}
+	}
+
+	public BaseGameStructure GetDestinationBase() {
+		if (bsDestinationBase == null) {
+			Debug.Log("<color=red>TrainStation: bsDestinationBase was NULL!</color>");
+		}
+		return bsDestinationBase;
 	}
 
 //	void OnCollisionEnter(Collision other) {

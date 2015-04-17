@@ -65,7 +65,7 @@ public class UpgradeGUI : MonoBehaviour {
 
 			tCurrency.text = "$ " + pPlayerResources.GetMoney() + "";
 			tBaseHealth.fillAmount = upgradingBase.fHealthCurrent / upgradingBase.fHealthMax;
-			tBaseHealthValue.text = "" + upgradingBase.iHealthCurrent + "/" + upgradingBase.fHealthMax + "";
+			tBaseHealthValue.text = "" + upgradingBase.fHealthCurrent + "/" + upgradingBase.fHealthMax + "";
 
 			if(upgradingBase.iIntegrityLevel == 1)
 			{

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class BaseGameStructure : GameStructure {
 
-	private Window[] windows;
+	public List<Window> l_windows;
 	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
 	public GameObject goAlertImage;
@@ -14,13 +14,9 @@ public class BaseGameStructure : GameStructure {
 
 	public bool bAlert;
 
-	public Window[] Windows {
-		get;
-		set;
-	}
-
 	void Awake() {
-		windows = GetComponentsInChildren<Window>();
+		l_windows = new List<Window>();
+		l_windows.AddRange(GetComponentsInChildren<Window>());
 		StaticGameStructures.bases.Add(this);
 
 	}
@@ -50,7 +46,7 @@ public class BaseGameStructure : GameStructure {
 
 	//Allows PlayerUnits to check the base for an available window before moving to man it (eg. if(CheckIfWindowAvailable){targetWindow = GetAvailableOpenWindow() })
 	public bool CheckIfWindowAvailable(){
-		foreach (Window window in windows) 
+		foreach (Window window in l_windows) 
 		{
 			if (window.bIsActive && !window.bIsManned) {
 				return true;
@@ -61,7 +57,7 @@ public class BaseGameStructure : GameStructure {
 
 	//Use after checking for open window, explained above, helps to avoid targeting a Null window
 	public Window GetAvailableOpenWindow() {
-		foreach (Window window in windows) {
+		foreach (Window window in l_windows) {
 			if (window.bIsActive && !window.bIsManned) {
 				return window;
 			}
@@ -72,7 +68,7 @@ public class BaseGameStructure : GameStructure {
 
 	//Same as for above, but for the enemies to determine manned windows, rather than unmanned
 	public bool CheckForTargetableWindow(){
-		foreach (Window window in windows) 
+		foreach (Window window in l_windows) 
 		{
 			if (window.CheckIfTargetable()) {
 				return true;
@@ -82,7 +78,7 @@ public class BaseGameStructure : GameStructure {
 	}
 
 	public Window TargetAvailableOpenWindow() {
-		foreach (Window window in windows) 
+		foreach (Window window in l_windows) 
 		{
 			if (window.bIsActive && window.bIsManned) {
 				return window;
@@ -110,6 +106,10 @@ public class BaseGameStructure : GameStructure {
 	public void UpgradeIntegrity() {
 		
 	}
+
+	public void UpgradeTrains() {
+		
+	}
 	
 	public void getThisBase() {
 		UpgradeUI.upgradingBase = this;
@@ -120,7 +120,7 @@ public class BaseGameStructure : GameStructure {
 		//Base windows plus upgrade level
 		int j = iWindowLevel + 2;
 		for (int i = 0; i < j; i++) {
-			windows[i].ActivateWindow();
+			l_windows[i].ActivateWindow();
 		}
 	}
 

@@ -62,6 +62,12 @@ public class SelectionManager : MonoBehaviour {
 							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
 						}
 					}
+					else if (hit.transform.gameObject.tag == "train-station" && l_goCurrentSelection.Count > 0) {
+						foreach (GameObject go in l_goCurrentSelection) {
+							BaseGameStructure bs = hit.transform.gameObject.GetComponent<TrainStation>().GetDestinationBase();
+							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
+						}
+					}
 					else {
 						Debug.Log("Nothing interesting here..");
 						if(l_goCurrentSelection.Count > 0) {
