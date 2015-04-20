@@ -47,9 +47,9 @@ public class PlayerUnit : GameUnit {
 	// Update is called once per frame
 	protected override void Update() {
 		base.Update();
-		if (FSM != null) {
-			FSM.Update();
-		}
+//		if (FSM != null) {
+//			FSM.Update();
+//		}
 		SelectionCircle();
 	}
 
