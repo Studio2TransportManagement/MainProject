@@ -18,6 +18,8 @@ public class UIAudioManager : MonoBehaviour {
 	public AudioClip acSelectUnit;
 	public AudioClip acDeselectUnit;
 	public AudioClip acThomasButton;
+	public AudioClip acPlayButton;
+	public AudioClip acExitButton;
 
 	public void UpgradeButton ()
 	{

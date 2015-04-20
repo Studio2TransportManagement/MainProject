@@ -28,6 +28,7 @@ public class UIMisc : MonoBehaviour {
 	void Start ()
 	{
 		Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	void Update () 
@@ -84,7 +85,7 @@ public class UIMisc : MonoBehaviour {
 
 	public void ContinueButton ()
 	{
-		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 }
