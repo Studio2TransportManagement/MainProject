@@ -58,7 +58,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	
 	protected virtual void Update() {
 
-		if (navAgent.transform.position != navAgent.destination)
+		if (navAgent.velocity != null)
 		{
 			aAnimator.SetBool("IsWalking", true);
 		}
