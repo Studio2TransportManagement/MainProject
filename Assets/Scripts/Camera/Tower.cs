@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class Tower : MonoBehaviour {
@@ -7,40 +8,44 @@ public class Tower : MonoBehaviour {
 	public Camera cTowerCamera;
 	public Camera cMainCamera;
 	public Canvas canMainCanvas;
-
+	private bool bInTower;
 
 	//
 	void Start(){
 		cTowerCamera.gameObject.SetActive(false);
 		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
+		bInTower = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButton(1) && cTowerCamera.gameObject.activeInHierarchy == true)
-		{
-			SwapCamera();
+		if (bInTower && Input.GetMouseButtonDown(1)) {
+			DeactivateTowerCamera();
 		}
 	}
 
 	void OnMouseDown(){
-//		Debug.Log("Clicked");
-		SwapCamera();
+		if (!EventSystem.current.IsPointerOverGameObject()) {
+			if (!bInTower) {
+				ActivateTowerCamera();
+			}
+		}
 	}
 
-	void SwapCamera(){
-//		Debug.Log("Swapping");
-		cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = !cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera;
-		cTowerCamera.gameObject.SetActive(!cTowerCamera.gameObject.activeInHierarchy);
-		canMainCanvas.GetComponent<Canvas>().enabled = !canMainCanvas.GetComponent<Canvas>().enabled;
-		if(cTowerCamera.gameObject.activeInHierarchy)
-		{
-			AudioSource.PlayClipAtPoint (audioManager.acEnterTower, Camera.main.transform.position);
-		}
-		else
-		{
-			AudioSource.PlayClipAtPoint (audioManager.acLeaveTower, Camera.main.transform.position);
-		}
-		Screen.lockCursor = !Screen.lockCursor;
+	void ActivateTowerCamera(){
+		//cMainCamera.GetComponent<TestCamera>().bCanMoveCamera = !cMainCamera.GetComponent<TestCamera>().bCanMoveCamera;
+		cTowerCamera.gameObject.SetActive(true);
+		canMainCanvas.GetComponent<Canvas>().enabled = false;
+		AudioSource.PlayClipAtPoint(audioManager.acEnterTower, Camera.main.transform.position);
+		Screen.lockCursor = true;
+		bInTower = true;
+	}
+
+	void DeactivateTowerCamera() {
+		cTowerCamera.gameObject.SetActive(false);
+		canMainCanvas.GetComponent<Canvas>().enabled = true;
+		AudioSource.PlayClipAtPoint(audioManager.acLeaveTower, Camera.main.transform.position);
+		Screen.lockCursor = false;
+		bInTower = false;
 	}
 }
