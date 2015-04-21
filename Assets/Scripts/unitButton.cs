@@ -11,25 +11,26 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	public Image IButtonPressed;
 	public Text tCurrentlyTraining;
 	public Transform tSpawnPoint;
-	public List<string> l_sCurrentUnitsName = new List<string>();
+	public List<string> l_sCurrentUnitsName;
 	public Text textCost;
 	public Color32 colTransparent;
 	public int iUnitsTraining = 0;
 	public int iPrice = 100;
-	public float fTrainingTimer = 60;
+	public float fTrainingTimer = 60.0f;
+	public Vector2 v2Variance;
 
 	private SpawnSoldier unitSpawner;
 	//public GameObject goProtoUnit;
 	public SOLDIER_TYPE troopChoice = SOLDIER_TYPE.GUNNER;
 
-	void Awake ()
-	{
+	void Awake () {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
 	}
 
 	void Start() {
 		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
-		unitSpawner = this.GetComponentInParent<SpawnSoldier> ();
+		unitSpawner = this.GetComponentInParent<SpawnSoldier>();
+		l_sCurrentUnitsName = new List<string>();
 	}
 	
 	void Update ()
@@ -54,9 +55,10 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			if (IButtonPressed.fillAmount == 0)
 			{
 				iUnitsTraining -= 1;
-				Debug.Log("Trained " + l_sCurrentUnitsName[0] +"");
-				unitSpawner.SpawnUnit(troopChoice, tSpawnPoint.position, l_sCurrentUnitsName[0]);
-				AudioSource.PlayClipAtPoint (audioManager.acEndTraining, Camera.main.transform.position);
+				Debug.Log("Trained " + l_sCurrentUnitsName[0] + "");
+				v2Variance = Random.insideUnitCircle * 3.0f;
+				unitSpawner.SpawnUnit(troopChoice, tSpawnPoint.position, v2Variance, l_sCurrentUnitsName[0]);
+				AudioSource.PlayClipAtPoint(audioManager.acEndTraining, Camera.main.transform.position);
 				l_sCurrentUnitsName.RemoveAt(0);
 			}
 			

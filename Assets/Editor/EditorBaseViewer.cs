@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class EditorBaseViewer : EditorWindow {
 
 	static public List<BaseGameStructure> sl_bsBases;
+	static public List<KeyValuePair<string, bool>> sl_mapsbShowTrains;
 	static private int s_iWindowCount;
 	static private GUIStyle s_guiStyleDisabled;
 	static private GUIStyle s_guiStyleAlert;
