@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class EditorBaseViewer : EditorWindow {
 
 	static public List<BaseGameStructure> sl_bsBases;
+	static public List<KeyValuePair<string, bool>> sl_mapsbShowTrains;
 	static private int s_iWindowCount;
 	static private GUIStyle s_guiStyleDisabled;
 	static private GUIStyle s_guiStyleAlert;
@@ -25,7 +26,7 @@ public class EditorBaseViewer : EditorWindow {
 
 	//Window
 	public static void Init() {
-		EditorBaseViewer window = (EditorBaseViewer)EditorWindow.GetWindow(typeof (EditorBaseViewer));
+		EditorBaseViewer window = (EditorBaseViewer)EditorWindow.GetWindow(typeof(EditorBaseViewer));
 
 		ReloadBases();
 
@@ -129,6 +130,25 @@ public class EditorBaseViewer : EditorWindow {
 					GUILayout.EndVertical();
 					//=========== GUI END   Windows
 
+					//=========== GUI BEGIN Stations
+					GUILayout.BeginVertical("box");
+					GUILayout.BeginHorizontal();
+					//Left
+					if (curbase.tsLeftStation != null) {
+						if (GUILayout.Button("Left Train (" + curbase.tsLeftStation.l_goWaiting.Count.ToString() + ")")) {
+							curbase.fHealthCurrent = curbase.fHealthMax;
+						}
+					}
+					//Right
+					if (curbase.tsRightStation != null) {
+						if (GUILayout.Button("Right Train (" + curbase.tsRightStation.l_goWaiting.Count.ToString() + ")")) {
+							curbase.fHealthCurrent = curbase.fHealthMax;
+						}
+					}
+					GUILayout.EndHorizontal();
+					GUILayout.EndVertical();
+					//=========== GUI END   Stations
+
 					//========= GUI END
 					GUILayout.EndVertical();
 				}
@@ -166,6 +186,11 @@ public class EditorBaseViewer : EditorWindow {
 			sl_bsBases.Clear();
 			//We'd like them alphabetical please Unity
 			sl_bsBases = GameObject.FindObjectsOfType<BaseGameStructure>().OrderBy(go=>go.name).ToList();
+
+			sl_mapsbShowTrains = new List<KeyValuePair<string, bool>>();
+			foreach (BaseGameStructure curbase in sl_bsBases) {
+				sl_mapsbShowTrains.Add(new KeyValuePair<string, bool>(curbase.name, false));
+			}
 		}
 
 		s_bCleanRuntime = false;
