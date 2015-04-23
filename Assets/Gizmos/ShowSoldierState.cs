@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 
 public class ShowSoldierState : MonoBehaviour {
@@ -14,8 +13,6 @@ public class ShowSoldierState : MonoBehaviour {
 		}
 		else {
 			Gizmos.DrawIcon(transform.position + vOffset, sStateIcon, false);
-
-			Handles.Label(transform.position, puUnit.fHealthCurrent.ToString());
 		}
 	}
 
