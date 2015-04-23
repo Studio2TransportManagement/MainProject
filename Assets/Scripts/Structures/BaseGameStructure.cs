@@ -115,6 +115,11 @@ public class BaseGameStructure : GameStructure {
 		UpgradeUI.upgradingBase = this;
 		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
 	}
+
+	public void CloseButton()
+	{
+		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
+	}
 	
 	public void UpgradeWindows() {
 		//Base windows plus upgrade level

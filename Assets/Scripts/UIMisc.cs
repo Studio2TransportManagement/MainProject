@@ -28,6 +28,7 @@ public class UIMisc : MonoBehaviour {
 	void Start ()
 	{
 		Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	void Update () 
@@ -62,6 +63,11 @@ public class UIMisc : MonoBehaviour {
 			}
 		}
 
+		if (Input.GetKeyDown (KeyCode.C))
+		{
+			CameraShake();
+		}
+
 		if(bIsMessageFading)
 		{
 			Color32 fadeColor = tSlainMessage.color;
@@ -84,7 +90,26 @@ public class UIMisc : MonoBehaviour {
 
 	public void ContinueButton ()
 	{
-		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 0.25f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
+	}
+
+	public void CameraShake ()
+	{
+		float height = 2.5f;
+		float shakeAmt = height*0.2f; // the degrees to shake the camera
+		float shakePeriodTime = 0.42f; // The period of each shake
+		float dropOffTime = 1f; // How long it takes the shaking to settle down to nothing
+		LTDescr shakeTween = LeanTween.rotateAroundLocal( gameObject, Vector3.right, shakeAmt, shakePeriodTime)
+		.setEase( LeanTweenType.easeShake ) // this is a special ease that is good for shaking
+		.setLoopClamp()
+		.setRepeat(1);
+		
+		// Slow the camera shake down to zero
+		LeanTween.value(gameObject, shakeAmt, 0f, dropOffTime).setOnUpdate( 
+		                                                                   (float val)=>{
+			shakeTween.setTo(Vector3.right*val);
+		}
+		).setEase(LeanTweenType.easeOutQuad);
 	}
 
 }

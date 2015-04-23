@@ -3,16 +3,19 @@ using System.Collections;
 
 public class ShowSoldierState : MonoBehaviour {
 
-	public Vector3 vOffset;
-	public string sStateIcon = "GizmoIcon_StateSoldierIdle.png";
-	public PlayerUnit puUnit;
+	private Vector3 vOffset;
+	private string sStateIcon = "GizmoIcon_StateSoldierIdle.png";
+	private PlayerUnit puUnit;
+	private Renderer rendUnitRender;
 
 	void OnDrawGizmos() {
 		if (puUnit == null) {
 			puUnit = this.GetComponent<PlayerUnit>();
+			rendUnitRender = puUnit.GetComponentInChildren<Renderer>();
 		}
 		else {
-			Gizmos.DrawIcon(transform.position + vOffset, sStateIcon, false);
+			vOffset = new Vector3(0.0f, rendUnitRender.bounds.size.y + 2.5f, 0.0f);
+			Gizmos.DrawIcon(puUnit.transform.position + vOffset, sStateIcon, false);
 		}
 	}
 

@@ -4,19 +4,19 @@ using UnityEngine.UI;
 
 public class NamePrinter : MonoBehaviour {
 
-	public Text tMemorialWallNames;
+	public Text[] l_TFallenSoldierNames;
 	public NameSaver MWNameSaver;
 
 	void Start ()
 	{
-		//MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
+		MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
 	}
 
 	void Update () 
 	{
-		if (Input.GetKeyDown (KeyCode.T))
+		for(int i = 0; i < MWNameSaver.l_sDeadUnitNames.Count; i++)
 		{
-			tMemorialWallNames.text = "Bob";
+			l_TFallenSoldierNames[i].text = MWNameSaver.l_sDeadUnitNames[i];
 		}
 	}
 }
