@@ -27,19 +27,16 @@ public class BaseGameStructure : GameStructure {
 		UpgradeWindows();
 	}
 
-	protected override void Update()
-	{
+	protected override void Update() {
 		base.Update();
-		if(bAlert)
-		{
-			if(l_euAttackers.Count <= 0){
+		if(bAlert) {
+			if(l_euAttackers.Count <= 0) {
 				bAlert =false;
 			}
 			goAlertImage.gameObject.SetActive(true);
 		}
 
-		if(!bAlert)
-		{
+		if(!bAlert) {
 			goAlertImage.SetActive(false);
 		}
 	}
@@ -68,8 +65,7 @@ public class BaseGameStructure : GameStructure {
 
 	//Same as for above, but for the enemies to determine manned windows, rather than unmanned
 	public bool CheckForTargetableWindow(){
-		foreach (Window window in l_windows) 
-		{
+		foreach (Window window in l_windows) {
 			if (window.CheckIfTargetable()) {
 				return true;
 			}
@@ -78,8 +74,7 @@ public class BaseGameStructure : GameStructure {
 	}
 
 	public Window TargetAvailableOpenWindow() {
-		foreach (Window window in l_windows) 
-		{
+		foreach (Window window in l_windows) {
 			if (window.bIsActive && window.bIsManned) {
 				return window;
 			}
@@ -87,41 +82,49 @@ public class BaseGameStructure : GameStructure {
 		return null;
 	}
 
-	public void ModifyCurrentIntegrity(float amount)
-	{
+	public void ModifyCurrentIntegrity(float amount) {
 		if (amount > 0) {
-			//add extra fluff here
 			fHealthCurrent += amount;
 		}
 		if (amount < 0) {
-			if(!bAlert)
-			{
+			if (!bAlert) {
 				bAlert = true;
 			}
-			//fluff
 			fHealthCurrent += amount;
 		}
 	}
 
 	public void UpgradeIntegrity() {
-		
+		//Oh geez this isn't done
+		if (this.iIntegrityLevel < 3) {
+			iIntegrityLevel++;
+		}
 	}
 
 	public void UpgradeTrains() {
-		
+		//Oh god this needs doing
+		if (this.iTrainsLevel < 3) {
+			iTrainsLevel++;
+		}
 	}
 	
 	public void getThisBase() {
 		UpgradeUI.upgradingBase = this;
-		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
+		CMC.OpenCloseUpgradeMenu(UpgradeUI.upgradingBase);
 	}
 
-	public void CloseButton()
-	{
-		CMC.OpenCloseUpgradeMenu (UpgradeUI.upgradingBase);
+	public void CloseButton() {
+		CMC.OpenCloseUpgradeMenu(UpgradeUI.upgradingBase);
 	}
 	
 	public void UpgradeWindows() {
+		if (iWindowLevel < 5) {
+			iWindowLevel++;
+		}
+		ActivateWindows();
+	}
+
+	public void ActivateWindows() {
 		//Base windows plus upgrade level
 		int j = iWindowLevel + 2;
 		for (int i = 0; i < j; i++) {
@@ -132,7 +135,7 @@ public class BaseGameStructure : GameStructure {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "enemy-unit") {
 			if (!l_euAttackers.Contains (other.GetComponent<EnemyUnit>())) {
-				l_euAttackers.Add (other.GetComponent<EnemyUnit> ());	
+				l_euAttackers.Add(other.GetComponent<EnemyUnit>());	
 			}
 		}
 	}

@@ -37,13 +37,14 @@ public class SelectionManager : MonoBehaviour {
 					goCurrentObject = hit.transform.gameObject;
 					//Don't select the same object twice
 					if (!l_goCurrentSelection.Contains(goCurrentObject)) {
-						
-						if (hit.transform.gameObject.GetComponent<PlayerUnit>()) {
-							l_goCurrentSelection.Add(goCurrentObject);
 							guCurrentUnit = hit.transform.gameObject.GetComponent<PlayerUnit>();
-							displayNames.AddText(guCurrentUnit.sUnitName);
-							Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
-							AudioSource.PlayClipAtPoint(audioManager.acSelectUnit, Camera.main.transform.position);
+						if (guCurrentUnit != null) {
+							if (guCurrentUnit.GetStateName() != "StateSoldierMoveToBase") {
+								l_goCurrentSelection.Add(goCurrentObject);
+								displayNames.AddText(guCurrentUnit.sUnitName);
+								//Debug.Log("Clicked on <color=blue>" + guCurrentUnit.sUnitName + "</color>!");
+								AudioSource.PlayClipAtPoint(audioManager.acSelectUnit, Camera.main.transform.position);
+							}
 						}
 					}
 					else {
@@ -57,19 +58,21 @@ public class SelectionManager : MonoBehaviour {
 				}
 				else {
 					if (hit.transform.gameObject.tag == "building" && l_goCurrentSelection.Count > 0) {
-						foreach (GameObject go in l_goCurrentSelection) {
-							BaseGameStructure bs = hit.transform.gameObject.GetComponent<BaseGameStructure>();
-							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
-						}
+//						foreach (GameObject go in l_goCurrentSelection) {
+//							BaseGameStructure bs = hit.transform.gameObject.GetComponent<BaseGameStructure>();
+//							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
+//						}
 					}
 					else if (hit.transform.gameObject.tag == "train-station" && l_goCurrentSelection.Count > 0) {
 						foreach (GameObject go in l_goCurrentSelection) {
 							BaseGameStructure bs = hit.transform.gameObject.GetComponent<TrainStation>().GetDestinationBase();
 							go.GetComponent<PlayerUnit>().ChangeState(new StateSoldierMoveToBase(bs));
+							AudioSource.PlayClipAtPoint(audioManager.acChangingBase, Camera.main.transform.position);
 						}
+						ClearSelection();
 					}
 					else {
-						Debug.Log("Nothing interesting here..");
+						//Debug.Log("Nothing interesting here..");
 						if(l_goCurrentSelection.Count > 0) {
 							AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
 						}
@@ -79,7 +82,7 @@ public class SelectionManager : MonoBehaviour {
 			}
 		}
 		
-		if(Input.GetMouseButtonDown(1)&& l_goCurrentSelection.Count > 0){
+		if(Input.GetMouseButtonDown(1) && l_goCurrentSelection.Count > 0){
 			AudioSource.PlayClipAtPoint(audioManager.acDeselectUnit, Camera.main.transform.position);
 			ClearSelection();		
 		}
@@ -89,15 +92,15 @@ public class SelectionManager : MonoBehaviour {
 			rRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(rRay, out hit, Mathf.Infinity)) {
 				foreach (GameObject gobj in l_goCurrentSelection) {
-					//If it was a unit, tell it to move
+					//If it was a player soldier
 					if (gobj.tag == "player-unit") {
 						//This needs to be where we get added to the train station
 						if (hit.transform.gameObject.tag == "train") {
-							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+							//gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
 							//hit.transform.gameObject.GetComponent<Train>().AddExpected(gobj.GetComponent<PlayerUnit>());
 						}
 						else {
-							gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+							//gobj.GetComponent<NavMeshAgent>().SetDestination(hit.point);
 						}
 					}
 				}
@@ -140,7 +143,7 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	public void ClearSelection() {
-		Debug.Log("<color=magenta>Lost selection!</color>");
+		//Debug.Log("<color=magenta>Lost selection!</color>");
 		//grab all the selected units and setactive false their goHealthInstans.
 		l_goCurrentSelection.Clear();
 		displayNames.ClearText();

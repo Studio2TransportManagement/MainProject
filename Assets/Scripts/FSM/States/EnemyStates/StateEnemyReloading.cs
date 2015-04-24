@@ -23,7 +23,7 @@ public sealed class StateEnemyReloading : FSM_State<EnemyUnit> {
 		if(fReloadTimer <=0)
 		{
 			eu.iCurrentAmmo = eu.iMaxAmmo;
-			Debug.Log ("<color=cyan>Reloaded</color>");
+			//Debug.Log ("<color=cyan>Reloaded</color>");
 			eu.ReturnToLastState();
 		}
 		

@@ -5,12 +5,11 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 
 	
 	public StateSoldierAlert() {
-		Debug.Log("StateSoldierAlert begin");
+		//Debug.Log("StateSoldierAlert begin");
 	}
-		
+
 	public override void Begin(PlayerUnit gu) {
-
-
+		//Debug.Log("StateSoldierAlert begin");
 	}
 	
 	public override void Run(PlayerUnit gu) {
@@ -51,7 +50,6 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-
-		Debug.Log("StateSoldierAlert end");
+		//Debug.Log("StateSoldierAlert end");
 	}
 }

@@ -7,26 +7,20 @@ public class FSM_Core<T> {
 	private T fsmOwner;
 	private FSM_State<T> stateCurrent;
 	private FSM_State<T> statePrevious;
-	private FSM_State<T> stateGlobal;
 
 	public void Init() {
 		stateCurrent = null;
 		statePrevious = null;
-		stateGlobal = null;
 	}
 
 	public void Config(T owner, FSM_State<T> start_state) {
 		fsmOwner = owner;
-		Debug.Log("Owner is " + fsmOwner.ToString());
+		//Debug.Log("Owner is " + fsmOwner.ToString());
 		stateCurrent = start_state;
 		stateCurrent.Begin(fsmOwner);
 	}
 
 	public void Update() {
-		if (stateGlobal != null) {
-			stateGlobal.Run(fsmOwner);
-		}
-
 		if (stateCurrent != null) {
 			stateCurrent.Run(fsmOwner);
 		}
