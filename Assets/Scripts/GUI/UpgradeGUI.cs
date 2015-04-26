@@ -156,7 +156,7 @@ public class UpgradeGUI : MonoBehaviour {
 		   upgradingBase.iWindowLevel != 3)
 		{
 			pPlayerResources.SetMoney(pPlayerResources.GetMoney() - upgradingBase.iWindowUpgradeCost);
-			upgradingBase.iWindowLevel += 1;
+			//upgradingBase.iWindowLevel += 1;
 			upgradingBase.UpgradeWindows();
 			upgradingBase.iWindowUpgradeCost += 100;
 		}

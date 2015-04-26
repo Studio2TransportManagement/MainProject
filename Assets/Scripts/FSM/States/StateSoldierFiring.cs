@@ -10,7 +10,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-		Debug.Log("StateSoldierFiring begin");
+		//Debug.Log("StateSoldierFiring begin");
 	}
 	
 	public override void Run(PlayerUnit gu) {
@@ -41,6 +41,6 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-		Debug.Log("StateSoldierFiring end");
+		//Debug.Log("StateSoldierFiring end");
 	}
 }

@@ -40,7 +40,7 @@ public class PlayerUnit : GameUnit {
 		goHealthInstance.transform.SetAsFirstSibling();
 		goHealthInstance.SetActive(false);
 		spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-		Debug.Log("PlayerUnit Initialised");
+		//Debug.Log("PlayerUnit Initialised");
 
 	}
 

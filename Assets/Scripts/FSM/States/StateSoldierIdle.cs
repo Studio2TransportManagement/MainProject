@@ -10,7 +10,7 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 
 
 	public StateSoldierIdle() {
-		Debug.Log("StateSoldierIdle begin");
+		//Debug.Log("StateSoldierIdle begin");
 	}
 
 	public StateSoldierIdle(float wanderRate, float wanderDistance) {
@@ -47,6 +47,6 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		gu.navAgent.speed = 3.0f;
-		Debug.Log("StateSoldierIdle end");
+		//Debug.Log("StateSoldierIdle end");
 	}
 }

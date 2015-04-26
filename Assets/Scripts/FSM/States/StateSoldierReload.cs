@@ -10,7 +10,7 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-		Debug.Log ("StateSoldierReload Begun");
+		//Debug.Log ("StateSoldierReload Begun");
 		fReloadTimer = gu.fReloadSpeed;
 	}
 	
@@ -29,6 +29,6 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-		Debug.Log("StateSoldierReload end");
+		//Debug.Log("StateSoldierReload end");
 	}
 }

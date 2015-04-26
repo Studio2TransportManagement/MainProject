@@ -28,11 +28,11 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 					eu.wMannedWindow = eu.goTargetBase.TargetAvailableOpenWindow();
 					eu.guTargetUnit = eu.wMannedWindow.TargetWindow(eu);
 					eu.guTargetUnit.DamageUnit(eu.fDamage);
-					Debug.Log ("<color=green>Firing at Window Unit</color>");
+					//Debug.Log ("<color=green>Firing at Window Unit</color>");
 				}
 				else {
 					eu.goTargetBase.ModifyCurrentIntegrity(-eu.fDamage);
-					Debug.Log ("<color=green>Firing at Base</color>");
+					//Debug.Log ("<color=green>Firing at Base</color>");
 				}
 				eu.iCurrentAmmo--;
 				tempShoot = eu.fFireRate;

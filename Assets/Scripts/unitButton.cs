@@ -55,7 +55,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			if (IButtonPressed.fillAmount == 0)
 			{
 				iUnitsTraining -= 1;
-				Debug.Log("Trained " + l_sCurrentUnitsName[0] + "");
+				//Debug.Log("Trained " + l_sCurrentUnitsName[0] + "");
 				v2Variance = Random.insideUnitCircle * 3.0f;
 				unitSpawner.SpawnUnit(troopChoice, tSpawnPoint.position, v2Variance, l_sCurrentUnitsName[0]);
 				AudioSource.PlayClipAtPoint(audioManager.acEndTraining, Camera.main.transform.position);
