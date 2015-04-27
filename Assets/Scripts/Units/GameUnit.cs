@@ -67,10 +67,26 @@ public class GameUnit : MonoBehaviour, ISelectable {
 //			aAnimator.SetBool("IsWalking", false);
 //		}
 
+		if (fHealthCurrent > (0.25 * fHealthMax)) {
+			UnitStopFlashing();
+		}
+
+		if (fHealthCurrent <= (0.25 * fHealthMax)) {
+			UnitFlashing();
+		}
+
 		if (fHealthCurrent <= 0) {
 			KillUnit();
 		}
 	}
+	protected virtual void UnitStopFlashing() {
+		//SOON
+	}
+
+	protected virtual void UnitFlashing() {
+		//SOON
+	}
+
 	protected virtual void KillUnit() {
 		//SOON
 	}

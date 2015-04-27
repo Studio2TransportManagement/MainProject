@@ -9,14 +9,22 @@ public class NamePrinter : MonoBehaviour {
 
 	void Start ()
 	{
-		MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
+//		MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
 	}
 
 	void Update () 
 	{
-		for(int i = 0; i < MWNameSaver.l_sDeadUnitNames.Count; i++)
+//		for(int i = 0; i < MWNameSaver.l_sDeadUnitNames.Count; i++)
+//		{
+//			l_TFallenSoldierNames[i].text = MWNameSaver.l_sDeadUnitNames[i];
+//		}
+
+		if (Input.GetKeyDown(KeyCode.P))
 		{
-			l_TFallenSoldierNames[i].text = MWNameSaver.l_sDeadUnitNames[i];
+			for(int i = 0; i < l_TFallenSoldierNames.Length; i++)
+			{
+				l_TFallenSoldierNames[i].text = "Placeholder Name";
+			}
 		}
 	}
 }
