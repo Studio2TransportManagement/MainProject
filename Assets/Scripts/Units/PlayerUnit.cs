@@ -24,6 +24,8 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
+	private float fTimer = 1.75f;
+
 	private SpriteRenderer spriteRenderer;
 
 
@@ -80,6 +82,46 @@ public class PlayerUnit : GameUnit {
 				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text>().text = sUnitName;
 			}
+		}
+	}
+
+	protected override void UnitStopFlashing() {
+		SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
+		UnitsMesh.enabled = true;
+	}
+
+	protected override void UnitFlashing() {
+		SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
+		fTimer -= Time.deltaTime;
+		
+		if(fTimer <= 1.5f)
+		{
+			UnitsMesh.enabled = false;
+		}
+		if(fTimer <= 1.25f)
+		{
+			UnitsMesh.enabled = true;
+		}
+		if(fTimer <= 1.0f)
+		{
+			UnitsMesh.enabled = false;
+		}
+		if(fTimer <= 0.75f)
+		{
+			UnitsMesh.enabled = true;
+		}
+		if(fTimer <= 0.5f)
+		{
+			UnitsMesh.enabled = false;
+		}
+		if(fTimer <= 0.25f)
+		{
+			UnitsMesh.enabled = true;
+		}
+		if(fTimer <= 0f)
+		{
+			UnitsMesh.enabled = false;
+			fTimer = 1.75f;
 		}
 	}
 
