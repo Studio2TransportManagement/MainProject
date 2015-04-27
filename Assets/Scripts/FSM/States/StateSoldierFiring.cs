@@ -37,7 +37,6 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 		if(gu.iCurrentAmmo <= 0) {
 			gu.ChangeState(new StateSoldierReload());
 		}
-		
 	}
 	
 	public override void End(PlayerUnit gu) {

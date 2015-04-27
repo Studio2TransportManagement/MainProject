@@ -40,7 +40,8 @@ public class EditorBaseViewer : EditorWindow {
 	}
 
 	public void OnGUI() {
-		if (sl_bsBases != null) {
+		//Don't draw anything if we haven't loaded yet
+		if (sl_bsBases != null || EditorApplication.currentScene != "") {
 			if (sl_bsBases.Count > 0) {
 				foreach (BaseGameStructure curbase in sl_bsBases) {
 					//========= GUI BEGIN 

@@ -25,22 +25,47 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Run(PlayerUnit gu) {
-	
 		do {
 			vDir = gu.transform.forward + new Vector3(Random.insideUnitCircle.x, gu.transform.position.y, Random.insideUnitCircle.y) * fWanderRate;
 			vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
 		}
-		while(NavMesh.SamplePosition(vTarget, out navhitIrrelevant, Mathf.Infinity, NavMesh.GetNavMeshLayerFromName("Floorges")));
+		while (NavMesh.SamplePosition(vTarget,
+		                              out navhitIrrelevant,
+		                              Mathf.Infinity,
+		                              NavMesh.GetNavMeshLayerFromName("Floorges")));
 
 		gu.navAgent.SetDestination(vTarget);
 
 		if (gu.goTargetBase != null) {
-			if(gu.goTargetBase.bAlert) {
-				gu.ChangeState(new StateSoldierAlert());
+			//Gunnner + Heavy
+			if (gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY) {
+				if (gu.goTargetBase.bAlert) {
+					gu.ChangeState(new StateSoldierAlert());
+				}
+			}
+			//Medic
+			else if (gu.SollyType == SOLDIER_TYPE.MEDIC) {
+				if (gu.goTargetBase.GetInjuredUnitsInBase().Count > 0) {
+					gu.guTargetUnit = gu.goTargetBase.GetInjuredUnitsInBase()[0];
+
+					foreach (GameUnit curunit in gu.goTargetBase.GetInjuredUnitsInBase()) {
+						if (curunit.fHealthCurrent > 0 && curunit.fHealthCurrent < gu.guTargetUnit.fHealthCurrent) {
+							gu.guTargetUnit = curunit;
+						}
+					}
+
+					gu.ChangeState(new StateSoldierHealAlly());
+				}
+			}
+			//Mechanic
+			else if (gu.SollyType == SOLDIER_TYPE.MECHANIC) {
+				if (gu.goTargetBase.fHealthCurrent < gu.goTargetBase.fHealthMax) {
+					gu.ChangeState(new StateSoldierRepairBase());
+				}
 			}
 		}
 		else {
-			Debug.Log("StateSoldierIdle: goTargetBase was null!");
+			Debug.Log("StateSoldierIdle (" + gu.SollyType.ToString() + "): goTargetBase was null!");
 		}
 		
 	}

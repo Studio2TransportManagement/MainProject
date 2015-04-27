@@ -11,6 +11,8 @@ public class BaseGameStructure : GameStructure {
 	public TrainStation tsLeftStation;
 	public TrainStation tsRightStation;
 	public List<EnemyUnit> l_euAttackers;
+	private List<GameObject> l_goAllply;
+	private List<GameUnit> l_guInjuredply;
 
 	public bool bAlert;
 
@@ -18,33 +20,33 @@ public class BaseGameStructure : GameStructure {
 		l_windows = new List<Window>();
 		l_windows.AddRange(GetComponentsInChildren<Window>());
 		StaticGameStructures.bases.Add(this);
-
 	}
 
 	void Start () {
-		l_euAttackers = new List<EnemyUnit> ();
+		l_euAttackers = new List<EnemyUnit>();
+		l_goAllply = new List<GameObject>();
+		l_guInjuredply = new List<GameUnit>();
 		PanelOpen = false;
-		UpgradeWindows();
+		ActivateWindows();
 	}
 
 	protected override void Update() {
 		base.Update();
-		if(bAlert) {
-			if(l_euAttackers.Count <= 0) {
-				bAlert =false;
+		if (bAlert) {
+			if (l_euAttackers.Count == 0) {
+				bAlert = false;
 			}
 			goAlertImage.gameObject.SetActive(true);
 		}
 
-		if(!bAlert) {
+		if (!bAlert) {
 			goAlertImage.SetActive(false);
 		}
 	}
 
 	//Allows PlayerUnits to check the base for an available window before moving to man it (eg. if(CheckIfWindowAvailable){targetWindow = GetAvailableOpenWindow() })
-	public bool CheckIfWindowAvailable(){
-		foreach (Window window in l_windows) 
-		{
+	public bool CheckIfWindowAvailable() {
+		foreach (Window window in l_windows) {
 			if (window.bIsActive && !window.bIsManned) {
 				return true;
 			}
@@ -52,7 +54,41 @@ public class BaseGameStructure : GameStructure {
 		return false;
 	}
 
-	//Use after checking for open window, explained above, helps to avoid targeting a Null window
+	public List<PlayerUnit> GetAllUnitsInBase() {
+		l_goAllply.Clear();
+		l_goAllply.AddRange(GameObject.FindGameObjectsWithTag("player-unit"));
+		List<PlayerUnit> allunits = new List<PlayerUnit>();
+		PlayerUnit currentunit = null;
+
+		foreach (GameObject go in l_goAllply) {
+			currentunit = go.GetComponent<PlayerUnit>();
+			if (currentunit != null) {
+				if (currentunit.goTargetBase == this) {
+					allunits.Add(currentunit);
+				}
+			}
+		}
+
+		return allunits;
+	}
+
+	public List<GameUnit> GetInjuredUnitsInBase() {
+		GetAllUnitsInBase();
+		l_guInjuredply.Clear();
+
+		GameUnit guTemp = null;
+
+		foreach (GameObject curunit in l_goAllply) {
+			guTemp = curunit.GetComponent<PlayerUnit>();
+			if (guTemp.fHealthCurrent > 0 && guTemp.fHealthCurrent < guTemp.fHealthMax) {
+				l_guInjuredply.Add(guTemp);
+			}
+		}
+
+		return l_guInjuredply;
+	}
+
+	//Use after checking for open window, helps to avoid targeting a Null window
 	public Window GetAvailableOpenWindow() {
 		foreach (Window window in l_windows) {
 			if (window.bIsActive && !window.bIsManned) {
@@ -64,7 +100,7 @@ public class BaseGameStructure : GameStructure {
 	}
 
 	//Same as for above, but for the enemies to determine manned windows, rather than unmanned
-	public bool CheckForTargetableWindow(){
+	public bool CheckForTargetableWindow() {
 		foreach (Window window in l_windows) {
 			if (window.CheckIfTargetable()) {
 				return true;
@@ -132,12 +168,17 @@ public class BaseGameStructure : GameStructure {
 		}
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "enemy-unit") {
-			if (!l_euAttackers.Contains (other.GetComponent<EnemyUnit>())) {
+			if (!l_euAttackers.Contains(other.GetComponent<EnemyUnit>())) {
 				l_euAttackers.Add(other.GetComponent<EnemyUnit>());	
 			}
 		}
+	}
+
+	public void Repair(float amount) {
+		fHealthCurrent += amount;
+		Mathf.Clamp(fHealthCurrent, 0, fHealthMax);
 	}
 
 }
