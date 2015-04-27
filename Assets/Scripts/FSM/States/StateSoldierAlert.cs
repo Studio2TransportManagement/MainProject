@@ -14,14 +14,14 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	
 	public override void Run(PlayerUnit gu) {
 		if (gu.goTargetBase != null) {
-			if(!gu.bManningWindow) {
+			if (!gu.bManningWindow) {
 				if (gu.goTargetBase != null) {
-					if(gu.goTargetBase.CheckIfWindowAvailable()) {
+					if (gu.goTargetBase.CheckIfWindowAvailable()) {
 						gu.wMannedWindow = gu.goTargetBase.GetAvailableOpenWindow();
 						gu.wMannedWindow.ManWindow(gu);
 						gu.bManningWindow = true;
 						gu.navAgent.SetDestination(gu.wMannedWindow.tStandingPosition.position);
-						//					Debug.Log ("Manning Window");
+						//Debug.Log ("Manning Window");
 					}
 					else {
 						Debug.Log("<color=red>No AvailableWindows</color>");
@@ -31,21 +31,21 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 						gu.ChangeState(new StateSoldierIdle());
 					}
 				}
-				else{
+				else {
 					Debug.Log("<color = red>Base is NULL</color>");
 				}
 			}
 			else {
-				if(gu.goTargetBase.l_euAttackers.Count > 0) {
+				if (gu.goTargetBase.l_euAttackers.Count > 0) {
 					gu.ChangeState(new StateSoldierFiring());
 				}
-				else{
+				else {
 					gu.ChangeState(new StateSoldierIdle());
 				}
 			}
 		}
 		else {
-			Debug.Log("StateSoldierAlert: gu.goTargetBase is null!");
+			Debug.Log("StateSoldierAlert(" + gu.SollyType.ToString() + "): gu.goTargetBase is null!");
 		}
 	}
 	

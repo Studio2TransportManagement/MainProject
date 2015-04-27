@@ -92,6 +92,11 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 
 	public void DamageUnit(float dmg) {
-		fHealthCurrent -=dmg;
+		fHealthCurrent -= dmg;
+	}
+
+	public void HealUnit(float heal) {
+		fHealthCurrent += heal;
+		Mathf.Clamp(fHealthCurrent, 0, fHealthMax);
 	}
 }

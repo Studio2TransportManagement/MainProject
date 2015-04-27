@@ -63,14 +63,12 @@ public class PlayerUnit : GameUnit {
 				goHealthInstance.SetActive (true);
 				spriteRenderer.color = colSelected;
 			}
-			else
-			{
+			else {
 				if (!isHovering) {
 					goHealthInstance.SetActive (false);
 					spriteRenderer.color = colDeselected;
 				}
-				else
-				{
+				else {
 					spriteRenderer.color = colHover;
 				}
 			}
@@ -129,8 +127,7 @@ public class PlayerUnit : GameUnit {
 		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
 		nameSaver.l_sDeadUnitNames.Add(sUnitName);
 		//make sure if the unit dies at a window, we stop manning it
-		if(bManningWindow)
-		{
+		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
 		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
@@ -162,7 +159,7 @@ public class PlayerUnit : GameUnit {
 	}
 
 	public void ReturnToLastState(){
-		FSM.ReturnToLastState ();
+		FSM.ReturnToLastState();
 	}
 
 	public string GetStateName() {

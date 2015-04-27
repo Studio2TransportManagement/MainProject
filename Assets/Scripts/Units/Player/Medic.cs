@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HeavyGunner : PlayerUnit {
+public class Medic : PlayerUnit {
 	
 	// Use this for initialization
 	protected override void Start () {
 		base.Start();
 		
-		SollyType = SOLDIER_TYPE.HEAVY;
+		SollyType = SOLDIER_TYPE.MEDIC;
+
+		this.goTargetBase = GetCurrentBase();
 		
 		//Init AI
 		FSM = new FSM_Core<PlayerUnit>();
