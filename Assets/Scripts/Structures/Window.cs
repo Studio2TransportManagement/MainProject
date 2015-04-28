@@ -49,11 +49,14 @@ public class Window : MonoBehaviour {
 	public void ManWindow(PlayerUnit soldier) {
 		goStationedSoldier = soldier;
 		bIsManned = true;
-
+		goStationedSoldier.bManningWindow = true;
+		goStationedSoldier.wMannedWindow = this;
 //		return tStandingPosition;
 	}
 
 	public void LeaveWindow() {
+		goStationedSoldier.bManningWindow = false;
+		goStationedSoldier.wMannedWindow = null;
 		goStationedSoldier = null;
 		bIsManned = false;
 	}

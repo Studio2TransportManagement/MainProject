@@ -23,7 +23,7 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 		if(fReloadTimer <=0)
 		{
 			gu.iCurrentAmmo = gu.iMaxAmmo;
-			gu.ReturnToLastState();
+			gu.ChangeState(new StateSoldierAlert());
 		}
 		
 	}

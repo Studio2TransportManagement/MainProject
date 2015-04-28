@@ -12,6 +12,7 @@ public class EditorBaseViewer : EditorWindow {
 	static private GUIStyle s_guiStyleDisabled;
 	static private GUIStyle s_guiStyleAlert;
 	static private bool s_bCleanRuntime;
+	static private Vector2 s_vScrollPos;
 
 	//Menu items
 	[MenuItem("Window/Base Viewer %&b")]
@@ -41,8 +42,9 @@ public class EditorBaseViewer : EditorWindow {
 
 	public void OnGUI() {
 		//Don't draw anything if we haven't loaded yet
-		if (sl_bsBases != null || EditorApplication.currentScene != "") {
+		if (sl_bsBases != null && EditorApplication.currentScene != "") {
 			if (sl_bsBases.Count > 0) {
+				s_vScrollPos = GUILayout.BeginScrollView(s_vScrollPos);
 				foreach (BaseGameStructure curbase in sl_bsBases) {
 					//========= GUI BEGIN 
 					GUILayout.BeginVertical("box");
@@ -123,6 +125,17 @@ public class EditorBaseViewer : EditorWindow {
 							else {
 								GUILayout.Label("tar", s_guiStyleDisabled);
 							}
+
+							if (win.bIsManned) {
+								GUILayout.Label(win.goStationedSoldier.SollyType.ToString());
+								if (GUILayout.Button("Select")) {
+									Selection.activeGameObject = win.goStationedSoldier.gameObject;
+								}
+							}
+							else {
+								GUILayout.Label("none", s_guiStyleDisabled);
+								GUILayout.Button("select", s_guiStyleDisabled);
+							}
 							GUILayout.EndHorizontal();
 
 							s_iWindowCount++;
@@ -153,6 +166,7 @@ public class EditorBaseViewer : EditorWindow {
 					//========= GUI END
 					GUILayout.EndVertical();
 				}
+				GUILayout.EndScrollView();
 			}
 			else {
 				GUILayout.Label("No BaseGameStructure object(s) found!", EditorStyles.boldLabel);

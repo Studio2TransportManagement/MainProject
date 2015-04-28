@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StateSoldierAlert : FSM_State<PlayerUnit> {
 
+	private bool bGoForWindow = false;
 	
 	public StateSoldierAlert() {
 		//Debug.Log("StateSoldierAlert begin");
@@ -15,24 +16,42 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	public override void Run(PlayerUnit gu) {
 		if (gu.goTargetBase != null) {
 			if (!gu.bManningWindow) {
-				if (gu.goTargetBase != null) {
+				if (gu.SollyType == SOLDIER_TYPE.HEAVY) {
+					bGoForWindow = false;
+
+					foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
+						if (eu.SollyType == ENEMY_TYPE.TANK) {
+							bGoForWindow = true;
+							break;
+						}
+					}
+				}
+				else {
+					bGoForWindow = true;
+				}
+
+				if (bGoForWindow) {
 					if (gu.goTargetBase.CheckIfWindowAvailable()) {
-						gu.wMannedWindow = gu.goTargetBase.GetAvailableOpenWindow();
-						gu.wMannedWindow.ManWindow(gu);
-						gu.bManningWindow = true;
+						gu.goTargetBase.GetAvailableOpenWindow().ManWindow(gu);
 						gu.navAgent.SetDestination(gu.wMannedWindow.tStandingPosition.position);
 						//Debug.Log ("Manning Window");
 					}
 					else {
-						Debug.Log("<color=red>No AvailableWindows</color>");
-					}
-
-					if (!gu.goTargetBase.bAlert) {
-						gu.ChangeState(new StateSoldierIdle());
+						if (gu.SollyType == SOLDIER_TYPE.HEAVY) {
+							foreach (Window win in gu.goTargetBase.GetMannedWindows()) {
+								if (win.goStationedSoldier.SollyType == SOLDIER_TYPE.GUNNER) {
+									win.LeaveWindow();
+									win.ManWindow(gu);
+									break;
+								}
+							}
+						}
+						//Debug.Log("<color=red>No AvailableWindows</color>");
 					}
 				}
-				else {
-					Debug.Log("<color = red>Base is NULL</color>");
+
+				if (!gu.goTargetBase.bAlert) {
+					gu.ChangeState(new StateSoldierIdle());
 				}
 			}
 			else {
@@ -50,6 +69,10 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
+		if (gu.bManningWindow && gu.goTargetBase.l_euAttackers.Count == 0) {
+			gu.wMannedWindow.LeaveWindow();
+//			Debug.Log("StateSoldierAlert leftwin end");
+		}
 		//Debug.Log("StateSoldierAlert end");
 	}
 }

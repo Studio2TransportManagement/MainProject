@@ -88,6 +88,16 @@ public class BaseGameStructure : GameStructure {
 		return l_guInjuredply;
 	}
 
+	public List<Window> GetMannedWindows() {
+		List<Window> lManned = new List<Window>();
+		foreach (Window win in l_windows) {
+			if (win.bIsManned && win.bIsActive) {
+				lManned.Add(win);
+			}
+		}
+		return lManned;
+	}
+
 	//Use after checking for open window, helps to avoid targeting a Null window
 	public Window GetAvailableOpenWindow() {
 		foreach (Window window in l_windows) {
