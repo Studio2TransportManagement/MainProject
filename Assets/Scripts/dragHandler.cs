@@ -6,7 +6,6 @@ public class dragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public UIAudioManager audioManager;
 	public static GameObject goItemBeingDragged;
-	public GameObject goRecruitmentInfoPanel;
 	Vector3 vStartPosition;
 	Vector3 vStartSize;
 	Vector3 vDragSize;
@@ -46,10 +45,6 @@ public class dragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		goItemBeingDragged.transform.localScale = vStartSize;
 		transform.position = vStartPosition;
 		goItemBeingDragged = null;
-		if(goRecruitmentInfoPanel.activeInHierarchy)
-		{
-			goRecruitmentInfoPanel.SetActive (false);
-		}
 	}
 	#endregion
 
