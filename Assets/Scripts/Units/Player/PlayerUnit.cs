@@ -28,7 +28,8 @@ public class PlayerUnit : GameUnit {
 
 	private SpriteRenderer spriteRenderer;
 
-
+	private bool bAtNavTargetPoint;
+	public Vector3 vNavTarget;
 
 	// Use this for initialization
 	protected override void Start() {
@@ -127,16 +128,18 @@ public class PlayerUnit : GameUnit {
 		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
-		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
-		nameSaver.l_sDeadUnitNames.Add(sUnitName);
-		//make sure if the unit dies at a window, we stop manning it
+		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dying")){
+			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
+			nameSaver.l_sDeadUnitNames.Add(sUnitName);
+			//make sure if the unit dies at a window, we stop manning it
 
-		//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
-		//if(deathAnimationHasFinished)
-		//Do following functions.
-		Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
-		Destroy(goHealthInstance);
-		Destroy(gameObject);
+			//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
+			//if(deathAnimationHasFinished)
+			//Do following functions.
+			Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
+			Destroy(goHealthInstance);
+			Destroy(gameObject);
+		}
 	}
 
 	void OnMouseEnter() {
@@ -167,7 +170,7 @@ public class PlayerUnit : GameUnit {
 		return this.FSM.GetStateName();
 	}
 
-	protected BaseGameStructure GetCurrentBase() {
+	public BaseGameStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();
 		Ray ray = new Ray(this.transform.position, Vector3.down);
 		if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("building"))) {
@@ -178,6 +181,27 @@ public class PlayerUnit : GameUnit {
 		Debug.Log ("Unit not detecting base");
 		return null;
 	}
+
+
+	public void WanderBetweenBasePoints() {
+
+		//if we havent set a target, we are within 0.2 units of the target or the current target is unreachable, get a new random target position
+		if(vNavTarget == Vector3.zero || VectorApproximatelyEquals(gameObject.transform.position, vNavTarget, 0.2f) || Vector3.Distance(gameObject.transform.position, vNavTarget) >= 50 || navAgent.pathStatus == NavMeshPathStatus.PathPartial) {
+			vNavTarget = goTargetBase.l_tWanderPoints[Random.Range(0,goTargetBase.l_tWanderPoints.Count)].position;
+			navAgent.SetDestination(vNavTarget);
+		}
+	}
+
+	//pretty simple what this does, but in all actuality it should be added to some kinda math class
+	public bool VectorApproximatelyEquals(Vector3 vec1, Vector3 vec2, float dif){
+		if( Mathf.Abs(vec1.x - vec2.x) <= dif && Mathf.Abs(vec1.z - vec2.z) <= dif) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 
 	public bool IsFSMInitialised() {
 		if (this.FSM != null) {

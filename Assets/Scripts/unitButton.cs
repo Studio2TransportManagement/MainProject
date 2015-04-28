@@ -29,7 +29,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	}
 
 	void Start() {
-		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
+//		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
 		unitSpawner = this.GetComponentInParent<SpawnSoldier>();
 		l_sCurrentUnitsName = new List<string>();
 	}

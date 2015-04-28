@@ -7,9 +7,12 @@ public class BaseGameStructure : GameStructure {
 	public List<Window> l_windows;
 	public bool PanelOpen;
 	public UpgradeGUI UpgradeUI;
-	public GameObject goAlertImage;
+//	public GameObject goAlertImage;
 	public TrainStation tsLeftStation;
 	public TrainStation tsRightStation;
+	public List<Transform> l_tWanderPoints;
+	public GameObject goStockpile;
+
 	public List<EnemyUnit> l_euAttackers;
 	private List<GameObject> l_goAllply;
 	private List<GameUnit> l_guInjuredply;
@@ -36,11 +39,11 @@ public class BaseGameStructure : GameStructure {
 			if (l_euAttackers.Count == 0) {
 				bAlert = false;
 			}
-			goAlertImage.gameObject.SetActive(true);
+//			goAlertImage.gameObject.SetActive(true);
 		}
 
 		if (!bAlert) {
-			goAlertImage.SetActive(false);
+//			goAlertImage.SetActive(false);
 		}
 	}
 

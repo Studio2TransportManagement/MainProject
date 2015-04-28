@@ -10,6 +10,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
+		gu.aAnimator.SetBool("bIsAiming", true);
 		//Debug.Log("StateSoldierFiring begin");
 	}
 	
@@ -42,6 +43,8 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
+		gu.aAnimator.SetBool("bIsAiming", false);
+
 		//Debug.Log("StateSoldierFiring end");
 	}
 }

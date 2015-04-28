@@ -72,9 +72,9 @@ public class TrainStation : MonoBehaviour {
 					foreach (GameObject obj in l_goOnTrain) {
 						//Position units
 						obj.GetComponent<PlayerUnit>().bInTransit = false;
-						obj.transform.position  = new Vector3 (Random.insideUnitCircle.x + vOffStation.position.x,
+						obj.transform.position  = new Vector3 (Random.insideUnitCircle.x * 5f + vOffStation.position.x,
 						                                       vOffStation.position.y,
-						                                       Random.insideUnitCircle.y + vOffStation.position.z);
+						                                       Random.insideUnitCircle.y * 5f + vOffStation.position.z);
 						obj.SetActive(true);
 						obj.GetComponent<PlayerUnit>().ChangeState(new StateSoldierIdle());
 					}
