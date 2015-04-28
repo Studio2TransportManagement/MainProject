@@ -5,7 +5,8 @@ using System.IO;
 using UnityEngine.UI;
 
 public class characterRandomiser : MonoBehaviour {
-	
+
+	private PlayerResources pPlayerResources;
 	public Sprite[] characterModels;
 	public string[] characterFirstNames;
 	public string[] characterLastNames;
@@ -14,6 +15,10 @@ public class characterRandomiser : MonoBehaviour {
 	public GameObject characterName;
 	public TextAsset firstNames;
 	public TextAsset lastNames;
+
+	void Awake () {
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	public void Start ()
 	{
@@ -39,6 +44,23 @@ public class characterRandomiser : MonoBehaviour {
 		nameNumber = Random.Range (0, characterLastNames.Length);
 		
 		characterName.GetComponent<Text> ().text += " " + characterLastNames [nameNumber];
+	}
+
+	public void Update ()
+	{
+		if(pPlayerResources.GetRecruits() == 0)
+		{
+			Recruit.SetActive (false);
+			DraggableRecruit.SetActive (false);
+			characterName.SetActive (false);
+		}
+
+		if(pPlayerResources.GetRecruits() > 0)
+		{
+			Recruit.SetActive (true);
+			DraggableRecruit.SetActive (true);
+			characterName.SetActive (true);
+		}
 	}
 
 	public void RandomiseAvatar ()

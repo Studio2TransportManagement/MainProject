@@ -20,7 +20,7 @@ public class MiniMapBases : MonoBehaviour {
 	public Sprite sBlinkingRed4;
 	public Sprite sBlinkingRed5;
 	public Sprite sBlinkingRed6;
-	public float fTimer = 0.875f;
+	public float fTimer = 0.21875f;
 	
 	void Update()
 	{
@@ -51,34 +51,34 @@ public class MiniMapBases : MonoBehaviour {
 			ICurrentBase.overrideSprite = sBlinkingRed0;
 			fTimer -= Time.deltaTime;
 
-			if(fTimer <= 0.75f)
+			if(fTimer <= 0.1875f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed1;
 			}
-			if(fTimer <= 0.625f)
+			if(fTimer <= 0.15625f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed2;
 			}
-			if(fTimer <= 0.5f)
+			if(fTimer <= 0.125f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed3;
 			}
-			if(fTimer <= 0.375f)
+			if(fTimer <= 0.09375f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed4;
 			}
-			if(fTimer <= 0.250f)
+			if(fTimer <= 0.0625f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed5;
 			}
-			if(fTimer <= 0.125f)
+			if(fTimer <= 0.03125f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed6;
 			}
 			if(fTimer <= 0f)
 			{
 				ICurrentBase.overrideSprite = sBlinkingRed0;
-				fTimer = 0.875f;
+				fTimer = 0.21875f;
 			}
 		}
 	}

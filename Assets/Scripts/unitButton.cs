@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class unitButton : MonoBehaviour, IDropHandler {
 
+	public GameObject goRecruitmentInfoPanel;
 	public UIAudioManager audioManager;
 	private PlayerResources pPlayerResources;
 	public GameObject goRecruitSystem;
@@ -84,6 +85,10 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			goRecruitSystem.GetComponent<characterRandomiser>().RandomiseAvatar();
 			if (iUnitsTraining == 0)
 			{
+				if(goRecruitmentInfoPanel.activeInHierarchy)
+				{
+					goRecruitmentInfoPanel.SetActive (false);
+				}
 				IButtonPressed.fillAmount = 1;
 				iUnitsTraining += 1;
 				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
