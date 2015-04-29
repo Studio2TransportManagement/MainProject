@@ -40,13 +40,18 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public GameUnit guTargetUnit;
 	
 	public GameObject goFiringEffect;
+
+	public bool bIsFlashing = false;
+	private float fTimer = 0.1f;
+
+	public SkinnedMeshRenderer UnitsMesh;
 	
 	// Use this for initialization
 	protected virtual void Start() {
 		fHealthCurrent = fHealthMax;
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
-
+		UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
 //		Debug.Log("Unit Initiated");
 	}
 
@@ -69,24 +74,20 @@ public class GameUnit : MonoBehaviour, ISelectable {
 //			aAnimator.SetBool("IsWalking", false);
 //		}
 
-		if (fHealthCurrent > (0.25 * fHealthMax)) {
-			UnitStopFlashing();
-		}
-
-		if (fHealthCurrent <= (0.25 * fHealthMax)) {
-			UnitFlashing();
+		if (bIsFlashing == true && UnitsMesh != null) {
+			UnitsMesh.enabled = false;
+			fTimer -= Time.deltaTime;
+			
+			if (fTimer <= 0) {
+				UnitsMesh.enabled = true;
+				bIsFlashing = false;
+				fTimer = 0.1f;
+			}
 		}
 
 		if (fHealthCurrent <= 0) {
 			KillUnit();
 		}
-	}
-	protected virtual void UnitStopFlashing() {
-		//SOON
-	}
-
-	protected virtual void UnitFlashing() {
-		//SOON
 	}
 
 	protected virtual void KillUnit() {
@@ -94,6 +95,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	}
 
 	public void DamageUnit(float dmg) {
+		bIsFlashing = true;
 		fHealthCurrent -= dmg;
 	}
 

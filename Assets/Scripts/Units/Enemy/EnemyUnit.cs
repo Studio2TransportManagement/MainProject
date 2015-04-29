@@ -13,8 +13,6 @@ public class EnemyUnit : GameUnit {
 
 	public ENEMY_TYPE SollyType = ENEMY_TYPE.NONE;
 
-	private float fTimer = 1.75f;
-
 	// Use this for initialization
 	protected override void Start () 
 	{
@@ -47,50 +45,6 @@ public class EnemyUnit : GameUnit {
 //			navAgent.SetDestination(this.transform.position);
 //		}
 
-	}
-
-	protected override void UnitStopFlashing() {
-		if(SollyType != ENEMY_TYPE.TANK){
-			SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-			UnitsMesh.enabled = true;
-		}
-	}
-	
-	protected override void UnitFlashing() {
-		if(SollyType !=ENEMY_TYPE.TANK) {
-			SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-			fTimer -= Time.deltaTime;
-			
-			if(fTimer <= 1.5f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 1.25f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 1.0f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 0.75f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 0.5f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 0.25f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 0f)
-			{
-				UnitsMesh.enabled = false;
-				fTimer = 1.75f;
-			}
-		}
 	}
 
 	protected override void KillUnit()
