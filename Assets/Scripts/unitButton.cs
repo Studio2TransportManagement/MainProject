@@ -48,7 +48,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 			tCurrentlyTraining.text = "" + iUnitsTraining + "";
 		}
 
-		if (Input.GetKeyDown(KeyCode.F7)) {
+		if (Input.GetKeyDown(KeyCode.F7) && this.iPrice == 100) {
 			l_sCurrentUnitsName.Insert(0, "Shia LaBeouf");
 		}
 		

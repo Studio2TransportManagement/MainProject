@@ -55,11 +55,11 @@ public class EnemySpawner : MonoBehaviour {
 					for(int i = 0; i < goSpawnPoints.Length; i++){
 						if(iCurrentWaveCount > 0) { 
 							Vector3 spawnPos = new Vector3 (
-								(Random.insideUnitCircle*fSpawnRadius).x +goSpawnPoints[i].transform.position.x,
-								goSpawnPoints[i].transform.position.y,
-								(Random.insideUnitCircle*fSpawnRadius).y +goSpawnPoints[i].transform.position.z
+								(Random.insideUnitCircle * fSpawnRadius).x + goSpawnPoints[i].transform.position.x,
+									goSpawnPoints[i].transform.position.y,
+									(Random.insideUnitCircle * fSpawnRadius).y + goSpawnPoints[i].transform.position.z
 								);
-							Instantiate(goEnemyGunner,spawnPos,Quaternion.identity);
+							Instantiate(goEnemyGunner, spawnPos, Quaternion.identity);
 							iCurrentWaveCount--;
 						}
 						else {
@@ -67,10 +67,10 @@ public class EnemySpawner : MonoBehaviour {
 						}
 					}
 
-					yield return new WaitForSeconds (fSpawnRate);
+					yield return new WaitForSeconds(fSpawnRate);
 				}
 				iCurrentWaveSize++;
-				yield return new WaitForSeconds (fWaveRate);
+				yield return new WaitForSeconds(fWaveRate);
 			}
 
 			//once Initial waves have been expended, start spawning larger waves
@@ -82,19 +82,19 @@ public class EnemySpawner : MonoBehaviour {
 						for(int a = (int)WaveSizes[i]; a > 0 ; a--)
 						{
 							Vector3 spawnPos = new Vector3 (
-								(Random.insideUnitCircle*fSpawnRadius).x +goSpawnPoints[i].transform.position.x,
+								(Random.insideUnitCircle*fSpawnRadius).x + goSpawnPoints[i].transform.position.x,
 								goSpawnPoints[i].transform.position.y,
-								(Random.insideUnitCircle*fSpawnRadius).y +goSpawnPoints[i].transform.position.z
+								(Random.insideUnitCircle*fSpawnRadius).y + goSpawnPoints[i].transform.position.z
 							);
 
-							Instantiate(goEnemyGunner,spawnPos,Quaternion.identity);
+							Instantiate(goEnemyGunner, spawnPos, Quaternion.identity);
 							iCurrentWaveCount--;
 							
 							if(fTankSpawnCounter >= fTankSpawnRate) {
 								spawnPos = new Vector3 (
-									(Random.insideUnitCircle*fSpawnRadius).x +goSpawnPoints[i].transform.position.x,
+									(Random.insideUnitCircle*fSpawnRadius).x + goSpawnPoints[i].transform.position.x,
 									goSpawnPoints[i].transform.position.y,
-									(Random.insideUnitCircle*fSpawnRadius).y +goSpawnPoints[i].transform.position.z
+									(Random.insideUnitCircle*fSpawnRadius).y + goSpawnPoints[i].transform.position.z
 								);
 								Instantiate(goEnemyTank ,spawnPos, Quaternion.identity);	
 								fTankSpawnCounter = 0f;
@@ -103,10 +103,10 @@ public class EnemySpawner : MonoBehaviour {
 						}
 					}
 					
-					yield return new WaitForSeconds (fSpawnRate);
+					yield return new WaitForSeconds(fSpawnRate);
 				}
 				iCurrentWaveSize += 2;
-				yield return new WaitForSeconds (fWaveRate);
+				yield return new WaitForSeconds(fWaveRate);
 			}
 
 		}

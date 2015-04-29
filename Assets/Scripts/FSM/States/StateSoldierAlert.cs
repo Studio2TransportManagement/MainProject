@@ -22,7 +22,7 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 					bGoForWindow = false;
 
 					foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
-						if (eu.SollyType == ENEMY_TYPE.TANK) {
+						if (eu.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
 							bGoForWindow = true;
 							break;
 						}

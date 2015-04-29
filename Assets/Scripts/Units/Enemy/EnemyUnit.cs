@@ -11,8 +11,6 @@ public class EnemyUnit : GameUnit {
 	public bool kill;
 	public float fWorth;
 
-	public ENEMY_TYPE SollyType = ENEMY_TYPE.NONE;
-
 	// Use this for initialization
 	protected override void Start () {
 		base.Start();
