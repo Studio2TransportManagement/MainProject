@@ -93,7 +93,7 @@ public class EnemySpawner : MonoBehaviour {
 							Instantiate(goEnemyGunner,spawnPos,Quaternion.identity);
 							iCurrentWaveCount--;
 							
-							if(fTankSpawnCounter == fTankSpawnRate) {
+							if(fTankSpawnCounter >= fTankSpawnRate) {
 								spawnPos = new Vector3 (
 									(Random.insideUnitCircle*fSpawnRadius).x +goSpawnPoints[i].transform.position.x,
 									goSpawnPoints[i].transform.position.y,
@@ -102,7 +102,7 @@ public class EnemySpawner : MonoBehaviour {
 								Instantiate(goEnemyTank ,spawnPos, Quaternion.identity);	
 								fTankSpawnCounter = 0f;
 							}
-							fTankSpawnCounter += Random.Range(0,1);
+							fTankSpawnCounter += Random.Range(0f,1f);
 						}
 					}
 					

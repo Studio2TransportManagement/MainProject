@@ -9,8 +9,10 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 
 	}
 	
-	public override void Begin(EnemyUnit eu) 
-	{
+	public override void Begin(EnemyUnit eu) {
+		eu.aAnimator.SetBool("bIsAiming", true);
+		eu.goFiringEffect.gameObject.SetActive(true);
+		eu.goFiringEffect.Play("Bullet Effect");
 //		Debug.Log ("StateEnemyFiring Begin");
 
 	}
@@ -45,6 +47,7 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 	}
 	
 	public override void End(EnemyUnit gu) {
-
+		gu.aAnimator.SetBool("bIsAiming", false);
+		gu.goFiringEffect.gameObject.SetActive(false);
 	}
 }

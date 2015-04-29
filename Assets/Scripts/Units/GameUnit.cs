@@ -39,7 +39,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 	public GameUnit guTargetUnit;
 	
-	public GameObject goFiringEffect;
+	public Animator goFiringEffect;
 	
 	// Use this for initialization
 	protected virtual void Start() {

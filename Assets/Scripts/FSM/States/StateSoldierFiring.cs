@@ -11,7 +11,8 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	
 	public override void Begin(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsAiming", true);
-		gu.goFiringEffect.SetActive(true);
+		gu.goFiringEffect.gameObject.SetActive(true);
+		gu.goFiringEffect.Play("Bullet Effect");
 		//Debug.Log("StateSoldierFiring begin");
 	}
 	
@@ -25,6 +26,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 		}
 
 		if (gu.guTargetUnit != null) {
+			gu.transform.LookAt(new Vector3(gu.guTargetUnit.transform.position.x, gu.transform.position.y, gu.guTargetUnit.transform.position.z));
 			if (gu.iCurrentAmmo > 0) {
 				if(fShootTimer > 0) {
 					fShootTimer -= Time.fixedDeltaTime;
@@ -45,7 +47,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsAiming", false);
-		gu.goFiringEffect.SetActive(true);
+		gu.goFiringEffect.gameObject.SetActive(false);
 		//Debug.Log("StateSoldierFiring end");
 	}
 }

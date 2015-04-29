@@ -48,6 +48,16 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 								}
 							}
 						}
+						
+						if (gu.SollyType == SOLDIER_TYPE.VILLAGER) {
+							foreach (Window win in gu.goTargetBase.GetMannedWindows()) {
+								if (win.goStationedSoldier.SollyType != SOLDIER_TYPE.VILLAGER) {
+									win.LeaveWindow();
+									win.ManWindow(gu);
+									break;
+								}
+							}
+						}
 						//Debug.Log("<color=red>No AvailableWindows</color>");
 					}
 				}
