@@ -59,8 +59,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_1
       rect:
@@ -69,8 +69,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_2
       rect:
@@ -79,8 +79,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_3
       rect:
@@ -89,8 +89,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_4
       rect:
@@ -99,8 +99,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_5
       rect:
@@ -109,8 +109,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_6
       rect:
@@ -119,8 +119,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_7
       rect:
@@ -129,8 +129,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Bazooka fire_strip9_8
       rect:
@@ -139,8 +139,8 @@ TextureImporter:
         y: 0
         width: 512
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

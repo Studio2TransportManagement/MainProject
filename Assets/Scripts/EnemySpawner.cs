@@ -23,23 +23,20 @@ public class EnemySpawner : MonoBehaviour {
 	public float fTankSpawnCounter;
 
 	private bool bSpawnCoroutineRunning;
+	public bool bGameOver = false;
 
 	
-	void Start () 
-	{
+	void Start () {
 		bSpawnCoroutineRunning = false;
-		
 		//By extracting the bounds from each SpawnPoint object, we don't need to have gameobject.collider.bounds.FUNCTION later when spawning, also allows to easily change from coolider to other.boundsp
 //		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
 		fSpawnRadius = goSpawnPoints[1].GetComponent<SphereCollider>().radius;
 		iCurrentWaveSize = iStartingWaveSize;
 		StartSpawning();
-
 	}
 	
 	
-	void Update () 
-	{
+	void Update () {
 		
 	}
 	
@@ -51,8 +48,8 @@ public class EnemySpawner : MonoBehaviour {
 		{
 			iCurrentWaveCount = iCurrentWaveSize;
 			float[] WaveSizes = CalculateWaveSizes(GenerateRatioArray());
-
-			if(iCurrentWaveSize < 9 ){
+					
+			if(iCurrentWaveSize < 9){
 				while(iCurrentWaveCount > 0) {
 
 					for(int i = 0; i < goSpawnPoints.Length; i++){
