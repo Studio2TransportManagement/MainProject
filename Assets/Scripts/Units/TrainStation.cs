@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +12,8 @@ public class TrainStation : MonoBehaviour {
 	public Train trProtoTrain;
 
 	public GameObject goHighlightedTrainStation;
+	public Text goLeftStationCapacity;
+	public Text goRightStationCapacity;
 	public Transform tStartPoint;
 	public Transform tEndPoint;
 	public Transform vOffStation;
@@ -18,7 +21,7 @@ public class TrainStation : MonoBehaviour {
 	public float fLerpTimer = 0.0f;
 	
 	public float fCountdown = 5.0f;
-	public int iCapacity = 4;
+	public int iCapacity = 3;
 	public bool bTravelling = false;
 	public bool bReversing = false;
 
@@ -35,6 +38,16 @@ public class TrainStation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+	
+		if (goLeftStationCapacity != null)
+		{
+			goLeftStationCapacity.text = "0/" + iCapacity + "";
+		}
+		if (goRightStationCapacity != null)
+		{
+			goRightStationCapacity.text = "0/" + iCapacity + "";
+		}
+
 		//Waiting for motion
 		if (!bTravelling) {
 			if (l_goWaiting.Count > 0) {
@@ -101,10 +114,26 @@ public class TrainStation : MonoBehaviour {
 
 	void OnMouseEnter() {
 		goHighlightedTrainStation.SetActive (true);
+		if (goLeftStationCapacity != null)
+		{
+			goLeftStationCapacity.gameObject.SetActive (true);
+		}
+		if (goRightStationCapacity != null)
+		{
+			goRightStationCapacity.gameObject.SetActive (true);
+		}
 	}
 	
 	void OnMouseExit() {
 		goHighlightedTrainStation.SetActive (false);
+		if (goLeftStationCapacity != null)
+		{
+			goLeftStationCapacity.gameObject.SetActive (false);
+		}
+		if (goRightStationCapacity != null)
+		{
+			goRightStationCapacity.gameObject.SetActive (false);
+		}
 	}
 
 	void OnTriggerEnter(Collider other){

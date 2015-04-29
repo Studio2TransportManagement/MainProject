@@ -19,6 +19,7 @@ public class GameStructure : MonoBehaviour {
 	public int iCapacity = 3;
 	public int iTrainsUpgradeCost = 50;
 	public int iCapacityUpgradeAmount = 2;
+	public int iCapacityUpgradeAmount2 = 5;
 
 	public ChildMenuController CMC;
 

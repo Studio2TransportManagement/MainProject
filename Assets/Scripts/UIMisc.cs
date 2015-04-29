@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIMisc : MonoBehaviour {
 
+	public ChildMenuController CMC;
 	private PlayerResources pPlayerResources;
 	public bool bIsMessageFading = false;
 	public bool bPaused = false;
@@ -36,7 +37,7 @@ public class UIMisc : MonoBehaviour {
 	{
 		//Sets labels to their corresponding variables
 		tRecruitAmount.text = "Recruits: " + pPlayerResources.GetRecruits()+ "";
-		tCurrency.text = "$ " + pPlayerResources.GetMoney() + "";
+		tCurrency.text = "Money: $" + pPlayerResources.GetMoney() + "";
 
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))
@@ -87,6 +88,11 @@ public class UIMisc : MonoBehaviour {
 		tSlainMessage.text = "" + name + " has been slain!";
 		tSlainMessage.color = colBloodRed;
 		bIsMessageFading = true;
+	}
+
+	public void RecruitmentBuildingButton ()
+	{
+		CMC.OpenCloseRecruitmentMenu();
 	}
 
 	public void Continue1Button ()
