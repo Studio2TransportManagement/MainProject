@@ -10,6 +10,7 @@ public class TrainStation : MonoBehaviour {
 	private Train trTrain;
 	public Train trProtoTrain;
 
+	public GameObject goHighlightedTrainStation;
 	public Transform tStartPoint;
 	public Transform tEndPoint;
 	public Transform vOffStation;
@@ -96,6 +97,14 @@ public class TrainStation : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void OnMouseEnter() {
+		goHighlightedTrainStation.SetActive (true);
+	}
+	
+	void OnMouseExit() {
+		goHighlightedTrainStation.SetActive (false);
 	}
 
 	void OnTriggerEnter(Collider other){

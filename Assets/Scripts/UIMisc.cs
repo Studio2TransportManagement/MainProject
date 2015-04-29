@@ -17,7 +17,8 @@ public class UIMisc : MonoBehaviour {
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
-	public GameObject goInstructionsPanel;
+	public GameObject goInstructionsPanel1;
+	public GameObject goInstructionsPanel2;
 	public GameObject goPausePanel;
 
 	void Awake ()
@@ -28,7 +29,7 @@ public class UIMisc : MonoBehaviour {
 	void Start ()
 	{
 		Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
-		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (goInstructionsPanel1, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	void Update () 
@@ -88,9 +89,15 @@ public class UIMisc : MonoBehaviour {
 		bIsMessageFading = true;
 	}
 
-	public void ContinueButton ()
+	public void Continue1Button ()
 	{
-		LeanTween.move (goInstructionsPanel, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
+		goInstructionsPanel1.SetActive (false);
+		goInstructionsPanel2.SetActive (true);
+	}
+
+	public void Continue2Button ()
+	{
+		LeanTween.move (goInstructionsPanel2, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	public void CameraShake ()

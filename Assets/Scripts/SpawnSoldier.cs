@@ -47,8 +47,6 @@ public class SpawnSoldier : MonoBehaviour {
 			shia.fReloadSpeed = 1.0f;
 			shia.iMaxAmmo = 200;
 			shia.transform.localScale *= 2;
-
-			UnityEditor.Selection.activeGameObject = shia.gameObject;
 		}
 		else {
 			lastSpawned.GetComponent<PlayerUnit>().sUnitName = name;
