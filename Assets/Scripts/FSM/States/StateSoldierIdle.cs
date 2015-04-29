@@ -37,7 +37,6 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 //		                              NavMesh.GetNavMeshLayerFromName("Floorges")));
 //
 //		gu.navAgent.SetDestination(vTarget);
-		gu.WanderBetweenBasePoints();
 
 		if (gu.goTargetBase != null) {
 			//Gunnner + Heavy
@@ -66,7 +65,9 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 					gu.ChangeState(new StateSoldierRepairBase());
 				}
 			}
+			gu.WanderBetweenBasePoints();
 		}
+
 		else {
 			Debug.Log("StateSoldierIdle (" + gu.SollyType.ToString() + "): goTargetBase was null!");
 		}

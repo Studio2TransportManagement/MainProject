@@ -38,7 +38,9 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public Window wMannedWindow { get; set; }
 
 	public GameUnit guTargetUnit;
-
+	
+	public GameObject goFiringEffect;
+	
 	// Use this for initialization
 	protected virtual void Start() {
 		fHealthCurrent = fHealthMax;

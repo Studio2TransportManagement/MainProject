@@ -63,18 +63,18 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 253
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_2
       rect:
@@ -83,18 +83,18 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_3
       rect:
         serializedVersion: 2
-        x: 768
+        x: 760
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_4
       rect:
@@ -103,8 +103,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_5
       rect:
@@ -113,8 +113,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_6
       rect:
@@ -123,8 +123,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_7
       rect:
@@ -133,18 +133,18 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_8
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 2045
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_9
       rect:
@@ -153,8 +153,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_10
       rect:
@@ -163,8 +163,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_11
       rect:
@@ -173,8 +173,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: BulletShooting_strip13_12
       rect:
@@ -183,8 +183,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

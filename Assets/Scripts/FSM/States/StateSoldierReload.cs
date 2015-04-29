@@ -23,7 +23,12 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 		if(fReloadTimer <=0)
 		{
 			gu.iCurrentAmmo = gu.iMaxAmmo;
-			gu.ChangeState(new StateSoldierAlert());
+			if(gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY) {
+				gu.ChangeState(new StateSoldierAlert());
+			}
+			else {
+				gu.ChangeState(new StateSoldierIdle());
+			}
 		}
 		
 	}

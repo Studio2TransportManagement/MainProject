@@ -11,6 +11,7 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
+		
 		//Debug.Log("StateSoldierHealAlly begin");
 	}
 	
