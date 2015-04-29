@@ -11,6 +11,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	
 	public override void Begin(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsAiming", true);
+		gu.goFiringEffect.SetActive(true);
 		//Debug.Log("StateSoldierFiring begin");
 	}
 	
@@ -25,7 +26,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 
 		if (gu.guTargetUnit != null) {
 			if (gu.iCurrentAmmo > 0) {
-				if(fShootTimer != 0f) {
+				if(fShootTimer > 0) {
 					fShootTimer -= Time.fixedDeltaTime;
 				}
 				
@@ -44,7 +45,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsAiming", false);
-
+		gu.goFiringEffect.SetActive(true);
 		//Debug.Log("StateSoldierFiring end");
 	}
 }
