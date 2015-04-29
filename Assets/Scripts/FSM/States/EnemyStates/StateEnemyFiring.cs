@@ -30,6 +30,7 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 					eu.wMannedWindow = eu.goTargetBase.TargetAvailableOpenWindow();
 					eu.guTargetUnit = eu.wMannedWindow.TargetWindow(eu);
 					eu.guTargetUnit.DamageUnit(eu.fDamage);
+					eu.transform.LookAt(new Vector3(eu.guTargetUnit.transform.position.x, eu.transform.position.y, eu.guTargetUnit.transform.position.z));
 					//Debug.Log ("<color=green>Firing at Window Unit</color>");
 				}
 				else {

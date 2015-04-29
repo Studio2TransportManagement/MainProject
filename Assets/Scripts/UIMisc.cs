@@ -20,6 +20,7 @@ public class UIMisc : MonoBehaviour {
 	public GameObject goInstructionsPanel1;
 	public GameObject goInstructionsPanel2;
 	public GameObject goPausePanel;
+	public EnemySpawner enemyspawner;
 
 	void Awake ()
 	{
@@ -97,7 +98,9 @@ public class UIMisc : MonoBehaviour {
 
 	public void Continue2Button ()
 	{
+		enemyspawner.StartSpawning();
 		LeanTween.move (goInstructionsPanel2, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
+		
 	}
 
 	public void CameraShake ()
