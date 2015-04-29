@@ -34,8 +34,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 		l_sCurrentUnitsName = new List<string>();
 	}
 	
-	void Update ()
-	{
+	void Update () {
 		
 		textCost.text = "$" + iPrice + "";
 		
@@ -47,6 +46,10 @@ public class unitButton : MonoBehaviour, IDropHandler {
 		{
 			tCurrentlyTraining.color = Color.white;
 			tCurrentlyTraining.text = "" + iUnitsTraining + "";
+		}
+
+		if (Input.GetKeyDown(KeyCode.F7)) {
+			l_sCurrentUnitsName.Insert(0, "Shia LaBeouf");
 		}
 		
 		if (iUnitsTraining >= 1)

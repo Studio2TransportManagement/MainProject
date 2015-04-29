@@ -26,7 +26,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 
 		if (gu.guTargetUnit != null) {
 			if (gu.iCurrentAmmo > 0) {
-				if(fShootTimer != 0f) {
+				if(fShootTimer > 0) {
 					fShootTimer -= Time.fixedDeltaTime;
 				}
 				

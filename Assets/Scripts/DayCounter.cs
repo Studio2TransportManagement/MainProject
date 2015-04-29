@@ -1,0 +1,28 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class DayCounter : MonoBehaviour {
+
+	public int iDay = 1;
+	public float fSecondsInDay = 5.0f;
+	private float fCounter = 0.0f;
+
+	public Text txtText;
+	
+	void Start() {
+	
+	}
+
+	void FixedUpdate() {
+		if (fCounter < fSecondsInDay) {
+			fCounter += Time.fixedDeltaTime;
+		}
+		else {
+			fCounter = 0.0f;
+			iDay++;
+		}
+
+		txtText.text = "Day: " + iDay.ToString("D2");
+	}
+}
