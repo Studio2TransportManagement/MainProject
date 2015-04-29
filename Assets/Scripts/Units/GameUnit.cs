@@ -31,7 +31,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public int iCurrentAmmo{ get; set; }
 
 	[Tooltip("The time in seconds it takes for a unit to reload (in future; a clip)")]
-	public int fReloadSpeed;
+	public float fReloadSpeed;
 
 	public BaseGameStructure goTargetBase { get; set; }
 

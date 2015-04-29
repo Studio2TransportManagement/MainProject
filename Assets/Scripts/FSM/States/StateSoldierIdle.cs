@@ -41,7 +41,7 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 
 		if (gu.goTargetBase != null) {
 			//Gunnner + Heavy
-			if (gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY) {
+			if (gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY || gu.SollyType == SOLDIER_TYPE.VILLAGER) {
 				if (gu.goTargetBase.bAlert) {
 					gu.ChangeState(new StateSoldierAlert());
 				}
