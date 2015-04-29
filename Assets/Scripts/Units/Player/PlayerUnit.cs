@@ -8,8 +8,6 @@ public class PlayerUnit : GameUnit {
 
 	protected FSM_Core<PlayerUnit> FSM;
 
-	public SOLDIER_TYPE SollyType = SOLDIER_TYPE.NONE;
-	
 	public bool isHovering = false;
 	
 	public SelectionManager SelectionManager;
@@ -32,17 +30,6 @@ public class PlayerUnit : GameUnit {
 	// Use this for initialization
 	protected override void Start() {
 		base.Start();
-
-		if (this.sUnitName == "Shia LeBeouf") {
-			this.SollyType = SOLDIER_TYPE.VILLAGER;
-			this.fDamage = 10.0f;
-			this.fFireRate = 0.01f;
-			this.fHealthMax = 500.0f;
-			this.fHealthCurrent = 500.0f;
-			this.fReloadSpeed = 1.0f;
-			this.iMaxAmmo = 200;
-			this.gameObject.transform.localScale *= 2;
-		}
 
 		bInTransit = false;
 		bUnselectable = false;
@@ -84,10 +71,10 @@ public class PlayerUnit : GameUnit {
 			}
 			
 			if (goHealthInstance.activeInHierarchy) {
-				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
+				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3(0f, 1.50f, 0f));
 				
 				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / fHealthMax;
-				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
+				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text>().text = sUnitName;
 			}
 		}

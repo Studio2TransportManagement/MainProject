@@ -24,7 +24,7 @@ public class Window : MonoBehaviour {
 	public EnemyUnit euTargetingEnemy;
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		goOpenModel.SetActive(false);
 		goClosedModel.SetActive(true);
 	}

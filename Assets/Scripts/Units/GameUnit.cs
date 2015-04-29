@@ -15,11 +15,15 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		set;
 	}
 
+	public SOLDIER_TYPE SollyType;
+
     public float fHealthMax;
 	public float fHealthCurrent;
 	public float fRange;
 	public float fFireRate;
 	public float fDamage;
+
+	public GameObject goParticleOuchPrefab;
 	
 	public Animator aAnimator;
 
@@ -94,13 +98,26 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		//SOON
 	}
 
-	public void DamageUnit(float dmg) {
+	public void DamageUnit(float dmg, GameUnit attacker) {
 		bIsFlashing = true;
 		fHealthCurrent -= dmg;
+		Instantiate(goParticleOuchPrefab, this.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+
+		if (this.fHealthCurrent <= 0) {
+			attacker.KilledAnEnemy();
+		}
 	}
 
 	public void HealUnit(float heal) {
 		fHealthCurrent += heal;
 		Mathf.Clamp(fHealthCurrent, 0, fHealthMax);
+	}
+
+	public void KilledAnEnemy() {
+		if (this.SollyType == SOLDIER_TYPE.VILLAGER) {
+			if (this.transform.localScale.x < 10) {
+				this.gameObject.transform.localScale *= 1.1f;
+			}
+		}
 	}
 }

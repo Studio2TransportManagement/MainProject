@@ -25,7 +25,7 @@ public class BaseGameStructure : GameStructure {
 		StaticGameStructures.bases.Add(this);
 	}
 
-	void Start () {
+	void Start() {
 		l_euAttackers = new List<EnemyUnit>();
 		l_goAllply = new List<GameObject>();
 		l_guInjuredply = new List<GameUnit>();
@@ -34,6 +34,7 @@ public class BaseGameStructure : GameStructure {
 	}
 
 	protected override void Update() {
+		ActivateWindows();
 		base.Update();
 		if (bAlert) {
 			if (l_euAttackers.Count == 0) {
@@ -167,7 +168,7 @@ public class BaseGameStructure : GameStructure {
 	}
 	
 	public void UpgradeWindows() {
-		if (iWindowLevel < 5) {
+		if (iWindowLevel < 3) {
 			iWindowLevel++;
 		}
 		ActivateWindows();

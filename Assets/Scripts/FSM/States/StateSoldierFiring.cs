@@ -33,7 +33,7 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 				}
 				
 				if (fShootTimer <= 0f) {
-					gu.guTargetUnit.DamageUnit(gu.fDamage);
+					gu.guTargetUnit.DamageUnit(gu.fDamage, gu);
 					gu.iCurrentAmmo--;
 					fShootTimer = gu.fFireRate;
 				}
