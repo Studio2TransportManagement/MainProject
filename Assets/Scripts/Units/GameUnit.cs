@@ -20,6 +20,8 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fRange;
 	public float fFireRate;
 	public float fDamage;
+
+	public GameObject goParticleOuchPrefab;
 	
 	public Animator aAnimator;
 
@@ -97,6 +99,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public void DamageUnit(float dmg) {
 		bIsFlashing = true;
 		fHealthCurrent -= dmg;
+		Instantiate(goParticleOuchPrefab, this.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
 	}
 
 	public void HealUnit(float heal) {

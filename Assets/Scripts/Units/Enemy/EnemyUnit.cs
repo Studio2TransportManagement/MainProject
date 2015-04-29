@@ -14,8 +14,7 @@ public class EnemyUnit : GameUnit {
 	public ENEMY_TYPE SollyType = ENEMY_TYPE.NONE;
 
 	// Use this for initialization
-	protected override void Start () 
-	{
+	protected override void Start () {
 		base.Start();
 
 		playerResources = FindObjectOfType<PlayerResources>();
@@ -28,8 +27,7 @@ public class EnemyUnit : GameUnit {
 	}
 
 	// Update is called once per frame
-	protected override void Update () 
-	{
+	protected override void Update () {
 		base.Update();
 		if (FSM != null) {
 			FSM.Update();
@@ -62,13 +60,11 @@ public class EnemyUnit : GameUnit {
 		FSM.ChangeState(gu);
 	}
 
-	public void ReturnToLastState()
-	{
+	public void ReturnToLastState() {
 		FSM.ReturnToLastState();
 	}
 
-	BaseGameStructure GetClosestBase()
-	{
+	BaseGameStructure GetClosestBase() {
 		BaseGameStructure returnStructure = StaticGameStructures.bases[0];
 				
 		float tempdistance = Vector3.Distance(this.transform.position, StaticGameStructures.bases[0].transform.position);
