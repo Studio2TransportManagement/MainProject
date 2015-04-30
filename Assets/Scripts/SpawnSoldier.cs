@@ -7,6 +7,11 @@ using System.Collections;
 public class SpawnSoldier : MonoBehaviour {
 
 	public GameObject goProtoUnit;
+	private PlayerResources pPlayerResources;
+
+	void Awake () {
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	void Start() {
 		//
@@ -23,16 +28,20 @@ public class SpawnSoldier : MonoBehaviour {
 
 		if (sol == SOLDIER_TYPE.GUNNER) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			pPlayerResources.iTotalRecruits ++;
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			pPlayerResources.iTotalRecruits ++;
 		}
 		if (sol == SOLDIER_TYPE.MEDIC) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			pPlayerResources.iTotalRecruits ++;
 		}
 		if (sol == SOLDIER_TYPE.MECHANIC) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
+			pPlayerResources.iTotalRecruits ++;
 		}
 
 		lastSpawned.GetComponent<PlayerUnit>().sUnitName = name;

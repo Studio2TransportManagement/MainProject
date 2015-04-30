@@ -18,7 +18,12 @@ public class SelectionManager : MonoBehaviour {
 
 	private GameObject goCurrentObject;
 	private PlayerUnit guCurrentUnit;
-	
+	private PlayerResources pPlayerResources;
+
+	void Awake () {
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
+
 	//Init
 	void Start() {
 		l_goCurrentSelection = new List<GameObject>();
@@ -28,6 +33,8 @@ public class SelectionManager : MonoBehaviour {
 	
 	//Update
 	void Update() {
+		pPlayerResources.iSelectedRecruits = l_goCurrentSelection.Count;
+
 		//Check for selectable objects under the mouse, but ignore GUIs
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
 			rRay = Camera.main.ScreenPointToRay(Input.mousePosition);

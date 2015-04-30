@@ -6,6 +6,8 @@ public class PlayerResources : MonoBehaviour {
 	public float fStartingCash;
 	public float fStartingRecruits;
 
+	public int iTotalRecruits;
+	public int iSelectedRecruits;
 	private float fCurrentMoney = 5000f;
 	private float fCurrentRecruits = 10f;
 
@@ -31,7 +33,6 @@ public class PlayerResources : MonoBehaviour {
 	public void SetMoney(float amount) {
 		fCurrentMoney = amount;
 	}
-
 
 	public void ChangeRecruits(float amount) {
 		if (amount > 0) {

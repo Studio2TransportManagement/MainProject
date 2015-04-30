@@ -26,6 +26,11 @@ public class PlayerUnit : GameUnit {
 
 	private bool bAtNavTargetPoint;
 	public Vector3 vNavTarget;
+	private PlayerResources pPlayerResources;
+
+	void Awake () {
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	// Use this for initialization
 	protected override void Start() {
@@ -87,6 +92,7 @@ public class PlayerUnit : GameUnit {
 		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dying")){
 			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
 			nameSaver.l_sDeadUnitNames.Add(sUnitName);
+			pPlayerResources.iTotalRecruits --;
 			//make sure if the unit dies at a window, we stop manning it
 
 			//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.

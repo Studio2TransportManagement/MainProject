@@ -10,6 +10,8 @@ public class UIMisc : MonoBehaviour {
 	public bool bPaused = false;
 	public Text tRecruitAmount;
 	public Text tCurrency;
+	public Text tTotalRecruits;
+	public Text tSelectedRecruits;
 	public SelectionManager SelectionManager;
 	public Text tSlainMessage;
 	public Texture2D texCursorDefault;
@@ -39,6 +41,8 @@ public class UIMisc : MonoBehaviour {
 		//Sets labels to their corresponding variables
 		tRecruitAmount.text = "Recruits: " + pPlayerResources.GetRecruits()+ "";
 		tCurrency.text = "Money: $" + pPlayerResources.GetMoney() + "";
+		tTotalRecruits.text = "Total Recruits \n " + pPlayerResources.iTotalRecruits + "";
+		tSelectedRecruits.text = "Selected Recruits \n " + pPlayerResources.iSelectedRecruits + "";
 
 		//Sets the cursor for the game
 		if (Input.GetMouseButtonDown (0))

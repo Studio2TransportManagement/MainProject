@@ -15,7 +15,6 @@ public class UpgradeGUI : MonoBehaviour {
 	public Sprite sBaseBravo;
 	public Sprite sBaseCharlie;
 	public Image tBaseHealth;
-	public Text tCurrency;
 	public Text tBaseHealthValue;
 	public Image IIntegrityButton;
 	public Sprite sIntegrityBtn1;
@@ -63,7 +62,6 @@ public class UpgradeGUI : MonoBehaviour {
 				IBaseName.overrideSprite = sBaseCharlie;
 			}
 
-			tCurrency.text = "$ " + pPlayerResources.GetMoney() + "";
 			tBaseHealth.fillAmount = upgradingBase.fHealthCurrent / upgradingBase.fHealthMax;
 			tBaseHealthValue.text = "" + upgradingBase.fHealthCurrent + "/" + upgradingBase.fHealthMax + "";
 
