@@ -27,7 +27,7 @@ public class DayCounter : MonoBehaviour {
 			resources.ChangeRecruits(fRecruitsPerDay);
 		}
 
-		txtText.text = "Day: " + iDay.ToString("D2");
+		txtText.text = "Day " + iDay.ToString("D2");
 		}
 	}
 }
