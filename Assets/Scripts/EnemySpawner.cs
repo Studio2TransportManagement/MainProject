@@ -14,6 +14,10 @@ public class EnemySpawner : MonoBehaviour {
 	public int iCurrentWaveCount;
 	//How many units there are in total in the current wave
 	public int iCurrentWaveSize;
+
+	public int iWaveIncrease;
+
+	public int iRatioSplitWave;
 	
 	public float fSpawnRate;
 	public float fWaveRate;
@@ -32,7 +36,7 @@ public class EnemySpawner : MonoBehaviour {
 //		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
 		fSpawnRadius = goSpawnPoints[1].GetComponent<SphereCollider>().radius;
 		iCurrentWaveSize = iStartingWaveSize;
-		StartSpawning();
+//		StartSpawning();
 	}
 	
 	
@@ -49,7 +53,7 @@ public class EnemySpawner : MonoBehaviour {
 			iCurrentWaveCount = iCurrentWaveSize;
 			float[] WaveSizes = CalculateWaveSizes(GenerateRatioArray());
 					
-			if(iCurrentWaveSize < 9){
+			if(iCurrentWaveSize < iRatioSplitWave){
 				while(iCurrentWaveCount > 0) {
 
 					for(int i = 0; i < goSpawnPoints.Length; i++){
@@ -69,12 +73,12 @@ public class EnemySpawner : MonoBehaviour {
 
 					yield return new WaitForSeconds(fSpawnRate);
 				}
-				iCurrentWaveSize++;
+				iCurrentWaveSize += iWaveIncrease;
 				yield return new WaitForSeconds(fWaveRate);
 			}
 
 			//once Initial waves have been expended, start spawning larger waves
-			if(iCurrentWaveSize >= 9) {
+			if(iCurrentWaveSize >= iRatioSplitWave) {
 				while(iCurrentWaveCount > 0)
 				{
 					for(int i = 0; i < WaveSizes.Length; i++)
@@ -105,7 +109,7 @@ public class EnemySpawner : MonoBehaviour {
 					
 					yield return new WaitForSeconds(fSpawnRate);
 				}
-				iCurrentWaveSize += 2;
+				iCurrentWaveSize += iWaveIncrease;
 				yield return new WaitForSeconds(fWaveRate);
 			}
 

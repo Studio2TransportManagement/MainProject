@@ -11,7 +11,7 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 
 	public override void Begin(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsRunning", true);
-
+		gu.navAgent.speed = gu.fAlertSpeed;
 		//Debug.Log("StateSoldierAlert begin");
 	}
 	

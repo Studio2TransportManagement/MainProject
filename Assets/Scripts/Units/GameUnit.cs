@@ -56,6 +56,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 		UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+		iCurrentAmmo = iMaxAmmo;
 //		Debug.Log("Unit Initiated");
 	}
 

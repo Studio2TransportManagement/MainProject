@@ -22,6 +22,9 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
+	public float fIdleSpeed;
+	public float fAlertSpeed;
+
 	private SpriteRenderer spriteRenderer;
 
 	private bool bAtNavTargetPoint;
