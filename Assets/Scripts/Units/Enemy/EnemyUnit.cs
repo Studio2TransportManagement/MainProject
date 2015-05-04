@@ -10,6 +10,8 @@ public class EnemyUnit : GameUnit {
 	[Tooltip("For testing purposes, kills the selected unit")]
 	public bool kill;
 	public float fWorth;
+	public Vector3 v3BasePos;
+	public bool AtBase = false;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -35,11 +37,6 @@ public class EnemyUnit : GameUnit {
 		{
 			fHealthCurrent = 0f;
 		}
-
-//		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
-//		{
-//			navAgent.SetDestination(this.transform.position);
-//		}
 
 	}
 

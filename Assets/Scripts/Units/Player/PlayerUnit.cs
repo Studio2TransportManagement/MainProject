@@ -91,15 +91,10 @@ public class PlayerUnit : GameUnit {
 		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
-		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dying")){
+		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("DeathAnim")){
 			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
 			nameSaver.l_sDeadUnitNames.Add(sUnitName);
 			pPlayerResources.iTotalRecruits --;
-			//make sure if the unit dies at a window, we stop manning it
-
-			//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
-			//if(deathAnimationHasFinished)
-			//Do following functions.
 			Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
 			Destroy(goHealthInstance);
 			Destroy(gameObject);
