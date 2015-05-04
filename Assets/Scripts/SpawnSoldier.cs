@@ -35,24 +35,7 @@ public class SpawnSoldier : MonoBehaviour {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
 		}
 
-		//Easter eggs are small and numerous
-		if (sol == SOLDIER_TYPE.GUNNER && name == "Shia LeBeouf") {
-			PlayerUnit shia = lastSpawned.GetComponent<Gunner>();
-			shia.sUnitName = name;
-			shia.SollyType = SOLDIER_TYPE.VILLAGER;
-			shia.fDamage = 10.0f;
-			shia.fFireRate = 0.01f;
-			shia.fHealthMax = 500.0f;
-			shia.fHealthCurrent = 500.0f;
-			shia.fReloadSpeed = 1.0f;
-			shia.iMaxAmmo = 200;
-			shia.transform.localScale *= 2;
-
-			UnityEditor.Selection.activeGameObject = shia.gameObject;
-		}
-		else {
-			lastSpawned.GetComponent<PlayerUnit>().sUnitName = name;
-		}
+		lastSpawned.GetComponent<PlayerUnit>().sUnitName = name;
 
 		lastSpawned.GetComponent<NavMeshAgent>().SetDestination(spawnpoint + new Vector3(0,0,-5));
 	}

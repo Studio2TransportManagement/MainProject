@@ -35,17 +35,6 @@ public class PlayerUnit : GameUnit {
 	protected override void Start() {
 		base.Start();
 
-		if (this.sUnitName == "Shia LeBeouf") {
-			this.SollyType = SOLDIER_TYPE.VILLAGER;
-			this.fDamage = 10.0f;
-			this.fFireRate = 0.01f;
-			this.fHealthMax = 500.0f;
-			this.fHealthCurrent = 500.0f;
-			this.fReloadSpeed = 1.0f;
-			this.iMaxAmmo = 200;
-			this.gameObject.transform.localScale *= 2;
-		}
-
 		bInTransit = false;
 		bUnselectable = false;
 		nameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
