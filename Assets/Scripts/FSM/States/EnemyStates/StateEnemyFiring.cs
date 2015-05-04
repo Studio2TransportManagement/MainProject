@@ -12,7 +12,13 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 	public override void Begin(EnemyUnit eu) {
 		eu.aAnimator.SetBool("bIsAiming", true);
 		eu.goFiringEffect.gameObject.SetActive(true);
-		eu.goFiringEffect.Play("Bullet Effect");
+		if(eu.SollyType == SOLDIER_TYPE.ENEMY_GUNNER) {
+			eu.goFiringEffect.Play("Bullet Effect");
+			eu.asAudioSource.clip = eu.uaUnitAudio.acFiring;
+			eu.asAudioSource.loop = true;
+			eu.asAudioSource.volume = 0.2f;
+			eu.asAudioSource.Play();
+		}
 //		Debug.Log ("StateEnemyFiring Begin");
 
 	}

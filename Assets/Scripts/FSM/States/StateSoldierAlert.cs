@@ -19,13 +19,16 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 		if (gu.goTargetBase != null) {
 			if (!gu.bManningWindow) {
 				if (gu.SollyType == SOLDIER_TYPE.HEAVY) {
-					bGoForWindow = false;
-
-					foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
-						if (eu.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
-							bGoForWindow = true;
-							break;
+					if(!gu.goTargetBase.CheckIfWindowAvailable()) {
+						foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
+							if (eu.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
+								bGoForWindow = true;
+								break;
+							}
 						}
+					}
+					else {
+						bGoForWindow = true;
 					}
 				}
 				else {

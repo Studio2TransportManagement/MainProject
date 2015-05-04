@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Window : MonoBehaviour {
 
-	public GameObject goOpenModel;
 	public GameObject goClosedModel;
 
 	public Transform tStandingPosition;
@@ -25,7 +24,6 @@ public class Window : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake() {
-		goOpenModel.SetActive(false);
 		goClosedModel.SetActive(true);
 	}
 	
@@ -34,15 +32,8 @@ public class Window : MonoBehaviour {
 
 	}
 
-	void debugSwitchWindowState() {
-		bIsActive = !bIsActive;
-		goOpenModel.SetActive(!goOpenModel.activeInHierarchy);
-		goClosedModel.SetActive(!goOpenModel.activeInHierarchy);
-	}
-
 	public void ActivateWindow() {
 		bIsActive = true;
-		goOpenModel.SetActive(true);
 		goClosedModel.SetActive(false);
 	}
 

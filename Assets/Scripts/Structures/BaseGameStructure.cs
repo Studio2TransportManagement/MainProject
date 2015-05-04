@@ -20,8 +20,8 @@ public class BaseGameStructure : GameStructure {
 	public bool bAlert;
 
 	void Awake() {
-		l_windows = new List<Window>();
-		l_windows.AddRange(GetComponentsInChildren<Window>());
+//		l_windows = new List<Window>();
+//		l_windows.AddRange(GetComponentsInChildren<Window>());
 		StaticGameStructures.bases.Add(this);
 	}
 
@@ -191,14 +191,14 @@ public class BaseGameStructure : GameStructure {
 	public void UpgradeWindows() {
 		if (iWindowLevel < 3) {
 			iWindowLevel++;
+			iWindows += 2;
 		}
 		ActivateWindows();
 	}
 
 	public void ActivateWindows() {
 		//Base windows plus upgrade level
-		int j = iWindowLevel + 2;
-		for (int i = 0; i < j; i++) {
+		for (int i = 0; i < iWindows; i++) {
 			l_windows[i].ActivateWindow();
 		}
 	}
@@ -207,7 +207,9 @@ public class BaseGameStructure : GameStructure {
 		if (other.gameObject.tag == "enemy-unit") {
 			EnemyUnit tempEU = other.GetComponent<EnemyUnit>();
 			if (!l_euAttackers.Contains(tempEU)) {
-				l_euAttackers.Add(tempEU);	
+				l_euAttackers.Add(tempEU);
+				tempEU.v3BasePos = other.transform.position;
+				tempEU.AtBase = true;
 			}
 		}
 	}

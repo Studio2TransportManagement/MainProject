@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class GameUnit : MonoBehaviour, ISelectable {
@@ -25,6 +26,11 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	
 	public float fIdleSpeed;
 	public float fAlertSpeed;
+
+	public UnitAudio uaUnitAudio;
+
+	[HideInInspector]
+	public AudioSource asAudioSource;
 
 	public GameObject goParticleOuchPrefab;
 	
@@ -59,6 +65,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 
 		selectionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionManager>();
 		UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+		asAudioSource = GetComponent<AudioSource>();
 		iCurrentAmmo = iMaxAmmo;
 //		Debug.Log("Unit Initiated");
 	}
