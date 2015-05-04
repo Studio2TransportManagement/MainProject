@@ -132,15 +132,25 @@ public class BaseGameStructure : GameStructure {
 		return null;
 	}
 
-	public void ModifyCurrentIntegrity(float amount) {
-		if (amount > 0) {
-			fHealthCurrent += amount;
-		}
-		if (amount < 0) {
+	public void DamageBase(float amount, GameUnit attacker) {
+		if(attacker.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
 			if (!bAlert) {
 				bAlert = true;
 			}
-			fHealthCurrent += amount;
+			fHealthCurrent -= amount * 10;
+			List<PlayerUnit> tempPU = new List<PlayerUnit>();
+			tempPU = GetAllUnitsInBase();
+
+			foreach(PlayerUnit pu in tempPU) {
+				pu.DamageUnit(amount, attacker);
+			}
+		}
+
+		else {
+			if (!bAlert) {
+				bAlert = true;
+			}
+			fHealthCurrent -= amount;
 		}
 	}
 
@@ -184,8 +194,9 @@ public class BaseGameStructure : GameStructure {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "enemy-unit") {
-			if (!l_euAttackers.Contains(other.GetComponent<EnemyUnit>())) {
-				l_euAttackers.Add(other.GetComponent<EnemyUnit>());	
+			EnemyUnit tempEU = other.GetComponent<EnemyUnit>();
+			if (!l_euAttackers.Contains(tempEU)) {
+				l_euAttackers.Add(tempEU);	
 			}
 		}
 	}

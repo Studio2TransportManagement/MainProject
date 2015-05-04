@@ -22,8 +22,6 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
-	public float fIdleSpeed;
-	public float fAlertSpeed;
 
 	private SpriteRenderer spriteRenderer;
 
@@ -89,6 +87,7 @@ public class PlayerUnit : GameUnit {
 	}
 
 	protected override void KillUnit() {
+		aAnimator.SetBool("bIsDying", true);
 		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
