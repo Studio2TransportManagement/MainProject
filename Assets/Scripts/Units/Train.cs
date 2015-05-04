@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class Train : MonoBehaviour {
 
+	public GameObject goLevel1;
+	public GameObject goLevel2;
+	public GameObject goLevel3;
+
 	// Use this for initialization
 	void Start () {
 		//

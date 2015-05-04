@@ -20,12 +20,12 @@ public class BaseGameStructure : GameStructure {
 	public bool bAlert;
 
 	void Awake() {
-		l_windows = new List<Window>();
-		l_windows.AddRange(GetComponentsInChildren<Window>());
+//		l_windows = new List<Window>();
+//		l_windows.AddRange(GetComponentsInChildren<Window>());
 		StaticGameStructures.bases.Add(this);
 	}
 
-	void Start () {
+	void Start() {
 		l_euAttackers = new List<EnemyUnit>();
 		l_goAllply = new List<GameObject>();
 		l_guInjuredply = new List<GameUnit>();
@@ -34,6 +34,7 @@ public class BaseGameStructure : GameStructure {
 	}
 
 	protected override void Update() {
+		ActivateWindows();
 		base.Update();
 		if (bAlert) {
 			if (l_euAttackers.Count == 0) {
@@ -45,6 +46,17 @@ public class BaseGameStructure : GameStructure {
 		if (!bAlert) {
 //			goAlertImage.SetActive(false);
 		}
+
+		if (iTrainsLevel == 2) {
+			tsLeftStation.Level2Upgrade();
+			tsRightStation.Level2Upgrade();
+		}
+
+		if (iTrainsLevel == 3) {
+			tsLeftStation.Level3Upgrade();
+			tsRightStation.Level3Upgrade();
+		}
+
 	}
 
 	//Allows PlayerUnits to check the base for an available window before moving to man it (eg. if(CheckIfWindowAvailable){targetWindow = GetAvailableOpenWindow() })
@@ -131,15 +143,25 @@ public class BaseGameStructure : GameStructure {
 		return null;
 	}
 
-	public void ModifyCurrentIntegrity(float amount) {
-		if (amount > 0) {
-			fHealthCurrent += amount;
-		}
-		if (amount < 0) {
+	public void DamageBase(float amount, GameUnit attacker) {
+		if(attacker.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
 			if (!bAlert) {
 				bAlert = true;
 			}
-			fHealthCurrent += amount;
+			fHealthCurrent -= amount * 10;
+			List<PlayerUnit> tempPU = new List<PlayerUnit>();
+			tempPU = GetAllUnitsInBase();
+
+			foreach(PlayerUnit pu in tempPU) {
+				pu.DamageUnit(amount, attacker);
+			}
+		}
+
+		else {
+			if (!bAlert) {
+				bAlert = true;
+			}
+			fHealthCurrent -= amount;
 		}
 	}
 
@@ -167,24 +189,27 @@ public class BaseGameStructure : GameStructure {
 	}
 	
 	public void UpgradeWindows() {
-		if (iWindowLevel < 5) {
+		if (iWindowLevel < 3) {
 			iWindowLevel++;
+			iWindows += 2;
 		}
 		ActivateWindows();
 	}
 
 	public void ActivateWindows() {
 		//Base windows plus upgrade level
-		int j = iWindowLevel + 2;
-		for (int i = 0; i < j; i++) {
+		for (int i = 0; i < iWindows; i++) {
 			l_windows[i].ActivateWindow();
 		}
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "enemy-unit") {
-			if (!l_euAttackers.Contains(other.GetComponent<EnemyUnit>())) {
-				l_euAttackers.Add(other.GetComponent<EnemyUnit>());	
+			EnemyUnit tempEU = other.GetComponent<EnemyUnit>();
+			if (!l_euAttackers.Contains(tempEU)) {
+				l_euAttackers.Add(tempEU);
+				tempEU.v3BasePos = other.transform.position;
+				tempEU.AtBase = true;
 			}
 		}
 	}

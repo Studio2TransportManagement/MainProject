@@ -9,8 +9,16 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 
 	}
 	
-	public override void Begin(EnemyUnit eu) 
-	{
+	public override void Begin(EnemyUnit eu) {
+		eu.aAnimator.SetBool("bIsAiming", true);
+		eu.goFiringEffect.gameObject.SetActive(true);
+		if(eu.SollyType == SOLDIER_TYPE.ENEMY_GUNNER) {
+			eu.goFiringEffect.Play("Bullet Effect");
+			eu.asAudioSource.clip = eu.uaUnitAudio.acFiring;
+			eu.asAudioSource.loop = true;
+			eu.asAudioSource.volume = 0.2f;
+			eu.asAudioSource.Play();
+		}
 //		Debug.Log ("StateEnemyFiring Begin");
 
 	}
@@ -27,11 +35,12 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 				if(eu.goTargetBase.CheckForTargetableWindow()) {
 					eu.wMannedWindow = eu.goTargetBase.TargetAvailableOpenWindow();
 					eu.guTargetUnit = eu.wMannedWindow.TargetWindow(eu);
-					eu.guTargetUnit.DamageUnit(eu.fDamage);
+					eu.guTargetUnit.DamageUnit(eu.fDamage, eu);
+					eu.transform.LookAt(new Vector3(eu.guTargetUnit.transform.position.x, eu.transform.position.y, eu.guTargetUnit.transform.position.z));
 					//Debug.Log ("<color=green>Firing at Window Unit</color>");
 				}
 				else {
-					eu.goTargetBase.ModifyCurrentIntegrity(-eu.fDamage);
+					eu.goTargetBase.DamageBase(eu.fDamage, eu);
 					//Debug.Log ("<color=green>Firing at Base</color>");
 				}
 				eu.iCurrentAmmo--;
@@ -45,6 +54,7 @@ public sealed class StateEnemyFiring : FSM_State<EnemyUnit> {
 	}
 	
 	public override void End(EnemyUnit gu) {
-
+		gu.aAnimator.SetBool("bIsAiming", false);
+		gu.goFiringEffect.gameObject.SetActive(false);
 	}
 }

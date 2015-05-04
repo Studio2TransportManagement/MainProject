@@ -19,7 +19,7 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-		gu.navAgent.speed = 1.0f;
+		gu.navAgent.speed = gu.fAlertSpeed;
 		gu.navAgent.angularSpeed = 180.0f;
 		gu.goTargetBase = gu.GetCurrentBase();
 		gu.aAnimator.SetBool("bIsWalking", true);
@@ -37,7 +37,6 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 //		                              NavMesh.GetNavMeshLayerFromName("Floorges")));
 //
 //		gu.navAgent.SetDestination(vTarget);
-		gu.WanderBetweenBasePoints();
 
 		if (gu.goTargetBase != null) {
 			//Gunnner + Heavy
@@ -66,7 +65,9 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 					gu.ChangeState(new StateSoldierRepairBase());
 				}
 			}
+			gu.WanderBetweenBasePoints();
 		}
+
 		else {
 			Debug.Log("StateSoldierIdle (" + gu.SollyType.ToString() + "): goTargetBase was null!");
 		}
@@ -75,8 +76,6 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsWalking", false);
-
-		gu.navAgent.speed = 3.0f;
 		//Debug.Log("StateSoldierIdle end");
 	}
 }

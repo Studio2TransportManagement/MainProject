@@ -5,6 +5,7 @@ using System.Collections;
 public class Tower : MonoBehaviour {
 
 	public UIAudioManager audioManager;
+	public GameObject goHighlightedTower;
 	public Camera cTowerCamera;
 	public Camera cMainCamera;
 	public Canvas canMainCanvas;
@@ -22,6 +23,14 @@ public class Tower : MonoBehaviour {
 		if (bInTower && Input.GetMouseButtonDown(1)) {
 			DeactivateTowerCamera();
 		}
+	}
+
+	void OnMouseEnter() {
+		goHighlightedTower.SetActive (true);
+	}
+	
+	void OnMouseExit() {
+		goHighlightedTower.SetActive (false);
 	}
 
 	void OnMouseDown(){

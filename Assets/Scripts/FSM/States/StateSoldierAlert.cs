@@ -11,7 +11,7 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 
 	public override void Begin(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsRunning", true);
-
+		gu.navAgent.speed = gu.fAlertSpeed;
 		//Debug.Log("StateSoldierAlert begin");
 	}
 	
@@ -19,13 +19,16 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 		if (gu.goTargetBase != null) {
 			if (!gu.bManningWindow) {
 				if (gu.SollyType == SOLDIER_TYPE.HEAVY) {
-					bGoForWindow = false;
-
-					foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
-						if (eu.SollyType == ENEMY_TYPE.TANK) {
-							bGoForWindow = true;
-							break;
+					if(!gu.goTargetBase.CheckIfWindowAvailable()) {
+						foreach (EnemyUnit eu in gu.goTargetBase.l_euAttackers) {
+							if (eu.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
+								bGoForWindow = true;
+								break;
+							}
 						}
+					}
+					else {
+						bGoForWindow = true;
 					}
 				}
 				else {
@@ -42,6 +45,16 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 						if (gu.SollyType == SOLDIER_TYPE.HEAVY) {
 							foreach (Window win in gu.goTargetBase.GetMannedWindows()) {
 								if (win.goStationedSoldier.SollyType == SOLDIER_TYPE.GUNNER) {
+									win.LeaveWindow();
+									win.ManWindow(gu);
+									break;
+								}
+							}
+						}
+						
+						if (gu.SollyType == SOLDIER_TYPE.VILLAGER) {
+							foreach (Window win in gu.goTargetBase.GetMannedWindows()) {
+								if (win.goStationedSoldier.SollyType != SOLDIER_TYPE.VILLAGER) {
 									win.LeaveWindow();
 									win.ManWindow(gu);
 									break;

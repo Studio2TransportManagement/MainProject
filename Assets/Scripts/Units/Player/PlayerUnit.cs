@@ -8,8 +8,6 @@ public class PlayerUnit : GameUnit {
 
 	protected FSM_Core<PlayerUnit> FSM;
 
-	public SOLDIER_TYPE SollyType = SOLDIER_TYPE.NONE;
-	
 	public bool isHovering = false;
 	
 	public SelectionManager SelectionManager;
@@ -24,12 +22,16 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
-	private float fTimer = 1.75f;
 
 	private SpriteRenderer spriteRenderer;
 
 	private bool bAtNavTargetPoint;
 	public Vector3 vNavTarget;
+	private PlayerResources pPlayerResources;
+
+	void Awake () {
+		pPlayerResources = FindObjectOfType<PlayerResources>();
+	}
 
 	// Use this for initialization
 	protected override void Start() {
@@ -75,67 +77,24 @@ public class PlayerUnit : GameUnit {
 			}
 			
 			if (goHealthInstance.activeInHierarchy) {
-				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3 (0f, 1.50f, 0f));
+				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position + new Vector3(0f, 1.50f, 0f));
 				
 				goHealthInstance.GetComponentsInChildren<Image>()[1].fillAmount = fHealthCurrent / fHealthMax;
-				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find ("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
+				goHealthInstance.GetComponent<RectTransform>().anchoredPosition = screenPoint - GameObject.Find("Main Canvas").transform.GetComponent<RectTransform>().sizeDelta / 2f;
 				goHealthInstance.GetComponentInChildren<Text>().text = sUnitName;
 			}
 		}
 	}
 
-	protected override void UnitStopFlashing() {
-		SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-		UnitsMesh.enabled = true;
-	}
-
-	protected override void UnitFlashing() {
-		SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-		fTimer -= Time.deltaTime;
-		
-		if(fTimer <= 1.5f)
-		{
-			UnitsMesh.enabled = false;
-		}
-		if(fTimer <= 1.25f)
-		{
-			UnitsMesh.enabled = true;
-		}
-		if(fTimer <= 1.0f)
-		{
-			UnitsMesh.enabled = false;
-		}
-		if(fTimer <= 0.75f)
-		{
-			UnitsMesh.enabled = true;
-		}
-		if(fTimer <= 0.5f)
-		{
-			UnitsMesh.enabled = false;
-		}
-		if(fTimer <= 0.25f)
-		{
-			UnitsMesh.enabled = true;
-		}
-		if(fTimer <= 0f)
-		{
-			UnitsMesh.enabled = false;
-			fTimer = 1.75f;
-		}
-	}
-
 	protected override void KillUnit() {
+		aAnimator.SetBool("bIsDying", true);
 		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
-		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dying")){
+		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("DeathAnim")){
 			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
 			nameSaver.l_sDeadUnitNames.Add(sUnitName);
-			//make sure if the unit dies at a window, we stop manning it
-
-			//Delay death until death animation has completed and then proceed to play slain message and delete player and correpsonding health bar.
-			//if(deathAnimationHasFinished)
-			//Do following functions.
+			pPlayerResources.iTotalRecruits --;
 			Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
 			Destroy(goHealthInstance);
 			Destroy(gameObject);

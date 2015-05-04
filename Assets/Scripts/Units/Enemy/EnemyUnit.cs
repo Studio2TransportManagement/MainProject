@@ -10,14 +10,11 @@ public class EnemyUnit : GameUnit {
 	[Tooltip("For testing purposes, kills the selected unit")]
 	public bool kill;
 	public float fWorth;
-
-	public ENEMY_TYPE SollyType = ENEMY_TYPE.NONE;
-
-	private float fTimer = 1.75f;
+	public Vector3 v3BasePos;
+	public bool AtBase = false;
 
 	// Use this for initialization
-	protected override void Start () 
-	{
+	protected override void Start () {
 		base.Start();
 
 		playerResources = FindObjectOfType<PlayerResources>();
@@ -30,8 +27,7 @@ public class EnemyUnit : GameUnit {
 	}
 
 	// Update is called once per frame
-	protected override void Update () 
-	{
+	protected override void Update () {
 		base.Update();
 		if (FSM != null) {
 			FSM.Update();
@@ -42,55 +38,6 @@ public class EnemyUnit : GameUnit {
 			fHealthCurrent = 0f;
 		}
 
-//		if(Vector3.Distance(this.transform.position, goTargetBase.transform.position) <= fRange)
-//		{
-//			navAgent.SetDestination(this.transform.position);
-//		}
-
-	}
-
-	protected override void UnitStopFlashing() {
-		if(SollyType != ENEMY_TYPE.TANK){
-			SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-			UnitsMesh.enabled = true;
-		}
-	}
-	
-	protected override void UnitFlashing() {
-		if(SollyType !=ENEMY_TYPE.TANK) {
-			SkinnedMeshRenderer UnitsMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
-			fTimer -= Time.deltaTime;
-			
-			if(fTimer <= 1.5f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 1.25f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 1.0f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 0.75f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 0.5f)
-			{
-				UnitsMesh.enabled = false;
-			}
-			if(fTimer <= 0.25f)
-			{
-				UnitsMesh.enabled = true;
-			}
-			if(fTimer <= 0f)
-			{
-				UnitsMesh.enabled = false;
-				fTimer = 1.75f;
-			}
-		}
 	}
 
 	protected override void KillUnit()
@@ -108,13 +55,11 @@ public class EnemyUnit : GameUnit {
 		FSM.ChangeState(gu);
 	}
 
-	public void ReturnToLastState()
-	{
+	public void ReturnToLastState() {
 		FSM.ReturnToLastState();
 	}
 
-	BaseGameStructure GetClosestBase()
-	{
+	BaseGameStructure GetClosestBase() {
 		BaseGameStructure returnStructure = StaticGameStructures.bases[0];
 				
 		float tempdistance = Vector3.Distance(this.transform.position, StaticGameStructures.bases[0].transform.position);

@@ -15,7 +15,6 @@ public class UpgradeGUI : MonoBehaviour {
 	public Sprite sBaseBravo;
 	public Sprite sBaseCharlie;
 	public Image tBaseHealth;
-	public Text tCurrency;
 	public Text tBaseHealthValue;
 	public Image IIntegrityButton;
 	public Sprite sIntegrityBtn1;
@@ -63,7 +62,6 @@ public class UpgradeGUI : MonoBehaviour {
 				IBaseName.overrideSprite = sBaseCharlie;
 			}
 
-			tCurrency.text = "$ " + pPlayerResources.GetMoney() + "";
 			tBaseHealth.fillAmount = upgradingBase.fHealthCurrent / upgradingBase.fHealthMax;
 			tBaseHealthValue.text = "" + upgradingBase.fHealthCurrent + "/" + upgradingBase.fHealthMax + "";
 
@@ -125,7 +123,7 @@ public class UpgradeGUI : MonoBehaviour {
 				ITrainsButton.overrideSprite = sTrainsBtn2;
 				ITrainsLvl.overrideSprite = sLvl2;
 				tTrainsUpgradeCost.color = new Color32(255, 255, 255, 255);
-				tTrainsInfo.text = "This will increase the number of units that can go on this base's adjacent trains by " + upgradingBase.iCapacityUpgradeAmount + ".";
+				tTrainsInfo.text = "This will increase the number of units that can go on this base's adjacent trains by " + upgradingBase.iCapacityUpgradeAmount2 + ".";
 			}
 			if(upgradingBase.iTrainsLevel == 3)
 			{
@@ -169,9 +167,19 @@ public class UpgradeGUI : MonoBehaviour {
 		   upgradingBase.iTrainsLevel != 3)
 		{
 			pPlayerResources.SetMoney(pPlayerResources.GetMoney() - upgradingBase.iTrainsUpgradeCost);
-			upgradingBase.iCapacity += upgradingBase.iCapacityUpgradeAmount;
+			if(upgradingBase.iTrainsLevel == 1)
+			{
+				upgradingBase.tsLeftStation.iCapacity += upgradingBase.iCapacityUpgradeAmount;
+				upgradingBase.tsRightStation.iCapacity += upgradingBase.iCapacityUpgradeAmount;
+				upgradingBase.iTrainsUpgradeCost += 100;
+			}
+			if(upgradingBase.iTrainsLevel == 2)
+			{
+				upgradingBase.tsLeftStation.iCapacity += upgradingBase.iCapacityUpgradeAmount2;
+				upgradingBase.tsRightStation.iCapacity += upgradingBase.iCapacityUpgradeAmount2;
+				upgradingBase.iTrainsUpgradeCost += 300;
+			}
 			upgradingBase.iTrainsLevel += 1;
-			upgradingBase.iTrainsUpgradeCost += 100;
 		}
 	}
 }

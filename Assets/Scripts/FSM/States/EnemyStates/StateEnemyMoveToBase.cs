@@ -14,7 +14,7 @@ public sealed class StateEnemyMoveToBase : FSM_State<EnemyUnit>{
 	
 	public override void Run(EnemyUnit eu) {
 
-		if(Vector3.Distance(eu.transform.position, eu.goTargetBase.transform.position) <= eu.fRange)
+		if(eu.AtBase)
 		{
 			eu.ChangeState(new StateEnemyFiring());
 		}
@@ -22,7 +22,8 @@ public sealed class StateEnemyMoveToBase : FSM_State<EnemyUnit>{
 	}
 	
 	public override void End(EnemyUnit eu) {
-		eu.navAgent.SetDestination(eu.gameObject.transform.position);
+		eu.navAgent.Stop();
+		eu.navAgent.SetDestination(eu.v3BasePos);
 //		Debug.Log("StateSoldierIdle end");
 	}
 }
