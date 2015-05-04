@@ -9,15 +9,19 @@ public class GameStructure : MonoBehaviour {
 	public float fHealthCurrent;
 
 	public int iIntegrityLevel = 1;
-	public int iIntegrityUpgradeCost = 50;
+	public int iIntegrityUpgradeCost = 150;
+	public int iIntegrityUpgradeCost2 = 300;
 	public int iIntegrityUpgradeAmount = 250;
+	public int iIntegrityUpgradeAmount2 = 500;
 	public int iWindowLevel = 1;
 	public int iWindows = 3;
-	public int iWindowUpgradeCost = 50;
+	public int iWindowUpgradeCost = 100;
+	public int iWindowUpgradeCost2 = 200;
 	public int iWindowsUpgradeAmount = 1;
 	public int iTrainsLevel = 1;
 	public int iCapacity = 3;
-	public int iTrainsUpgradeCost = 50;
+	public int iTrainsUpgradeCost = 100;
+	public int iTrainsUpgradeCost2 = 200;
 	public int iCapacityUpgradeAmount = 2;
 	public int iCapacityUpgradeAmount2 = 5;
 

@@ -30,6 +30,7 @@ public class TrainStation : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		trTrain = (Train)Instantiate(trProtoTrain, tStartPoint.transform.position, tStartPoint.rotation);
+		trTrain.transform.SetParent(GameObject.Find("Rail Network").transform, false);
 		trTrain.transform.localScale = tStartPoint.localScale;
 
 		l_goWaiting = new List<GameObject>();
@@ -38,7 +39,7 @@ public class TrainStation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-	
+
 		if (goLeftStationCapacity != null)
 		{
 			goLeftStationCapacity.text = "0/" + iCapacity + "";
@@ -134,6 +135,18 @@ public class TrainStation : MonoBehaviour {
 		{
 			goRightStationCapacity.gameObject.SetActive (false);
 		}
+	}
+
+	public void Level2Upgrade ()
+	{
+		trTrain.goLevel1.SetActive (false);
+		trTrain.goLevel2.SetActive (true);
+	}
+
+	public void Level3Upgrade ()
+	{
+		trTrain.goLevel2.SetActive (false);
+		trTrain.goLevel3.SetActive (true);
 	}
 
 	void OnTriggerEnter(Collider other){

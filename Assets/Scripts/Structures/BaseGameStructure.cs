@@ -46,6 +46,17 @@ public class BaseGameStructure : GameStructure {
 		if (!bAlert) {
 //			goAlertImage.SetActive(false);
 		}
+
+		if (iTrainsLevel == 2) {
+			tsLeftStation.Level2Upgrade();
+			tsRightStation.Level2Upgrade();
+		}
+
+		if (iTrainsLevel == 3) {
+			tsLeftStation.Level3Upgrade();
+			tsRightStation.Level3Upgrade();
+		}
+
 	}
 
 	//Allows PlayerUnits to check the base for an available window before moving to man it (eg. if(CheckIfWindowAvailable){targetWindow = GetAvailableOpenWindow() })
