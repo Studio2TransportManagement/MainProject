@@ -23,6 +23,7 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 		gu.navAgent.angularSpeed = 180.0f;
 		gu.goTargetBase = gu.GetCurrentBase();
 		gu.aAnimator.SetBool("bIsWalking", true);
+		gu.GetCurrentBase()
 //		navhitIrrelevant = new NavMeshHit();
 	}
 	
@@ -47,6 +48,10 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 			}
 			//Medic
 			else if (gu.SollyType == SOLDIER_TYPE.MEDIC) {
+				if (gu.goTargetBase == null) {
+					Debug.LogError("MEDIC DIDNT GET A BASE");
+				}
+
 				if (gu.goTargetBase.GetInjuredUnitsInBase().Count > 0) {
 					gu.guTargetUnit = gu.goTargetBase.GetInjuredUnitsInBase()[0];
 
@@ -56,13 +61,21 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 						}
 					}
 
-					gu.ChangeState(new StateSoldierHealAlly());
+					gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
+
+					if (gu.guTargetUnit != null && gu.navAgent.remainingDistance <= 0.3f ) {
+						gu.ChangeState(new StateSoldierHealAlly());
+					}
 				}
 			}
 			//Mechanic
 			else if (gu.SollyType == SOLDIER_TYPE.MECHANIC) {
 				if (gu.goTargetBase.fHealthCurrent < gu.goTargetBase.fHealthMax) {
-					gu.ChangeState(new StateSoldierRepairBase());
+					gu.navAgent.SetDestination(gu.goTargetBase.transform.position);
+					
+					if (gu.goTargetBase != null && gu.navAgent.remainingDistance <= 0.3f ) {
+						gu.ChangeState(new StateSoldierRepairBase());
+					}
 				}
 			}
 			gu.WanderBetweenBasePoints();

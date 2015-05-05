@@ -32,6 +32,10 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 					if (gu.guTargetUnit != null) {
 						gu.guTargetUnit.HealUnit(gu.fDamage);
 						gu.iCurrentAmmo--;
+
+						if (gu.goParticleActionEffectPrefab != null) {
+							GameObject.Instantiate(gu.goParticleActionEffectPrefab, gu.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity);
+						}
 					}
 					fHealTimer = gu.fFireRate;
 				}

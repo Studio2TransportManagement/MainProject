@@ -22,12 +22,15 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
+	public GameObject goParticleActionEffectPrefab;
 
 	private SpriteRenderer spriteRenderer;
 
 	private bool bAtNavTargetPoint;
 	public Vector3 vNavTarget;
 	private PlayerResources pPlayerResources;
+
+	ParticleEmitter peActionEffect;
 
 	void Awake () {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
@@ -45,6 +48,8 @@ public class PlayerUnit : GameUnit {
 		goHealthInstance.transform.SetAsFirstSibling();
 		goHealthInstance.SetActive(false);
 		spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+		this.goTargetBase = GetCurrentBase();
 		//Debug.Log("PlayerUnit Initialised");
 
 	}
@@ -128,6 +133,8 @@ public class PlayerUnit : GameUnit {
 	public string GetStateName() {
 		return this.FSM.GetStateName();
 	}
+
+
 
 	public BaseGameStructure GetCurrentBase() {
 		RaycastHit hit = new RaycastHit();

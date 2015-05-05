@@ -27,6 +27,10 @@ public class StateSoldierRepairBase : FSM_State<PlayerUnit> {
 				gu.goTargetBase.Repair(gu.fDamage);
 				gu.iCurrentAmmo--;
 				fRepairTimer = gu.fFireRate;
+
+				if (gu.goParticleActionEffectPrefab != null) {
+					GameObject.Instantiate(gu.goParticleActionEffectPrefab, gu.transform.position + new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity);
+				}
 			}
 		}
 		

@@ -112,7 +112,12 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public void DamageUnit(float dmg, GameUnit attacker) {
 		bIsFlashing = true;
 		fHealthCurrent -= dmg;
-		Instantiate(goParticleOuchPrefab, this.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+		Instantiate(goParticleOuchPrefab,
+		            this.transform.position + new Vector3(Random.Range(-0.5f, 0.5f),
+		                                      1 + Random.Range(-0.5f, 0.5f),
+		                                      Random.Range(-0.5f, 0.5f)),
+		            						  Quaternion.identity
+		            );
 
 		if (this.fHealthCurrent <= 0) {
 			attacker.KilledAnEnemy();
