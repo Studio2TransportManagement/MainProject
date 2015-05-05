@@ -21,7 +21,6 @@ public class UIMisc : MonoBehaviour {
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
-	public GameObject goNoMoreClicking;
 	public GameObject goGameOverLabel;
 	public Text TDontHaveEnoughMoney;
 	public Text TDontHaveEnoughMoneyInstance;
@@ -201,7 +200,7 @@ public class UIMisc : MonoBehaviour {
 	public void GameOver ()
 	{
 		bIsGameOver = true;
-		goNoMoreClicking.SetActive (true);
+		IFadeOut.transform.gameObject.SetActive (true);
 		goGameOverLabel.SetActive (true);
 	}
 

@@ -19,7 +19,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	public int iPrice = 100;
 	public float fTrainingTimer = 60.0f;
 	public Vector2 v2Variance;
-	private UIMisc UIMisc;
+	public UIMisc UIMisc;
 
 	private SpawnSoldier unitSpawner;
 	//public GameObject goProtoUnit;
@@ -27,7 +27,6 @@ public class unitButton : MonoBehaviour, IDropHandler {
 
 	void Awake () {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
-		UIMisc = FindObjectOfType<UIMisc> ();
 	}
 
 	void Start() {
