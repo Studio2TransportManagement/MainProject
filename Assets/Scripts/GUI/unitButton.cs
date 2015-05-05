@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class unitButton : MonoBehaviour, IDropHandler {
 
-	public GameObject goRecruitmentInfoPanel;
+	public Image IInstructions;
 	public UIAudioManager audioManager;
 	private PlayerResources pPlayerResources;
 	public GameObject goRecruitSystem;
@@ -19,6 +19,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	public int iPrice = 100;
 	public float fTrainingTimer = 60.0f;
 	public Vector2 v2Variance;
+	private UIMisc UIMisc;
 
 	private SpawnSoldier unitSpawner;
 	//public GameObject goProtoUnit;
@@ -26,6 +27,7 @@ public class unitButton : MonoBehaviour, IDropHandler {
 
 	void Awake () {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
+		UIMisc = FindObjectOfType<UIMisc> ();
 	}
 
 	void Start() {
@@ -82,16 +84,13 @@ public class unitButton : MonoBehaviour, IDropHandler {
 	
 	public void OnDrop (PointerEventData eventData)
 	{
-		if (pPlayerResources.GetMoney() >= iPrice && pPlayerResources.GetRecruits() >= 1)
+		if (pPlayerResources.GetMoney() >= iPrice)
 		{
-			l_sCurrentUnitsName.Add("" + goRecruitSystem.GetComponent<characterRandomiser>().characterName.GetComponent<Text>().text + "");
+			l_sCurrentUnitsName.Add("" + goRecruitSystem.GetComponent<characterRandomiser>().TCharacterName.GetComponent<Text>().text + "");
 			goRecruitSystem.GetComponent<characterRandomiser>().RandomiseAvatar();
 			if (iUnitsTraining == 0)
 			{
-				if(goRecruitmentInfoPanel.activeInHierarchy)
-				{
-					goRecruitmentInfoPanel.SetActive (false);
-				}
+				IInstructions.enabled = false;
 				IButtonPressed.fillAmount = 1;
 				iUnitsTraining += 1;
 				pPlayerResources.SetMoney(pPlayerResources.GetMoney() - iPrice);
@@ -105,6 +104,10 @@ public class unitButton : MonoBehaviour, IDropHandler {
 				pPlayerResources.SetRecruits(pPlayerResources.GetRecruits() - 1);
 				AudioSource.PlayClipAtPoint (audioManager.acStartTraining, Camera.main.transform.position);
 			}
+		}
+		else
+		{
+			UIMisc.DontHaveEnoughMoney();
 		}
 	}
 	

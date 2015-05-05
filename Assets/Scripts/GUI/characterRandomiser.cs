@@ -10,9 +10,10 @@ public class characterRandomiser : MonoBehaviour {
 	public Sprite[] characterModels;
 	public string[] characterFirstNames;
 	public string[] characterLastNames;
-	public GameObject Recruit;
-	public GameObject DraggableRecruit;
-	public GameObject characterName;
+	public Image IRecruit;
+	public Image IDraggableRecruit;
+	public Text TCharacterName;
+	public GameObject goInstructions;
 	public TextAsset firstNames;
 	public TextAsset lastNames;
 
@@ -34,32 +35,34 @@ public class characterRandomiser : MonoBehaviour {
 
 		int modelNumber = Random.Range (0, characterModels.Length);
 		
-		Recruit.GetComponent<Image> ().overrideSprite = characterModels [modelNumber];
-		DraggableRecruit.GetComponent<Image> ().overrideSprite = characterModels [modelNumber];
+		IRecruit.overrideSprite = characterModels [modelNumber];
+		IDraggableRecruit.overrideSprite = characterModels [modelNumber];
 		
 		int nameNumber = Random.Range (0, characterFirstNames.Length);
 		
-		characterName.GetComponent<Text> ().text = "" + characterFirstNames [nameNumber];
+		TCharacterName.text = "" + characterFirstNames [nameNumber];
 		
 		nameNumber = Random.Range (0, characterLastNames.Length);
 		
-		characterName.GetComponent<Text> ().text += " " + characterLastNames [nameNumber];
+		TCharacterName.text += " " + characterLastNames [nameNumber];
 	}
 
 	public void Update ()
 	{
 		if(pPlayerResources.GetRecruits() == 0)
 		{
-			Recruit.SetActive (false);
-			DraggableRecruit.SetActive (false);
-			characterName.SetActive (false);
+			IRecruit.transform.gameObject.SetActive (false);
+			IDraggableRecruit.transform.gameObject.SetActive (false);
+			TCharacterName.transform.gameObject.SetActive (false);
+			goInstructions.SetActive (false);
 		}
 
 		if(pPlayerResources.GetRecruits() > 0)
 		{
-			Recruit.SetActive (true);
-			DraggableRecruit.SetActive (true);
-			characterName.SetActive (true);
+			IRecruit.transform.gameObject.SetActive (true);
+			IDraggableRecruit.transform.gameObject.SetActive (true);
+			TCharacterName.transform.gameObject.SetActive (true);
+			goInstructions.SetActive (true);
 		}
 	}
 
@@ -67,15 +70,15 @@ public class characterRandomiser : MonoBehaviour {
 	{
 		int modelNumber = Random.Range (0, characterModels.Length);
 
-		Recruit.GetComponent<Image> ().overrideSprite = characterModels [modelNumber];
-		DraggableRecruit.GetComponent<Image> ().overrideSprite = characterModels [modelNumber];
+		IRecruit.overrideSprite = characterModels [modelNumber];
+		IDraggableRecruit.overrideSprite = characterModels [modelNumber];
 
 		int nameNumber = Random.Range (0, characterFirstNames.Length);
 	   
-		characterName.GetComponent<Text> ().text = "" + characterFirstNames [nameNumber];
+		TCharacterName.text = "" + characterFirstNames [nameNumber];
 
 		nameNumber = Random.Range (0, characterLastNames.Length);
 
-		characterName.GetComponent<Text> ().text += " " + characterLastNames [nameNumber];
+		TCharacterName.text += " " + characterLastNames [nameNumber];
 	}
 }

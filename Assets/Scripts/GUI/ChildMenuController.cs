@@ -13,10 +13,12 @@ public class ChildMenuController : GUI_Base {
 	static bool bPanelMoving;
 	static BaseGameStructure currentOpenBase;
 	public float fTimer = 0.35f;
+	private UIMisc UIMisc;
 
 	//Init
 	void Start() {
 		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
+		UIMisc = FindObjectOfType<UIMisc>();
 		LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.01f).setEase (LeanTweenType.easeInQuad);
 		LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.01f).setEase (LeanTweenType.easeInQuad);
 	}
@@ -35,6 +37,23 @@ public class ChildMenuController : GUI_Base {
 		{
 			fTimer = 0.35f;
 		}
+
+		if(UIMisc.bIsGameOver && bIsRecruitmentPanelOpen)
+		{
+			LeanTween.move (goRecruitmentPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 0.25f).setEase (LeanTweenType.easeInQuad);
+			AudioSource.PlayClipAtPoint( audioManager.acCloseRecruitment, Camera.main.transform.position);
+			bIsRecruitmentPanelOpen = false;
+			bPanelMoving = true;
+		}
+
+		if(UIMisc.bIsGameOver && bIsUpgradePanelOpen)
+		{
+			LeanTween.move (goUpgradePanel, new Vector2(Screen.width/2f, 2f * Screen.height), 0.25f).setEase (LeanTweenType.easeInQuad);
+			AudioSource.PlayClipAtPoint( audioManager.acCloseUpgrade, Camera.main.transform.position);
+			bIsUpgradePanelOpen = false;
+			bPanelMoving = true;
+		}
+
 	}
 
 	public void OpenCloseUpgradeMenu(BaseGameStructure currentBase)

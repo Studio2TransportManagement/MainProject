@@ -38,10 +38,12 @@ public class UpgradeGUI : MonoBehaviour {
 	public Image ITrainsLvl;
 	public Text tTrainsUpgradeCost;
 	public Text tTrainsInfo;
+	private UIMisc UIMisc;
 
 	// Use this for initialization
 	void Awake () {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
+		UIMisc = FindObjectOfType<UIMisc> ();
 	}
 	
 	// Update is called once per frame
@@ -93,14 +95,14 @@ public class UpgradeGUI : MonoBehaviour {
 				IWindowsButton.overrideSprite = sWindowsBtn1;
 				IWindowsLvl.overrideSprite = sLvl1;
 				tWindowsUpgradeCost.color = new Color32(255, 255, 255, 255);
-				tWindowsInfo.text = "This will increase the number of windows for units to shoot from by " + upgradingBase.iWindowsUpgradeAmount + ".";
+				tWindowsInfo.text = "This will increase the number of windows for units to shoot from by 2.";
 			}
 			if(upgradingBase.iWindowLevel == 2)
 			{
 				IWindowsButton.overrideSprite = sWindowsBtn2;
 				IWindowsLvl.overrideSprite = sLvl2;
 				tWindowsUpgradeCost.color = new Color32(255, 255, 255, 255);
-				tWindowsInfo.text = "This will increase the number of windows for units to shoot from by " + upgradingBase.iWindowsUpgradeAmount + ".";
+				tWindowsInfo.text = "This will increase the number of windows for units to shoot from by 2.";
 			}
 			if(upgradingBase.iWindowLevel == 3)
 			{
@@ -143,8 +145,21 @@ public class UpgradeGUI : MonoBehaviour {
 		{
 			pPlayerResources.SetMoney(pPlayerResources.GetMoney() - upgradingBase.iIntegrityUpgradeCost);
 			upgradingBase.fHealthMax += upgradingBase.iIntegrityUpgradeAmount;
+			upgradingBase.fHealthCurrent += upgradingBase.iIntegrityUpgradeAmount;
 			upgradingBase.iIntegrityLevel += 1;
-			upgradingBase.iIntegrityUpgradeCost += 100;
+			upgradingBase.iIntegrityUpgradeCost += 200;
+		}
+
+		if(pPlayerResources.GetMoney() < upgradingBase.iIntegrityUpgradeCost &&
+		   upgradingBase.iIntegrityLevel == 1)
+		{
+			UIMisc.DontHaveEnoughMoney();
+		}
+
+		if(pPlayerResources.GetMoney() < upgradingBase.iIntegrityUpgradeCost2 &&
+		   upgradingBase.iIntegrityLevel == 2)
+		{
+			UIMisc.DontHaveEnoughMoney();
 		}
 	}
 
@@ -154,9 +169,20 @@ public class UpgradeGUI : MonoBehaviour {
 		   upgradingBase.iWindowLevel != 3)
 		{
 			pPlayerResources.SetMoney(pPlayerResources.GetMoney() - upgradingBase.iWindowUpgradeCost);
-			//upgradingBase.iWindowLevel += 1;
 			upgradingBase.UpgradeWindows();
 			upgradingBase.iWindowUpgradeCost += 100;
+		}
+
+		if(pPlayerResources.GetMoney() < upgradingBase.iWindowUpgradeCost &&
+		   upgradingBase.iWindowLevel == 1)
+		{
+			UIMisc.DontHaveEnoughMoney();
+		}
+		
+		if(pPlayerResources.GetMoney() < upgradingBase.iWindowUpgradeCost &&
+		   upgradingBase.iWindowLevel == 2)
+		{
+			UIMisc.DontHaveEnoughMoney();
 		}
 		
 	}
@@ -180,6 +206,18 @@ public class UpgradeGUI : MonoBehaviour {
 				upgradingBase.iTrainsUpgradeCost += 300;
 			}
 			upgradingBase.iTrainsLevel += 1;
+		}
+
+		if(pPlayerResources.GetMoney() < upgradingBase.iTrainsUpgradeCost &&
+		   upgradingBase.iTrainsLevel == 1)
+		{
+			UIMisc.DontHaveEnoughMoney();
+		}
+		
+		if(pPlayerResources.GetMoney() < upgradingBase.iTrainsUpgradeCost2 &&
+		   upgradingBase.iTrainsLevel == 2)
+		{
+			UIMisc.DontHaveEnoughMoney();
 		}
 	}
 }

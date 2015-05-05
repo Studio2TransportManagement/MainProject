@@ -16,8 +16,6 @@ public class GameStructure : MonoBehaviour {
 	public int iWindowLevel = 1;
 	public int iWindows = 3;
 	public int iWindowUpgradeCost = 100;
-	public int iWindowUpgradeCost2 = 200;
-	public int iWindowsUpgradeAmount = 1;
 	public int iTrainsLevel = 1;
 	public int iCapacity = 3;
 	public int iTrainsUpgradeCost = 100;
@@ -25,7 +23,12 @@ public class GameStructure : MonoBehaviour {
 	public int iCapacityUpgradeAmount = 2;
 	public int iCapacityUpgradeAmount2 = 5;
 
+	public GameObject goBaseHealth75;
+	public GameObject goBaseHealth50;
+	public GameObject goBaseHealth25;
+
 	public ChildMenuController CMC;
+	public UIMisc UIMisc;
 
 	// Use this for initialization
 	void Awake () 
@@ -41,9 +44,34 @@ public class GameStructure : MonoBehaviour {
 		iWindowLevel = Mathf.Clamp(iWindowLevel, 1, 3);
 		iTrainsLevel = Mathf.Clamp(iTrainsLevel, 1, 3);
 
+		if(fHealthCurrent <= fHealthMax &&
+		   fHealthCurrent > (3f/4f) * fHealthMax)
+		{
+			goBaseHealth75.SetActive (false);
+		}
+		
+		if(fHealthCurrent <= (3f/4f) * fHealthMax &&
+		   fHealthCurrent > (1f/2f) * fHealthMax)
+		{
+			goBaseHealth75.SetActive (true);
+			goBaseHealth50.SetActive (false);
+		}
+		
+		if(fHealthCurrent <= (1f/2f) * fHealthMax &&
+		   fHealthCurrent > (1f/4f) * fHealthMax)
+		{
+			goBaseHealth50.SetActive (true);
+			goBaseHealth25.SetActive (false);
+		}
+		
+		if(fHealthCurrent <= (1f/4f) * fHealthMax)
+		{
+			goBaseHealth25.SetActive (true);
+		}
+
 		if(fHealthCurrent <= 0)
 		{
-			Application.LoadLevel(2);
+			UIMisc.GameOver();
 		}
 
 	}

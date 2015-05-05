@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class NamePrinter : MonoBehaviour {
 
+	public GameObject goMemorialWall;
+	private bool bisStartofScene = true;
+	private float fRiseTimer = 3.0f;
 	public Text[] l_TFallenSoldierNames;
 	public NameSaver MWNameSaver;
 
@@ -15,15 +18,25 @@ public class NamePrinter : MonoBehaviour {
 		l_TFallenSoldierNames[3].text = "Duncan Corrigan";
 		l_TFallenSoldierNames[4].text = "David Hanna";
 		l_TFallenSoldierNames[5].text = "Scott Neskovski";
-		MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
+//		MWNameSaver = GameObject.FindGameObjectWithTag("NameSaver").GetComponent<NameSaver>();
 	}
 
 	void Update () 
 	{
-		for(int i = 6; (i-6) < MWNameSaver.l_sDeadUnitNames.Count; i++)
+		if(bisStartofScene)
 		{
-			l_TFallenSoldierNames[i].text = MWNameSaver.l_sDeadUnitNames[i-6];
+			fRiseTimer -= Time.deltaTime;
+			
+			if(fRiseTimer <= 0f)
+			{
+				MoveMemorialWall();
+				bisStartofScene = false;
+			}
 		}
+//		for(int i = 6; (i-6) < MWNameSaver.l_sDeadUnitNames.Count; i++)
+//		{
+//			l_TFallenSoldierNames[i].text = MWNameSaver.l_sDeadUnitNames[i-6];
+//		}
 
 //		if (Input.GetKeyDown(KeyCode.P))
 //		{
@@ -32,5 +45,10 @@ public class NamePrinter : MonoBehaviour {
 //				l_TFallenSoldierNames[i].text = "Placeholder Name";
 //			}
 //		}
+	}
+
+	void MoveMemorialWall ()
+	{
+		LeanTween.move (goMemorialWall, new Vector2 (Screen.width/2f, (Screen.height/2f) - 40), 3f).setEase (LeanTweenType.easeInQuad);
 	}
 }

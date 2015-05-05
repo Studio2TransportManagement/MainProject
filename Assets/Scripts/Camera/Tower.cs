@@ -10,11 +10,13 @@ public class Tower : MonoBehaviour {
 	public Camera cMainCamera;
 	public Canvas canMainCanvas;
 	private bool bInTower;
+	private UIMisc UIMisc;
 
 	//
 	void Start(){
 		cTowerCamera.gameObject.SetActive(false);
 		audioManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIAudioManager>();
+		UIMisc = FindObjectOfType<UIMisc>();
 		bInTower = false;
 	}
 
@@ -23,6 +25,15 @@ public class Tower : MonoBehaviour {
 		if (bInTower && Input.GetMouseButtonDown(1)) {
 			DeactivateTowerCamera();
 		}
+
+		if (UIMisc.bIsGameOver && bInTower) {
+			DeactivateTowerCamera();
+		}
+
+		if (UIMisc.bIsGameOver) {
+			cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = false;
+		}
+
 	}
 
 	void OnMouseEnter() {
@@ -42,7 +53,7 @@ public class Tower : MonoBehaviour {
 	}
 
 	void ActivateTowerCamera(){
-		//cMainCamera.GetComponent<TestCamera>().bCanMoveCamera = !cMainCamera.GetComponent<TestCamera>().bCanMoveCamera;
+		cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = false;
 		cTowerCamera.gameObject.SetActive(true);
 		canMainCanvas.GetComponent<Canvas>().enabled = false;
 		AudioSource.PlayClipAtPoint(audioManager.acEnterTower, Camera.main.transform.position);
@@ -51,6 +62,7 @@ public class Tower : MonoBehaviour {
 	}
 
 	void DeactivateTowerCamera() {
+		cMainCamera.GetComponent<TestCamera> ().bCanMoveCamera = true;
 		cTowerCamera.gameObject.SetActive(false);
 		canMainCanvas.GetComponent<Canvas>().enabled = true;
 		AudioSource.PlayClipAtPoint(audioManager.acLeaveTower, Camera.main.transform.position);

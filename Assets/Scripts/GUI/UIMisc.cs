@@ -7,6 +7,7 @@ public class UIMisc : MonoBehaviour {
 	public ChildMenuController CMC;
 	private PlayerResources pPlayerResources;
 	public bool bIsMessageFading = false;
+	public bool bIsGameOver = false;
 	public bool bPaused = false;
 	public Text tRecruitAmount;
 	public Text tCurrency;
@@ -20,10 +21,26 @@ public class UIMisc : MonoBehaviour {
 	public Vector2 hotSpot = Vector2.zero;
 	public Color32 colTransparent;
 	public Color32 colBloodRed;
-	public GameObject goInstructionsPanel1;
-	public GameObject goInstructionsPanel2;
+	public GameObject goNoMoreClicking;
+	public GameObject goGameOverLabel;
+	public Text TDontHaveEnoughMoney;
+	public Text TDontHaveEnoughMoneyInstance;
+	public Image IFadeOut;
+	private float fFadeTimer = 3.0f;
+	public GameObject goInstructionsPanel;
 	public GameObject goPausePanel;
 	public EnemySpawner enemyspawner;
+
+	public GameObject goTutorial1;
+	public GameObject goTutorial2;
+	public GameObject goTutorial3;
+	public GameObject goTutorial4;
+	public GameObject goTutorial5;
+	private bool bIsFirstTutClosed = false;
+	public float fFirstTutTimer = 5.0f;
+	private bool bIsThirdTutClosed = false;
+	public float fThirdTutTimer = 15.0f;
+	private bool bIsRecruitsAvailable = false;
 
 	void Awake ()
 	{
@@ -33,7 +50,7 @@ public class UIMisc : MonoBehaviour {
 	void Start ()
 	{
 		Cursor.SetCursor (texCursorDefault, hotSpot, cursorMode);
-		LeanTween.move (goInstructionsPanel1, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 	}
 
 	void Update () 
@@ -70,11 +87,6 @@ public class UIMisc : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.C))
-		{
-			CameraShake();
-		}
-
 		if(bIsMessageFading)
 		{
 			Color32 fadeColor = tSlainMessage.color;
@@ -85,6 +97,57 @@ public class UIMisc : MonoBehaviour {
 			{
 				bIsMessageFading = false;
 			}
+		}
+
+		if(bIsGameOver)
+		{
+			fFadeTimer -= Time.deltaTime;
+
+			if(fFadeTimer <= 0f)
+			{
+				Color32 fadeColor = IFadeOut.color;
+				fadeColor.a += 1;
+				IFadeOut.color = fadeColor;
+				
+				if(fadeColor.a >= 255)
+				{
+					Application.LoadLevel (2);
+				}
+			}
+		}
+
+		if(bIsFirstTutClosed)
+		{
+			fFirstTutTimer -= Time.deltaTime;
+
+			if(fFirstTutTimer <= 0f)
+			{
+				goTutorial1.SetActive (false);
+				goTutorial2.SetActive (true);
+				LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
+				fFirstTutTimer = 5f;
+				bIsFirstTutClosed = false;
+			}
+		}
+
+		if(bIsThirdTutClosed)
+		{
+			fThirdTutTimer -= Time.deltaTime;
+			
+			if(fThirdTutTimer <= 0f)
+			{
+				goTutorial3.SetActive (false);
+				goTutorial4.SetActive (true);
+				LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
+				fThirdTutTimer = 15f;
+				bIsThirdTutClosed = false;
+			}
+		}
+
+		if(pPlayerResources.GetMoney() >= 90 && pPlayerResources.GetRecruits() >= 1 && !bIsRecruitsAvailable)
+		{
+			LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
+			bIsRecruitsAvailable = true;
 		}
 	}
 
@@ -102,34 +165,44 @@ public class UIMisc : MonoBehaviour {
 
 	public void Continue1Button ()
 	{
-		goInstructionsPanel1.SetActive (false);
-		goInstructionsPanel2.SetActive (true);
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+		bIsFirstTutClosed = true;
 	}
 
 	public void Continue2Button ()
 	{
-		enemyspawner.StartSpawning();
-		LeanTween.move (goInstructionsPanel2, new Vector2(2f * Screen.width, Screen.height/ 2f), 1f).setEase (LeanTweenType.easeInQuad);
-		
+		goTutorial2.SetActive (false);
+		goTutorial3.SetActive (true);
 	}
 
-	public void CameraShake ()
+	public void Continue3Button ()
 	{
-		float height = 2.5f;
-		float shakeAmt = height*0.2f; // the degrees to shake the camera
-		float shakePeriodTime = 0.42f; // The period of each shake
-		float dropOffTime = 1f; // How long it takes the shaking to settle down to nothing
-		LTDescr shakeTween = LeanTween.rotateAroundLocal( gameObject, Vector3.right, shakeAmt, shakePeriodTime)
-		.setEase( LeanTweenType.easeShake ) // this is a special ease that is good for shaking
-		.setLoopClamp()
-		.setRepeat(1);
-		
-		// Slow the camera shake down to zero
-		LeanTween.value(gameObject, shakeAmt, 0f, dropOffTime).setOnUpdate( 
-		                                                                   (float val)=>{
-			shakeTween.setTo(Vector3.right*val);
-		}
-		).setEase(LeanTweenType.easeOutQuad);
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+		bIsThirdTutClosed = true;
+	}
+
+	public void Continue4Button ()
+	{
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+	}
+
+	public void Continue5Button ()
+	{
+		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+	}
+
+	public void DontHaveEnoughMoney ()
+	{
+		TDontHaveEnoughMoneyInstance = Instantiate(TDontHaveEnoughMoney) as Text;
+		TDontHaveEnoughMoneyInstance.transform.SetParent(GameObject.Find("Main Canvas").transform, false);
+		TDontHaveEnoughMoneyInstance.transform.position = Input.mousePosition;
+	}
+
+	public void GameOver ()
+	{
+		bIsGameOver = true;
+		goNoMoreClicking.SetActive (true);
+		goGameOverLabel.SetActive (true);
 	}
 
 }
