@@ -13,6 +13,9 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 		gu.aAnimator.SetBool("bIsAiming", true);
 		gu.goFiringEffect.gameObject.SetActive(true);
 		gu.goFiringEffect.Play("Bullet Effect");
+		gu.wMannedWindow.ActivateWeapons();
+		fShootTimer = gu.fFireRate;
+
 		gu.asAudioSource.clip = gu.uaUnitAudio.acFiring;
 		if(gu.SollyType == SOLDIER_TYPE.GUNNER) { 
 			gu.asAudioSource.loop = true;
@@ -34,15 +37,17 @@ public sealed class StateSoldierFiring : FSM_State<PlayerUnit> {
 			gu.transform.LookAt(new Vector3(gu.guTargetUnit.transform.position.x, gu.transform.position.y, gu.guTargetUnit.transform.position.z));
 			if (gu.iCurrentAmmo > 0) {
 				if(fShootTimer > 0) {
+
 					fShootTimer -= Time.fixedDeltaTime;
-					if(gu.SollyType == SOLDIER_TYPE.HEAVY) {
-						gu.asAudioSource.Play();
-					}
+
 				}
 				
 				if (fShootTimer <= 0f) {
 					gu.guTargetUnit.DamageUnit(gu.fDamage, gu);
 					gu.iCurrentAmmo--;
+					if(gu.SollyType == SOLDIER_TYPE.HEAVY) {
+						AudioSource.PlayClipAtPoint (gu.uaUnitAudio.acFiring, gu.gameObject.transform.position);
+					}
 					fShootTimer = gu.fFireRate;
 				}
 			}

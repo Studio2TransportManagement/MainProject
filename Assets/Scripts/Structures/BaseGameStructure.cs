@@ -96,7 +96,9 @@ public class BaseGameStructure : GameStructure {
 		foreach (GameObject curunit in l_goAllply) {
 			guTemp = curunit.GetComponent<PlayerUnit>();
 			if (guTemp.fHealthCurrent > 0 && guTemp.fHealthCurrent < guTemp.fHealthMax) {
-				l_guInjuredply.Add(guTemp);
+				if(guTemp != null) {
+					l_guInjuredply.Add(guTemp);
+				}
 			}
 		}
 

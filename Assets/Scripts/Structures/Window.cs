@@ -8,23 +8,20 @@ public class Window : MonoBehaviour {
 	public Transform tStandingPosition;
 
 	public bool bIsActive = false;
-//		get;
-//		set;
-//	}
-
 	public bool bIsManned = false;
-//		get;
-//		set;
-//	}
-
 	public bool bIsTargeted = false;
 		
 	public PlayerUnit goStationedSoldier;
 	public EnemyUnit euTargetingEnemy;
 
+	public GameObject Rifle;
+	public GameObject Bazooka;
+
 	// Use this for initialization
 	void Awake() {
 		goClosedModel.SetActive(true);
+		Rifle.SetActive(false);
+		Bazooka.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -42,12 +39,28 @@ public class Window : MonoBehaviour {
 		bIsManned = true;
 		goStationedSoldier.bManningWindow = true;
 		goStationedSoldier.wMannedWindow = this;
-//		return tStandingPosition;
+
+	}
+
+	public void ActivateWeapons() {
+		if(goStationedSoldier.SollyType == SOLDIER_TYPE.GUNNER) {
+			Rifle.SetActive(true);
+		}
+		if(goStationedSoldier.SollyType == SOLDIER_TYPE.HEAVY) {
+			Bazooka.SetActive(true);
+		}
 	}
 
 	public void LeaveWindow() {
 		goStationedSoldier.bManningWindow = false;
 		goStationedSoldier.wMannedWindow = null;
+		if(goStationedSoldier.SollyType == SOLDIER_TYPE.GUNNER) {
+			Rifle.SetActive(false);
+		}
+		if(goStationedSoldier.SollyType == SOLDIER_TYPE.HEAVY) {
+			Bazooka.SetActive(false);
+		}
+
 		goStationedSoldier = null;
 		bIsManned = false;
 	}

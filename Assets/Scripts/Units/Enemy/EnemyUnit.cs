@@ -7,8 +7,6 @@ public class EnemyUnit : GameUnit {
 	private FSM_Core<EnemyUnit> FSM;
 
 	private PlayerResources playerResources;
-	[Tooltip("For testing purposes, kills the selected unit")]
-	public bool kill;
 	public float fWorth;
 	public Vector3 v3BasePos;
 	public bool AtBase = false;
@@ -32,16 +30,11 @@ public class EnemyUnit : GameUnit {
 		if (FSM != null) {
 			FSM.Update();
 		}
-
-		if(kill)
-		{
-			fHealthCurrent = 0f;
-		}
-
 	}
 
 	protected override void KillUnit()
 	{
+		bStartedDying = true;
 		playerResources.ChangeMoney(fWorth);
 		if(wMannedWindow != null){
 			wMannedWindow.RemoveTarget();

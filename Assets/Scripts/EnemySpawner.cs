@@ -27,13 +27,14 @@ public class EnemySpawner : MonoBehaviour {
 	public float fTankSpawnCounter;
 
 	private bool bSpawnCoroutineRunning;
-	public bool bGameOver = false;
+	private PlayerResources prplayerResources;
+	private bool bIsGeneratingRecruits;
 
 	
 	void Start() {
+		prplayerResources = GameObject.FindGameObjectWithTag("GameController").GetComponent<PlayerResources>();
 		bSpawnCoroutineRunning = false;
-		//By extracting the bounds from each SpawnPoint object, we don't need to have gameobject.collider.bounds.FUNCTION later when spawning, also allows to easily change from coolider to other.boundsp
-//		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
+		bIsGeneratingRecruits = false;
 		fSpawnRadius = goSpawnPoints[1].GetComponent<SphereCollider>().radius;
 		iCurrentWaveSize = iStartingWaveSize;
 //		StartSpawning();
@@ -54,7 +55,11 @@ public class EnemySpawner : MonoBehaviour {
 		{
 			iCurrentWaveCount = iCurrentWaveSize;
 			float[] WaveSizes = CalculateWaveSizes(GenerateRatioArray());
-					
+
+			if(iCurrentWaveSize >= 3 && !bIsGeneratingRecruits) {
+				StartGeneratingRecruits();
+			}
+
 			if(iCurrentWaveSize < iRatioSplitWave){
 				while(iCurrentWaveCount > 0) {
 
@@ -76,6 +81,9 @@ public class EnemySpawner : MonoBehaviour {
 					yield return new WaitForSeconds(fSpawnRate);
 				}
 				iCurrentWaveSize += iWaveIncrease;
+				if(bIsGeneratingRecruits) {
+					prplayerResources.ChangeRecruits(1.0f);
+				}
 				yield return new WaitForSeconds(fWaveRate);
 			}
 
@@ -110,6 +118,9 @@ public class EnemySpawner : MonoBehaviour {
 					}
 					
 					yield return new WaitForSeconds(fSpawnRate);
+				}
+				if(bIsGeneratingRecruits) {
+					prplayerResources.ChangeRecruits(1.0f);
 				}
 				iCurrentWaveSize += iWaveIncrease;
 				yield return new WaitForSeconds(fWaveRate);
@@ -184,5 +195,9 @@ public class EnemySpawner : MonoBehaviour {
 		else{
 			return false;
 		}
+	}
+
+	public void StartGeneratingRecruits() {
+		bIsGeneratingRecruits = true;
 	}
 }

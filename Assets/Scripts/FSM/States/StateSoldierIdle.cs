@@ -14,10 +14,9 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-		gu.navAgent.speed = gu.fAlertSpeed;
+		gu.navAgent.speed = gu.fIdleSpeed;
 		gu.navAgent.angularSpeed = 180.0f;
 		gu.goTargetBase = gu.GetCurrentBase();
-		gu.aAnimator.SetBool("bIsWalking", true);
 		gu.GetCurrentBase();
 	}
 	
@@ -71,7 +70,6 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-		gu.aAnimator.SetBool("bIsWalking", false);
 		//Debug.Log("StateSoldierIdle end");
 	}
 }
