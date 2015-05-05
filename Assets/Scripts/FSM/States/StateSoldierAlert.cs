@@ -10,7 +10,6 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	}
 
 	public override void Begin(PlayerUnit gu) {
-		gu.aAnimator.SetBool("bIsRunning", true);
 		gu.navAgent.speed = gu.fAlertSpeed;
 		//Debug.Log("StateSoldierAlert begin");
 	}
@@ -69,7 +68,10 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 					gu.ChangeState(new StateSoldierIdle());
 				}
 
-				gu.WanderBetweenBasePoints();
+//				if, after all that, the unit is still not manning a window, wander around
+				if(!gu.bManningWindow) {
+					gu.WanderBetweenBasePoints();
+				}
 			}
 			else {
 				//only start firing if theres enemies at the base and we're close enough to the window to actually start attacking
@@ -89,11 +91,10 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-		gu.aAnimator.SetBool("bIsRunning", false);
 
-		if (gu.bManningWindow && gu.goTargetBase.l_euAttackers.Count == 0) {
+		if (gu.bManningWindow && gu.goTargetBase.l_euAttackers.Count <= 0) {
 			gu.wMannedWindow.LeaveWindow();
-//			Debug.Log("StateSoldierAlert leftwin end");
+			//			Debug.Log("StateSoldierAlert leftwin end");
 		}
 		//Debug.Log("StateSoldierAlert end");
 	}

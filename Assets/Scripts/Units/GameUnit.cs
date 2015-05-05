@@ -58,6 +58,12 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public bool bIsFlashing = false;
 	private float fTimer = 0.1f;
 
+	private Vector3 vPrevPos;
+	private Vector3 vCurrPos;
+	private float fCurrSpeed;
+
+	protected bool bStartedDying = false;
+
 	public SkinnedMeshRenderer UnitsMesh;
 	
 	// Use this for initialization
@@ -90,6 +96,12 @@ public class GameUnit : MonoBehaviour, ISelectable {
 //			aAnimator.SetBool("IsWalking", false);
 //		}
 
+		//use the difference between the unit's current and previous position to determine unit's movement speed
+		vCurrPos = transform.position - vPrevPos;
+		fCurrSpeed = vCurrPos.magnitude /Time.deltaTime;
+		vPrevPos = transform.position;
+		aAnimator.SetFloat("fSpeed", fCurrSpeed);
+
 		if (bIsFlashing == true && UnitsMesh != null) {
 			UnitsMesh.enabled = false;
 			fTimer -= Time.deltaTime;
@@ -102,12 +114,14 @@ public class GameUnit : MonoBehaviour, ISelectable {
 		}
 
 		if (fHealthCurrent <= 0) {
-			KillUnit();
+			if(!bStartedDying) {
+				KillUnit();
+			}
 		}
 	}
 
 	protected virtual void KillUnit() {
-		//SOON
+
 	}
 
 	public void DamageUnit(float dmg, GameUnit attacker) {

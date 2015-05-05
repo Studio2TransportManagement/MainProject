@@ -4,6 +4,7 @@ using System.Collections;
 public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 
 	private float fReloadTimer;
+	private bool playedAudio = false;
 	
 	public StateSoldierReload() {
 		
@@ -20,10 +21,14 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	
 	public override void Run(PlayerUnit gu) {
 		
-		if(Vector3.Distance(gu.gameObject.transform.position, gu.goTargetBase.goStockpile.transform.position) <= 5.0f) {
+		if(Vector3.Distance(gu.gameObject.transform.position, gu.goTargetBase.goStockpile.transform.position) <=4.0f) {
 			gu.navAgent.Stop();
 			gu.navAgent.SetDestination(gu.gameObject.transform.position);
-			gu.aAnimator.SetBool("bIsReloading", true);
+			gu.aAnimator.SetBool("bIsRummaging", true);
+			if(!playedAudio) {
+				AudioSource.PlayClipAtPoint(gu.uaUnitAudio.acReloading, gu.gameObject.transform.position, 0.1f);
+				playedAudio = true;
+			}
 			if(fReloadTimer > 0)
 			{
 				fReloadTimer -= Time.deltaTime;
@@ -43,7 +48,7 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
-		gu.aAnimator.SetBool("bIsReloading", false);
+		gu.aAnimator.SetBool("bIsRummaging", false);
 		//Debug.Log("StateSoldierReload end");
 	}
 }
