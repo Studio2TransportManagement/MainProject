@@ -12,28 +12,38 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	public override void Begin(PlayerUnit gu) {
 		//Debug.Log ("StateSoldierReload Begun");
 		fReloadTimer = gu.fReloadSpeed;
+		gu.navAgent.SetDestination(gu.goTargetBase.goStockpile.transform.position);
+		if(gu.bManningWindow) {
+			gu.wMannedWindow.LeaveWindow();
+		}
 	}
 	
 	public override void Run(PlayerUnit gu) {
 		
-		if(fReloadTimer > 0)
-		{
-			fReloadTimer -= Time.deltaTime;
-		}
-		if(fReloadTimer <=0)
-		{
-			gu.iCurrentAmmo = gu.iMaxAmmo;
-			if(gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY) {
-				gu.ChangeState(new StateSoldierAlert());
+		if(Vector3.Distance(gu.gameObject.transform.position, gu.goTargetBase.goStockpile.transform.position) <= 5.0f) {
+			gu.navAgent.Stop();
+			gu.navAgent.SetDestination(gu.gameObject.transform.position);
+			gu.aAnimator.SetBool("bIsReloading", true);
+			if(fReloadTimer > 0)
+			{
+				fReloadTimer -= Time.deltaTime;
 			}
-			else {
-				gu.ChangeState(new StateSoldierIdle());
+			if(fReloadTimer <=0)
+			{
+				gu.iCurrentAmmo = gu.iMaxAmmo;
+				if(gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY) {
+					gu.ChangeState(new StateSoldierAlert());
+				}
+				else {
+					gu.ChangeState(new StateSoldierIdle());
+				}
 			}
 		}
 		
 	}
 	
 	public override void End(PlayerUnit gu) {
+		gu.aAnimator.SetBool("bIsReloading", false);
 		//Debug.Log("StateSoldierReload end");
 	}
 }

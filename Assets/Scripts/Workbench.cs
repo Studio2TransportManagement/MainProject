@@ -21,6 +21,8 @@ public class Workbench : MonoBehaviour {
 
 	void OnMouseDown ()
 	{
-		CurrentBase.getThisBase ();
+		if(!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
+			CurrentBase.getThisBase ();
+		}
 	}
 }
