@@ -12,33 +12,16 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 	public StateSoldierIdle() {
 		//Debug.Log("StateSoldierIdle begin");
 	}
-
-	public StateSoldierIdle(float wanderRate, float wanderDistance) {
-//		fWanderRate = wanderRate;
-//		fWanderDistance = wanderDistance;
-	}
 	
 	public override void Begin(PlayerUnit gu) {
 		gu.navAgent.speed = gu.fAlertSpeed;
 		gu.navAgent.angularSpeed = 180.0f;
 		gu.goTargetBase = gu.GetCurrentBase();
 		gu.aAnimator.SetBool("bIsWalking", true);
-		gu.GetCurrentBase()
-//		navhitIrrelevant = new NavMeshHit();
+		gu.GetCurrentBase();
 	}
 	
 	public override void Run(PlayerUnit gu) {
-//		do {
-//			vDir = gu.transform.forward + new Vector3(Random.insideUnitCircle.x, gu.transform.position.y, Random.insideUnitCircle.y) * fWanderRate;
-//			vTarget = gu.transform.position + vDir.normalized * fWanderDistance;
-//		}
-//		while (NavMesh.SamplePosition(vTarget,
-//		                              out navhitIrrelevant,
-//		                              Mathf.Infinity,
-//		                              NavMesh.GetNavMeshLayerFromName("Floorges")));
-//
-//		gu.navAgent.SetDestination(vTarget);
-
 		if (gu.goTargetBase != null) {
 			//Gunnner + Heavy
 			if (gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY || gu.SollyType == SOLDIER_TYPE.VILLAGER) {

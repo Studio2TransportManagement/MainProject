@@ -22,8 +22,6 @@ public class PlayerUnit : GameUnit {
 	public bool bManningWindow;
 	public bool bInTransit;
 
-	public GameObject goParticleActionEffectPrefab;
-
 	private SpriteRenderer spriteRenderer;
 
 	private bool bAtNavTargetPoint;
@@ -32,7 +30,7 @@ public class PlayerUnit : GameUnit {
 
 	ParticleEmitter peActionEffect;
 
-	void Awake () {
+	void Awake() {
 		pPlayerResources = FindObjectOfType<PlayerResources>();
 	}
 
@@ -99,7 +97,7 @@ public class PlayerUnit : GameUnit {
 		if(aAnimator.GetCurrentAnimatorStateInfo(0).IsName("DeathAnim")){
 			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
 			nameSaver.l_sDeadUnitNames.Add(sUnitName);
-			pPlayerResources.iTotalRecruits --;
+			pPlayerResources.iTotalRecruits--;
 			Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
 			Destroy(goHealthInstance);
 			Destroy(gameObject);

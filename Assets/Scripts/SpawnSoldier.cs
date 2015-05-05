@@ -28,20 +28,20 @@ public class SpawnSoldier : MonoBehaviour {
 
 		if (sol == SOLDIER_TYPE.GUNNER) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
-			pPlayerResources.iTotalRecruits ++;
+			pPlayerResources.iTotalRecruits++;
 		}
 
 		if (sol == SOLDIER_TYPE.HEAVY) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
-			pPlayerResources.iTotalRecruits ++;
+			pPlayerResources.iTotalRecruits++;
 		}
 		if (sol == SOLDIER_TYPE.MEDIC) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
-			pPlayerResources.iTotalRecruits ++;
+			pPlayerResources.iTotalRecruits++;
 		}
 		if (sol == SOLDIER_TYPE.MECHANIC) {
 			lastSpawned = (GameObject)Instantiate(goProtoUnit, spawnpoint, Quaternion.identity);
-			pPlayerResources.iTotalRecruits ++;
+			pPlayerResources.iTotalRecruits++;
 		}
 
 		lastSpawned.GetComponent<PlayerUnit>().sUnitName = name;

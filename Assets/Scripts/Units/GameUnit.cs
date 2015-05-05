@@ -33,6 +33,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public AudioSource asAudioSource;
 
 	public GameObject goParticleOuchPrefab;
+	public GameObject goParticleActionEffectPrefab;
 	
 	public Animator aAnimator;
 

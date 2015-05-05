@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour {
 	public bool bGameOver = false;
 
 	
-	void Start () {
+	void Start() {
 		bSpawnCoroutineRunning = false;
 		//By extracting the bounds from each SpawnPoint object, we don't need to have gameobject.collider.bounds.FUNCTION later when spawning, also allows to easily change from coolider to other.boundsp
 //		bSpawnBounds = BuildBoundsArray(goSpawnPoints);
@@ -40,8 +40,10 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	
-	void Update () {
-		
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.F5)) {
+			this.fWaveRate = 5.0f;
+		}
 	}
 	
 	
