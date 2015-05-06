@@ -24,6 +24,7 @@ public class UIMisc : MonoBehaviour {
 	public GameObject goGameOverLabel;
 	public Text TDontHaveEnoughMoney;
 	public Text TDontHaveEnoughMoneyInstance;
+	public GameObject goDimDown;
 	public Image IFadeOut;
 	private float fFadeTimer = 3.0f;
 	public GameObject goInstructionsPanel;
@@ -126,6 +127,7 @@ public class UIMisc : MonoBehaviour {
 				LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 				fFirstTutTimer = 5f;
 				bIsFirstTutClosed = false;
+				goDimDown.SetActive (true);
 			}
 		}
 
@@ -140,13 +142,17 @@ public class UIMisc : MonoBehaviour {
 				LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 				fThirdTutTimer = 15f;
 				bIsThirdTutClosed = false;
+				goDimDown.SetActive (true);
 			}
 		}
 
 		if(pPlayerResources.GetMoney() >= 90 && pPlayerResources.GetRecruits() >= 1 && !bIsRecruitsAvailable)
 		{
+			goTutorial4.SetActive (false);
+			goTutorial5.SetActive (true);
 			LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, Screen.height/2f), 1f).setEase (LeanTweenType.easeInQuad);
 			bIsRecruitsAvailable = true;
+			goDimDown.SetActive (true);
 		}
 	}
 
@@ -166,6 +172,7 @@ public class UIMisc : MonoBehaviour {
 	{
 		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
 		bIsFirstTutClosed = true;
+		goDimDown.SetActive (false);
 	}
 
 	public void Continue2Button ()
@@ -178,16 +185,19 @@ public class UIMisc : MonoBehaviour {
 	{
 		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
 		bIsThirdTutClosed = true;
+		goDimDown.SetActive (false);
 	}
 
 	public void Continue4Button ()
 	{
 		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+		goDimDown.SetActive (false);
 	}
 
 	public void Continue5Button ()
 	{
 		LeanTween.move (goInstructionsPanel, new Vector2(Screen.width/2f, -(2f * Screen.height)), 1f).setEase (LeanTweenType.easeInQuad);
+		goDimDown.SetActive (false);
 	}
 
 	public void DontHaveEnoughMoney ()

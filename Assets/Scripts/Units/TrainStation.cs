@@ -22,6 +22,7 @@ public class TrainStation : MonoBehaviour {
 	
 	public float fCountdown = 5.0f;
 	public int iCapacity = 3;
+	public int iRecruitsSenttoTrain = 0;
 	public bool bTravelling = false;
 	public bool bReversing = false;
 
@@ -42,11 +43,11 @@ public class TrainStation : MonoBehaviour {
 
 		if (goLeftStationCapacity != null)
 		{
-			goLeftStationCapacity.text = "0/" + iCapacity + "";
+			goLeftStationCapacity.text = "" + iRecruitsSenttoTrain + "/" + iCapacity + "";
 		}
 		if (goRightStationCapacity != null)
 		{
-			goRightStationCapacity.text = "0/" + iCapacity + "";
+			goRightStationCapacity.text = "" + iRecruitsSenttoTrain + "/" + iCapacity + "";
 		}
 
 		//Waiting for motion
@@ -95,6 +96,7 @@ public class TrainStation : MonoBehaviour {
 					}
 					fLerpTimer = 0.0f;
 					bReversing = true;
+					iRecruitsSenttoTrain -= l_goOnTrain.Count;
 					l_goOnTrain.Clear();
 				}
 			}
@@ -164,6 +166,7 @@ public class TrainStation : MonoBehaviour {
 		if (bsDestinationBase == null) {
 			Debug.Log("<color=red>TrainStation: bsDestinationBase was NULL!</color>");
 		}
+		iRecruitsSenttoTrain ++;
 		return bsDestinationBase;
 	}
 
