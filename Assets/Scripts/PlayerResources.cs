@@ -14,7 +14,7 @@ public class PlayerResources : MonoBehaviour {
 	private Vector3 tranRecruitStartingPosition;
 	public Color32 colYellow;
 	public bool bIsRecruitFading;
-	public int iTotalRecruits;
+	public int iTotalRecruits = 6;
 	public int iSelectedRecruits;
 	private float fCurrentMoney = 5000f;
 	private float fCurrentRecruits = 10f;

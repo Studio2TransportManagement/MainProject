@@ -18,6 +18,9 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 		gu.navAgent.angularSpeed = 180.0f;
 		gu.goTargetBase = gu.GetCurrentBase();
 		gu.GetCurrentBase();
+		if(gu.bManningWindow) {
+			gu.wMannedWindow.LeaveWindow();
+		}
 	}
 	
 	public override void Run(PlayerUnit gu) {

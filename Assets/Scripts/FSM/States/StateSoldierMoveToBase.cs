@@ -60,20 +60,20 @@ public sealed class StateSoldierMoveToBase : FSM_State<PlayerUnit> {
 		//Bravo to others
 		if (gu.goTargetBase.sBaseName == "Base Bravo") {
 			if (bsBaseToReach.sBaseName == "Base Alpha") {
-				return gu.goTargetBase.tsRightStation;
+				return gu.goTargetBase.tsLeftStation;
 			}
 			if (bsBaseToReach.sBaseName == "Base Charlie") {
-				return gu.goTargetBase.tsLeftStation;
+				return gu.goTargetBase.tsRightStation;
 			}
 		}
 
 		//Charlie to others
 		if (gu.goTargetBase.sBaseName == "Base Charlie") {
 			if (bsBaseToReach.sBaseName == "Base Alpha") {
-				return gu.goTargetBase.tsLeftStation;
+				return gu.goTargetBase.tsRightStation;
 			}
 			if (bsBaseToReach.sBaseName == "Base Bravo") {
-				return gu.goTargetBase.tsRightStation;
+				return gu.goTargetBase.tsLeftStation;
 			}
 		}
 Debug.Log ("ERROR: Not Valid Station");

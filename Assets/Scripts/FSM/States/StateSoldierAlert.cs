@@ -38,7 +38,7 @@ public class StateSoldierAlert : FSM_State<PlayerUnit> {
 					if (gu.goTargetBase.CheckIfWindowAvailable()) {
 						gu.goTargetBase.GetAvailableOpenWindow().ManWindow(gu);
 						gu.navAgent.SetDestination(gu.wMannedWindow.tStandingPosition.position);
-						//Debug.Log ("Manning Window");
+						Debug.Log ("Manning Window");
 					}
 					else {
 						if (gu.SollyType == SOLDIER_TYPE.HEAVY) {

@@ -54,13 +54,8 @@ public class Window : MonoBehaviour {
 	public void LeaveWindow() {
 		goStationedSoldier.bManningWindow = false;
 		goStationedSoldier.wMannedWindow = null;
-		if(goStationedSoldier.SollyType == SOLDIER_TYPE.GUNNER) {
-			Rifle.SetActive(false);
-		}
-		if(goStationedSoldier.SollyType == SOLDIER_TYPE.HEAVY) {
-			Bazooka.SetActive(false);
-		}
-
+		Rifle.SetActive(false);
+		Bazooka.SetActive(false);
 		goStationedSoldier = null;
 		bIsManned = false;
 	}

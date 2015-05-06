@@ -10,9 +10,11 @@ public class EnemyUnit : GameUnit {
 	public float fWorth;
 	public Vector3 v3BasePos;
 	public bool AtBase = false;
+	
+	public GameObject goParticleExplodePrefab;
 
 	// Use this for initialization
-	protected override void Start () {
+	protected override void Start() {
 		base.Start();
 
 		playerResources = FindObjectOfType<PlayerResources>();
@@ -25,7 +27,7 @@ public class EnemyUnit : GameUnit {
 	}
 
 	// Update is called once per frame
-	protected override void Update () {
+	protected override void Update() {
 		base.Update();
 		if (FSM != null) {
 			FSM.Update();
@@ -39,7 +41,7 @@ public class EnemyUnit : GameUnit {
 		if(wMannedWindow != null){
 			wMannedWindow.RemoveTarget();
 		}
-		this.goTargetBase.l_euAttackers.Remove (this);
+		this.goTargetBase.l_euAttackers.Remove(this);
 		Destroy(this.gameObject);
 	}
 

@@ -187,13 +187,9 @@ public class EnemySpawner : MonoBehaviour {
 		return b == 0 ? a : FindGCD(b, a % b);
 	}
 
-	public bool StartSpawning(){
+	public void StartSpawning(){
 		if(!bSpawnCoroutineRunning){
 			StartCoroutine(SpawnEnemies());
-			return true;
-		}
-		else{
-			return false;
 		}
 	}
 
