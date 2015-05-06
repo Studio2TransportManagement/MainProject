@@ -23,12 +23,12 @@ public class TestCamera : MonoBehaviour {
 
 		if(bCanMoveCamera)
 		{
-			if(Input.GetKey(KeyCode.A))
+			if(Input.GetAxis("Horizontal")< 0)
 			{
 				this.transform.RotateAround(vRot, Vector3.up, -fCamPanSpeed*Time.deltaTime);
 			}
 			
-			if(Input.GetKey(KeyCode.D))
+			if(Input.GetAxis("Horizontal")> 0)
 			{
 				this.transform.RotateAround(vRot, Vector3.up, fCamPanSpeed*Time.deltaTime);
 			}
