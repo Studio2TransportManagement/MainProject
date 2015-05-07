@@ -9,20 +9,18 @@ public class EditorBalanceModifier : EditorWindow {
 	private Vector2 vScrollPosition;
 
 	private bool valuesFold = false;
-	static private Dictionary<string, GameUnitBalance> d_units;
+	static private Dictionary<string, UnitBalanceValues> d_units;
 	static private Dictionary<string, GUIContent> d_ValuesGuiContent;
 	static private List<string> l_dunitKeys; 
 
-	static private BaseGameStructure fort;
-	static private EnemySpawner enemySpawner;
+	static private FortBalanceValues fort;
+	static private SpawnerBalanceValues enemySpawner;
 
 	private bool gameFold = false;
-	private bool showBase = false;
-	private bool showSpawner = false;
 
 	[MenuItem ("Window/Balance Prefabs")]
 	static public void Init () {
-		d_units = new Dictionary<string, GameUnitBalance>();
+		d_units = new Dictionary<string, UnitBalanceValues>();
 		d_ValuesGuiContent = new Dictionary<string, GUIContent>();
 		l_dunitKeys = new List<string>();
 		EditorBalanceModifier window =  (EditorBalanceModifier) EditorWindow.GetWindow(typeof(EditorBalanceModifier));
@@ -36,6 +34,7 @@ public class EditorBalanceModifier : EditorWindow {
 		d_ValuesGuiContent.Add("Alert Speed", new GUIContent("Alert Speed", "How fast this unit type will move when alerted.\nEnemy Units are always alert."));
 
 		LoadPrefabs();
+		l_dunitKeys = new List<string> (d_units.Keys);
 		window.Show();
 	}
 
@@ -45,15 +44,14 @@ public class EditorBalanceModifier : EditorWindow {
 		valuesFold = EditorGUILayout.Foldout(valuesFold, "Unit Values");
 		if(valuesFold) {
 			EditorGUI.indentLevel++;
-			l_dunitKeys = new List<string> (d_units.Keys);
 			foreach(string key in l_dunitKeys) {
 				d_units[key].bValuesTabOpen = EditorGUILayout.Foldout(d_units[key].bValuesTabOpen,key);
 				if(d_units[key].bValuesTabOpen) {
 					EditorGUILayout.BeginHorizontal();
 						EditorGUILayout.BeginVertical();
-							EditorGUILayout.LabelField("Values", EditorStyles.boldLabel);
+							EditorGUILayout.LabelField(key + "'s Values", EditorStyles.boldLabel);
 
-							ModifyGameUnitValues(d_units[key].d_sfToBeAppliedValues);
+							ModifyGameUnitValues(d_units[key]);
 							EditorGUILayout.BeginHorizontal();
 								if(GUILayout.Button("Apply")) {
 									ApplyValuesToPrefab(d_units[key]);
@@ -82,17 +80,17 @@ public class EditorBalanceModifier : EditorWindow {
 
 							if(GUILayout.Button("Calculate")) {
 								if(d_units[key].guGameUnit.SollyType == SOLDIER_TYPE.ENEMY_GUNNER) {
-									d_units[key].fVsTargets[0] = GetBattleTime(fort.fHealthMax, d_units[key].d_sfToBeAppliedValues);
-									d_units[key].fVsTargets[1] = GetBattleTime(d_units["Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues);
-									d_units[key].fVsTargets[2] = GetBattleTime(d_units["Heavy Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues);
+									d_units[key].fVsTargets[0] = Mathf.Round(GetBattleTime(fort.d_sfToBeAppliedValues["Health"], d_units[key].d_sfToBeAppliedValues, false) * 100f) / 100f;
+									d_units[key].fVsTargets[1] = Mathf.Round(GetBattleTime(d_units["Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues, false) * 100f) / 100f;
+									d_units[key].fVsTargets[2] = Mathf.Round(GetBattleTime(d_units["Heavy Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues, false) * 100f) / 100f;
 								}
 								else if (d_units[key].guGameUnit.SollyType == SOLDIER_TYPE.ENEMY_TANK) {
-									d_units[key].fVsTargets[0] = GetBattleTime(fort.fHealthMax, d_units[key].d_sfToBeAppliedValues);
+									d_units[key].fVsTargets[0] = Mathf.Round(GetBattleTime(fort.d_sfToBeAppliedValues["Health"], d_units[key].d_sfToBeAppliedValues, true) * 100f) / 100f;
 								}
 								
 								else {
-									d_units[key].fVsTargets[0] = GetBattleTime(d_units["Enemy Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues);
-									d_units[key].fVsTargets[1] = GetBattleTime(d_units["Enemy Tank"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues);	
+									d_units[key].fVsTargets[0] = Mathf.Round(GetBattleTime(d_units["Enemy Gunner"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues, false)  * 100f) / 100f;
+									d_units[key].fVsTargets[1] = Mathf.Round(GetBattleTime(d_units["Enemy Tank"].d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]], d_units[key].d_sfToBeAppliedValues, false) * 100f) / 100f;	
 								}
 							}
 
@@ -100,112 +98,95 @@ public class EditorBalanceModifier : EditorWindow {
 					EditorGUILayout.EndHorizontal();
 				}
 			}
+			
+			EditorGUILayout.BeginHorizontal();
+			if(GUILayout.Button("Apply All Units")) {
+				foreach(string key in l_dunitKeys) {
+					ApplyValuesToPrefab(d_units[key]);
+				}
+			}
+			if(GUILayout.Button("Revert All Units")) {
+				foreach(string key in l_dunitKeys) {
+					RevertValuesToPrefab(d_units[key]);
+				}
+			}
+			EditorGUILayout.EndHorizontal();
 			EditorGUI.indentLevel--;
 		}
 
 		gameFold = EditorGUILayout.Foldout(gameFold, "Spawner and Fort Values");
 		if(gameFold) {
 			EditorGUI.indentLevel++;
-			showBase = EditorGUILayout.Foldout(showBase, "Fort");
-			if(showBase) {
+			fort.bValuesTabOpen = EditorGUILayout.Foldout(fort.bValuesTabOpen, "Fort");
+			if(fort.bValuesTabOpen) {
+				EditorGUILayout.LabelField("Fort's Values", EditorStyles.boldLabel);
+
 				EditorGUI.indentLevel++;
-				GUILayout.Label("Health", EditorStyles.boldLabel);
+				List<string> keys = new List<string> (fort.d_sfToBeAppliedValues.Keys);
+				foreach (string key in keys) {
+					float temp = EditorGUILayout.FloatField(key, fort.d_sfToBeAppliedValues[key]);
+					if(temp <= 0.0f) {
+						temp = fort.d_sfToBeAppliedValues[key];
+					}
+					else {
+						fort.d_sfToBeAppliedValues[key] = temp;
+					}
+				}
+				EditorGUILayout.BeginHorizontal();
+				if(GUILayout.Button("Apply")) {
+					fort.bgsBase.fHealthMax = fort.d_sfToBeAppliedValues["Health"];
+					fort.bgsBase.iIntegrityUpgradeCost = (int)fort.d_sfToBeAppliedValues["Health Upg. Cost"];
+					fort.bgsBase.iIntegrityUpgradeAmount = (int)fort.d_sfToBeAppliedValues["Health Upg. Amount"];
+					fort.bgsBase.iWindowUpgradeCost = (int)fort.d_sfToBeAppliedValues["Window Upg. Cost"];
+					fort.bgsBase.iTrainsUpgradeCost = (int)fort.d_sfToBeAppliedValues["Trains Upg. Cost"];
 
-				float tempHP = EditorGUILayout.FloatField("Starting Health: ", fort.fHealthMax);
-				if(tempHP < 1) {
-					tempHP = fort.fHealthMax;
 				}
-				else {
-					fort.fHealthMax = tempHP;
-				}
-				int tempHUPC = EditorGUILayout.IntField("Health Upgrade Cost: $", fort.iIntegrityUpgradeCost);
-				if(tempHUPC < 0) {
-					tempHUPC = fort.iIntegrityUpgradeCost;
-				}
-				else {
-					fort.iIntegrityUpgradeCost = tempHUPC;
-				}
-				int tempHUPA = EditorGUILayout.IntField("Health Upgrade Amount: ", fort.iIntegrityUpgradeAmount);
-				if(tempHUPA < 0) {
-					tempHUPA = fort.iIntegrityUpgradeAmount;
-				}
-				else {
-					fort.iIntegrityUpgradeAmount = tempHUPA;
-				}
+				if(GUILayout.Button("Revert")) {
+					fort.d_sfToBeAppliedValues["Health"] = fort.bgsBase.fHealthMax;
+					fort.d_sfToBeAppliedValues["Health Upg. Cost"] = fort.bgsBase.iIntegrityUpgradeCost;
+					fort.d_sfToBeAppliedValues["Health Upg. Amount"] = fort.bgsBase.iIntegrityUpgradeAmount;
+					fort.d_sfToBeAppliedValues["Window Upg. Cost"] = fort.bgsBase.iWindowUpgradeCost;
+					fort.d_sfToBeAppliedValues["Trains Upg. Cost"] = fort.bgsBase.iTrainsUpgradeCost;
 
-				GUILayout.Label("Windows", EditorStyles.boldLabel);
-				int tempWUPC = EditorGUILayout.IntField("Window Upgrade Cost: $", fort.iWindowUpgradeCost);
-				if(tempWUPC < 0) {
-					tempWUPC = fort.iWindowUpgradeCost;
 				}
-				else {
-					fort.iWindowUpgradeCost = tempWUPC;
-				}
+				EditorGUILayout.EndHorizontal();
 
-				GUILayout.Label("Trains", EditorStyles.boldLabel);
-				int tempTUPC = EditorGUILayout.IntField("Trains Upgrade Cost: $", fort.iTrainsUpgradeCost);
-				if(tempTUPC < 0) {
-					tempTUPC = fort.iTrainsUpgradeCost;
-				}
-				else {
-					fort.iTrainsUpgradeCost = tempTUPC;
-				}
 				EditorGUI.indentLevel--;
 			}
 
-			showSpawner = EditorGUILayout.Foldout(showSpawner, "Enemy Spawner");
-			if(showSpawner) {
+			enemySpawner.bValuesTabOpen = EditorGUILayout.Foldout(enemySpawner.bValuesTabOpen, "Enemy Spawner");
+			if(enemySpawner.bValuesTabOpen) {
 				EditorGUI.indentLevel++;
+				EditorGUILayout.LabelField("Enemy Spawner Values", EditorStyles.boldLabel);
 
-
-				int tempInit = EditorGUILayout.IntField(new GUIContent ("First Wave Size: ", "How many enemies spawn with the first wave."), enemySpawner.iStartingWaveSize);
-				if(tempInit < 0) {
-					tempInit = enemySpawner.iStartingWaveSize;
+				List<string> keys = new List<string> (enemySpawner.d_sfToBeAppliedValues.Keys);
+				foreach (string key in keys) {
+					float temp = EditorGUILayout.FloatField(key, enemySpawner.d_sfToBeAppliedValues[key]);
+					if(temp <= 0.0f) {
+						temp = enemySpawner.d_sfToBeAppliedValues[key];
+					}
+					else {
+						enemySpawner.d_sfToBeAppliedValues[key] = temp;
+					}
 				}
-				else {
-					enemySpawner.iStartingWaveSize = tempInit;
+				EditorGUILayout.BeginHorizontal();
+				if(GUILayout.Button("Apply")) {
+					enemySpawner.esSpawner.iStartingWaveSize = (int)enemySpawner.d_sfToBeAppliedValues["Starting Wave Size"];
+					enemySpawner.esSpawner.iWaveIncrease = (int)enemySpawner.d_sfToBeAppliedValues["Added each wave"];
+					enemySpawner.esSpawner.fWaveRate = enemySpawner.d_sfToBeAppliedValues["Wave Timer"];
+					enemySpawner.esSpawner.iRatioSplitWave = (int)enemySpawner.d_sfToBeAppliedValues["Ratio Split wave"];
+					enemySpawner.esSpawner.fTankSpawnRate = enemySpawner.d_sfToBeAppliedValues["Tank Spawn Factor"];
+					
 				}
-
-				int tempInc = EditorGUILayout.IntField(new GUIContent ("Wave Increment: ", "How many units are added to the total number of enemies at the end of each wave."), enemySpawner.iWaveIncrease);
-				if(tempInc < 0) {
-					tempInc = enemySpawner.iWaveIncrease;
+				if(GUILayout.Button("Revert")) {
+					enemySpawner.d_sfToBeAppliedValues["Starting Wave Size"] = enemySpawner.esSpawner.iStartingWaveSize;
+					enemySpawner.d_sfToBeAppliedValues["Added each wave"] = enemySpawner.esSpawner.iWaveIncrease;
+					enemySpawner.d_sfToBeAppliedValues["Wave Timer"] = enemySpawner.esSpawner.fWaveRate;
+					enemySpawner.d_sfToBeAppliedValues["Ratio Split wave"] = enemySpawner.esSpawner.iRatioSplitWave;
+					enemySpawner.d_sfToBeAppliedValues["Tank Spawn Factor"] = enemySpawner.esSpawner.fTankSpawnRate;
+					
 				}
-				else {
-					enemySpawner.iWaveIncrease = tempInc;
-				}
-
-				int tempRS = EditorGUILayout.IntField(new GUIContent ("Ratio Split Wave: ", "When the total number of units in a wave reaches this, the waves will start splitting between bases unpredictably rather than evenly"), enemySpawner.iRatioSplitWave);
-				if(tempRS < 0) {
-					tempRS = enemySpawner.iRatioSplitWave;
-				}
-				else {
-					enemySpawner.iRatioSplitWave = tempRS;
-				}
-
-
-				float tempWR = EditorGUILayout.FloatField(new GUIContent ("Wave Rate: ", "Time, in seconds, between each wave. \nOnly starts counting once the enitre wave has spawned"), enemySpawner.fWaveRate);
-				if(tempWR < 0) {
-					tempWR = enemySpawner.fWaveRate;
-				}
-				else {
-					enemySpawner.fWaveRate = tempWR;
-				}
-
-				float tempSR = EditorGUILayout.FloatField(new GUIContent ("Spawn Rate: ", "Time, in seconds, between each individual enemy unit spawn"), enemySpawner.fSpawnRate);
-				if(tempSR < 0) {
-					tempSR = enemySpawner.fSpawnRate;
-				}
-				else {
-					enemySpawner.fSpawnRate = tempSR;
-				}
-
-				float tempTR = EditorGUILayout.FloatField(new GUIContent ("Tank Spawn Rate: ", "After every unit spawns, a random number from 0 to 1 is added and tracked until it reaches this value, at which point a tank spawns.\n Higher numbers mean tank spawns less often"), enemySpawner.fTankSpawnRate);
-				if(tempTR < 0) {
-					tempTR = enemySpawner.fTankSpawnRate;
-				}
-				else {
-					enemySpawner.fTankSpawnRate = tempTR;
-				}
+				EditorGUILayout.EndHorizontal();
 				EditorGUI.indentLevel--;
 			}
 		}
@@ -214,36 +195,37 @@ public class EditorBalanceModifier : EditorWindow {
 
 	static void LoadPrefabs() {
 
-		d_units.Add("Enemy Gunner", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/EnemyGunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
-		d_units.Add("Enemy Tank", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/EnemyTank.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
-		d_units.Add("Gunner", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Gunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
-		d_units.Add("Heavy Gunner", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Heavy Gunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
-		d_units.Add("Medic", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Medic.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
-		d_units.Add("Mechanic", new GameUnitBalance(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Mechanic.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Enemy Gunner", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/EnemyGunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Enemy Tank", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/EnemyTank.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Gunner", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Gunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Heavy Gunner", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Heavy Gunner.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Medic", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Medic.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
+		d_units.Add("Mechanic", new UnitBalanceValues(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Units/Mechanic.prefab", (typeof(GameUnit))) as GameUnit, d_ValuesGuiContent));
 
-		fort = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath (AssetDatabase.FindAssets("Base", new string[] {"Assets/Prefabs"})[0]), (typeof(BaseGameStructure))) as BaseGameStructure;
-		enemySpawner = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath (AssetDatabase.FindAssets("EnemySpawnController", new string[] {"Assets/Prefabs"})[0]), (typeof(EnemySpawner))) as EnemySpawner;
+		fort = new FortBalanceValues(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath (AssetDatabase.FindAssets("Base", new string[] {"Assets/Prefabs"})[0]), (typeof(BaseGameStructure))) as BaseGameStructure);
+		enemySpawner = new SpawnerBalanceValues(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath (AssetDatabase.FindAssets("EnemySpawnController", new string[] {"Assets/Prefabs"})[0]), (typeof(EnemySpawner))) as EnemySpawner);
 
 
 	}
 
 
-	void ModifyGameUnitValues(Dictionary<GUIContent, float> dic) {
+	void ModifyGameUnitValues(UnitBalanceValues gubal) {
 
-		List<GUIContent> keys = new List<GUIContent> (dic.Keys);
+		List<GUIContent> keys = new List<GUIContent> (gubal.d_sfToBeAppliedValues.Keys);
 
 		foreach(GUIContent entry in keys) {
-			float temp = EditorGUILayout.FloatField(entry, dic[entry]);
+			float temp = EditorGUILayout.FloatField(entry, gubal.d_sfToBeAppliedValues[entry]);
 			if(temp <= 0.0f) {
-				temp = dic[entry];
+				temp = gubal.d_sfToBeAppliedValues[entry];
 			}
 			else {
-				dic[entry] = temp;
+				gubal.d_sfToBeAppliedValues[entry] = temp;
 			}
 		}
+
 	}
 
-	void ApplyValuesToPrefab(GameUnitBalance gubal) {
+	void ApplyValuesToPrefab(UnitBalanceValues gubal) {
 		gubal.guGameUnit.fHealthMax = gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]];
 		gubal.guGameUnit.fDamage = gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Damage"]];
 		gubal.guGameUnit.fFireRate = gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Fire Rate"]];
@@ -254,7 +236,7 @@ public class EditorBalanceModifier : EditorWindow {
 
 	}
 
-	void RevertValuesToPrefab(GameUnitBalance gubal) {
+	void RevertValuesToPrefab(UnitBalanceValues gubal) {
 		gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Health"]] = gubal.guGameUnit.fHealthMax;
 		gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Damage"]] = gubal.guGameUnit.fDamage; 
 		gubal.d_sfToBeAppliedValues[d_ValuesGuiContent["Fire Rate"]] = gubal.guGameUnit.fFireRate;
@@ -265,43 +247,52 @@ public class EditorBalanceModifier : EditorWindow {
 		
 	}
 
-	float GetBattleTime(float targetHP, Dictionary<GUIContent, float> dic){
-		float battleTime = 10.0f;
+	float GetBattleTime(float targetHP, Dictionary<GUIContent, float> dic, bool tank){
+		float battleTime = 0.0f;
 		float floatCalc = 0.1f;
 		int currentAmmo = (int) dic[d_ValuesGuiContent["Max Ammo"]];
-		float tempFireRate = 0.0f;
+		float tempFireRate = dic[d_ValuesGuiContent["Fire Rate"]];
 		float tempReloadRate = dic[d_ValuesGuiContent["Reload Speed"]];
 		bool targetDead = false;
 
-//		if(dic[d_ValuesGuiContent["Damage"]] > 0.0f || dic[d_ValuesGuiContent["Health"]] > 0 || targetHP > 0) {
-			while(!targetDead) {
-				battleTime += floatCalc;
-				if(targetHP >= 0) {
-					if(currentAmmo > 0) {
-						if(tempFireRate <= 0) {
+		while(!targetDead) {
+//			Debug.Log("Run");
+			if(targetHP > 0.0f) {
+				if(currentAmmo > 0) {
+					if(tempFireRate <= 0.0f) {
+//					Debug.Log("Damaged");
+						if(tank) {
+							targetHP -= dic[d_ValuesGuiContent["Damage"]] * 10.0f;
+						}
+						else {
 							targetHP -= dic[d_ValuesGuiContent["Damage"]];
-							currentAmmo--;
-							tempFireRate = dic[d_ValuesGuiContent["Fire Rate"]];
 						}
-						else {
-							tempFireRate -=floatCalc;
-						}
+						currentAmmo--;
+						tempFireRate = dic[d_ValuesGuiContent["Fire Rate"]];
 					}
-					else { 
-						if(tempReloadRate <= 0) {
-							currentAmmo = (int) dic[d_ValuesGuiContent["Max Ammo"]];
-							tempReloadRate =  dic[d_ValuesGuiContent["Reload Speed"]];
-						}
-						else {
-							tempReloadRate -=floatCalc;
-						}
+					else {
+						tempFireRate -=floatCalc;
+						battleTime += floatCalc;
+
 					}
 				}
-				else {
-					targetDead = true;
+				else { 
+					if(tempReloadRate <= 0.0f) {
+//						Debug.Log("Reloading");
+						currentAmmo = (int) dic[d_ValuesGuiContent["Max Ammo"]];
+						tempReloadRate =  dic[d_ValuesGuiContent["Reload Speed"]];
+					}
+					else {
+						tempReloadRate -=floatCalc;
+						battleTime += floatCalc;
+
+					}
 				}
 			}
-//		}
+			else {
+				targetDead = true;
+			}
+		}
 		return battleTime;
 	}
 }

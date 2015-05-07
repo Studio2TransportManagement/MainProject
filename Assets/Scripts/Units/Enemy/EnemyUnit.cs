@@ -7,7 +7,6 @@ public class EnemyUnit : GameUnit {
 	private FSM_Core<EnemyUnit> FSM;
 
 	private PlayerResources playerResources;
-	public float fWorth;
 	public Vector3 v3BasePos;
 	public bool AtBase = false;
 	

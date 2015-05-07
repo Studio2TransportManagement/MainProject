@@ -23,6 +23,7 @@ public class GameUnit : MonoBehaviour, ISelectable {
 	public float fRange;
 	public float fFireRate;
 	public float fDamage;
+	public float fWorth;
 	
 	public float fIdleSpeed;
 	public float fAlertSpeed;

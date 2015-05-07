@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class GameUnitBalance{
+public class UnitBalanceValues{
 
 	public Dictionary<GUIContent, float> d_sfToBeAppliedValues;
 
@@ -13,7 +13,7 @@ public class GameUnitBalance{
 
 	public float[] fVsTargets = {0f,0f,0f};
 
-	public GameUnitBalance(GameUnit gu, Dictionary<string, GUIContent> dic) {
+	public UnitBalanceValues(GameUnit gu, Dictionary<string, GUIContent> dic) {
 
 		d_sfToBeAppliedValues = new Dictionary<GUIContent, float>();
 
@@ -28,6 +28,9 @@ public class GameUnitBalance{
 		d_sfToBeAppliedValues.Add(dic["Max Ammo"], (float) gu.iMaxAmmo);
 		d_sfToBeAppliedValues.Add(dic["Idle Speed"], gu.fIdleSpeed);
 		d_sfToBeAppliedValues.Add(dic["Alert Speed"], gu.fAlertSpeed);
+		if(guGameUnit.SollyType == SOLDIER_TYPE.ENEMY_TANK || guGameUnit.SollyType == SOLDIER_TYPE.ENEMY_GUNNER) {
+			d_sfToBeAppliedValues.Add (new GUIContent ("$Worth","How much $$ this unit will give when killed"), gu.fWorth);
+		}
 	}
 
 }
