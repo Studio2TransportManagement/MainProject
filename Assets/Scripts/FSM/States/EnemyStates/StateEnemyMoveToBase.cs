@@ -9,6 +9,7 @@ public sealed class StateEnemyMoveToBase : FSM_State<EnemyUnit>{
 	
 	public override void Begin(EnemyUnit eu) {
 		eu.navAgent.SetDestination(eu.goTargetBase.transform.position);
+		eu.navAgent.speed = eu.fAlertSpeed;
 //		Debug.Log ("StateEnemyMoveToBase has begun");
 	}
 	

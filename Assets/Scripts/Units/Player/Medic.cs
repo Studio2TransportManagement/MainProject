@@ -19,5 +19,7 @@ public class Medic : PlayerUnit {
 	protected override void Update() {
 		base.Update();
 		base.SelectionCircle();
+		Debug.Log("Current state is " + FSM.GetStateName());
+		Debug.Log (iCurrentAmmo.ToString() + "Ammo");
 	}
 }

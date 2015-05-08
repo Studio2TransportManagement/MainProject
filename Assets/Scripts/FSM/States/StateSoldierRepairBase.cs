@@ -47,7 +47,11 @@ public class StateSoldierRepairBase : FSM_State<PlayerUnit> {
 			if(gu.iCurrentAmmo <= 0) {
 				gu.ChangeState(new StateSoldierReload());
 			}
-		}		
+		}
+	
+		if(gu.iCurrentAmmo <= 0) {
+			gu.ChangeState(new StateSoldierReload());
+		}
 	}
 	
 	public override void End(PlayerUnit gu) {

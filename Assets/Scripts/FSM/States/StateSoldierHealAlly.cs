@@ -17,9 +17,9 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 	
 	public override void Run(PlayerUnit gu) {
 		//Don't heal ourselves
-		if (gu.guTargetUnit == gu) {
-			gu.guTargetUnit = null;
-		}
+//		if (gu.guTargetUnit == gu) {
+//			gu.guTargetUnit = null;
+//		}
 
 		//If they're fully healed or have vanished, don't try and heal them
 		if (gu.guTargetUnit != null && gu.guTargetUnit.fHealthCurrent < gu.guTargetUnit.fHealthMax) {
@@ -43,6 +43,11 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 					fHealTimer = gu.fFireRate;
 				}
 			}
+			else {
+				gu.navAgent.SetDestination(gu.goTargetBase.goStockpile.transform.position);
+
+				gu.ChangeState(new StateSoldierReload());
+			}
 		} 
 		else {
 			//No heal target
@@ -50,6 +55,8 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 		}
 
 		if (gu.iCurrentAmmo <= 0) {
+			gu.navAgent.SetDestination(gu.goTargetBase.goStockpile.transform.position);
+
 			gu.ChangeState(new StateSoldierReload());
 		}
 	}

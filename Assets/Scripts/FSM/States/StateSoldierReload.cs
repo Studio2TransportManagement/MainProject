@@ -49,6 +49,6 @@ public sealed class StateSoldierReload : FSM_State<PlayerUnit> {
 	
 	public override void End(PlayerUnit gu) {
 		gu.aAnimator.SetBool("bIsRummaging", false);
-		//Debug.Log("StateSoldierReload end");
+		Debug.Log("StateSoldierReload end");
 	}
 }

@@ -42,7 +42,7 @@ public class EnemyUnit : GameUnit {
 			wMannedWindow.RemoveTarget();
 		}
 		this.goTargetBase.l_euAttackers.Remove(this);
-		Destroy(gameObject, aAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
+		Destroy(gameObject);
 
 	}
 

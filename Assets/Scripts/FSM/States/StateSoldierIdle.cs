@@ -2,13 +2,6 @@
 
 public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 
-	private Vector3 vTarget;
-	private Vector3 vDir;
-//	private float fWanderRate = 0.5f;
-//	private float fWanderDistance = 20.0f;
-	private NavMeshHit navhitIrrelevant;
-
-
 	public StateSoldierIdle() {
 		//Debug.Log("StateSoldierIdle begin");
 	}
