@@ -95,20 +95,18 @@ public class PlayerUnit : GameUnit {
 		if (bManningWindow) {
 			wMannedWindow.LeaveWindow();
 		}
-//		if(aAnimator.GetBool("bIsDying") && aAnimator.GetCurrentAnimationClipState){
-			selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
-			nameSaver.l_sDeadUnitNames.Add(sUnitName);
-			pPlayerResources.iTotalRecruits--;
-			Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
-			if(!asAudioSource.isPlaying) {
-				asAudioSource.clip = uaUnitAudio.acDying;
-				asAudioSource.volume = 0.2f;
-				asAudioSource.Play();
-			}
-			Destroy(goHealthInstance);
+		selectionManager.RemoveDeadUnitIfSelected(this.gameObject);
+		nameSaver.l_sDeadUnitNames.Add(sUnitName);
+		pPlayerResources.iTotalRecruits--;
+		Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
+		if(!asAudioSource.isPlaying) {
+			asAudioSource.clip = uaUnitAudio.acDying;
+			asAudioSource.volume = 0.2f;
+			asAudioSource.Play();
+		}
+		Destroy(goHealthInstance);
 		Debug.Log(sUnitName + " IS DEAD");
-			Destroy(gameObject, aAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
-//		}
+		Destroy(gameObject, aAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
 	}
 
 	void OnMouseEnter() {
