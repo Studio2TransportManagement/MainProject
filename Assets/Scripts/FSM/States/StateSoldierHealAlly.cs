@@ -11,7 +11,7 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 	}
 	
 	public override void Begin(PlayerUnit gu) {
-		
+		gu.aAnimator.SetBool("bIsRummaging", true);
 		//Debug.Log("StateSoldierHealAlly begin");
 	}
 	
@@ -26,6 +26,8 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 			if (gu.iCurrentAmmo > 0) {
 				if (fHealTimer != 0f) {
 					fHealTimer -= Time.fixedDeltaTime;
+					gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
+
 				}
 				
 				if (fHealTimer <= 0) {
@@ -52,6 +54,7 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 	}
 	
 	public override void End(PlayerUnit gu) {
+		gu.aAnimator.SetBool("bIsRummaging", false);
 		//Debug.Log("StateSoldierHealAlly end");
 	}
 }

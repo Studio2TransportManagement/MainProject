@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerUnit : GameUnit {
+	public Vector3 NavDest;
 
 	public string sUnitName;
 
@@ -55,6 +56,7 @@ public class PlayerUnit : GameUnit {
 	// Update is called once per frame
 	protected override void Update() {
 		base.Update();
+		NavDest = navAgent.destination;
 		if (FSM != null) {
 			FSM.Update();
 		}
@@ -101,7 +103,7 @@ public class PlayerUnit : GameUnit {
 		Camera.main.GetComponent<UIMisc>().tSlainMessagePrintToUI(sUnitName);
 		if(!asAudioSource.isPlaying) {
 			asAudioSource.clip = uaUnitAudio.acDying;
-			asAudioSource.volume = 0.2f;
+			asAudioSource.volume = 0.5f;
 			asAudioSource.Play();
 		}
 		Destroy(goHealthInstance);
@@ -153,10 +155,10 @@ public class PlayerUnit : GameUnit {
 
 
 	public void WanderBetweenBasePoints() {
-
-		//if we havent set a target, we are within 0.2 units of the target or the current target is unreachable, get a new random target position
-		if(vNavTarget == Vector3.zero || VectorApproximatelyEquals(gameObject.transform.position, vNavTarget, 0.2f) || Vector3.Distance(gameObject.transform.position, vNavTarget) >= 50 || navAgent.pathStatus == NavMeshPathStatus.PathPartial) {
+		if(vNavTarget == Vector3.zero || VectorApproximatelyEquals(gameObject.transform.position, vNavTarget, 1.0f) || Vector3.Distance(gameObject.transform.position, vNavTarget) >= 50 || navAgent.pathStatus == NavMeshPathStatus.PathPartial) {
 			vNavTarget = goTargetBase.l_tWanderPoints[Random.Range(0,goTargetBase.l_tWanderPoints.Count)].position;
+		}
+		if(navAgent.destination != vNavTarget) {
 			navAgent.SetDestination(vNavTarget);
 		}
 	}

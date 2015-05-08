@@ -21,6 +21,8 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 		if(gu.bManningWindow) {
 			gu.wMannedWindow.LeaveWindow();
 		}
+		gu.WanderBetweenBasePoints();
+
 	}
 	
 	public override void Run(PlayerUnit gu) {
@@ -29,6 +31,9 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 			if (gu.SollyType == SOLDIER_TYPE.GUNNER || gu.SollyType == SOLDIER_TYPE.HEAVY || gu.SollyType == SOLDIER_TYPE.VILLAGER) {
 				if (gu.goTargetBase.bAlert) {
 					gu.ChangeState(new StateSoldierAlert());
+				}
+				else {
+					gu.WanderBetweenBasePoints();
 				}
 			}
 			//Medic
@@ -51,23 +56,24 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 					}
 
 					gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
-
-					if (gu.guTargetUnit != null && gu.navAgent.remainingDistance <= 0.3f ) {
+					if (gu.guTargetUnit != null && gu.navAgent.remainingDistance <= 1.5f ) {
 						gu.ChangeState(new StateSoldierHealAlly());
 					}
+				}
+				else {
+					gu.WanderBetweenBasePoints();
 				}
 			}
 			//Mechanic
 			else if (gu.SollyType == SOLDIER_TYPE.MECHANIC) {
 				if (gu.goTargetBase.fHealthCurrent < gu.goTargetBase.fHealthMax) {
-					gu.navAgent.SetDestination(gu.goTargetBase.transform.position);
-					
-					if (gu.goTargetBase != null && gu.navAgent.remainingDistance <= 0.3f ) {
 						gu.ChangeState(new StateSoldierRepairBase());
-					}
+				}
+				else {
+					gu.WanderBetweenBasePoints();
 				}
 			}
-			gu.WanderBetweenBasePoints();
+
 		}
 
 		else {

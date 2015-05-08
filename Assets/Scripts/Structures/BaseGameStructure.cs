@@ -12,6 +12,7 @@ public class BaseGameStructure : GameStructure {
 	public TrainStation tsRightStation;
 	public List<Transform> l_tWanderPoints;
 	public GameObject goStockpile;
+	public Transform RepairLocation;
 
 	public List<EnemyUnit> l_euAttackers;
 	private List<GameObject> l_goAllply;

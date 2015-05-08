@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour {
 			iCurrentWaveCount = iCurrentWaveSize;
 			float[] WaveSizes = CalculateWaveSizes(GenerateRatioArray());
 
-			if(iCurrentWaveSize >= 3 && !bIsGeneratingRecruits) {
+			if(iCurrentWaveSize >= 2 && !bIsGeneratingRecruits) {
 				StartGeneratingRecruits();
 			}
 

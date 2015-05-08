@@ -36,12 +36,14 @@ public class EnemyUnit : GameUnit {
 	protected override void KillUnit()
 	{
 		bStartedDying = true;
+		aAnimator.SetBool("bIsDying", true);
 		playerResources.ChangeMoney(fWorth);
 		if(wMannedWindow != null){
 			wMannedWindow.RemoveTarget();
 		}
 		this.goTargetBase.l_euAttackers.Remove(this);
-		Destroy(this.gameObject);
+		Destroy(gameObject, aAnimator.GetCurrentAnimatorStateInfo(0).length-0.3f);
+
 	}
 
 	

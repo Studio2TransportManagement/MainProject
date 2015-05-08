@@ -44,6 +44,8 @@ public class GameStructure : MonoBehaviour {
 		iWindowLevel = Mathf.Clamp(iWindowLevel, 1, 3);
 		iTrainsLevel = Mathf.Clamp(iTrainsLevel, 1, 3);
 
+
+
 		if(fHealthCurrent <= fHealthMax &&
 		   fHealthCurrent > (3f/4f) * fHealthMax)
 		{
