@@ -23,10 +23,11 @@ public class StateSoldierHealAlly : FSM_State<PlayerUnit> {
 
 		//If they're fully healed or have vanished, don't try and heal them
 		if (gu.guTargetUnit != null && gu.guTargetUnit.fHealthCurrent < gu.guTargetUnit.fHealthMax) {
+			gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
+
 			if (gu.iCurrentAmmo > 0) {
 				if (fHealTimer != 0f) {
 					fHealTimer -= Time.fixedDeltaTime;
-					gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
 
 				}
 				
