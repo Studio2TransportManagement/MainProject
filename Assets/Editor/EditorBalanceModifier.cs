@@ -55,9 +55,13 @@ public class EditorBalanceModifier : EditorWindow {
 							EditorGUILayout.BeginHorizontal();
 								if(GUILayout.Button("Apply")) {
 									ApplyValuesToPrefab(d_units[key]);
+									EditorUtility.SetDirty(d_units[key].guGameUnit);
+
 								}
 								if(GUILayout.Button("Revert")) {
 									RevertValuesToPrefab(d_units[key]);
+									EditorUtility.SetDirty(d_units[key].guGameUnit);
+
 								}
 							EditorGUILayout.EndHorizontal();
 						EditorGUILayout.EndVertical();
@@ -103,11 +107,15 @@ public class EditorBalanceModifier : EditorWindow {
 			if(GUILayout.Button("Apply All Units")) {
 				foreach(string key in l_dunitKeys) {
 					ApplyValuesToPrefab(d_units[key]);
+					EditorUtility.SetDirty(d_units[key].guGameUnit);
+
 				}
 			}
 			if(GUILayout.Button("Revert All Units")) {
 				foreach(string key in l_dunitKeys) {
 					RevertValuesToPrefab(d_units[key]);
+					EditorUtility.SetDirty(d_units[key].guGameUnit);
+
 				}
 			}
 			EditorGUILayout.EndHorizontal();
@@ -139,6 +147,7 @@ public class EditorBalanceModifier : EditorWindow {
 					fort.bgsBase.iIntegrityUpgradeAmount = (int)fort.d_sfToBeAppliedValues["Health Upg. Amount"];
 					fort.bgsBase.iWindowUpgradeCost = (int)fort.d_sfToBeAppliedValues["Window Upg. Cost"];
 					fort.bgsBase.iTrainsUpgradeCost = (int)fort.d_sfToBeAppliedValues["Trains Upg. Cost"];
+					EditorUtility.SetDirty(fort.bgsBase);
 
 				}
 				if(GUILayout.Button("Revert")) {
@@ -147,6 +156,8 @@ public class EditorBalanceModifier : EditorWindow {
 					fort.d_sfToBeAppliedValues["Health Upg. Amount"] = fort.bgsBase.iIntegrityUpgradeAmount;
 					fort.d_sfToBeAppliedValues["Window Upg. Cost"] = fort.bgsBase.iWindowUpgradeCost;
 					fort.d_sfToBeAppliedValues["Trains Upg. Cost"] = fort.bgsBase.iTrainsUpgradeCost;
+					EditorUtility.SetDirty(fort.bgsBase);
+
 
 				}
 				EditorGUILayout.EndHorizontal();
@@ -176,7 +187,8 @@ public class EditorBalanceModifier : EditorWindow {
 					enemySpawner.esSpawner.fWaveRate = enemySpawner.d_sfToBeAppliedValues["Wave Timer"];
 					enemySpawner.esSpawner.iRatioSplitWave = (int)enemySpawner.d_sfToBeAppliedValues["Ratio Split wave"];
 					enemySpawner.esSpawner.fTankSpawnRate = enemySpawner.d_sfToBeAppliedValues["Tank Spawn Factor"];
-					
+					EditorUtility.SetDirty(enemySpawner.esSpawner);
+
 				}
 				if(GUILayout.Button("Revert")) {
 					enemySpawner.d_sfToBeAppliedValues["Starting Wave Size"] = enemySpawner.esSpawner.iStartingWaveSize;
@@ -184,6 +196,7 @@ public class EditorBalanceModifier : EditorWindow {
 					enemySpawner.d_sfToBeAppliedValues["Wave Timer"] = enemySpawner.esSpawner.fWaveRate;
 					enemySpawner.d_sfToBeAppliedValues["Ratio Split wave"] = enemySpawner.esSpawner.iRatioSplitWave;
 					enemySpawner.d_sfToBeAppliedValues["Tank Spawn Factor"] = enemySpawner.esSpawner.fTankSpawnRate;
+					EditorUtility.SetDirty(enemySpawner.esSpawner);
 					
 				}
 				EditorGUILayout.EndHorizontal();

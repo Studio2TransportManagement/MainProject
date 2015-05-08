@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
+[System.Serializable]
 public class SpawnerBalanceValues {
 	
 	public Dictionary<string, float> d_sfToBeAppliedValues;
