@@ -46,6 +46,10 @@ public sealed class StateSoldierIdle : FSM_State<PlayerUnit> {
 						}
 					}
 
+					if (gu.guTargetUnit == gu && gu.goTargetBase.GetInjuredUnitsInBase().Count > 1) {
+						gu.guTargetUnit = gu.goTargetBase.GetInjuredUnitsInBase()[1];
+					}
+
 					gu.navAgent.SetDestination(gu.guTargetUnit.transform.position);
 
 					if (gu.guTargetUnit != null && gu.navAgent.remainingDistance <= 0.3f ) {
